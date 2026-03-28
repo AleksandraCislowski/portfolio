@@ -1,0 +1,44 @@
+{
+  "nav": {
+    "home": "Strona główna",
+    "about": "O mnie",
+    "projects": "Projekty",
+    "contact": "Kontakt",
+    "language": "Język"
+  },
+  "hero": {
+    "greeting": "Cześć, jestem Aleksandra",
+    "subtitle": "Frontend Developer | React | Next.js",
+    "seeProjects": "Zobacz projekty",
+    "contact": "Kontakt"
+  },
+  "about": {
+    "title": "O mnie",
+    "description": "Jestem pasjonatką nowoczesnych technologii frontendowych. Tworzę szybkie, dostępne i efektowne aplikacje webowe. Uwielbiam React, Next.js i piękne UI."
+  },
+  "projects": {
+    "title": "Projekty",
+    "example": "Przykładowy projekt {{number}}",
+    "description": "Opis projektu. Tutaj pojawi się krótki opis Twojego projektu."
+  },
+  "contact": {
+    "title": "Kontakt",
+    "name": "Imię",
+    "email": "Email",
+    "message": "Wiadomość",
+    "send": "Wyślij"
+  },
+  "footer": {
+    "copyright": "© {{year}} Aleksandra.dev"
+  },
+  "joyride": {
+    "welcome": "Witaj w moim portfolio! Przewiń w dół, aby zobaczyć więcej.",
+    "projects": "Tutaj znajdziesz moje projekty. Kliknij, aby zobaczyć szczegóły!",
+    "contact": "Masz pytania? Skorzystaj z formularza kontaktowego!",
+    "back": "Wstecz",
+    "close": "Zamknij",
+    "last": "Koniec",
+    "next": "Dalej",
+    "skip": "Pomiń"
+  }
+}

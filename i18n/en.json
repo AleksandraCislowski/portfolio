@@ -1,0 +1,44 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact",
+    "language": "Language"
+  },
+  "hero": {
+    "greeting": "Hi, I'm Aleksandra",
+    "subtitle": "Frontend Developer | React | Next.js",
+    "seeProjects": "See projects",
+    "contact": "Contact"
+  },
+  "about": {
+    "title": "About",
+    "description": "I am passionate about modern frontend technologies. I create fast, accessible, and beautiful web applications. I love React, Next.js, and great UI."
+  },
+  "projects": {
+    "title": "Projects",
+    "example": "Example project {{number}}",
+    "description": "Project description. Here will be a short description of your project."
+  },
+  "contact": {
+    "title": "Contact",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send"
+  },
+  "footer": {
+    "copyright": "© {{year}} YourName.dev"
+  },
+  "joyride": {
+    "welcome": "Welcome to my portfolio! Scroll down to see more.",
+    "projects": "Here you will find my projects. Click to see details!",
+    "contact": "Have questions? Use the contact form!",
+    "back": "Back",
+    "close": "Close",
+    "last": "Finish",
+    "next": "Next",
+    "skip": "Skip"
+  }
+}

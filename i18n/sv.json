@@ -1,0 +1,44 @@
+{
+  "nav": {
+    "home": "Hem",
+    "about": "Om mig",
+    "projects": "Projekt",
+    "contact": "Kontakt",
+    "language": "Språk"
+  },
+  "hero": {
+    "greeting": "Hej, jag är Aleksandra",
+    "subtitle": "Frontendutvecklare | React | Next.js",
+    "seeProjects": "Se projekt",
+    "contact": "Kontakt"
+  },
+  "about": {
+    "title": "Om mig",
+    "description": "Jag brinner för moderna frontendteknologier. Jag skapar snabba, tillgängliga och snygga webbapplikationer. Jag älskar React, Next.js och vackra gränssnitt."
+  },
+  "projects": {
+    "title": "Projekt",
+    "example": "Exempelprojekt {{number}}",
+    "description": "Projektbeskrivning. Här kommer en kort beskrivning av ditt projekt."
+  },
+  "contact": {
+    "title": "Kontakt",
+    "name": "Namn",
+    "email": "E-post",
+    "message": "Meddelande",
+    "send": "Skicka"
+  },
+  "footer": {
+    "copyright": "© {{year}} DittNamn.dev"
+  },
+  "joyride": {
+    "welcome": "Välkommen till min portfolio! Scrolla ner för att se mer.",
+    "projects": "Här hittar du mina projekt. Klicka för att se detaljer!",
+    "contact": "Har du frågor? Använd kontaktformuläret!",
+    "back": "Tillbaka",
+    "close": "Stäng",
+    "last": "Slutför",
+    "next": "Nästa",
+    "skip": "Hoppa över"
+  }
+}
