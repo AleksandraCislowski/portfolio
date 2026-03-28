@@ -6,7 +6,6 @@ import Hero from './Hero';
 import About from './About';
 import Projects from './Projects';
 import Contact from './Contact';
-import PortfolioJoyride from './PortfolioJoyride';
 import { useTranslation } from '../i18n/useTranslation';
 
 export default function PortfolioApp({
@@ -21,7 +20,6 @@ export default function PortfolioApp({
   return (
     <>
       <Navbar />
-      <PortfolioJoyride />
       <Container maxWidth='lg' disableGutters>
         <Hero />
         <About />
