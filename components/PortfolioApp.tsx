@@ -1,7 +1,6 @@
 'use client';
 import * as React from 'react';
-import { ThemeProvider, CssBaseline, Container, Box } from '@mui/material';
-import darkTheme from '../theme/darkTheme';
+import { Container, Box } from '@mui/material';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import About from './About';
@@ -11,12 +10,13 @@ import PortfolioJoyride from './PortfolioJoyride';
 
 export default function PortfolioApp({
   children,
+  currentYear,
 }: {
   children: React.ReactNode;
+  currentYear: number;
 }) {
   return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
+    <>
       <Navbar />
       <PortfolioJoyride />
       <Container maxWidth='lg' disableGutters>
@@ -34,8 +34,8 @@ export default function PortfolioApp({
           fontSize: 14,
         }}
       >
-        © {new Date().getFullYear()} TwojeImię.dev
+        © {currentYear} TwojeImię.dev
       </Box>
-    </ThemeProvider>
+    </>
   );
 }
