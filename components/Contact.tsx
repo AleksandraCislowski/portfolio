@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { Box, Typography, TextField, Button, Stack } from '@mui/material';
+import { useTranslation } from '../i18n/useTranslation';
 
 export default function Contact() {
+  const dict = useTranslation();
+  if (!dict) return null;
   return (
     <Box
       id='contact'
@@ -13,20 +16,25 @@ export default function Contact() {
       }}
     >
       <Typography variant='h3' sx={{ fontWeight: 700, mb: 2 }}>
-        Kontakt
+        {dict.contact.title}
       </Typography>
       <Box component='form' sx={{ width: '100%', maxWidth: 400 }}>
         <Stack spacing={3}>
-          <TextField label='Imię' variant='outlined' fullWidth required />
           <TextField
-            label='Email'
+            label={dict.contact.name}
+            variant='outlined'
+            fullWidth
+            required
+          />
+          <TextField
+            label={dict.contact.email}
             variant='outlined'
             type='email'
             fullWidth
             required
           />
           <TextField
-            label='Wiadomość'
+            label={dict.contact.message}
             variant='outlined'
             fullWidth
             required
@@ -39,7 +47,7 @@ export default function Contact() {
             size='large'
             type='submit'
           >
-            Wyślij
+            {dict.contact.send}
           </Button>
         </Stack>
       </Box>

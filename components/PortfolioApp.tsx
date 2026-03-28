@@ -7,6 +7,7 @@ import About from './About';
 import Projects from './Projects';
 import Contact from './Contact';
 import PortfolioJoyride from './PortfolioJoyride';
+import { useTranslation } from '../i18n/useTranslation';
 
 export default function PortfolioApp({
   children,
@@ -15,6 +16,8 @@ export default function PortfolioApp({
   children: React.ReactNode;
   currentYear: number;
 }) {
+  const dict = useTranslation();
+  if (!dict) return null;
   return (
     <>
       <Navbar />
@@ -34,7 +37,7 @@ export default function PortfolioApp({
           fontSize: 14,
         }}
       >
-        © {currentYear} TwojeImię.dev
+        {dict.footer.copyright.replace('{{year}}', currentYear.toString())}
       </Box>
     </>
   );

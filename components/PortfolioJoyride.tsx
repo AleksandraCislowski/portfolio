@@ -1,24 +1,26 @@
 import * as React from 'react';
 import { Joyride, STATUS, type EventData } from 'react-joyride';
-
-const steps = [
-  {
-    target: 'main',
-    content: 'Witaj w moim portfolio! Przewiń w dół, aby zobaczyć więcej.',
-    disableBeacon: true,
-  },
-  {
-    target: '#projects',
-    content: 'Tutaj znajdziesz moje projekty. Kliknij, aby zobaczyć szczegóły!',
-  },
-  {
-    target: '#contact',
-    content: 'Masz pytania? Skorzystaj z formularza kontaktowego!',
-  },
-];
+import { useTranslation } from '../i18n/useTranslation';
 
 export default function PortfolioJoyride() {
+  const dict = useTranslation();
   const [run, setRun] = React.useState(true);
+  if (!dict) return null;
+  const steps = [
+    {
+      target: 'main',
+      content: dict.joyride.welcome,
+      disableBeacon: true,
+    },
+    {
+      target: '#projects',
+      content: dict.joyride.projects,
+    },
+    {
+      target: '#contact',
+      content: dict.joyride.contact,
+    },
+  ];
   const handleJoyrideCallback = (data: EventData) => {
     const { status } = data;
     if (status === STATUS.FINISHED || status === STATUS.SKIPPED) {
@@ -31,11 +33,11 @@ export default function PortfolioJoyride() {
       run={run}
       continuous
       locale={{
-        back: 'Wstecz',
-        close: 'Zamknij',
-        last: 'Koniec',
-        next: 'Dalej',
-        skip: 'Pomiń',
+        back: dict.joyride.back,
+        close: dict.joyride.close,
+        last: dict.joyride.last,
+        next: dict.joyride.next,
+        skip: dict.joyride.skip,
       }}
       onEvent={handleJoyrideCallback}
     />

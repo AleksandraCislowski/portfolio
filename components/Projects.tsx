@@ -1,23 +1,18 @@
 import * as React from 'react';
-import {
-  Box,
-  Typography,
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-  Skeleton,
-} from '@mui/material';
+import { Box, Typography, Card, CardContent, Skeleton } from '@mui/material';
+import { useTranslation } from '../i18n/useTranslation';
 
 export default function Projects() {
-  // Placeholder: przykładowe karty projektów
+  const dict = useTranslation();
+  if (!dict) return null;
+  // Placeholder: example project cards
   return (
     <Box id='projects' sx={{ py: 8, px: { xs: 2, md: 6 } }}>
       <Typography
         variant='h3'
         sx={{ fontWeight: 700, mb: 4, textAlign: 'center' }}
       >
-        Projekty
+        {dict.projects.title}
       </Typography>
       <Box
         sx={{
@@ -40,10 +35,10 @@ export default function Projects() {
               <Skeleton variant='rectangular' height={160} animation='wave' />
               <CardContent>
                 <Typography variant='h6' sx={{ mb: 1 }}>
-                  Przykładowy projekt {i}
+                  {dict.projects.example.replace('{{number}}', i.toString())}
                 </Typography>
                 <Typography variant='body2' color='text.secondary'>
-                  Opis projektu. Tutaj pojawi się krótki opis Twojego projektu.
+                  {dict.projects.description}
                 </Typography>
               </CardContent>
             </Card>

@@ -1,4 +1,4 @@
 export default function HomePage() {
-  // Wszystko jest w layout - tu tylko children, jeśli będą podstrony
+  // Everything is in the layout - here only children, if there will be subpages
   return null;
 }

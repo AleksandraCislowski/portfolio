@@ -3,8 +3,11 @@ import { Box, Typography, Stack, Avatar, IconButton } from '@mui/material';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import EmailIcon from '@mui/icons-material/Email';
+import { useTranslation } from '../i18n/useTranslation';
 
 export default function About() {
+  const dict = useTranslation();
+  if (!dict) return null;
   return (
     <Box
       id='about'
@@ -17,19 +20,17 @@ export default function About() {
     >
       <Avatar
         src='/avatar.png'
-        alt='Twoje zdjęcie'
+        alt='avatar'
         sx={{ width: 100, height: 100, mb: 2 }}
       />
       <Typography variant='h3' sx={{ fontWeight: 700, mb: 1 }}>
-        O mnie
+        {dict.about.title}
       </Typography>
       <Typography
         variant='body1'
         sx={{ maxWidth: 500, color: 'text.secondary', mb: 2 }}
       >
-        Jestem pasjonatem nowoczesnych technologii frontendowych. Tworzę
-        szybkie, dostępne i efektowne aplikacje webowe. Uwielbiam React, Next.js
-        i piękne UI.
+        {dict.about.description}
       </Typography>
       <Stack direction='row' spacing={2}>
         <IconButton color='primary' href='https://linkedin.com' target='_blank'>
@@ -38,7 +39,7 @@ export default function About() {
         <IconButton color='primary' href='https://github.com' target='_blank'>
           <GitHubIcon />
         </IconButton>
-        <IconButton color='primary' href='mailto:twoj@email.com'>
+        <IconButton color='primary' href='mailto:your@email.com'>
           <EmailIcon />
         </IconButton>
       </Stack>
