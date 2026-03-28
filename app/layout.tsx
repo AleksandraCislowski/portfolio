@@ -1,15 +1,8 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import { ThemeProvider, CssBaseline, Container, Box } from '@mui/material';
-import darkTheme from '../theme/darkTheme';
-import Navbar from '../components/Navbar';
-import Hero from '../components/Hero';
-import About from '../components/About';
-import Projects from '../components/Projects';
-import Contact from '../components/Contact';
-
 import PortfolioApp from '../components/PortfolioApp';
+import ThemeRegistry from './ThemeRegistry';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -31,10 +24,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const currentYear = new Date().getFullYear();
+
   return (
     <html lang='pl' className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
-        <PortfolioApp>{children}</PortfolioApp>
+        <ThemeRegistry>
+          <PortfolioApp currentYear={currentYear}>{children}</PortfolioApp>
+        </ThemeRegistry>
       </body>
     </html>
   );
