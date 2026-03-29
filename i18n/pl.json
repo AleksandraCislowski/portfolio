@@ -3,42 +3,40 @@
     "home": "Strona główna",
     "about": "O mnie",
     "projects": "Projekty",
+    "downloads": "Do pobrania",
     "contact": "Kontakt",
     "language": "Język"
   },
   "hero": {
     "greeting": "Cześć, jestem Aleksandra",
-    "subtitle": "Frontend Developer | React | Next.js",
-    "seeProjects": "Zobacz projekty",
-    "contact": "Kontakt"
+    "subtitle": "Frontend Developer i Scrum Master",
+    "seeProjects": "Zobacz moje projekty",
+    "contact": "Napisz do mnie"
   },
   "about": {
     "title": "O mnie",
-    "description": "Jestem pasjonatką nowoczesnych technologii frontendowych. Tworzę szybkie, dostępne i efektowne aplikacje webowe. Uwielbiam React, Next.js i piękne UI."
+    "description": "Jestem Frontend Developerem i Scrum Masterem z silnym zapleczem technicznym w React, Next.js i TypeScript. Prowadzę zespoły Agile, dostarczając produkty cyfrowe o wysokim wpływie, optymalizując procesy i wspierając współpracę międzydziałową. Łączę praktyczne programowanie z biznesowym podejściem i pasją do ciągłego doskonalenia."
   },
   "projects": {
     "title": "Projekty",
-    "example": "Przykładowy projekt {{number}}",
-    "description": "Opis projektu. Tutaj pojawi się krótki opis Twojego projektu."
+    "description": "Wybrane projekty, które pokazują moje zaangażowanie w jakość, innowacyjność i doświadczenie użytkownika. Zobacz, jak rozwiązuję realne wyzwania dzięki kreatywności, kodowi i przywództwu Agile."
+  },
+  "downloads": {
+    "title": "Do pobrania",
+    "description": "Szukasz mojego CV lub innych materiałów? Pobierz pliki poniżej, aby dowiedzieć się więcej o moim doświadczeniu i umiejętnościach. Wkrótce pojawią się kolejne dokumenty.",
+    "cv": "Pobierz CV",
+    "portfolio": "Pobierz portfolio",
+    "other": "Inne pliki"
   },
   "contact": {
     "title": "Kontakt",
-    "name": "Imię",
-    "email": "Email",
-    "message": "Wiadomość",
-    "send": "Wyślij"
+    "name": "Twoje imię",
+    "email": "Twój email",
+    "message": "Twoja wiadomość",
+    "send": "Wyślij wiadomość",
+    "description": "Chcesz nawiązać współpracę lub masz pytanie? Wypełnij formularz, a odezwę się jak najszybciej."
   },
   "footer": {
-    "copyright": "© {{year}} Aleksandra.dev"
-  },
-  "joyride": {
-    "welcome": "Witaj w moim portfolio! Przewiń w dół, aby zobaczyć więcej.",
-    "projects": "Tutaj znajdziesz moje projekty. Kliknij, aby zobaczyć szczegóły!",
-    "contact": "Masz pytania? Skorzystaj z formularza kontaktowego!",
-    "back": "Wstecz",
-    "close": "Zamknij",
-    "last": "Koniec",
-    "next": "Dalej",
-    "skip": "Pomiń"
+    "copyright": "© {{year}} Aleksandra Cislowski. Wszelkie prawa zastrzeżone."
   }
 }

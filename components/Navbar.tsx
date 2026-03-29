@@ -23,6 +23,7 @@ export default function Navbar() {
     { label: dict.nav.home, href: '#' },
     { label: dict.nav.about, href: '#about' },
     { label: dict.nav.projects, href: '#projects' },
+    { label: dict.nav.downloads, href: '#downloads' },
     { label: dict.nav.contact, href: '#contact' },
   ];
   return (

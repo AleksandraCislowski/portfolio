@@ -35,7 +35,7 @@ export default function Projects() {
               <Skeleton variant='rectangular' height={160} animation='wave' />
               <CardContent>
                 <Typography variant='h6' sx={{ mb: 1 }}>
-                  {dict.projects.example.replace('{{number}}', i.toString())}
+                  {`Project ${i}`}
                 </Typography>
                 <Typography variant='body2' color='text.secondary'>
                   {dict.projects.description}

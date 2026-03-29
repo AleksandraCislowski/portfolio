@@ -1,44 +1,42 @@
 {
   "nav": {
     "home": "Home",
-    "about": "About",
+    "about": "About Me",
     "projects": "Projects",
+    "downloads": "Downloads",
     "contact": "Contact",
     "language": "Language"
   },
   "hero": {
-    "greeting": "Hi, I'm Aleksandra",
-    "subtitle": "Frontend Developer | React | Next.js",
-    "seeProjects": "See projects",
-    "contact": "Contact"
+    "greeting": "Hello, I'm Aleksandra",
+    "subtitle": "Frontend Developer & Scrum Master",
+    "seeProjects": "Explore My Work",
+    "contact": "Let's Connect"
   },
   "about": {
-    "title": "About",
-    "description": "I am passionate about modern frontend technologies. I create fast, accessible, and beautiful web applications. I love React, Next.js, and great UI."
+    "title": "About Me",
+    "description": "I am a Frontend Developer and Scrum Master with a strong technical background in React, Next.js, and TypeScript. I lead Agile teams to deliver high-impact digital products, optimize delivery processes, and foster cross-functional collaboration. My approach combines hands-on development with a business mindset and a passion for continuous improvement."
   },
   "projects": {
     "title": "Projects",
-    "example": "Example project {{number}}",
-    "description": "Project description. Here will be a short description of your project."
+    "description": "A curated selection of my recent work. Each project demonstrates my commitment to quality, innovation, and user experience. Discover how I solve real-world challenges with creativity, code, and Agile leadership."
+  },
+  "downloads": {
+    "title": "Downloads",
+    "description": "Looking for my CV or other resources? Download the files below to learn more about my experience and skills. More documents will be added soon.",
+    "cv": "Download CV",
+    "portfolio": "Download Portfolio",
+    "other": "Other Files"
   },
   "contact": {
     "title": "Contact",
-    "name": "Name",
-    "email": "Email",
-    "message": "Message",
-    "send": "Send"
+    "name": "Your Name",
+    "email": "Your Email",
+    "message": "Your Message",
+    "send": "Send Message",
+    "description": "Interested in working together or have a question? Fill out the form below and I’ll get back to you soon."
   },
   "footer": {
-    "copyright": "© {{year}} YourName.dev"
-  },
-  "joyride": {
-    "welcome": "Welcome to my portfolio! Scroll down to see more.",
-    "projects": "Here you will find my projects. Click to see details!",
-    "contact": "Have questions? Use the contact form!",
-    "back": "Back",
-    "close": "Close",
-    "last": "Finish",
-    "next": "Next",
-    "skip": "Skip"
+    "copyright": "© {{year}} Aleksandra Cislowski. All rights reserved."
   }
 }
