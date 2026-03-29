@@ -10,10 +10,6 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  Drawer,
-  List,
-  ListItemButton,
-  ListItemText,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useLanguage, type Language } from '../i18n/LanguageContext';
@@ -26,8 +22,7 @@ export default function Navbar() {
   const { lang, setLang } = useLanguage();
   const t = useTranslation();
   const { mode, setMode } = useThemeMode();
-  const [mobileNavOpen, setMobileNavOpen] = React.useState(false);
-
+  if (!t) return null;
   const navItems = [
     { label: t.nav.home, href: '#' },
     { label: t.nav.about, href: '#about' },
@@ -38,9 +33,9 @@ export default function Navbar() {
   return (
     <AppBar
       position='sticky'
-      color='default'
+      color='transparent'
       elevation={0}
-      sx={{ backdropFilter: 'blur(8px)' }}
+      sx={{ backdropFilter: 'blur(8px)', background: 'rgba(24,26,27,0.7)' }}
     >
       <Toolbar>
         <IconButton
@@ -48,7 +43,6 @@ export default function Navbar() {
           color='inherit'
           aria-label='menu'
           sx={{ mr: 2, display: { sm: 'none' } }}
-          onClick={() => setMobileNavOpen(true)}
         >
           <MenuIcon />
         </IconButton>
@@ -64,7 +58,7 @@ export default function Navbar() {
               key={item.label}
               href={item.href}
               color='inherit'
-              sx={{ mx: 1 }}
+              sx={{ fontWeight: 600, mx: 1 }}
             >
               {item.label}
             </Button>
@@ -93,26 +87,6 @@ export default function Navbar() {
           </Select>
         </FormControl>
       </Toolbar>
-      <Drawer
-        anchor='left'
-        open={mobileNavOpen}
-        onClose={() => setMobileNavOpen(false)}
-      >
-        <Box sx={{ width: 280, pt: 2 }}>
-          <List>
-            {navItems.map((item) => (
-              <ListItemButton
-                key={item.label}
-                component='a'
-                href={item.href}
-                onClick={() => setMobileNavOpen(false)}
-              >
-                <ListItemText primary={item.label} />
-              </ListItemButton>
-            ))}
-          </List>
-        </Box>
-      </Drawer>
     </AppBar>
   );
 }
