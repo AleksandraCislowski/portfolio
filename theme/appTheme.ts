@@ -1,5 +1,6 @@
 import { alpha, createTheme, type ThemeOptions } from '@mui/material/styles';
 import type { ThemeMode } from './types';
+import { DESIGN_TOKENS } from './tokens';
 
 const lightPalette: ThemeOptions['palette'] = {
   mode: 'light',
@@ -53,7 +54,7 @@ const darkPalette: ThemeOptions['palette'] = {
 
 const sharedThemeOptions: ThemeOptions = {
   shape: {
-    borderRadius: 14,
+    borderRadius: DESIGN_TOKENS.radius.md,
   },
   typography: {
     fontFamily:
