@@ -3,9 +3,9 @@
     "home": "Home",
     "about": "About",
     "impact": "Impact",
-    "experience": "Experience",
     "skills": "Skills",
     "projects": "Work",
+    "downloads": "Downloads",
     "contact": "Contact",
     "language": "Language"
   },
@@ -44,42 +44,20 @@
       }
     ]
   },
-  "experience": {
-    "title": "Professional Experience",
-    "roles": [
-      {
-        "title": "Frontend Developer / Scrum Master",
-        "company": "Montrima AB",
-        "location": "Stockholm, Sweden",
-        "period": "Apr 2024 - Mar 2026",
-        "summary": "Led Agile delivery and supported frontend development for a production SaaS platform.",
-        "achievements": [
-          "Owned delivery rituals and execution quality across planning, stand-ups, and retrospectives.",
-          "Improved team velocity and delivery predictability through workflow optimization.",
-          "Drove stakeholder demos, faster feedback loops, and decision clarity.",
-          "Coordinated bug resolution and production issue follow-up to improve platform stability."
-        ]
-      },
-      {
-        "title": "Owner & Founder",
-        "company": "Aleksandra Cislowski Företag",
-        "location": "Stockholm, Sweden",
-        "period": "Feb 2019 - Present",
-        "summary": "Built and managed a business end-to-end: strategy, sales, operations, and client relationships.",
-        "achievements": [
-          "Delivered consistent year-over-year revenue growth through focused execution.",
-          "Maintained high retention through service quality and relationship management.",
-          "Optimized operational workflows for better scheduling and cost control."
-        ]
-      }
-    ]
-  },
   "skills": {
     "title": "Core Skills",
     "groups": [
       {
         "title": "Frontend Engineering",
-        "items": ["React", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "MUI"]
+        "items": [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "JavaScript",
+          "HTML5",
+          "CSS3",
+          "MUI"
+        ]
       },
       {
         "title": "Delivery & Collaboration",
@@ -94,11 +72,29 @@
       },
       {
         "title": "Tooling",
-        "items": ["Git", "GitLab", "Azure DevOps"]
+        "items": [
+          "Git",
+          "GitLab",
+          "Azure DevOps"
+        ]
+      }
+    ],
+    "languagesTitle": "Languages",
+    "languageLevels": [
+      {
+        "name": "English",
+        "level": "C2",
+        "percent": 100
       },
       {
-        "title": "Languages",
-        "items": ["English (C2)", "Polish (C2)", "Swedish (B2)"]
+        "name": "Polish",
+        "level": "C2",
+        "percent": 100
+      },
+      {
+        "name": "Swedish",
+        "level": "B2",
+        "percent": 75
       }
     ],
     "certificationsTitle": "Recent Certifications",
@@ -124,6 +120,30 @@
       {
         "title": "Stakeholder Feedback Engine",
         "description": "Established regular demos and tighter feedback loops to speed up decision-making and reduce delivery risk."
+      }
+    ]
+  },
+  "downloads": {
+    "title": "Downloads",
+    "description": "Grab my CV and supporting documents. Everything is grouped for quick recruiter review.",
+    "items": [
+      {
+        "id": "cv",
+        "title": "Curriculum Vitae",
+        "description": "Complete professional profile, impact metrics, and role history.",
+        "cta": "Download CV"
+      },
+      {
+        "id": "portfolio",
+        "title": "Portfolio Snapshot",
+        "description": "Short project and delivery summary for fast screening.",
+        "cta": "Download Portfolio"
+      },
+      {
+        "id": "references",
+        "title": "References",
+        "description": "Professional references and recommendation contacts.",
+        "cta": "Download References"
       }
     ]
   },

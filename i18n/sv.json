@@ -3,9 +3,9 @@
     "home": "Hem",
     "about": "Om mig",
     "impact": "Effekt",
-    "experience": "Erfarenhet",
     "skills": "Kompetenser",
     "projects": "Arbete",
+    "downloads": "Nedladdningar",
     "contact": "Kontakt",
     "language": "Språk"
   },
@@ -44,42 +44,20 @@
       }
     ]
   },
-  "experience": {
-    "title": "Professionell erfarenhet",
-    "roles": [
-      {
-        "title": "Frontend Developer / Scrum Master",
-        "company": "Montrima AB",
-        "location": "Stockholm, Sweden",
-        "period": "Apr 2024 - Mar 2026",
-        "summary": "Ledde Agile-delivery och stöttade frontendutveckling för en produktions-SaaS-plattform.",
-        "achievements": [
-          "Ansvarade för Scrum-ceremonier och exekveringskvalitet.",
-          "Förbättrade velocity och leveransförutsägbarhet genom workflow-optimering.",
-          "Drev stakeholder-demos och snabbare feedbackloopar.",
-          "Koordinerade bugghantering och produktionsincidenter för högre stabilitet."
-        ]
-      },
-      {
-        "title": "Owner & Founder",
-        "company": "Aleksandra Cislowski Företag",
-        "location": "Stockholm, Sweden",
-        "period": "Feb 2019 - Present",
-        "summary": "Ansvarade end-to-end för strategi, försäljning, drift och kundrelationer.",
-        "achievements": [
-          "Kontinuerlig tillväxt år över år genom fokuserad exekvering.",
-          "Hög kundretention genom kvalitet och stark kunddialog.",
-          "Optimerade processer för bättre planering och kostnadskontroll."
-        ]
-      }
-    ]
-  },
   "skills": {
     "title": "Kärnkompetenser",
     "groups": [
       {
         "title": "Frontend Engineering",
-        "items": ["React", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "MUI"]
+        "items": [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "JavaScript",
+          "HTML5",
+          "CSS3",
+          "MUI"
+        ]
       },
       {
         "title": "Delivery & samarbete",
@@ -94,11 +72,29 @@
       },
       {
         "title": "Verktyg",
-        "items": ["Git", "GitLab", "Azure DevOps"]
+        "items": [
+          "Git",
+          "GitLab",
+          "Azure DevOps"
+        ]
+      }
+    ],
+    "languagesTitle": "Språk",
+    "languageLevels": [
+      {
+        "name": "English",
+        "level": "C2",
+        "percent": 100
       },
       {
-        "title": "Språk",
-        "items": ["English (C2)", "Polish (C2)", "Swedish (B2)"]
+        "name": "Polish",
+        "level": "C2",
+        "percent": 100
+      },
+      {
+        "name": "Swedish",
+        "level": "B2",
+        "percent": 75
       }
     ],
     "certificationsTitle": "Senaste certifieringar",
@@ -124,6 +120,30 @@
       {
         "title": "Stakeholder Feedback Engine",
         "description": "Skapade regelbundna demos och snabbare feedbackloopar för snabbare beslut och lägre leveransrisk."
+      }
+    ]
+  },
+  "downloads": {
+    "title": "Nedladdningar",
+    "description": "Ladda ner mitt CV och kompletterande dokument. Allt är strukturerat för snabb rekryteringsgranskning.",
+    "items": [
+      {
+        "id": "cv",
+        "title": "Curriculum Vitae",
+        "description": "Full professionell profil, effektmått och rollerfarenhet.",
+        "cta": "Ladda ner CV"
+      },
+      {
+        "id": "portfolio",
+        "title": "Portfolio Snapshot",
+        "description": "Kort sammanfattning av projekt och delivery-resultat.",
+        "cta": "Ladda ner Portfolio"
+      },
+      {
+        "id": "references",
+        "title": "Referenser",
+        "description": "Professionella referenser och kontaktuppgifter.",
+        "cta": "Ladda ner Referenser"
       }
     ]
   },

@@ -1,9 +1,9 @@
 export const SECTION_IDS = {
   about: 'about',
   impact: 'impact',
-  experience: 'experience',
   skills: 'skills',
   projects: 'projects',
+  downloads: 'downloads',
   contact: 'contact',
 } as const;
 
@@ -11,9 +11,9 @@ export const SECTION_ANCHORS = {
   home: '#',
   about: `#${SECTION_IDS.about}`,
   impact: `#${SECTION_IDS.impact}`,
-  experience: `#${SECTION_IDS.experience}`,
   skills: `#${SECTION_IDS.skills}`,
   projects: `#${SECTION_IDS.projects}`,
+  downloads: `#${SECTION_IDS.downloads}`,
   contact: `#${SECTION_IDS.contact}`,
 } as const;
 
@@ -29,5 +29,10 @@ export const SITE_CONFIG = {
     linkedIn: 'https://www.linkedin.com/in/aleksandra-cislowski',
     github: 'https://github.com/AleksandraCislowski',
     lovorda: 'https://lovorda.com/me/Aleksandra',
+  },
+  documents: {
+    cv: '/documents/cv-aleksandra-cislowski.pdf',
+    portfolio: '/documents/portfolio-aleksandra-cislowski.pdf',
+    references: '/documents/references-aleksandra-cislowski.pdf',
   },
 } as const;

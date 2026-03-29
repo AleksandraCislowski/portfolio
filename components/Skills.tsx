@@ -1,9 +1,20 @@
 import * as React from 'react';
-import { Box, Typography, Card, CardContent, Chip } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Card,
+  CardContent,
+  Chip,
+  LinearProgress,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Section from './Section';
 import { SITE_CONFIG } from '../config/site';
 import { useTranslation } from '../i18n/useTranslation';
+
+const SectionTitle = styled(Typography)(() => ({
+  marginBottom: 24,
+}));
 
 const SkillsGrid = styled(Box)(() => ({
   display: 'grid',
@@ -17,6 +28,27 @@ const ChipsWrap = styled(Box)(() => ({
   gap: 8,
 }));
 
+const CardTitle = styled(Typography)(() => ({
+  marginBottom: 12,
+}));
+
+const LanguagesPanel = styled(Box)(() => ({
+  marginTop: 24,
+  display: 'grid',
+  gap: 12,
+}));
+
+const LanguageRow = styled(Box)(() => ({
+  display: 'grid',
+  gap: 6,
+}));
+
+const LanguageHeader = styled(Box)(() => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+}));
+
 const Certifications = styled(Box)(() => ({
   marginTop: 24,
 }));
@@ -26,17 +58,13 @@ export default function Skills() {
 
   return (
     <Section id={SITE_CONFIG.sectionIds.skills}>
-      <Typography variant='h3' sx={{ mb: 3 }}>
-        {t.skills.title}
-      </Typography>
+      <SectionTitle variant='h3'>{t.skills.title}</SectionTitle>
 
       <SkillsGrid>
         {t.skills.groups.map((group) => (
           <Card key={group.title}>
             <CardContent>
-              <Typography variant='h6' sx={{ mb: 1.5 }}>
-                {group.title}
-              </Typography>
+              <CardTitle variant='h6'>{group.title}</CardTitle>
               <ChipsWrap>
                 {group.items.map((item) => (
                   <Chip key={item} label={item} variant='outlined' />
@@ -47,10 +75,25 @@ export default function Skills() {
         ))}
       </SkillsGrid>
 
+      <LanguagesPanel>
+        <Typography variant='h5'>{t.skills.languagesTitle}</Typography>
+        {t.skills.languageLevels.map((language) => (
+          <LanguageRow key={language.name}>
+            <LanguageHeader>
+              <Typography variant='body2'>{language.name}</Typography>
+              <Typography variant='body2'>{language.level}</Typography>
+            </LanguageHeader>
+            <LinearProgress
+              variant='determinate'
+              value={language.percent}
+              sx={{ height: 10, borderRadius: 999 }}
+            />
+          </LanguageRow>
+        ))}
+      </LanguagesPanel>
+
       <Certifications>
-        <Typography variant='h5' sx={{ mb: 1.5 }}>
-          {t.skills.certificationsTitle}
-        </Typography>
+        <CardTitle variant='h5'>{t.skills.certificationsTitle}</CardTitle>
         <ChipsWrap>
           {t.skills.certifications.map((certification) => (
             <Chip key={certification} label={certification} />
