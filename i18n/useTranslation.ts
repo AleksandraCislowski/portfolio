@@ -1,7 +1,10 @@
-import { useLanguage } from './LanguageContext';
 import * as React from 'react';
+import en from './en.json';
+import { Language, useLanguage } from './LanguageContext';
 
-const translations = {
+export type TranslationDict = typeof en;
+
+const translations: Record<Language, () => Promise<{ default: TranslationDict }>> = {
   en: () => import('./en.json'),
   pl: () => import('./pl.json'),
   sv: () => import('./sv.json'),
@@ -9,15 +12,10 @@ const translations = {
 
 export function useTranslation() {
   const { lang } = useLanguage();
-  const [dict, setDict] = React.useState<any>(null);
+  const [dict, setDict] = React.useState<TranslationDict>(en);
 
   React.useEffect(() => {
-    type LangKey = keyof typeof translations;
-    const allowedLangs: LangKey[] = ['en', 'pl', 'sv'];
-    const selectedLang: LangKey = allowedLangs.includes(lang as LangKey)
-      ? (lang as LangKey)
-      : 'en';
-    translations[selectedLang]().then((mod: any) => setDict(mod.default));
+    translations[lang]().then((mod) => setDict(mod.default));
   }, [lang]);
 
   return dict;

@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
+
 import PortfolioApp from '../components/PortfolioApp';
 import { LanguageProvider } from '../i18n/LanguageContext';
 import ThemeRegistry from './ThemeRegistry';
+import { ThemeModeProvider } from '../theme/ThemeModeContext';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -31,9 +32,11 @@ export default function RootLayout({
     <html lang='en' className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
         <LanguageProvider>
-          <ThemeRegistry>
-            <PortfolioApp currentYear={currentYear}>{children}</PortfolioApp>
-          </ThemeRegistry>
+          <ThemeModeProvider>
+            <ThemeRegistry>
+              <PortfolioApp currentYear={currentYear}>{children}</PortfolioApp>
+            </ThemeRegistry>
+          </ThemeModeProvider>
         </LanguageProvider>
       </body>
     </html>

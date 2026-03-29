@@ -5,7 +5,7 @@ import { useTranslation } from '../i18n/useTranslation';
 
 export default function Hero() {
   const t = useTranslation();
-  if (!t) return null;
+
   return (
     <Box
       component={motion.section}
@@ -28,12 +28,10 @@ export default function Hero() {
         alt='avatar'
         sx={{ width: 120, height: 120, mb: 3, boxShadow: 3 }}
       />
-      <Typography variant='h1' sx={{ fontSize: { xs: 36, md: 56 }, mb: 2 }}>
-        {t.hero.greeting
-          .replace('<1>', '<span style={{ color: "#00bcd4" }}>')
-          .replace('</1>', '</span>')}
+      <Typography variant='h1' sx={{ mb: 2 }}>
+        {t.hero.greeting}
       </Typography>
-      <Typography variant='h5' sx={{ mb: 4, color: 'text.secondary' }}>
+      <Typography variant='subtitle1' sx={{ mb: 4 }}>
         {t.hero.subtitle}
       </Typography>
       <Stack direction='row' spacing={2} justifyContent='center'>

@@ -7,7 +7,7 @@ import { useTranslation } from '../i18n/useTranslation';
 
 export default function About() {
   const t = useTranslation();
-  if (!t) return null;
+
   return (
     <Box
       id='about'
@@ -23,23 +23,36 @@ export default function About() {
         alt='avatar'
         sx={{ width: 100, height: 100, mb: 2 }}
       />
-      <Typography variant='h3' sx={{ fontWeight: 700, mb: 1 }}>
+      <Typography variant='h3' sx={{ mb: 1 }}>
         {t.about.title}
       </Typography>
-      <Typography
-        variant='body1'
-        sx={{ maxWidth: 500, color: 'text.secondary', mb: 2 }}
-      >
+      <Typography variant='body2' sx={{ maxWidth: 500, mb: 2 }}>
         {t.about.description}
       </Typography>
       <Stack direction='row' spacing={2}>
-        <IconButton color='primary' href='https://linkedin.com' target='_blank'>
+        <IconButton
+          color='primary'
+          href='https://linkedin.com'
+          target='_blank'
+          rel='noopener noreferrer'
+          aria-label='Open LinkedIn profile'
+        >
           <LinkedInIcon />
         </IconButton>
-        <IconButton color='primary' href='https://github.com' target='_blank'>
+        <IconButton
+          color='primary'
+          href='https://github.com'
+          target='_blank'
+          rel='noopener noreferrer'
+          aria-label='Open GitHub profile'
+        >
           <GitHubIcon />
         </IconButton>
-        <IconButton color='primary' href='mailto:your@email.com'>
+        <IconButton
+          color='primary'
+          href='mailto:your@email.com'
+          aria-label='Send email'
+        >
           <EmailIcon />
         </IconButton>
       </Stack>

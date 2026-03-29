@@ -4,14 +4,10 @@ import { useTranslation } from '../i18n/useTranslation';
 
 export default function Projects() {
   const t = useTranslation();
-  if (!t) return null;
   // Placeholder: example project cards
   return (
     <Box id='projects' sx={{ py: 8, px: { xs: 2, md: 6 } }}>
-      <Typography
-        variant='h3'
-        sx={{ fontWeight: 700, mb: 4, textAlign: 'center' }}
-      >
+      <Typography variant='h3' sx={{ mb: 4, textAlign: 'center' }}>
         {t.projects.title}
       </Typography>
       <Box
@@ -37,7 +33,7 @@ export default function Projects() {
                 <Typography variant='h6' sx={{ mb: 1 }}>
                   {`Project ${i}`}
                 </Typography>
-                <Typography variant='body2' color='text.secondary'>
+                <Typography variant='body2'>
                   {t.projects.description}
                 </Typography>
               </CardContent>

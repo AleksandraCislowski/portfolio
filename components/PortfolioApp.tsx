@@ -1,10 +1,11 @@
 'use client';
 import * as React from 'react';
-import { Container, Box } from '@mui/material';
+import { Container, Box, Typography } from '@mui/material';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import About from './About';
 import Projects from './Projects';
+import Downloads from './Downloads';
 import Contact from './Contact';
 import { useTranslation } from '../i18n/useTranslation';
 
@@ -16,26 +17,36 @@ export default function PortfolioApp({
   currentYear: number;
 }) {
   const t = useTranslation();
-  if (!t) return null;
+
   return (
     <>
       <Navbar />
-      <Container maxWidth='lg' disableGutters>
-        <Hero />
-        <About />
-        <Projects />
-        <Contact />
-        {children}
-      </Container>
       <Box
         sx={{
-          textAlign: 'center',
-          py: 4,
-          color: 'text.secondary',
-          fontSize: 14,
+          bgcolor: 'background.default',
+          color: 'text.primary',
+          minHeight: '100dvh',
+          transition: 'background-color 0.25s ease, color 0.25s ease',
         }}
       >
-        {t.footer.copyright.replace('{{year}}', currentYear.toString())}
+        <Container maxWidth='lg' disableGutters>
+          <Hero />
+          <About />
+          <Projects />
+          <Downloads />
+          <Contact />
+          {children}
+        </Container>
+        <Box
+          sx={{
+            textAlign: 'center',
+            py: 4,
+          }}
+        >
+          <Typography variant='caption'>
+            {t.footer.copyright.replace('{{year}}', currentYear.toString())}
+          </Typography>
+        </Box>
       </Box>
     </>
   );

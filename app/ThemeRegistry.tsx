@@ -5,7 +5,8 @@ import createCache from '@emotion/cache';
 import { CacheProvider, type EmotionCache } from '@emotion/react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { useServerInsertedHTML } from 'next/navigation';
-import darkTheme from '../theme/darkTheme';
+import { getAppTheme } from '../theme/appTheme';
+import { useThemeMode } from '../theme/ThemeModeContext';
 
 type ThemeRegistryProps = {
   children: React.ReactNode;
@@ -16,6 +17,8 @@ type EmotionCacheWithFlush = EmotionCache & {
 };
 
 export default function ThemeRegistry({ children }: ThemeRegistryProps) {
+  const { mode } = useThemeMode();
+  const theme = React.useMemo(() => getAppTheme(mode), [mode]);
   const [{ cache, flush }] = React.useState(() => {
     const cache = createCache({
       key: 'mui',
@@ -69,7 +72,7 @@ export default function ThemeRegistry({ children }: ThemeRegistryProps) {
 
   return (
     <CacheProvider value={cache}>
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         {children}
       </ThemeProvider>
