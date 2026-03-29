@@ -17,8 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Portfolio | YourName.dev',
-  description: 'Modern IT portfolio - React, Next.js, MUI',
+  title: 'Aleksandra Cislowski | Frontend Developer & Scrum Master',
+  description:
+    'Portfolio of Aleksandra Cislowski — Frontend Developer and Scrum Master focused on high-quality product delivery, React, Next.js, and TypeScript.',
 };
 
 export default function RootLayout({

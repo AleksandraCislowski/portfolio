@@ -1,15 +1,10 @@
 import * as React from 'react';
-import { Box, Typography, Card, CardContent, Skeleton } from '@mui/material';
+import { Box, Typography, Card, CardContent } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { DESIGN_TOKENS } from '../theme/tokens';
 import { useTranslation } from '../i18n/useTranslation';
 import Section from './Section';
 import { SITE_CONFIG } from '../config/site';
-
-const PLACEHOLDER_PROJECTS = Array.from(
-  { length: SITE_CONFIG.placeholderProjectsCount },
-  (_, index) => index + 1,
-);
 
 const CardsGrid = styled(Box)(() => ({
   display: 'flex',
@@ -39,6 +34,12 @@ const ProjectTitle = styled(Typography)(() => ({
   marginBottom: 8,
 }));
 
+const ProjectCover = styled(Box)(({ theme }) => ({
+  height: 120,
+  background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+  opacity: 0.2,
+}));
+
 export default function Projects() {
   const t = useTranslation();
 
@@ -48,15 +49,15 @@ export default function Projects() {
         {t.projects.title}
       </SectionTitle>
       <CardsGrid>
-        {PLACEHOLDER_PROJECTS.map((projectNumber) => (
-          <CardColumn key={projectNumber}>
+        {t.projects.items.map((item) => (
+          <CardColumn key={item.title}>
             <ProjectCard>
-              <Skeleton variant='rectangular' height={160} animation='wave' />
+              <ProjectCover />
               <CardContent>
                 <ProjectTitle variant='h6'>
-                  {`Project ${projectNumber}`}
+                  {item.title}
                 </ProjectTitle>
-                <Typography variant='body2'>{t.projects.description}</Typography>
+                <Typography variant='body2'>{item.description}</Typography>
               </CardContent>
             </ProjectCard>
           </CardColumn>

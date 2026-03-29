@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Typography, TextField, Button, Stack } from '@mui/material';
+import { Typography, TextField, Button, Stack, Link } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { DESIGN_TOKENS } from '../theme/tokens';
 import { useTranslation } from '../i18n/useTranslation';
@@ -13,6 +13,17 @@ const ContactForm = styled('form')(() => ({
 
 const ContactTitle = styled(Typography)(() => ({
   marginBottom: 16,
+}));
+
+const ContactDescription = styled(Typography)(() => ({
+  marginBottom: 16,
+  textAlign: 'center',
+  maxWidth: 720,
+}));
+
+const ContactMeta = styled(Stack)(() => ({
+  marginBottom: 24,
+  textAlign: 'center',
 }));
 
 export default function Contact() {
@@ -39,6 +50,36 @@ export default function Contact() {
       <ContactTitle variant='h3'>
         {t.contact.title}
       </ContactTitle>
+      <ContactDescription variant='body2'>
+        {t.contact.description}
+      </ContactDescription>
+      <ContactMeta spacing={0.75}>
+        <Typography variant='body2'>
+          {t.contact.locationLabel}: {SITE_CONFIG.location}
+        </Typography>
+        <Typography variant='body2'>
+          {t.contact.phoneLabel}: {SITE_CONFIG.contactPhone}
+        </Typography>
+        <Typography variant='body2'>
+          {t.contact.emailLabel}:{' '}
+          <Link href={`mailto:${SITE_CONFIG.contactEmail}`} underline='hover'>
+            {SITE_CONFIG.contactEmail}
+          </Link>
+        </Typography>
+        <Typography variant='body2'>
+          <Link href={SITE_CONFIG.socialLinks.linkedIn} target='_blank' rel='noopener noreferrer' underline='hover'>
+            LinkedIn
+          </Link>{' '}
+          ·{' '}
+          <Link href={SITE_CONFIG.socialLinks.github} target='_blank' rel='noopener noreferrer' underline='hover'>
+            GitHub
+          </Link>{' '}
+          ·{' '}
+          <Link href={SITE_CONFIG.socialLinks.lovorda} target='_blank' rel='noopener noreferrer' underline='hover'>
+            Lovorda
+          </Link>
+        </Typography>
+      </ContactMeta>
       <ContactForm onSubmit={handleSubmit}>
         <Stack spacing={3}>
           <TextField

@@ -5,8 +5,10 @@ import { styled } from '@mui/material/styles';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import About from './About';
+import Impact from './Impact';
+import Experience from './Experience';
+import Skills from './Skills';
 import Projects from './Projects';
-import Downloads from './Downloads';
 import Contact from './Contact';
 import { useTranslation } from '../i18n/useTranslation';
 
@@ -38,8 +40,10 @@ export default function PortfolioApp({
         <Container maxWidth='lg' disableGutters>
           <Hero />
           <About />
+          <Impact />
+          <Experience />
+          <Skills />
           <Projects />
-          <Downloads />
           <Contact />
           {children}
         </Container>

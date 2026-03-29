@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Typography, Stack, Avatar, IconButton } from '@mui/material';
+import {
+  Typography,
+  Stack,
+  Avatar,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { DESIGN_TOKENS } from '../theme/tokens';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -24,6 +32,12 @@ const AboutTitle = styled(Typography)(() => ({
   marginBottom: 8,
 }));
 
+const HighlightsList = styled(List)(() => ({
+  width: '100%',
+  maxWidth: DESIGN_TOKENS.size.downloadsDescriptionMaxWidth,
+  marginBottom: 16,
+}));
+
 export default function About() {
   const t = useTranslation();
 
@@ -36,6 +50,13 @@ export default function About() {
       <AboutDescription variant='body2'>
         {t.about.description}
       </AboutDescription>
+      <HighlightsList dense>
+        {t.about.highlights.map((highlight) => (
+          <ListItem key={highlight} disableGutters>
+            <ListItemText primary={highlight} />
+          </ListItem>
+        ))}
+      </HighlightsList>
       <Stack direction='row' spacing={2}>
         <IconButton
           color='primary'

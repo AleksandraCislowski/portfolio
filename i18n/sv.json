@@ -2,41 +2,143 @@
   "nav": {
     "home": "Hem",
     "about": "Om mig",
-    "projects": "Projekt",
-    "downloads": "Nedladdningar",
+    "impact": "Effekt",
+    "experience": "Erfarenhet",
+    "skills": "Kompetenser",
+    "projects": "Arbete",
     "contact": "Kontakt",
     "language": "Språk"
   },
   "hero": {
-    "greeting": "Hej, jag är Aleksandra",
-    "subtitle": "Frontendutvecklare & Scrum Master",
-    "seeProjects": "Utforska mitt arbete",
-    "contact": "Kontakta mig"
+    "greeting": "Frontend Developer & Scrum Master",
+    "subtitle": "Jag hjälper team att leverera bättre produkter snabbare genom stark frontend-exekvering och delivery-ledarskap.",
+    "primaryCta": "Se mitt arbete",
+    "secondaryCta": "Boka ett samtal"
   },
   "about": {
-    "title": "Om mig",
-    "description": "Jag är Frontendutvecklare och Scrum Master med stark teknisk bakgrund inom React, Next.js och TypeScript. Jag leder agila team för att leverera digitala produkter med stor påverkan, optimerar leveransprocesser och främjar tvärfunktionellt samarbete. Jag kombinerar praktisk utveckling med affärstänkande och en passion för ständig förbättring."
+    "title": "Produktfokuserad ingenjör med delivery-DNA",
+    "description": "Jag kombinerar praktisk frontendutveckling med Agile-ledarskap. Min styrka är att koppla ihop produkt, design och teknik för att leverera hög kvalitet med bra tempo.",
+    "highlights": [
+      "Stark grund i React, Next.js och TypeScript med erfarenhet från produktion-SaaS.",
+      "Dokumenterad Scrum-ledning: facilitering, planering, retrospektiv och stabil exekvering.",
+      "Affärsdriven och ansvarstagande profil genom entreprenörskap."
+    ]
+  },
+  "impact": {
+    "title": "Leveranseffekt",
+    "items": [
+      {
+        "value": "18 sprintar",
+        "label": "100% sprintmålsuppfyllelse",
+        "description": "Ledde ett tvärfunktionellt team på 5 personer med konsekvent leveransdisciplin."
+      },
+      {
+        "value": "+15%",
+        "label": "ökad teameffektivitet",
+        "description": "Bättre förutsägbarhet och flow genom processoptimering och hinderhantering."
+      },
+      {
+        "value": "70%+",
+        "label": "kundretention",
+        "description": "Långsiktiga relationer och stabilt värdeskapande i eget bolag."
+      }
+    ]
+  },
+  "experience": {
+    "title": "Professionell erfarenhet",
+    "roles": [
+      {
+        "title": "Frontend Developer / Scrum Master",
+        "company": "Montrima AB",
+        "location": "Stockholm, Sweden",
+        "period": "Apr 2024 - Mar 2026",
+        "summary": "Ledde Agile-delivery och stöttade frontendutveckling för en produktions-SaaS-plattform.",
+        "achievements": [
+          "Ansvarade för Scrum-ceremonier och exekveringskvalitet.",
+          "Förbättrade velocity och leveransförutsägbarhet genom workflow-optimering.",
+          "Drev stakeholder-demos och snabbare feedbackloopar.",
+          "Koordinerade bugghantering och produktionsincidenter för högre stabilitet."
+        ]
+      },
+      {
+        "title": "Owner & Founder",
+        "company": "Aleksandra Cislowski Företag",
+        "location": "Stockholm, Sweden",
+        "period": "Feb 2019 - Present",
+        "summary": "Ansvarade end-to-end för strategi, försäljning, drift och kundrelationer.",
+        "achievements": [
+          "Kontinuerlig tillväxt år över år genom fokuserad exekvering.",
+          "Hög kundretention genom kvalitet och stark kunddialog.",
+          "Optimerade processer för bättre planering och kostnadskontroll."
+        ]
+      }
+    ]
+  },
+  "skills": {
+    "title": "Kärnkompetenser",
+    "groups": [
+      {
+        "title": "Frontend Engineering",
+        "items": ["React", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "MUI"]
+      },
+      {
+        "title": "Delivery & samarbete",
+        "items": [
+          "Agile / Scrum",
+          "Sprint Planning",
+          "Retrospectives",
+          "Cross-functional Facilitation",
+          "Stakeholder Communication",
+          "Delivery Optimization"
+        ]
+      },
+      {
+        "title": "Verktyg",
+        "items": ["Git", "GitLab", "Azure DevOps"]
+      },
+      {
+        "title": "Språk",
+        "items": ["English (C2)", "Polish (C2)", "Swedish (B2)"]
+      }
+    ],
+    "certificationsTitle": "Senaste certifieringar",
+    "certifications": [
+      "CSS - The Complete Guide (Flexbox, Grid, Sass)",
+      "React Native - The Practical Guide",
+      "MERN Fullstack Guide",
+      "Next.js & React - The Complete Guide",
+      "React & TypeScript - The Practical Guide"
+    ]
   },
   "projects": {
-    "title": "Projekt",
-    "description": "Ett urval av mina senaste projekt. Varje projekt visar mitt engagemang för kvalitet, innovation och användarupplevelse. Se hur jag löser verkliga utmaningar med kreativitet, kod och agilt ledarskap."
-  },
-  "downloads": {
-    "title": "Nedladdningar",
-    "description": "Letar du efter mitt CV eller andra resurser? Ladda ner filerna nedan för att lära dig mer om min erfarenhet och kompetens. Fler dokument kommer snart.",
-    "cv": "Ladda ner CV",
-    "portfolio": "Ladda ner portfolio",
-    "other": "Andra filer"
+    "title": "Utvalt arbete",
+    "items": [
+      {
+        "title": "SaaS Delivery Leadership",
+        "description": "Kombinerade Scrum-ledarskap och frontend-samarbete för stabil, förutsägbar och affärsanpassad leverans."
+      },
+      {
+        "title": "Workflow & Velocity Optimization",
+        "description": "Införde processförbättringar och hinderhantering som ökade effektivitet och planeringssäkerhet."
+      },
+      {
+        "title": "Stakeholder Feedback Engine",
+        "description": "Skapade regelbundna demos och snabbare feedbackloopar för snabbare beslut och lägre leveransrisk."
+      }
+    ]
   },
   "contact": {
-    "title": "Kontakt",
+    "title": "Låt oss bygga något starkt",
+    "description": "Öppen för roller inom Frontend, Scrum Master och Delivery i Sverige samt EU-remote.",
     "name": "Ditt namn",
     "email": "Din e-post",
     "message": "Ditt meddelande",
     "send": "Skicka meddelande",
-    "description": "Intresserad av samarbete eller har du en fråga? Fyll i formuläret så återkommer jag snart."
+    "locationLabel": "Plats",
+    "phoneLabel": "Telefon",
+    "emailLabel": "E-post"
   },
   "footer": {
-    "copyright": "© {{year}} Aleksandra Cislowski. Alla rättigheter förbehållna."
+    "copyright": "© {{year}} Aleksandra Cislowski. Byggd med kvalitet och tydligt fokus."
   }
 }

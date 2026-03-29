@@ -61,7 +61,7 @@ export default function Hero() {
           size='large'
           href={SITE_CONFIG.sections.projects}
         >
-          {t.hero.seeProjects}
+          {t.hero.primaryCta}
         </Button>
         <Button
           variant='outlined'
@@ -69,7 +69,7 @@ export default function Hero() {
           size='large'
           href={SITE_CONFIG.sections.contact}
         >
-          {t.hero.contact}
+          {t.hero.secondaryCta}
         </Button>
       </HeroActions>
     </Box>

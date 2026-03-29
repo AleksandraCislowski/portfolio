@@ -1,42 +1,144 @@
 {
   "nav": {
     "home": "Home",
-    "about": "About Me",
-    "projects": "Projects",
-    "downloads": "Downloads",
+    "about": "About",
+    "impact": "Impact",
+    "experience": "Experience",
+    "skills": "Skills",
+    "projects": "Work",
     "contact": "Contact",
     "language": "Language"
   },
   "hero": {
-    "greeting": "Hello, I'm Aleksandra",
-    "subtitle": "Frontend Developer & Scrum Master",
-    "seeProjects": "Explore My Work",
-    "contact": "Let's Connect"
+    "greeting": "Frontend Developer & Scrum Master",
+    "subtitle": "I help teams ship better products faster with strong frontend execution and delivery leadership.",
+    "primaryCta": "View My Work",
+    "secondaryCta": "Book a Conversation"
   },
   "about": {
-    "title": "About Me",
-    "description": "I am a Frontend Developer and Scrum Master with a strong technical background in React, Next.js, and TypeScript. I lead Agile teams to deliver high-impact digital products, optimize delivery processes, and foster cross-functional collaboration. My approach combines hands-on development with a business mindset and a passion for continuous improvement."
+    "title": "Product-Minded Engineer With Delivery DNA",
+    "description": "I combine hands-on frontend engineering with Agile delivery leadership. My edge is bridging product, design, and engineering to deliver high-quality outcomes without losing momentum.",
+    "highlights": [
+      "Strong React, Next.js, and TypeScript foundation with practical SaaS delivery experience.",
+      "Proven Scrum leadership: facilitation, planning, retrospectives, and steady execution.",
+      "Business ownership mindset from entrepreneurship and end-to-end client delivery."
+    ]
+  },
+  "impact": {
+    "title": "Delivery Impact",
+    "items": [
+      {
+        "value": "18 sprints",
+        "label": "100% sprint goal completion",
+        "description": "Led a 5-person cross-functional team with consistent delivery discipline."
+      },
+      {
+        "value": "+15%",
+        "label": "team efficiency uplift",
+        "description": "Improved predictability and flow through process and impediment optimization."
+      },
+      {
+        "value": "70%+",
+        "label": "client retention",
+        "description": "Built long-term relationships and reliable value delivery as founder."
+      }
+    ]
+  },
+  "experience": {
+    "title": "Professional Experience",
+    "roles": [
+      {
+        "title": "Frontend Developer / Scrum Master",
+        "company": "Montrima AB",
+        "location": "Stockholm, Sweden",
+        "period": "Apr 2024 - Mar 2026",
+        "summary": "Led Agile delivery and supported frontend development for a production SaaS platform.",
+        "achievements": [
+          "Owned delivery rituals and execution quality across planning, stand-ups, and retrospectives.",
+          "Improved team velocity and delivery predictability through workflow optimization.",
+          "Drove stakeholder demos, faster feedback loops, and decision clarity.",
+          "Coordinated bug resolution and production issue follow-up to improve platform stability."
+        ]
+      },
+      {
+        "title": "Owner & Founder",
+        "company": "Aleksandra Cislowski Företag",
+        "location": "Stockholm, Sweden",
+        "period": "Feb 2019 - Present",
+        "summary": "Built and managed a business end-to-end: strategy, sales, operations, and client relationships.",
+        "achievements": [
+          "Delivered consistent year-over-year revenue growth through focused execution.",
+          "Maintained high retention through service quality and relationship management.",
+          "Optimized operational workflows for better scheduling and cost control."
+        ]
+      }
+    ]
+  },
+  "skills": {
+    "title": "Core Skills",
+    "groups": [
+      {
+        "title": "Frontend Engineering",
+        "items": ["React", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "MUI"]
+      },
+      {
+        "title": "Delivery & Collaboration",
+        "items": [
+          "Agile / Scrum",
+          "Sprint Planning",
+          "Retrospectives",
+          "Cross-functional Facilitation",
+          "Stakeholder Communication",
+          "Delivery Optimization"
+        ]
+      },
+      {
+        "title": "Tooling",
+        "items": ["Git", "GitLab", "Azure DevOps"]
+      },
+      {
+        "title": "Languages",
+        "items": ["English (C2)", "Polish (C2)", "Swedish (B2)"]
+      }
+    ],
+    "certificationsTitle": "Recent Certifications",
+    "certifications": [
+      "CSS - The Complete Guide (Flexbox, Grid, Sass)",
+      "React Native - The Practical Guide",
+      "MERN Fullstack Guide",
+      "Next.js & React - The Complete Guide",
+      "React & TypeScript - The Practical Guide"
+    ]
   },
   "projects": {
-    "title": "Projects",
-    "description": "A curated selection of my recent work. Each project demonstrates my commitment to quality, innovation, and user experience. Discover how I solve real-world challenges with creativity, code, and Agile leadership."
-  },
-  "downloads": {
-    "title": "Downloads",
-    "description": "Looking for my CV or other resources? Download the files below to learn more about my experience and skills. More documents will be added soon.",
-    "cv": "Download CV",
-    "portfolio": "Download Portfolio",
-    "other": "Other Files"
+    "title": "Selected Work",
+    "items": [
+      {
+        "title": "SaaS Delivery Leadership",
+        "description": "Combined Scrum leadership and frontend collaboration to keep delivery stable, predictable, and aligned with business priorities."
+      },
+      {
+        "title": "Workflow & Velocity Optimization",
+        "description": "Introduced process improvements and impediment removal routines that lifted team efficiency and planning confidence."
+      },
+      {
+        "title": "Stakeholder Feedback Engine",
+        "description": "Established regular demos and tighter feedback loops to speed up decision-making and reduce delivery risk."
+      }
+    ]
   },
   "contact": {
-    "title": "Contact",
+    "title": "Let's Build Something Great",
+    "description": "Open to Frontend Developer, Scrum Master, and Delivery roles in Sweden and EU remote setups.",
     "name": "Your Name",
     "email": "Your Email",
     "message": "Your Message",
     "send": "Send Message",
-    "description": "Interested in working together or have a question? Fill out the form below and I’ll get back to you soon."
+    "locationLabel": "Location",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email"
   },
   "footer": {
-    "copyright": "© {{year}} Aleksandra Cislowski. All rights reserved."
+    "copyright": "© {{year}} Aleksandra Cislowski. Built with care and high standards."
   }
 }

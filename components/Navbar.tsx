@@ -93,8 +93,10 @@ export default function Navbar() {
   const navItems = [
     { label: t.nav.home, href: SITE_CONFIG.sections.home },
     { label: t.nav.about, href: SITE_CONFIG.sections.about },
+    { label: t.nav.impact, href: SITE_CONFIG.sections.impact },
+    { label: t.nav.experience, href: SITE_CONFIG.sections.experience },
+    { label: t.nav.skills, href: SITE_CONFIG.sections.skills },
     { label: t.nav.projects, href: SITE_CONFIG.sections.projects },
-    { label: t.nav.downloads, href: SITE_CONFIG.sections.downloads },
     { label: t.nav.contact, href: SITE_CONFIG.sections.contact },
   ] as const;
 
