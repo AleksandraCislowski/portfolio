@@ -1,6 +1,19 @@
 import * as React from 'react';
-import { Box, Typography, TextField, Button, Stack } from '@mui/material';
+import { Typography, TextField, Button, Stack } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { DESIGN_TOKENS } from '../theme/tokens';
 import { useTranslation } from '../i18n/useTranslation';
+import Section from './Section';
+import { SITE_CONFIG } from '../config/site';
+
+const ContactForm = styled('form')(() => ({
+  width: '100%',
+  maxWidth: DESIGN_TOKENS.size.contactFormMaxWidth,
+}));
+
+const ContactTitle = styled(Typography)(() => ({
+  marginBottom: 16,
+}));
 
 export default function Contact() {
   const t = useTranslation();
@@ -17,28 +30,16 @@ export default function Contact() {
     const subject = encodeURIComponent(`Portfolio contact from ${name}`);
     const body = encodeURIComponent(`Email: ${email}\n\n${message}`);
 
-    window.location.href = `mailto:your@email.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${SITE_CONFIG.contactEmail}?subject=${subject}&body=${body}`;
     setIsSubmitting(false);
   };
 
   return (
-    <Box
-      id='contact'
-      sx={{
-        py: 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      <Typography variant='h3' sx={{ mb: 2 }}>
+    <Section id={SITE_CONFIG.sectionIds.contact} centered>
+      <ContactTitle variant='h3'>
         {t.contact.title}
-      </Typography>
-      <Box
-        component='form'
-        onSubmit={handleSubmit}
-        sx={{ width: '100%', maxWidth: 400 }}
-      >
+      </ContactTitle>
+      <ContactForm onSubmit={handleSubmit}>
         <Stack spacing={3}>
           <TextField
             name='name'
@@ -74,7 +75,7 @@ export default function Contact() {
             {t.contact.send}
           </Button>
         </Stack>
-      </Box>
-    </Box>
+      </ContactForm>
+    </Section>
   );
 }

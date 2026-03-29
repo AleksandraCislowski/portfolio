@@ -1,38 +1,45 @@
 import * as React from 'react';
-import { Box, Typography, Stack, Avatar, IconButton } from '@mui/material';
+import { Typography, Stack, Avatar, IconButton } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { DESIGN_TOKENS } from '../theme/tokens';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import EmailIcon from '@mui/icons-material/Email';
 import { useTranslation } from '../i18n/useTranslation';
+import Section from './Section';
+import { SITE_CONFIG } from '../config/site';
+
+const AboutAvatar = styled(Avatar)(() => ({
+  width: DESIGN_TOKENS.size.aboutAvatar,
+  height: DESIGN_TOKENS.size.aboutAvatar,
+  marginBottom: 16,
+}));
+
+const AboutDescription = styled(Typography)(() => ({
+  maxWidth: DESIGN_TOKENS.size.aboutDescriptionMaxWidth,
+  marginBottom: 16,
+}));
+
+const AboutTitle = styled(Typography)(() => ({
+  marginBottom: 8,
+}));
 
 export default function About() {
   const t = useTranslation();
 
   return (
-    <Box
-      id='about'
-      sx={{
-        py: 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      <Avatar
-        src='/avatar.png'
-        alt='avatar'
-        sx={{ width: 100, height: 100, mb: 2 }}
-      />
-      <Typography variant='h3' sx={{ mb: 1 }}>
+    <Section id={SITE_CONFIG.sectionIds.about} centered>
+      <AboutAvatar src={SITE_CONFIG.avatarImage} alt='Profile photo' />
+      <AboutTitle variant='h3'>
         {t.about.title}
-      </Typography>
-      <Typography variant='body2' sx={{ maxWidth: 500, mb: 2 }}>
+      </AboutTitle>
+      <AboutDescription variant='body2'>
         {t.about.description}
-      </Typography>
+      </AboutDescription>
       <Stack direction='row' spacing={2}>
         <IconButton
           color='primary'
-          href='https://linkedin.com'
+          href={SITE_CONFIG.socialLinks.linkedIn}
           target='_blank'
           rel='noopener noreferrer'
           aria-label='Open LinkedIn profile'
@@ -41,7 +48,7 @@ export default function About() {
         </IconButton>
         <IconButton
           color='primary'
-          href='https://github.com'
+          href={SITE_CONFIG.socialLinks.github}
           target='_blank'
           rel='noopener noreferrer'
           aria-label='Open GitHub profile'
@@ -50,12 +57,12 @@ export default function About() {
         </IconButton>
         <IconButton
           color='primary'
-          href='mailto:your@email.com'
+          href={`mailto:${SITE_CONFIG.contactEmail}`}
           aria-label='Send email'
         >
           <EmailIcon />
         </IconButton>
       </Stack>
-    </Box>
+    </Section>
   );
 }

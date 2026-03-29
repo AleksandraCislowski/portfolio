@@ -1,26 +1,33 @@
 import * as React from 'react';
-import { Box, Typography, Stack, Button } from '@mui/material';
+import { Typography, Stack, Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { DESIGN_TOKENS } from '../theme/tokens';
 import DownloadIcon from '@mui/icons-material/Download';
 import { useTranslation } from '../i18n/useTranslation';
+import Section from './Section';
+import { SITE_CONFIG } from '../config/site';
+
+const DownloadsDescription = styled(Typography)(() => ({
+  maxWidth: DESIGN_TOKENS.size.downloadsDescriptionMaxWidth,
+  marginInline: 'auto',
+  marginBottom: 32,
+}));
+
+const DownloadsTitle = styled(Typography)(() => ({
+  marginBottom: 16,
+}));
 
 export default function Downloads() {
   const t = useTranslation();
 
   return (
-    <Box
-      id='downloads'
-      sx={{
-        py: 8,
-        px: { xs: 2, md: 6 },
-        textAlign: 'center',
-      }}
-    >
-      <Typography variant='h3' sx={{ mb: 2 }}>
+    <Section id={SITE_CONFIG.sectionIds.downloads} textAlign='center'>
+      <DownloadsTitle variant='h3'>
         {t.downloads.title}
-      </Typography>
-      <Typography variant='body2' sx={{ maxWidth: 720, mx: 'auto', mb: 4 }}>
+      </DownloadsTitle>
+      <DownloadsDescription variant='body2'>
         {t.downloads.description}
-      </Typography>
+      </DownloadsDescription>
 
       <Stack
         direction={{ xs: 'column', sm: 'row' }}
@@ -37,6 +44,6 @@ export default function Downloads() {
           {t.downloads.other}
         </Button>
       </Stack>
-    </Box>
+    </Section>
   );
 }

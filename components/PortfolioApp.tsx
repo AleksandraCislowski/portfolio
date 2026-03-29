@@ -1,6 +1,7 @@
 'use client';
 import * as React from 'react';
 import { Container, Box, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import About from './About';
@@ -8,6 +9,18 @@ import Projects from './Projects';
 import Downloads from './Downloads';
 import Contact from './Contact';
 import { useTranslation } from '../i18n/useTranslation';
+
+const AppMain = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.background.default,
+  color: theme.palette.text.primary,
+  minHeight: '100dvh',
+  transition: 'background-color 0.25s ease, color 0.25s ease',
+}));
+
+const Footer = styled(Box)(() => ({
+  textAlign: 'center',
+  paddingBlock: 32,
+}));
 
 export default function PortfolioApp({
   children,
@@ -21,14 +34,7 @@ export default function PortfolioApp({
   return (
     <>
       <Navbar />
-      <Box
-        sx={{
-          bgcolor: 'background.default',
-          color: 'text.primary',
-          minHeight: '100dvh',
-          transition: 'background-color 0.25s ease, color 0.25s ease',
-        }}
-      >
+      <AppMain>
         <Container maxWidth='lg' disableGutters>
           <Hero />
           <About />
@@ -37,17 +43,12 @@ export default function PortfolioApp({
           <Contact />
           {children}
         </Container>
-        <Box
-          sx={{
-            textAlign: 'center',
-            py: 4,
-          }}
-        >
+        <Footer>
           <Typography variant='caption'>
             {t.footer.copyright.replace('{{year}}', currentYear.toString())}
           </Typography>
-        </Box>
-      </Box>
+        </Footer>
+      </AppMain>
     </>
   );
 }
