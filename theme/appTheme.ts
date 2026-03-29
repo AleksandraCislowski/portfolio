@@ -5,51 +5,51 @@ import { DESIGN_TOKENS } from './tokens';
 const lightPalette: ThemeOptions['palette'] = {
   mode: 'light',
   primary: {
-    main: '#0F766E',
-    light: '#14B8A6',
-    dark: '#0B5E58',
-    contrastText: '#F8FAFC',
+    main: '#2563EB',
+    light: '#3B82F6',
+    dark: '#1D4ED8',
+    contrastText: '#EFF6FF',
   },
   secondary: {
-    main: '#B45309',
-    light: '#F59E0B',
-    dark: '#7C2D12',
-    contrastText: '#FFFBEB',
+    main: '#7C3AED',
+    light: '#A78BFA',
+    dark: '#6D28D9',
+    contrastText: '#F5F3FF',
   },
   background: {
-    default: '#FCFAF5',
-    paper: '#FFFEFB',
+    default: '#F6F9FF',
+    paper: '#FFFFFF',
   },
   text: {
-    primary: '#2A221A',
-    secondary: '#5D5348',
+    primary: '#0F172A',
+    secondary: '#475569',
   },
-  divider: '#E8DECF',
+  divider: '#D9E5FF',
 };
 
 const darkPalette: ThemeOptions['palette'] = {
   mode: 'dark',
   primary: {
-    main: '#2DD4BF',
-    light: '#5EEAD4',
-    dark: '#14B8A6',
-    contrastText: '#0B1120',
+    main: '#60A5FA',
+    light: '#93C5FD',
+    dark: '#3B82F6',
+    contrastText: '#0B1220',
   },
   secondary: {
-    main: '#FB923C',
-    light: '#FDBA74',
-    dark: '#C2410C',
+    main: '#C4B5FD',
+    light: '#DDD6FE',
+    dark: '#8B5CF6',
     contrastText: '#111827',
   },
   background: {
     default: '#0A1222',
-    paper: '#111C34',
+    paper: '#101A33',
   },
   text: {
     primary: '#E2E8F0',
     secondary: '#94A3B8',
   },
-  divider: '#22314C',
+  divider: '#25365E',
 };
 
 const sharedThemeOptions: ThemeOptions = {
@@ -108,8 +108,8 @@ export function getAppTheme(mode: ThemeMode) {
           body: {
             backgroundImage:
               mode === 'dark'
-                ? 'radial-gradient(circle at 20% 20%, rgba(45,212,191,0.08), transparent 40%), radial-gradient(circle at 80% 0%, rgba(251,146,60,0.08), transparent 35%)'
-                : 'radial-gradient(circle at 12% 10%, rgba(245,158,11,0.08), transparent 34%), radial-gradient(circle at 88% 2%, rgba(15,118,110,0.06), transparent 38%)',
+                ? 'radial-gradient(circle at 18% 18%, rgba(96,165,250,0.16), transparent 42%), radial-gradient(circle at 82% 0%, rgba(124,58,237,0.14), transparent 36%)'
+                : 'radial-gradient(circle at 10% 8%, rgba(59,130,246,0.14), transparent 34%), radial-gradient(circle at 90% 2%, rgba(139,92,246,0.12), transparent 38%), radial-gradient(circle at 50% 100%, rgba(45,212,191,0.08), transparent 40%)',
             backgroundAttachment: 'fixed',
           },
         },
@@ -119,6 +119,13 @@ export function getAppTheme(mode: ThemeMode) {
           root: ({ theme }) => ({
             backgroundColor: alpha(theme.palette.background.paper, 0.82),
             borderBottom: `1px solid ${alpha(theme.palette.divider, 0.9)}`,
+            boxShadow: '0 10px 28px rgba(2, 6, 23, 0.35)',
+          }),
+          colorDefault: ({ theme }) => ({
+            backgroundColor: alpha(theme.palette.background.paper, 0.82),
+            color: theme.palette.text.primary,
+            borderBottom: `1px solid ${alpha(theme.palette.divider, 0.9)}`,
+            boxShadow: '0 10px 28px rgba(2, 6, 23, 0.35)',
           }),
         },
       },

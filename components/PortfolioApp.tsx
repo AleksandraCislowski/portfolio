@@ -21,7 +21,7 @@ const AppMain = styled(Box)(({ theme }) => ({
 
 const Footer = styled(Box)(() => ({
   textAlign: 'center',
-  paddingBlock: 32,
+  paddingBlock: 20,
 }));
 
 export default function PortfolioApp({

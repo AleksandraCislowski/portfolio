@@ -1,11 +1,12 @@
 export const DESIGN_TOKENS = {
   section: {
-    paddingYMobile: 7,
-    paddingYDesktop: 9,
+    paddingYMobile: 4,
+    paddingYDesktop: 5,
     paddingXMobile: 2,
-    paddingXDesktop: 6,
+    paddingXDesktop: 4,
   },
   radius: {
+    sm: 10,
     md: 14,
     lg: 16,
   },

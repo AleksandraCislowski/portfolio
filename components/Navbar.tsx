@@ -15,7 +15,7 @@ import {
   ListItemButton,
   ListItemText,
 } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { alpha, styled } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
@@ -29,11 +29,26 @@ import { DESIGN_TOKENS } from '../theme/tokens';
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   top: 0,
   zIndex: theme.zIndex.appBar,
+  backgroundColor: '#101A33',
+  color: '#E2E8F0',
+  borderBottom: `1px solid ${alpha('#E2E8F0', 0.2)}`,
+  boxShadow: '0 10px 28px rgba(2, 6, 23, 0.35)',
   backdropFilter: 'blur(10px)',
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 2,
+    background: `linear-gradient(90deg, ${alpha(theme.palette.primary.light, 0.8)} 0%, ${alpha(theme.palette.secondary.main, 0.85)} 100%)`,
+    pointerEvents: 'none',
+  },
 }));
 
 const StyledToolbar = styled(Toolbar)(() => ({
   gap: DESIGN_TOKENS.spacing.xs * 8,
+  minHeight: 72,
 }));
 
 const MobileMenuButton = styled(IconButton)(({ theme }) => ({
@@ -45,6 +60,8 @@ const MobileMenuButton = styled(IconButton)(({ theme }) => ({
 
 const Brand = styled(Typography)(() => ({
   flexGrow: 1,
+  fontWeight: 800,
+  letterSpacing: '-0.02em',
 }));
 
 const DesktopNav = styled(Box)(({ theme }) => ({
@@ -55,14 +72,23 @@ const DesktopNav = styled(Box)(({ theme }) => ({
   },
 }));
 
-const NavButton = styled(Button)(() => ({
+const NavButton = styled(Button)(({ theme }) => ({
   marginInline: 4,
+  borderRadius: DESIGN_TOKENS.radius.sm,
+  paddingInline: theme.spacing(1.25),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.primary.main, 0.12),
+  },
 }));
 
 const ThemeButton = styled(IconButton)(({ theme }) => ({
   marginLeft: theme.spacing(0),
+  border: `1px solid ${alpha('#E2E8F0', 0.28)}`,
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(1),
+  },
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.primary.main, 0.12),
   },
 }));
 
@@ -72,7 +98,51 @@ const LanguageFormControl = styled(FormControl)(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {
     minWidth: DESIGN_TOKENS.size.languageSelectMinWidthDesktop,
   },
+  '& .MuiInputLabel-root': {
+    color: alpha('#E2E8F0', 0.78),
+  },
+  '& .MuiInputLabel-root.Mui-focused': {
+    color: '#E2E8F0',
+  },
+  '& .MuiOutlinedInput-root': {
+    color: '#E2E8F0',
+    backgroundColor: alpha('#0A1222', 0.35),
+  },
+  '& .MuiSelect-select': {
+    color: '#E2E8F0',
+  },
+  '& .MuiOutlinedInput-notchedOutline': {
+    borderColor: alpha('#E2E8F0', 0.3),
+  },
+  '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+    borderColor: alpha('#E2E8F0', 0.45),
+  },
+  '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+    borderColor: alpha('#E2E8F0', 0.6),
+  },
+  '& .MuiSelect-icon': {
+    color: alpha('#E2E8F0', 0.78),
+  },
 }));
+
+const languageMenuProps = {
+  PaperProps: {
+    sx: {
+      backgroundColor: '#101A33',
+      color: '#E2E8F0',
+      border: `1px solid ${alpha('#E2E8F0', 0.2)}`,
+      '& .MuiMenuItem-root': {
+        color: '#E2E8F0',
+      },
+      '& .MuiMenuItem-root.Mui-selected': {
+        backgroundColor: alpha('#60A5FA', 0.25),
+      },
+      '& .MuiMenuItem-root.Mui-selected:hover': {
+        backgroundColor: alpha('#60A5FA', 0.35),
+      },
+    },
+  },
+} as const;
 
 const DrawerContent = styled(Box)(() => ({
   paddingTop: 16,
@@ -150,6 +220,7 @@ export default function Navbar() {
             value={lang}
             label={t.nav.language}
             onChange={handleLanguageChange}
+            MenuProps={languageMenuProps}
           >
             {LANGUAGES.map((language) => (
               <MenuItem key={language} value={language}>

@@ -7,20 +7,23 @@ import { useTranslation } from '../i18n/useTranslation';
 import { SITE_CONFIG } from '../config/site';
 
 const heroSectionSx = {
-  minHeight: '60vh',
+  minHeight: '48vh',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
   textAlign: 'center',
-  paddingBlock: 64,
+  paddingBlock: {
+    xs: 32,
+    md: 40,
+  },
   position: 'relative',
 } as const;
 
 const HeroAvatar = styled(Avatar)(({ theme }) => ({
   width: DESIGN_TOKENS.size.heroAvatar,
   height: DESIGN_TOKENS.size.heroAvatar,
-  marginBottom: 24,
+  marginBottom: 16,
   boxShadow: theme.shadows[6],
 }));
 
@@ -29,11 +32,11 @@ const HeroActions = styled(Stack)(() => ({
 }));
 
 const HeroTitle = styled(Typography)(() => ({
-  marginBottom: 16,
+  marginBottom: 12,
 }));
 
 const HeroSubtitle = styled(Typography)(() => ({
-  marginBottom: 32,
+  marginBottom: 20,
 }));
 
 export default function Hero() {
