@@ -138,6 +138,51 @@ export function getAppTheme(mode: ThemeMode) {
           disableElevation: true,
         },
       },
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            backgroundColor: alpha(theme.palette.background.paper, 0.9),
+            color: theme.palette.text.primary,
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: alpha(theme.palette.divider, 0.9),
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: alpha(theme.palette.primary.main, 0.55),
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: theme.palette.primary.main,
+              borderWidth: 1,
+            },
+          }),
+        },
+      },
+      MuiInputLabel: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            color: theme.palette.text.secondary,
+            '&.Mui-focused': {
+              color: theme.palette.primary.main,
+            },
+          }),
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          select: ({ theme }) => ({
+            color: theme.palette.text.primary,
+          }),
+          icon: ({ theme }) => ({
+            color: theme.palette.text.secondary,
+          }),
+        },
+      },
+      MuiMenuItem: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            color: theme.palette.text.primary,
+          }),
+        },
+      },
       MuiTypography: {
         styleOverrides: {
           subtitle1: ({ theme }) => ({

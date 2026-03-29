@@ -33,9 +33,9 @@ export default function Navbar() {
   return (
     <AppBar
       position='sticky'
-      color='transparent'
+      color='default'
       elevation={0}
-      sx={{ backdropFilter: 'blur(8px)', background: 'rgba(24,26,27,0.7)' }}
+      sx={{ top: 0, zIndex: (theme) => theme.zIndex.appBar, backdropFilter: 'blur(10px)' }}
     >
       <Toolbar>
         <IconButton
