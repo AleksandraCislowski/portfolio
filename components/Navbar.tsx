@@ -17,14 +17,14 @@ import { useTranslation } from '../i18n/useTranslation';
 
 export default function Navbar() {
   const { lang, setLang } = useLanguage();
-  const dict = useTranslation();
-  if (!dict) return null;
+  const t = useTranslation();
+  if (!t) return null;
   const navItems = [
-    { label: dict.nav.home, href: '#' },
-    { label: dict.nav.about, href: '#about' },
-    { label: dict.nav.projects, href: '#projects' },
-    { label: dict.nav.downloads, href: '#downloads' },
-    { label: dict.nav.contact, href: '#contact' },
+    { label: t.nav.home, href: '#' },
+    { label: t.nav.about, href: '#about' },
+    { label: t.nav.projects, href: '#projects' },
+    { label: t.nav.downloads, href: '#downloads' },
+    { label: t.nav.contact, href: '#contact' },
   ];
   return (
     <AppBar
@@ -61,12 +61,12 @@ export default function Navbar() {
           ))}
         </Box>
         <FormControl size='small' sx={{ ml: 2, minWidth: 120 }}>
-          <InputLabel id='lang-select-label'>{dict.nav.language}</InputLabel>
+          <InputLabel id='lang-select-label'>{t.nav.language}</InputLabel>
           <Select
             labelId='lang-select-label'
             id='lang-select'
             value={lang}
-            label={dict.nav.language}
+            label={t.nav.language}
             onChange={(e) => setLang(e.target.value as string)}
           >
             <MenuItem value='en'>English</MenuItem>

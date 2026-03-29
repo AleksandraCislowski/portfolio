@@ -3,8 +3,8 @@ import { Box, Typography, TextField, Button, Stack } from '@mui/material';
 import { useTranslation } from '../i18n/useTranslation';
 
 export default function Contact() {
-  const dict = useTranslation();
-  if (!dict) return null;
+  const t = useTranslation();
+  if (!t) return null;
   return (
     <Box
       id='contact'
@@ -16,25 +16,25 @@ export default function Contact() {
       }}
     >
       <Typography variant='h3' sx={{ fontWeight: 700, mb: 2 }}>
-        {dict.contact.title}
+        {t.contact.title}
       </Typography>
       <Box component='form' sx={{ width: '100%', maxWidth: 400 }}>
         <Stack spacing={3}>
           <TextField
-            label={dict.contact.name}
+            label={t.contact.name}
             variant='outlined'
             fullWidth
             required
           />
           <TextField
-            label={dict.contact.email}
+            label={t.contact.email}
             variant='outlined'
             type='email'
             fullWidth
             required
           />
           <TextField
-            label={dict.contact.message}
+            label={t.contact.message}
             variant='outlined'
             fullWidth
             required
@@ -47,7 +47,7 @@ export default function Contact() {
             size='large'
             type='submit'
           >
-            {dict.contact.send}
+            {t.contact.send}
           </Button>
         </Stack>
       </Box>

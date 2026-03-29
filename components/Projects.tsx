@@ -3,8 +3,8 @@ import { Box, Typography, Card, CardContent, Skeleton } from '@mui/material';
 import { useTranslation } from '../i18n/useTranslation';
 
 export default function Projects() {
-  const dict = useTranslation();
-  if (!dict) return null;
+  const t = useTranslation();
+  if (!t) return null;
   // Placeholder: example project cards
   return (
     <Box id='projects' sx={{ py: 8, px: { xs: 2, md: 6 } }}>
@@ -12,7 +12,7 @@ export default function Projects() {
         variant='h3'
         sx={{ fontWeight: 700, mb: 4, textAlign: 'center' }}
       >
-        {dict.projects.title}
+        {t.projects.title}
       </Typography>
       <Box
         sx={{
@@ -38,7 +38,7 @@ export default function Projects() {
                   {`Project ${i}`}
                 </Typography>
                 <Typography variant='body2' color='text.secondary'>
-                  {dict.projects.description}
+                  {t.projects.description}
                 </Typography>
               </CardContent>
             </Card>

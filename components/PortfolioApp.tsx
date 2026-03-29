@@ -15,8 +15,8 @@ export default function PortfolioApp({
   children: React.ReactNode;
   currentYear: number;
 }) {
-  const dict = useTranslation();
-  if (!dict) return null;
+  const t = useTranslation();
+  if (!t) return null;
   return (
     <>
       <Navbar />
@@ -35,7 +35,7 @@ export default function PortfolioApp({
           fontSize: 14,
         }}
       >
-        {dict.footer.copyright.replace('{{year}}', currentYear.toString())}
+        {t.footer.copyright.replace('{{year}}', currentYear.toString())}
       </Box>
     </>
   );

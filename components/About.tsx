@@ -6,8 +6,8 @@ import EmailIcon from '@mui/icons-material/Email';
 import { useTranslation } from '../i18n/useTranslation';
 
 export default function About() {
-  const dict = useTranslation();
-  if (!dict) return null;
+  const t = useTranslation();
+  if (!t) return null;
   return (
     <Box
       id='about'
@@ -24,13 +24,13 @@ export default function About() {
         sx={{ width: 100, height: 100, mb: 2 }}
       />
       <Typography variant='h3' sx={{ fontWeight: 700, mb: 1 }}>
-        {dict.about.title}
+        {t.about.title}
       </Typography>
       <Typography
         variant='body1'
         sx={{ maxWidth: 500, color: 'text.secondary', mb: 2 }}
       >
-        {dict.about.description}
+        {t.about.description}
       </Typography>
       <Stack direction='row' spacing={2}>
         <IconButton color='primary' href='https://linkedin.com' target='_blank'>

@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import { useTranslation } from '../i18n/useTranslation';
 
 export default function Hero() {
-  const dict = useTranslation();
-  if (!dict) return null;
+  const t = useTranslation();
+  if (!t) return null;
   return (
     <Box
       component={motion.section}
@@ -29,12 +29,12 @@ export default function Hero() {
         sx={{ width: 120, height: 120, mb: 3, boxShadow: 3 }}
       />
       <Typography variant='h1' sx={{ fontSize: { xs: 36, md: 56 }, mb: 2 }}>
-        {dict.hero.greeting
+        {t.hero.greeting
           .replace('<1>', '<span style={{ color: "#00bcd4" }}>')
           .replace('</1>', '</span>')}
       </Typography>
       <Typography variant='h5' sx={{ mb: 4, color: 'text.secondary' }}>
-        {dict.hero.subtitle}
+        {t.hero.subtitle}
       </Typography>
       <Stack direction='row' spacing={2} justifyContent='center'>
         <Button
@@ -43,7 +43,7 @@ export default function Hero() {
           size='large'
           href='#projects'
         >
-          {dict.hero.seeProjects}
+          {t.hero.seeProjects}
         </Button>
         <Button
           variant='outlined'
@@ -51,7 +51,7 @@ export default function Hero() {
           size='large'
           href='#contact'
         >
-          {dict.hero.contact}
+          {t.hero.contact}
         </Button>
       </Stack>
     </Box>
