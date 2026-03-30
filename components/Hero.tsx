@@ -18,7 +18,7 @@ const MotionBox = motion.create(Box);
 
 const heroSectionSx = {
   position: 'relative',
-  overflow: 'hidden',
+  overflow: 'visible',
   px: {
     xs: 2,
     md: 4,
@@ -28,10 +28,54 @@ const heroSectionSx = {
     md: 6,
   },
   pb: {
-    xs: 6,
-    md: 8,
+    xs: 7,
+    md: 12,
   },
 } as const;
+
+const HeroGlow = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  inset: 0,
+  pointerEvents: 'none',
+  zIndex: 2,
+  overflow: 'visible',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: -120,
+    left: -140,
+    width: 420,
+    height: 420,
+    borderRadius: '50%',
+    background: `radial-gradient(circle, ${alpha(theme.palette.primary.light, 0.3)} 0%, transparent 64%)`,
+    filter: 'blur(10px)',
+  },
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    right: -160,
+    bottom: -180,
+    width: 520,
+    height: 520,
+    borderRadius: '50%',
+    background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.28)} 0%, transparent 66%)`,
+    filter: 'blur(14px)',
+  },
+  [theme.breakpoints.down('md')]: {
+    '&::before': {
+      top: -72,
+      left: -100,
+      width: 300,
+      height: 300,
+    },
+    '&::after': {
+      right: -120,
+      bottom: -120,
+      width: 340,
+      height: 340,
+    },
+  },
+}));
 
 const HeroShell = styled(Box)(({ theme }) => ({
   position: 'relative',
@@ -41,40 +85,24 @@ const HeroShell = styled(Box)(({ theme }) => ({
   minHeight: 'calc(100dvh - 120px)',
   padding: theme.spacing(4),
   borderRadius: 36,
-  border: `1px solid ${alpha(theme.palette.divider, 0.7)}`,
+  border: '1px solid transparent',
   background:
     theme.palette.mode === 'dark'
       ? `linear-gradient(135deg, ${alpha('#09111F', 0.94)} 0%, ${alpha('#101A33', 0.98)} 52%, ${alpha('#16264B', 0.94)} 100%)`
       : `linear-gradient(135deg, ${alpha('#FFFFFF', 0.92)} 0%, ${alpha('#EEF4FF', 0.98)} 54%, ${alpha('#E0EAFF', 0.94)} 100%)`,
   boxShadow:
     theme.palette.mode === 'dark'
-      ? '0 32px 80px rgba(2, 6, 23, 0.48)'
-      : '0 32px 80px rgba(37, 99, 235, 0.16)',
+      ? `0 32px 80px rgba(2, 6, 23, 0.48), inset 0 1px 0 ${alpha(
+          '#FFFFFF',
+          0.06,
+        )}`
+      : `0 32px 80px rgba(37, 99, 235, 0.16), inset 0 1px 0 ${alpha(
+          '#FFFFFF',
+          0.9,
+        )}`,
   backdropFilter: 'blur(16px)',
   isolation: 'isolate',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    inset: '-20% auto auto -12%',
-    width: 320,
-    height: 320,
-    borderRadius: '50%',
-    background: `radial-gradient(circle, ${alpha(theme.palette.primary.light, 0.34)} 0%, transparent 68%)`,
-    pointerEvents: 'none',
-    zIndex: 0,
-  },
-  '&::after': {
-    content: '""',
-    position: 'absolute',
-    right: '-10%',
-    bottom: '-18%',
-    width: 360,
-    height: 360,
-    borderRadius: '50%',
-    background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.24)} 0%, transparent 70%)`,
-    pointerEvents: 'none',
-    zIndex: 0,
-  },
+  zIndex: 1,
   [theme.breakpoints.up('md')]: {
     gridTemplateColumns: 'minmax(0, 1.02fr) minmax(380px, 0.98fr)',
     padding: theme.spacing(5),
@@ -83,7 +111,7 @@ const HeroShell = styled(Box)(({ theme }) => ({
 
 const CopyColumn = styled(Box)(() => ({
   position: 'relative',
-  zIndex: 1,
+  zIndex: 3,
 }));
 
 const HeroEyebrow = styled(Box)(({ theme }) => ({
@@ -145,7 +173,7 @@ const MetaChip = styled(Chip)(({ theme }) => ({
 
 const VisualColumn = styled(Box)(() => ({
   position: 'relative',
-  zIndex: 1,
+  zIndex: 3,
 }));
 
 const ImageFrame = styled(Box)(({ theme }) => ({
@@ -215,6 +243,7 @@ export default function Hero() {
       transition={{ duration: 0.8, ease: 'easeOut' }}
       sx={heroSectionSx}
     >
+      <HeroGlow />
       <HeroShell>
         <MotionBox
           initial={{ opacity: 0, x: -28 }}
