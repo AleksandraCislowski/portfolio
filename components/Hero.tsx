@@ -89,7 +89,7 @@ const HeroShell = styled(Box)(({ theme }) => ({
   background:
     theme.palette.mode === 'dark'
       ? `linear-gradient(135deg, ${alpha('#09111F', 0.94)} 0%, ${alpha('#101A33', 0.98)} 52%, ${alpha('#16264B', 0.94)} 100%)`
-      : `linear-gradient(135deg, ${alpha('#FFFFFF', 0.92)} 0%, ${alpha('#EEF4FF', 0.98)} 54%, ${alpha('#E0EAFF', 0.94)} 100%)`,
+      : `linear-gradient(135deg, ${alpha('#E6EEFF', 0.96)} 0%, ${alpha('#DCE7FF', 0.98)} 54%, ${alpha('#D2E0FF', 0.95)} 100%)`,
   boxShadow:
     theme.palette.mode === 'dark'
       ? `0 32px 80px rgba(2, 6, 23, 0.48), inset 0 1px 0 ${alpha(
