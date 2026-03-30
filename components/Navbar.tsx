@@ -92,57 +92,52 @@ const ThemeButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
-const LanguageFormControl = styled(FormControl)(({ theme }) => ({
-  marginLeft: theme.spacing(1),
-  minWidth: DESIGN_TOKENS.size.languageSelectMinWidthMobile,
-  [theme.breakpoints.up('sm')]: {
-    minWidth: DESIGN_TOKENS.size.languageSelectMinWidthDesktop,
-  },
-  '& .MuiInputLabel-root': {
-    color: alpha('#E2E8F0', 0.78),
-  },
-  '& .MuiInputLabel-root.Mui-focused': {
-    color: '#E2E8F0',
-  },
-  '& .MuiOutlinedInput-root': {
-    color: '#E2E8F0',
-    backgroundColor: alpha('#0A1222', 0.35),
-  },
-  '& .MuiSelect-select': {
-    color: '#E2E8F0',
-  },
-  '& .MuiOutlinedInput-notchedOutline': {
-    borderColor: alpha('#E2E8F0', 0.3),
-  },
-  '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
-    borderColor: alpha('#E2E8F0', 0.45),
-  },
-  '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-    borderColor: alpha('#E2E8F0', 0.6),
-  },
-  '& .MuiSelect-icon': {
-    color: alpha('#E2E8F0', 0.78),
-  },
-}));
-
-const languageMenuProps = {
-  PaperProps: {
-    sx: {
-      backgroundColor: '#101A33',
-      color: '#E2E8F0',
-      border: `1px solid ${alpha('#E2E8F0', 0.2)}`,
-      '& .MuiMenuItem-root': {
-        color: '#E2E8F0',
-      },
-      '& .MuiMenuItem-root.Mui-selected': {
-        backgroundColor: alpha('#60A5FA', 0.25),
-      },
-      '& .MuiMenuItem-root.Mui-selected:hover': {
-        backgroundColor: alpha('#60A5FA', 0.35),
-      },
+const LanguageFormControl = styled(FormControl)(({ theme }) => {
+  return {
+    marginLeft: theme.spacing(1),
+    minWidth: DESIGN_TOKENS.size.languageSelectMinWidthMobile,
+    [theme.breakpoints.up('sm')]: {
+      minWidth: DESIGN_TOKENS.size.languageSelectMinWidthDesktop,
     },
-  },
-} as const;
+    '& .MuiInputLabel-root': {
+      color: alpha('#E2E8F0', 0.78),
+    },
+    '& .MuiInputLabel-root.MuiInputLabel-shrink': {
+      color: '#E2E8F0',
+    },
+    '& .MuiInputLabel-root.Mui-focused': {
+      color: '#E2E8F0',
+    },
+    '& .MuiOutlinedInput-root': {
+      color: '#E2E8F0',
+      backgroundColor: alpha('#0A1222', 0.35),
+    },
+    '& .MuiOutlinedInput-input': {
+      color: '#E2E8F0',
+      WebkitTextFillColor: '#E2E8F0',
+    },
+    '& .MuiSelect-select': {
+      color: '#E2E8F0',
+      WebkitTextFillColor: '#E2E8F0',
+    },
+    '& .MuiSelect-select.MuiSelect-outlined': {
+      color: '#E2E8F0',
+      WebkitTextFillColor: '#E2E8F0',
+    },
+    '& .MuiOutlinedInput-notchedOutline': {
+      borderColor: alpha('#E2E8F0', 0.3),
+    },
+    '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+      borderColor: alpha('#E2E8F0', 0.45),
+    },
+    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: alpha('#E2E8F0', 0.6),
+    },
+    '& .MuiSelect-icon': {
+      color: alpha('#E2E8F0', 0.78),
+    },
+  };
+});
 
 const DrawerContent = styled(Box)(() => ({
   paddingTop: 16,
@@ -159,6 +154,24 @@ export default function Navbar() {
   const [mobileNavOpen, setMobileNavOpen] = React.useState(false);
 
   const nextMode = mode === 'dark' ? 'light' : 'dark';
+  const languageMenuProps = {
+    PaperProps: {
+      sx: {
+        backgroundColor: '#101A33',
+        color: '#E2E8F0',
+        border: `1px solid ${alpha('#E2E8F0', 0.2)}`,
+        '& .MuiMenuItem-root': {
+          color: '#E2E8F0',
+        },
+        '& .MuiMenuItem-root.Mui-selected': {
+          backgroundColor: alpha('#60A5FA', 0.25),
+        },
+        '& .MuiMenuItem-root.Mui-selected:hover': {
+          backgroundColor: alpha('#60A5FA', 0.35),
+        },
+      },
+    },
+  } as const;
 
   const navItems = [
     { label: t.nav.home, href: SITE_CONFIG.sections.home },
