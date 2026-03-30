@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import Image from 'next/image';
 import {
@@ -8,13 +10,21 @@ import {
   Typography,
 } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
-import { motion } from 'framer-motion';
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  type Variants,
+} from 'framer-motion';
 import { useTranslation } from '../i18n/useTranslation';
 import { SITE_CONFIG } from '../config/site';
 import heroImage from '../public/images/profile/Tech-driven confidence in a digital world.png';
 
 const MotionSection = motion.create(Box);
 const MotionBox = motion.create(Box);
+const MotionChip = motion.create(Chip);
 
 const heroSectionSx = {
   position: 'relative',
@@ -33,51 +43,90 @@ const heroSectionSx = {
   },
 } as const;
 
-const HeroGlow = styled(Box)(({ theme }) => ({
+const sectionVariants: Variants = {
+  hidden: { opacity: 0, y: 34 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.85,
+      ease: 'easeOut',
+      staggerChildren: 0.08,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 26 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.75,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const HeroBackdrop = styled(Box)(() => ({
   position: 'absolute',
   inset: 0,
-  pointerEvents: 'none',
-  zIndex: 2,
   overflow: 'visible',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: -120,
-    left: -140,
-    width: 420,
-    height: 420,
-    borderRadius: '50%',
-    background: `radial-gradient(circle, ${alpha(theme.palette.primary.light, 0.3)} 0%, transparent 64%)`,
-    filter: 'blur(10px)',
-  },
-  '&::after': {
-    content: '""',
-    position: 'absolute',
-    right: -160,
-    bottom: -180,
-    width: 520,
-    height: 520,
-    borderRadius: '50%',
-    background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.28)} 0%, transparent 66%)`,
-    filter: 'blur(14px)',
-  },
-  [theme.breakpoints.down('md')]: {
-    '&::before': {
-      top: -72,
-      left: -100,
-      width: 300,
-      height: 300,
-    },
-    '&::after': {
-      right: -120,
-      bottom: -120,
-      width: 340,
-      height: 340,
-    },
-  },
+  pointerEvents: 'none',
+  zIndex: 1,
 }));
 
-const HeroShell = styled(Box)(({ theme }) => ({
+const GlowOrb = styled(motion.div)<{ $variant: 'left' | 'right' }>(({ theme, $variant }) => ({
+  position: 'absolute',
+  borderRadius: '50%',
+  filter: 'blur(14px)',
+  mixBlendMode: theme.palette.mode === 'dark' ? 'screen' : 'normal',
+  opacity: theme.palette.mode === 'dark' ? 0.9 : 1,
+  ...( $variant === 'left'
+    ? {
+        top: -130,
+        left: -150,
+        width: 430,
+        height: 430,
+        background: `radial-gradient(circle, ${alpha(theme.palette.primary.light, 0.36)} 0%, transparent 65%)`,
+      }
+    : {
+        right: -180,
+        bottom: -220,
+        width: 540,
+        height: 540,
+        background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.3)} 0%, transparent 67%)`,
+      }),
+  [theme.breakpoints.down('md')]: $variant === 'left'
+    ? {
+        top: -72,
+        left: -102,
+        width: 300,
+        height: 300,
+      }
+    : {
+        right: -118,
+        bottom: -120,
+        width: 340,
+        height: 340,
+      },
+}));
+
+const BackdropGrid = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  inset: '7% 6% 4%',
+  borderRadius: 34,
+  opacity: theme.palette.mode === 'dark' ? 0.22 : 0.28,
+  backgroundImage: `
+    linear-gradient(${alpha(theme.palette.common.white, theme.palette.mode === 'dark' ? 0.06 : 0.16)} 1px, transparent 1px),
+    linear-gradient(90deg, ${alpha(theme.palette.common.white, theme.palette.mode === 'dark' ? 0.06 : 0.16)} 1px, transparent 1px)
+  `,
+  backgroundSize: '32px 32px',
+  maskImage: 'linear-gradient(180deg, rgba(0,0,0,0.8), rgba(0,0,0,0.12))',
+}));
+
+const HeroShell = styled(motion.div)(({ theme }) => ({
   position: 'relative',
   display: 'grid',
   gap: theme.spacing(5),
@@ -92,29 +141,35 @@ const HeroShell = styled(Box)(({ theme }) => ({
       : `linear-gradient(135deg, ${alpha('#E6EEFF', 0.96)} 0%, ${alpha('#DCE7FF', 0.98)} 54%, ${alpha('#D2E0FF', 0.95)} 100%)`,
   boxShadow:
     theme.palette.mode === 'dark'
-      ? `0 32px 80px rgba(2, 6, 23, 0.48), inset 0 1px 0 ${alpha(
-          '#FFFFFF',
-          0.06,
-        )}`
-      : `0 32px 80px rgba(37, 99, 235, 0.16), inset 0 1px 0 ${alpha(
-          '#FFFFFF',
-          0.9,
-        )}`,
+      ? `0 32px 80px rgba(2, 6, 23, 0.48), inset 0 1px 0 ${alpha('#FFFFFF', 0.06)}`
+      : `0 32px 80px rgba(37, 99, 235, 0.16), inset 0 1px 0 ${alpha('#FFFFFF', 0.9)}`,
   backdropFilter: 'blur(16px)',
   isolation: 'isolate',
-  zIndex: 1,
+  zIndex: 2,
+  overflow: 'hidden',
   [theme.breakpoints.up('md')]: {
     gridTemplateColumns: 'minmax(0, 1.02fr) minmax(380px, 0.98fr)',
     padding: theme.spacing(5),
   },
 }));
 
-const CopyColumn = styled(Box)(() => ({
-  position: 'relative',
-  zIndex: 3,
+const HeroScan = styled(motion.div)(({ theme }) => ({
+  position: 'absolute',
+  inset: 0,
+  zIndex: 0,
+  background: `linear-gradient(115deg, transparent 0%, ${alpha(
+    theme.palette.common.white,
+    theme.palette.mode === 'dark' ? 0.02 : 0.14,
+  )} 48%, transparent 64%)`,
+  pointerEvents: 'none',
 }));
 
-const HeroEyebrow = styled(Box)(({ theme }) => ({
+const CopyColumn = styled(Box)(() => ({
+  position: 'relative',
+  zIndex: 4,
+}));
+
+const HeroEyebrow = styled(motion.div)(({ theme }) => ({
   display: 'inline-flex',
   alignItems: 'center',
   gap: theme.spacing(1.25),
@@ -125,6 +180,7 @@ const HeroEyebrow = styled(Box)(({ theme }) => ({
   backgroundColor: alpha(theme.palette.background.paper, 0.5),
   color: theme.palette.text.secondary,
   backdropFilter: 'blur(10px)',
+  boxShadow: `0 14px 36px ${alpha(theme.palette.primary.main, 0.12)}`,
 }));
 
 const HeroKicker = styled(Typography)(({ theme }) => ({
@@ -139,6 +195,10 @@ const HeroTitle = styled(Typography)(({ theme }) => ({
   maxWidth: 620,
   marginBottom: theme.spacing(2.5),
   textWrap: 'balance',
+  textShadow:
+    theme.palette.mode === 'dark'
+      ? '0 10px 30px rgba(15, 23, 42, 0.28)'
+      : '0 10px 30px rgba(59, 130, 246, 0.12)',
 }));
 
 const HeroSubtitle = styled(Typography)(({ theme }) => ({
@@ -155,25 +215,84 @@ const HeroActions = styled(Stack)(({ theme }) => ({
   marginBottom: theme.spacing(3),
 }));
 
+const PrimaryHeroButton = styled(Button)(({ theme }) => ({
+  paddingInline: theme.spacing(2.6),
+  paddingBlock: theme.spacing(1.35),
+  borderRadius: 18,
+  background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.light} 100%)`,
+  boxShadow: `0 18px 36px ${alpha(theme.palette.primary.main, 0.34)}`,
+  transition:
+    'transform 180ms ease, box-shadow 220ms ease, filter 220ms ease',
+  '&:hover': {
+    transform: 'translateY(-3px)',
+    boxShadow: `0 24px 44px ${alpha(theme.palette.primary.main, 0.42)}`,
+    filter: 'brightness(1.04)',
+  },
+}));
+
+const SecondaryHeroButton = styled(Button)(({ theme }) => ({
+  paddingInline: theme.spacing(2.3),
+  paddingBlock: theme.spacing(1.35),
+  borderRadius: 18,
+  borderWidth: 1.5,
+  backgroundColor: alpha(theme.palette.background.paper, 0.22),
+  backdropFilter: 'blur(12px)',
+  transition:
+    'transform 180ms ease, border-color 220ms ease, background-color 220ms ease',
+  '&:hover': {
+    transform: 'translateY(-3px)',
+    backgroundColor: alpha(theme.palette.background.paper, 0.34),
+    borderWidth: 1.5,
+  },
+}));
+
 const HeroMeta = styled(Stack)(({ theme }) => ({
   flexDirection: 'row',
   flexWrap: 'wrap',
   gap: theme.spacing(1),
+  marginBottom: theme.spacing(2.5),
 }));
 
-const MetaChip = styled(Chip)(({ theme }) => ({
+const HeroSignals = styled(Stack)(({ theme }) => ({
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  gap: theme.spacing(2.5),
+  rowGap: theme.spacing(1.25),
+}));
+
+const SignalItem = styled(Box)(({ theme }) => ({
+  minWidth: 128,
+  '& strong': {
+    display: 'block',
+    marginBottom: 2,
+    fontSize: '1.5rem',
+    lineHeight: 1,
+    letterSpacing: '-0.04em',
+  },
+  '& span': {
+    color: theme.palette.text.secondary,
+    fontSize: '0.92rem',
+  },
+}));
+
+const MetaChip = styled(MotionChip)(({ theme }) => ({
   borderRadius: 999,
   backgroundColor: alpha(theme.palette.background.paper, 0.58),
   border: `1px solid ${alpha(theme.palette.divider, 0.9)}`,
   color: theme.palette.text.primary,
+  boxShadow: `0 12px 24px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.14 : 0.06)}`,
   '& .MuiChip-label': {
-    fontWeight: 600,
+    fontWeight: 700,
   },
 }));
 
 const VisualColumn = styled(Box)(() => ({
   position: 'relative',
-  zIndex: 3,
+  zIndex: 4,
+}));
+
+const VisualStack = styled(Box)(() => ({
+  position: 'relative',
 }));
 
 const ImageFrame = styled(Box)(({ theme }) => ({
@@ -190,6 +309,7 @@ const ImageFrame = styled(Box)(({ theme }) => ({
     theme.palette.mode === 'dark'
       ? '0 28px 60px rgba(2, 6, 23, 0.42)'
       : '0 28px 60px rgba(37, 99, 235, 0.22)',
+  transition: 'transform 220ms ease, box-shadow 260ms ease',
   [theme.breakpoints.up('md')]: {
     minHeight: 560,
   },
@@ -199,7 +319,7 @@ const ImageFrame = styled(Box)(({ theme }) => ({
     inset: 0,
     background:
       theme.palette.mode === 'dark'
-        ? 'linear-gradient(180deg, rgba(9,17,31,0.04) 0%, rgba(9,17,31,0.26) 100%)'
+        ? 'linear-gradient(180deg, rgba(9,17,31,0.04) 0%, rgba(9,17,31,0.28) 100%)'
         : 'linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(15,23,42,0.08) 100%)',
     pointerEvents: 'none',
     zIndex: 1,
@@ -210,7 +330,7 @@ const ImageAccent = styled(Box)(({ theme }) => ({
   position: 'absolute',
   right: -20,
   bottom: 28,
-  zIndex: 2,
+  zIndex: 3,
   maxWidth: 220,
   padding: theme.spacing(1.75, 2),
   borderRadius: 22,
@@ -235,92 +355,216 @@ const ImageAccent = styled(Box)(({ theme }) => ({
 
 export default function Hero() {
   const t = useTranslation();
+  const shouldReduceMotion = useReducedMotion();
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springX = useSpring(mouseX, { stiffness: 120, damping: 18, mass: 0.5 });
+  const springY = useSpring(mouseY, { stiffness: 120, damping: 18, mass: 0.5 });
+  const shellTransform = useMotionTemplate`perspective(1400px) rotateX(${springY}deg) rotateY(${springX}deg)`;
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (shouldReduceMotion) {
+      return;
+    }
+
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 8;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * -8;
+
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
+  const handlePointerLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
 
   return (
     <MotionSection
-      initial={{ opacity: 0, y: 32 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
+      variants={sectionVariants}
+      initial='hidden'
+      animate='visible'
       sx={heroSectionSx}
     >
-      <HeroGlow />
-      <HeroShell>
-        <MotionBox
-          initial={{ opacity: 0, x: -28 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.85, delay: 0.1, ease: 'easeOut' }}
-        >
+      <HeroBackdrop>
+        <GlowOrb
+          $variant='left'
+          animate={
+            shouldReduceMotion
+              ? undefined
+              : {
+                  x: [0, 18, -10, 0],
+                  y: [0, 12, -8, 0],
+                  scale: [1, 1.08, 0.98, 1],
+                }
+          }
+          transition={{
+            duration: 14,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+        <GlowOrb
+          $variant='right'
+          animate={
+            shouldReduceMotion
+              ? undefined
+              : {
+                  x: [0, -20, 12, 0],
+                  y: [0, -16, 10, 0],
+                  scale: [1, 1.06, 0.97, 1],
+                }
+          }
+          transition={{
+            duration: 16,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+        <BackdropGrid />
+      </HeroBackdrop>
+
+      <HeroShell
+        style={shouldReduceMotion ? undefined : { transform: shellTransform }}
+        onPointerMove={handlePointerMove}
+        onPointerLeave={handlePointerLeave}
+        whileHover={shouldReduceMotion ? undefined : { y: -4 }}
+        transition={{ duration: 0.25, ease: 'easeOut' }}
+      >
+        <HeroScan
+          animate={
+            shouldReduceMotion
+              ? undefined
+              : {
+                  x: ['-30%', '120%'],
+                }
+          }
+          transition={{
+            duration: 5.8,
+            repeat: Infinity,
+            repeatDelay: 1.8,
+            ease: 'easeInOut',
+          }}
+        />
+
+        <MotionBox variants={itemVariants}>
           <CopyColumn>
-            <HeroEyebrow>
+            <HeroEyebrow
+              whileHover={shouldReduceMotion ? undefined : { y: -2, scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+            >
               <HeroKicker>Tech-driven delivery</HeroKicker>
               <Typography variant='body2'>{SITE_CONFIG.location}</Typography>
             </HeroEyebrow>
 
-            <HeroTitle variant='h1'>
-              {t.hero.greeting}
-            </HeroTitle>
+            <MotionBox variants={itemVariants}>
+              <HeroTitle variant='h1'>
+                {t.hero.greeting}
+              </HeroTitle>
+            </MotionBox>
 
-            <HeroSubtitle>
-              {t.hero.subtitle}
-            </HeroSubtitle>
+            <MotionBox variants={itemVariants}>
+              <HeroSubtitle>
+                {t.hero.subtitle}
+              </HeroSubtitle>
+            </MotionBox>
 
-            <HeroActions>
-              <Button
-                variant='contained'
-                color='primary'
-                size='large'
-                href={SITE_CONFIG.sections.projects}
-              >
-                {t.hero.primaryCta}
-              </Button>
-              <Button
-                variant='outlined'
-                color='secondary'
-                size='large'
-                href={SITE_CONFIG.sections.contact}
-              >
-                {t.hero.secondaryCta}
-              </Button>
-            </HeroActions>
+            <MotionBox variants={itemVariants}>
+              <HeroActions>
+                <PrimaryHeroButton
+                  variant='contained'
+                  color='primary'
+                  size='large'
+                  href={SITE_CONFIG.sections.projects}
+                >
+                  {t.hero.primaryCta}
+                </PrimaryHeroButton>
+                <SecondaryHeroButton
+                  variant='outlined'
+                  color='secondary'
+                  size='large'
+                  href={SITE_CONFIG.sections.contact}
+                >
+                  {t.hero.secondaryCta}
+                </SecondaryHeroButton>
+              </HeroActions>
+            </MotionBox>
 
-            <HeroMeta>
-              <MetaChip label='React' />
-              <MetaChip label='Next.js' />
-              <MetaChip label='TypeScript' />
-              <MetaChip label='Scrum' />
-            </HeroMeta>
+            <MotionBox variants={itemVariants}>
+              <HeroMeta>
+                {['React', 'Next.js', 'TypeScript', 'Scrum'].map((label, index) => (
+                  <MetaChip
+                    key={label}
+                    label={label}
+                    whileHover={shouldReduceMotion ? undefined : { y: -4, scale: 1.04 }}
+                    initial={shouldReduceMotion ? undefined : { opacity: 0, y: 16 }}
+                    animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.45,
+                      delay: 0.35 + index * 0.06,
+                      ease: 'easeOut',
+                    }}
+                  />
+                ))}
+              </HeroMeta>
+            </MotionBox>
+
+            <MotionBox variants={itemVariants}>
+              <HeroSignals>
+                <SignalItem>
+                  <Typography component='strong'>5+</Typography>
+                  <Typography component='span'>years building polished digital products</Typography>
+                </SignalItem>
+                <SignalItem>
+                  <Typography component='strong'>UI + Delivery</Typography>
+                  <Typography component='span'>frontend execution paired with team momentum</Typography>
+                </SignalItem>
+                <SignalItem>
+                  <Typography component='strong'>Stockholm</Typography>
+                  <Typography component='span'>open to remote and hybrid collaboration</Typography>
+                </SignalItem>
+              </HeroSignals>
+            </MotionBox>
           </CopyColumn>
         </MotionBox>
 
-        <MotionBox
-          initial={{ opacity: 0, x: 28, scale: 0.97 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.15, ease: 'easeOut' }}
-        >
+        <MotionBox variants={itemVariants}>
           <VisualColumn>
-            <ImageFrame>
-              <Image
-                src={heroImage}
-                alt='Aleksandra Cislowski in a modern, tech-driven portrait'
-                fill
-                priority
-                placeholder='blur'
-                sizes='(max-width: 900px) 100vw, 44vw'
-                style={{
-                  objectFit: 'cover',
-                  objectPosition: 'center 22%',
-                }}
-              />
+            <VisualStack>
+              <ImageFrame>
+                <motion.div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    zIndex: 0,
+                  }}
+                >
+                  <Image
+                    src={heroImage}
+                    alt='Aleksandra Cislowski in a modern, tech-driven portrait'
+                    fill
+                    priority
+                    placeholder='blur'
+                    sizes='(max-width: 900px) 100vw, 44vw'
+                    style={{
+                      objectFit: 'cover',
+                      objectPosition: 'center 22%',
+                    }}
+                  />
+                </motion.div>
 
-              <ImageAccent>
-                <Typography variant='caption' sx={{ display: 'block', mb: 0.75 }}>
-                  Product-minded frontend leadership
-                </Typography>
-                <Typography variant='body2'>
-                  Building polished user experiences with strong delivery rhythm.
-                </Typography>
-              </ImageAccent>
-            </ImageFrame>
+                <ImageAccent>
+                  <Typography variant='caption' sx={{ display: 'block', mb: 0.75 }}>
+                    Product-minded frontend leadership
+                  </Typography>
+                  <Typography variant='body2'>
+                    Building polished user experiences with strong delivery rhythm.
+                  </Typography>
+                </ImageAccent>
+              </ImageFrame>
+            </VisualStack>
           </VisualColumn>
         </MotionBox>
       </HeroShell>
