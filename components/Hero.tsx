@@ -12,10 +12,7 @@ import {
 import { alpha, styled } from '@mui/material/styles';
 import {
   motion,
-  useMotionTemplate,
-  useMotionValue,
   useReducedMotion,
-  useSpring,
   type Variants,
 } from 'framer-motion';
 import { useTranslation } from '../i18n/useTranslation';
@@ -74,7 +71,7 @@ const HeroBackdrop = styled(Box)(() => ({
   inset: 0,
   overflow: 'visible',
   pointerEvents: 'none',
-  zIndex: 1,
+  zIndex: 3,
 }));
 
 const GlowOrb = styled(motion.div)<{ $variant: 'left' | 'right' }>(({ theme, $variant }) => ({
@@ -166,7 +163,7 @@ const HeroScan = styled(motion.div)(({ theme }) => ({
 
 const CopyColumn = styled(Box)(() => ({
   position: 'relative',
-  zIndex: 4,
+  zIndex: 5,
 }));
 
 const HeroEyebrow = styled(motion.div)(({ theme }) => ({
@@ -221,13 +218,6 @@ const PrimaryHeroButton = styled(Button)(({ theme }) => ({
   borderRadius: 18,
   background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.light} 100%)`,
   boxShadow: `0 18px 36px ${alpha(theme.palette.primary.main, 0.34)}`,
-  transition:
-    'transform 180ms ease, box-shadow 220ms ease, filter 220ms ease',
-  '&:hover': {
-    transform: 'translateY(-3px)',
-    boxShadow: `0 24px 44px ${alpha(theme.palette.primary.main, 0.42)}`,
-    filter: 'brightness(1.04)',
-  },
 }));
 
 const SecondaryHeroButton = styled(Button)(({ theme }) => ({
@@ -237,13 +227,6 @@ const SecondaryHeroButton = styled(Button)(({ theme }) => ({
   borderWidth: 1.5,
   backgroundColor: alpha(theme.palette.background.paper, 0.22),
   backdropFilter: 'blur(12px)',
-  transition:
-    'transform 180ms ease, border-color 220ms ease, background-color 220ms ease',
-  '&:hover': {
-    transform: 'translateY(-3px)',
-    backgroundColor: alpha(theme.palette.background.paper, 0.34),
-    borderWidth: 1.5,
-  },
 }));
 
 const HeroMeta = styled(Stack)(({ theme }) => ({
@@ -288,7 +271,7 @@ const MetaChip = styled(MotionChip)(({ theme }) => ({
 
 const VisualColumn = styled(Box)(() => ({
   position: 'relative',
-  zIndex: 4,
+  zIndex: 5,
 }));
 
 const VisualStack = styled(Box)(() => ({
@@ -357,30 +340,6 @@ export default function Hero() {
   const t = useTranslation();
   const shouldReduceMotion = useReducedMotion();
 
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 120, damping: 18, mass: 0.5 });
-  const springY = useSpring(mouseY, { stiffness: 120, damping: 18, mass: 0.5 });
-  const shellTransform = useMotionTemplate`perspective(1400px) rotateX(${springY}deg) rotateY(${springX}deg)`;
-
-  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (shouldReduceMotion) {
-      return;
-    }
-
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 8;
-    const y = ((event.clientY - rect.top) / rect.height - 0.5) * -8;
-
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const handlePointerLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
   return (
     <MotionSection
       variants={sectionVariants}
@@ -426,13 +385,7 @@ export default function Hero() {
         <BackdropGrid />
       </HeroBackdrop>
 
-      <HeroShell
-        style={shouldReduceMotion ? undefined : { transform: shellTransform }}
-        onPointerMove={handlePointerMove}
-        onPointerLeave={handlePointerLeave}
-        whileHover={shouldReduceMotion ? undefined : { y: -4 }}
-        transition={{ duration: 0.25, ease: 'easeOut' }}
-      >
+      <HeroShell>
         <HeroScan
           animate={
             shouldReduceMotion
@@ -451,10 +404,7 @@ export default function Hero() {
 
         <MotionBox variants={itemVariants}>
           <CopyColumn>
-            <HeroEyebrow
-              whileHover={shouldReduceMotion ? undefined : { y: -2, scale: 1.02 }}
-              transition={{ duration: 0.2 }}
-            >
+            <HeroEyebrow>
               <HeroKicker>Tech-driven delivery</HeroKicker>
               <Typography variant='body2'>{SITE_CONFIG.location}</Typography>
             </HeroEyebrow>
@@ -498,7 +448,6 @@ export default function Hero() {
                   <MetaChip
                     key={label}
                     label={label}
-                    whileHover={shouldReduceMotion ? undefined : { y: -4, scale: 1.04 }}
                     initial={shouldReduceMotion ? undefined : { opacity: 0, y: 16 }}
                     animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
                     transition={{
