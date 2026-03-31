@@ -138,7 +138,7 @@ const HeroShell = styled(motion.div)(({ theme }) => ({
   isolation: 'isolate',
   zIndex: 2,
   overflow: 'hidden',
-  [theme.breakpoints.up('md')]: {
+  [theme.breakpoints.up('lg')]: {
     gridTemplateColumns: 'minmax(0, 1.02fr) minmax(380px, 0.98fr)',
     padding: theme.spacing(5),
   },
@@ -367,6 +367,9 @@ const MetaChip = styled(MotionChip)(({ theme }) => ({
 const VisualColumn = styled(Box)(() => ({
   position: 'relative',
   zIndex: 5,
+  '@media (max-width: 1199px)': {
+    order: 2,
+  },
 }));
 
 const VisualStack = styled(Box)(() => ({
@@ -388,7 +391,7 @@ const ImageFrame = styled(Box)(({ theme }) => ({
       ? '0 28px 60px rgba(2, 6, 23, 0.42)'
       : '0 28px 60px rgba(37, 99, 235, 0.22)',
   transition: 'transform 220ms ease, box-shadow 260ms ease',
-  [theme.breakpoints.up('md')]: {
+  [theme.breakpoints.up('lg')]: {
     minHeight: 560,
   },
   '&::after': {

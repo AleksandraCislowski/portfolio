@@ -47,6 +47,9 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
 }));
 
 const StyledToolbar = styled(Toolbar)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  width: '100%',
   gap: DESIGN_TOKENS.spacing.xs * 8,
   minHeight: 72,
   paddingInline: 16,
@@ -62,31 +65,95 @@ const StyledToolbar = styled(Toolbar)(() => ({
   },
 }));
 
-const MobileMenuButton = styled(IconButton)(({ theme }) => ({
-  marginRight: theme.spacing(DESIGN_TOKENS.spacing.xs),
-  '@media (min-width: 901px)': {
+const MobileMenuButton = styled(IconButton)(() => ({
+  marginRight: 4,
+  '@media (min-width: 1025px)': {
     display: 'none',
   },
 }));
 
-const Brand = styled(Typography)(() => ({
-  flexGrow: 1,
+const RightControls = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  flexShrink: 0,
+  '@media (max-width: 1024px)': {
+    gap: theme.spacing(1),
+  },
+}));
+
+const ToolbarRight = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  marginLeft: 'auto',
+  flex: 1,
+  minWidth: 0,
+  [theme.breakpoints.up('lg')]: {
+    gap: theme.spacing(0.5),
+  },
+}));
+
+const BrandLink = styled('a')(({ theme }) => ({
+  display: 'inline-flex',
+  alignItems: 'center',
+  flexShrink: 0,
+  color: 'inherit',
+  textDecoration: 'none',
+  borderRadius: 14,
+  '&:focus-visible': {
+    outline: `2px solid ${alpha(theme.palette.primary.light, 0.9)}`,
+    outlineOffset: 4,
+  },
+}));
+
+const BrandLockup = styled(Box)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: 8.8,
+  '@media (max-width: 1024px)': {
+    flexShrink: 0,
+  },
+}));
+
+const BrandMark = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  width: 42,
+  height: 42,
+  flexShrink: 0,
+  overflow: 'visible',
+  borderRadius: 0,
+  filter: `drop-shadow(0 8px 18px ${alpha(theme.palette.common.black, 0.2)})`,
+  '@media (max-width: 1180px)': {
+    width: 38,
+    height: 38,
+  },
+  '@media (max-width: 980px)': {
+    width: 34,
+    height: 34,
+  },
+}));
+
+const Brand = styled(Typography)(({ theme }) => ({
   fontWeight: 800,
   letterSpacing: '-0.02em',
   whiteSpace: 'nowrap',
   fontSize: '1.4rem',
+  color: theme.palette.primary.light,
   '@media (max-width: 1180px)': {
     fontSize: '1.2rem',
   },
   '@media (max-width: 980px)': {
     fontSize: '1.05rem',
   },
+  '@media (max-width: 1024px)': {
+    fontSize: '0.98rem',
+  },
 }));
 
 const DesktopNav = styled(Box)(() => ({
   alignItems: 'center',
   display: 'none',
-  '@media (min-width: 901px)': {
+  '@media (min-width: 1025px)': {
     display: 'flex',
   },
 }));
@@ -129,7 +196,7 @@ const LanguageFormControl = styled(FormControl)(({ theme }) => {
   return {
     marginLeft: theme.spacing(1),
     minWidth: DESIGN_TOKENS.size.languageSelectMinWidthMobile,
-    '@media (min-width: 901px)': {
+    '@media (min-width: 1025px)': {
       minWidth: DESIGN_TOKENS.size.languageSelectMinWidthDesktop,
     },
     '@media (max-width: 1180px)': {
@@ -138,6 +205,7 @@ const LanguageFormControl = styled(FormControl)(({ theme }) => {
     },
     '@media (max-width: 1024px)': {
       minWidth: 96,
+      display: 'none',
     },
     '& .MuiInputLabel-root': {
       color: alpha('#E2E8F0', 0.78),
@@ -184,6 +252,44 @@ const LanguageFormControl = styled(FormControl)(({ theme }) => {
     },
   };
 });
+
+const DrawerLanguageFormControl = styled(FormControl)(({ theme }) => ({
+  margin: theme.spacing(1, 2, 2),
+  minWidth: `calc(${DESIGN_TOKENS.size.navDrawerWidth}px - ${theme.spacing(4)})`,
+  '& .MuiInputLabel-root': {
+    color: theme.palette.text.secondary,
+  },
+  '& .MuiInputLabel-root.MuiInputLabel-shrink': {
+    color: theme.palette.text.primary,
+  },
+  '& .MuiInputLabel-root.Mui-focused': {
+    color: theme.palette.text.primary,
+  },
+  '& .MuiOutlinedInput-root': {
+    color: theme.palette.text.primary,
+    backgroundColor: alpha(theme.palette.background.paper, 0.72),
+  },
+  '& .MuiOutlinedInput-input': {
+    color: theme.palette.text.primary,
+    WebkitTextFillColor: theme.palette.text.primary,
+  },
+  '& .MuiSelect-select': {
+    color: theme.palette.text.primary,
+    WebkitTextFillColor: theme.palette.text.primary,
+  },
+  '& .MuiOutlinedInput-notchedOutline': {
+    borderColor: alpha(theme.palette.divider, 0.9),
+  },
+  '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+    borderColor: alpha(theme.palette.primary.main, 0.45),
+  },
+  '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+    borderColor: theme.palette.primary.main,
+  },
+  '& .MuiSelect-icon': {
+    color: theme.palette.text.secondary,
+  },
+}));
 
 const DrawerContent = styled(Box)(() => ({
   paddingTop: 16,
@@ -242,62 +348,108 @@ export default function Navbar() {
   return (
     <StyledAppBar position='sticky' color='default' elevation={0}>
       <StyledToolbar>
-        <MobileMenuButton
-          edge='start'
-          color='inherit'
-          aria-label='Open navigation menu'
-          onClick={() => setMobileNavOpen(true)}
+        <BrandLink
+          href={SITE_CONFIG.sections.home}
+          aria-label='Go to top of page'
         >
-          <MenuIcon />
-        </MobileMenuButton>
+          <BrandLockup>
+            <BrandMark>
+              <Box
+                component='img'
+                src='/images/profile/monogram.png'
+                alt='AC monogram'
+                sx={{
+                  display: 'block',
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                }}
+              />
+            </BrandMark>
+            <Brand variant='h5'>{SITE_CONFIG.brandName}</Brand>
+          </BrandLockup>
+        </BrandLink>
 
-        <Brand variant='h5'>
-          {SITE_CONFIG.brandName}
-        </Brand>
-
-        <DesktopNav>
-          {navItems.map((item) => (
-            <NavButton key={item.href} href={item.href} color='inherit'>
-              {item.label}
-            </NavButton>
-          ))}
-        </DesktopNav>
-
-        <ThemeButton
-          onClick={() => setMode(nextMode)}
-          color='inherit'
-          aria-label={`Switch to ${nextMode} mode`}
-        >
-          {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-        </ThemeButton>
-
-        <LanguageFormControl size='small'>
-          <InputLabel id='lang-select-label'>{t.nav.language}</InputLabel>
-          <Select<Language>
-            labelId='lang-select-label'
-            id='lang-select'
-            value={lang}
-            label={t.nav.language}
-            onChange={handleLanguageChange}
-            MenuProps={languageMenuProps}
-          >
-            {LANGUAGES.map((language) => (
-              <MenuItem key={language} value={language}>
-                {languageLabels[language]}
-              </MenuItem>
+        <ToolbarRight>
+          <DesktopNav>
+            {navItems.map((item) => (
+              <NavButton key={item.href} href={item.href} color='inherit'>
+                {item.label}
+              </NavButton>
             ))}
-          </Select>
-        </LanguageFormControl>
+          </DesktopNav>
+
+          <LanguageFormControl size='small'>
+            <InputLabel id='lang-select-label'>{t.nav.language}</InputLabel>
+            <Select<Language>
+              labelId='lang-select-label'
+              id='lang-select'
+              value={lang}
+              label={t.nav.language}
+              onChange={handleLanguageChange}
+              MenuProps={languageMenuProps}
+            >
+              {LANGUAGES.map((language) => (
+                <MenuItem key={language} value={language}>
+                  {languageLabels[language]}
+                </MenuItem>
+              ))}
+            </Select>
+          </LanguageFormControl>
+
+          <RightControls>
+            <ThemeButton
+              onClick={() => setMode(nextMode)}
+              color='inherit'
+              aria-label={`Switch to ${nextMode} mode`}
+            >
+              {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+            </ThemeButton>
+
+            <MobileMenuButton
+              edge='end'
+              color='inherit'
+              aria-label='Open navigation menu'
+              onClick={() => setMobileNavOpen(true)}
+            >
+              <MenuIcon />
+            </MobileMenuButton>
+          </RightControls>
+        </ToolbarRight>
       </StyledToolbar>
 
       <Drawer
-        anchor='left'
+        anchor='right'
         open={mobileNavOpen}
         onClose={() => setMobileNavOpen(false)}
         PaperProps={{ sx: drawerPaperSx }}
       >
         <DrawerContent>
+          <DrawerLanguageFormControl size='small'>
+            <InputLabel id='drawer-lang-select-label'>
+              {t.nav.language}
+            </InputLabel>
+            <Select<Language>
+              labelId='drawer-lang-select-label'
+              id='drawer-lang-select'
+              value={lang}
+              label={t.nav.language}
+              onChange={handleLanguageChange}
+              MenuProps={languageMenuProps}
+            >
+              {LANGUAGES.map((language) => (
+                <MenuItem key={language} value={language}>
+                  {languageLabels[language]}
+                </MenuItem>
+              ))}
+            </Select>
+          </DrawerLanguageFormControl>
           <List>
+            <ListItemButton onClick={() => setMode(nextMode)}>
+              <ListItemText
+                primary={mode === 'dark' ? 'Light mode' : 'Dark mode'}
+              />
+            </ListItemButton>
             {navItems.map((item) => (
               <ListItemButton
                 key={item.href}
