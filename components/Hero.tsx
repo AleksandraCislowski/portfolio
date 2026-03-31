@@ -213,20 +213,102 @@ const HeroActions = styled(Stack)(({ theme }) => ({
 }));
 
 const PrimaryHeroButton = styled(Button)(({ theme }) => ({
+  position: 'relative',
+  overflow: 'hidden',
+  isolation: 'isolate',
+  borderRadius: 18,
   paddingInline: theme.spacing(2.6),
   paddingBlock: theme.spacing(1.35),
-  borderRadius: 18,
+  transition:
+    'transform 200ms ease, box-shadow 220ms ease, border-color 220ms ease, background-color 220ms ease, color 220ms ease',
   background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.light} 100%)`,
   boxShadow: `0 18px 36px ${alpha(theme.palette.primary.main, 0.34)}`,
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    inset: '-12% -32%',
+    background: `linear-gradient(118deg, transparent 12%, ${alpha('#FFFFFF', 0.22)} 34%, ${alpha('#FFFFFF', 0.56)} 50%, ${alpha('#FFFFFF', 0.18)} 66%, transparent 82%)`,
+    opacity: 0,
+    transform: 'translateX(-34%) skewX(-18deg)',
+  },
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    inset: 1,
+    borderRadius: 16,
+    background: `linear-gradient(180deg, ${alpha('#FFFFFF', 0.24)} 0%, transparent 42%, ${alpha('#0F172A', 0.12)} 100%)`,
+    opacity: 0.5,
+  },
+  '&:hover': {
+    transform: 'translateY(-3px) scale(1.01)',
+    boxShadow: `0 24px 46px ${alpha(theme.palette.primary.main, 0.38)}, 0 0 0 1px ${alpha(theme.palette.primary.light, 0.26)}`,
+    background: `linear-gradient(135deg, ${theme.palette.primary.light} 0%, ${theme.palette.primary.main} 100%)`,
+  },
+  '&:hover::before': {
+    opacity: 1,
+    transform: 'translateX(30%) skewX(-18deg)',
+  },
+  '&:hover::after': {
+    opacity: 0.72,
+  },
+  '&:active': {
+    transform: 'translateY(-1px) scale(0.99)',
+  },
+  '&.Mui-focusVisible': {
+    outline: `2px solid ${alpha(theme.palette.common.white, theme.palette.mode === 'dark' ? 0.82 : 0.96)}`,
+    outlineOffset: 3,
+  },
 }));
 
 const SecondaryHeroButton = styled(Button)(({ theme }) => ({
+  position: 'relative',
+  overflow: 'hidden',
+  isolation: 'isolate',
+  borderRadius: 18,
   paddingInline: theme.spacing(2.3),
   paddingBlock: theme.spacing(1.35),
-  borderRadius: 18,
+  transition:
+    'transform 200ms ease, box-shadow 220ms ease, border-color 220ms ease, background-color 220ms ease, color 220ms ease',
   borderWidth: 1.5,
   backgroundColor: alpha(theme.palette.background.paper, 0.22),
   backdropFilter: 'blur(12px)',
+  borderColor: alpha(theme.palette.secondary.main, theme.palette.mode === 'dark' ? 0.4 : 0.26),
+  boxShadow: `0 14px 30px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.22 : 0.08)}`,
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    inset: -1,
+    background: `radial-gradient(circle at 18% 18%, ${alpha(theme.palette.secondary.light, 0.32)} 0%, transparent 42%), linear-gradient(135deg, ${alpha(theme.palette.background.paper, theme.palette.mode === 'dark' ? 0.14 : 0.6)} 0%, transparent 100%)`,
+    opacity: 0,
+    transform: 'scale(0.92)',
+  },
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    inset: 0,
+    borderRadius: 16,
+    border: `1px solid ${alpha(theme.palette.common.white, theme.palette.mode === 'dark' ? 0.22 : 0.54)}`,
+    opacity: 0,
+  },
+  '&:hover': {
+    borderColor: alpha(theme.palette.secondary.main, 0.58),
+    backgroundColor: alpha(theme.palette.background.paper, theme.palette.mode === 'dark' ? 0.28 : 0.66),
+    boxShadow: `0 22px 38px ${alpha(theme.palette.secondary.main, 0.18)}`,
+  },
+  '&:hover::before': {
+    opacity: 1,
+    transform: 'scale(1)',
+  },
+  '&:hover::after': {
+    opacity: 1,
+  },
+  '&:active': {
+    transform: 'translateY(-1px) scale(0.99)',
+  },
+  '&.Mui-focusVisible': {
+    outline: `2px solid ${alpha(theme.palette.common.white, theme.palette.mode === 'dark' ? 0.82 : 0.96)}`,
+    outlineOffset: 3,
+  },
 }));
 
 const HeroMeta = styled(Stack)(({ theme }) => ({
