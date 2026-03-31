@@ -55,7 +55,7 @@ export default function Contact() {
       </ContactDescription>
       <ContactMeta spacing={0.75}>
         <Typography variant='body2'>
-          {t.contact.locationLabel}: {SITE_CONFIG.location}
+          {t.contact.locationLabel}: {t.contact.locationValue}
         </Typography>
         <Typography variant='body2'>
           {t.contact.phoneLabel}: {SITE_CONFIG.contactPhone}

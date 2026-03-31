@@ -10,10 +10,43 @@
     "language": "Język"
   },
   "hero": {
+    "kicker": "Rozwiązania napędzane technologią",
+    "location": "Sztokholm, Szwecja",
     "greeting": "Frontend Developer & Scrum Master",
-    "subtitle": "Pomagam zespołom dostarczać lepsze produkty szybciej dzięki mocnemu execution frontendowemu i skutecznemu prowadzeniu delivery.",
+    "subtitle": "Łączę rolę programisty frontend z prowadzeniem procesu dostarczania produktów, wspierając organizacje w zwiększaniu tempa pracy i jakości rozwiązań dzięki wysokim standardom technicznym i skutecznej organizacji pracy zespołów.",
     "primaryCta": "Zobacz moje realizacje",
-    "secondaryCta": "Umów rozmowę"
+    "secondaryCta": "Umów rozmowę",
+    "portraitparagraph1": "Przywództwo frontendowe zorientowane na produkt",
+    "portraitparagraph2": "Tworzenie dopracowanego UX z silnym rytmem dostarczania",
+    "skillPills": [
+      "React",
+      "Next.js",
+      "JavaScript",
+      "TypeScript",
+      "HTML5",
+      "CSS3",
+      "MUI",
+      "Responsywne interfejsy",
+      "Współpraca UI/UX",
+      "Optymalizacja wydajności",
+      "Usprawnianie procesów",
+      "GitLab",
+      "Azure DevOps"
+    ],
+    "signals": [
+      {
+        "value": "React + Next.js",
+        "label": "rozwój kluczowych funkcjonalności SaaS w środowisku produkcyjnym"
+      },
+      {
+        "value": "+15%",
+        "label": "wzrost efektywności dzięki usprawnieniu procesów frontendowych i lepszej organizacji pracy zespołu"
+      },
+      {
+        "value": "Architektura UI",
+        "label": "tworzenie skalowalnych komponentów wielokrotnego użytku z naciskiem na wydajność"
+      }
+    ]
   },
   "about": {
     "title": "Inżynier produktu z DNA delivery",
@@ -22,6 +55,41 @@
       "Mocne fundamenty React, Next.js i TypeScript oraz doświadczenie przy produkcyjnym SaaS.",
       "Skuteczne prowadzenie Scrum: facylitacja, planowanie, retrospektywy i stabilna egzekucja.",
       "Podejście właścicielskie i biznesowe zbudowane w pracy founderskiej."
+    ]
+  },
+  "proof": {
+    "cta": "Otwórz bubbles",
+    "eyebrow": "Sygnały wartości",
+    "title": "Bardziej ludzki sposób pokazania mojego zakresu",
+    "description": "Zamiast płaskiej listy kompetencji ta sekcja pokazuje mocne strony jako interaktywne sygnały. Każda bubble reprezentuje wzorzec pracy, który wnoszę do zespołów i produktów.",
+    "detailEyebrow": "Wybrany sygnał",
+    "closeHint": "Kliknij poza obszarem, aby zamknąć",
+    "items": [
+      {
+        "label": "Rytm delivery",
+        "metric": "18 sprintów z pełną realizacją celu",
+        "description": "Pomagam zespołom zbudować powtarzalny rytm, w którym planowanie, wykonanie i domykanie tematów pozostają ze sobą w syncu sprint po sprincie."
+      },
+      {
+        "label": "Ownership frontendowy",
+        "metric": "React + Next.js + TypeScript",
+        "description": "Lubię projektować dopracowane interfejsy, utrzymywać czytelny codebase i przekładać intencję produktową na solidne doświadczenia użytkownika."
+      },
+      {
+        "label": "Jasność procesu",
+        "metric": "+15% wzrostu efektywności",
+        "description": "Szukam tarcia w workflow, zależnościach i rytuałach zespołu, a potem upraszczam system tak, żeby łatwiej było utrzymać momentum."
+      },
+      {
+        "label": "Zaufanie klientów",
+        "metric": "70%+ retencji",
+        "description": "Długie relacje zwykle biorą się ze spójnej komunikacji, spokojnej egzekucji i silnego poczucia odpowiedzialności za rezultat."
+      },
+      {
+        "label": "Most cross-funkcyjny",
+        "metric": "Produkt, design i engineering w syncu",
+        "description": "Naturalnie łączę perspektywy różnych dyscyplin, zmniejszam niejasność i utrzymuję zespół wokół wspólnej definicji sukcesu."
+      }
     ]
   },
   "impact": {
@@ -72,11 +140,7 @@
       },
       {
         "title": "Narzędzia",
-        "items": [
-          "Git",
-          "GitLab",
-          "Azure DevOps"
-        ]
+        "items": ["Git", "GitLab", "Azure DevOps"]
       }
     ],
     "languagesTitle": "Języki",
@@ -155,6 +219,7 @@
     "message": "Twoja wiadomość",
     "send": "Wyślij wiadomość",
     "locationLabel": "Lokalizacja",
+    "locationValue": "Sztokholm, Szwecja",
     "phoneLabel": "Telefon",
     "emailLabel": "E-mail"
   },

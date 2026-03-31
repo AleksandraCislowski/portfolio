@@ -2,20 +2,11 @@
 
 import * as React from 'react';
 import Image from 'next/image';
-import {
-  Box,
-  Button,
-  Chip,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Chip, Stack, Typography } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
-import {
-  motion,
-  useReducedMotion,
-  type Variants,
-} from 'framer-motion';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { useTranslation } from '../i18n/useTranslation';
+import { useLanguage } from '../i18n/LanguageContext';
 import { SITE_CONFIG } from '../config/site';
 import heroImage from '../public/images/profile/Tech-driven confidence in a digital world.png';
 
@@ -74,41 +65,44 @@ const HeroBackdrop = styled(Box)(() => ({
   zIndex: 3,
 }));
 
-const GlowOrb = styled(motion.div)<{ $variant: 'left' | 'right' }>(({ theme, $variant }) => ({
-  position: 'absolute',
-  borderRadius: '50%',
-  filter: 'blur(14px)',
-  mixBlendMode: theme.palette.mode === 'dark' ? 'screen' : 'normal',
-  opacity: theme.palette.mode === 'dark' ? 0.9 : 1,
-  ...( $variant === 'left'
-    ? {
-        top: -130,
-        left: -150,
-        width: 430,
-        height: 430,
-        background: `radial-gradient(circle, ${alpha(theme.palette.primary.light, 0.36)} 0%, transparent 65%)`,
-      }
-    : {
-        right: -180,
-        bottom: -220,
-        width: 540,
-        height: 540,
-        background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.3)} 0%, transparent 67%)`,
-      }),
-  [theme.breakpoints.down('md')]: $variant === 'left'
-    ? {
-        top: -72,
-        left: -102,
-        width: 300,
-        height: 300,
-      }
-    : {
-        right: -118,
-        bottom: -120,
-        width: 340,
-        height: 340,
-      },
-}));
+const GlowOrb = styled(motion.div)<{ $variant: 'left' | 'right' }>(
+  ({ theme, $variant }) => ({
+    position: 'absolute',
+    borderRadius: '50%',
+    filter: 'blur(14px)',
+    mixBlendMode: theme.palette.mode === 'dark' ? 'screen' : 'normal',
+    opacity: theme.palette.mode === 'dark' ? 0.9 : 1,
+    ...($variant === 'left'
+      ? {
+          top: -130,
+          left: -150,
+          width: 430,
+          height: 430,
+          background: `radial-gradient(circle, ${alpha(theme.palette.primary.light, 0.36)} 0%, transparent 65%)`,
+        }
+      : {
+          right: -180,
+          bottom: -220,
+          width: 540,
+          height: 540,
+          background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.3)} 0%, transparent 67%)`,
+        }),
+    [theme.breakpoints.down('md')]:
+      $variant === 'left'
+        ? {
+            top: -72,
+            left: -102,
+            width: 300,
+            height: 300,
+          }
+        : {
+            right: -118,
+            bottom: -120,
+            width: 340,
+            height: 340,
+          },
+  }),
+);
 
 const BackdropGrid = styled(Box)(({ theme }) => ({
   position: 'absolute',
@@ -169,15 +163,20 @@ const CopyColumn = styled(Box)(() => ({
 const HeroEyebrow = styled(motion.div)(({ theme }) => ({
   display: 'inline-flex',
   alignItems: 'center',
+  flexWrap: 'nowrap',
   gap: theme.spacing(1.25),
   marginBottom: theme.spacing(2.5),
   padding: theme.spacing(0.9, 1.4),
+  minHeight: 56,
   borderRadius: 999,
   border: `1px solid ${alpha(theme.palette.primary.main, 0.22)}`,
   backgroundColor: alpha(theme.palette.background.paper, 0.5),
   color: theme.palette.text.secondary,
   backdropFilter: 'blur(10px)',
   boxShadow: `0 14px 36px ${alpha(theme.palette.primary.main, 0.12)}`,
+  [theme.breakpoints.down('sm')]: {
+    minHeight: 56,
+  },
 }));
 
 const HeroKicker = styled(Typography)(({ theme }) => ({
@@ -186,6 +185,13 @@ const HeroKicker = styled(Typography)(({ theme }) => ({
   letterSpacing: '0.12em',
   textTransform: 'uppercase',
   color: alpha(theme.palette.primary.main, 0.95),
+  whiteSpace: 'nowrap',
+  lineHeight: 1.1,
+}));
+
+const HeroLocation = styled(Typography)(() => ({
+  whiteSpace: 'nowrap',
+  lineHeight: 1.1,
 }));
 
 const HeroTitle = styled(Typography)(({ theme }) => ({
@@ -272,7 +278,10 @@ const SecondaryHeroButton = styled(Button)(({ theme }) => ({
   borderWidth: 1.5,
   backgroundColor: alpha(theme.palette.background.paper, 0.22),
   backdropFilter: 'blur(12px)',
-  borderColor: alpha(theme.palette.secondary.main, theme.palette.mode === 'dark' ? 0.4 : 0.26),
+  borderColor: alpha(
+    theme.palette.secondary.main,
+    theme.palette.mode === 'dark' ? 0.4 : 0.26,
+  ),
   boxShadow: `0 14px 30px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.22 : 0.08)}`,
   '&::before': {
     content: '""',
@@ -292,7 +301,10 @@ const SecondaryHeroButton = styled(Button)(({ theme }) => ({
   },
   '&:hover': {
     borderColor: alpha(theme.palette.secondary.main, 0.58),
-    backgroundColor: alpha(theme.palette.background.paper, theme.palette.mode === 'dark' ? 0.28 : 0.66),
+    backgroundColor: alpha(
+      theme.palette.background.paper,
+      theme.palette.mode === 'dark' ? 0.28 : 0.66,
+    ),
     boxShadow: `0 22px 38px ${alpha(theme.palette.secondary.main, 0.18)}`,
   },
   '&:hover::before': {
@@ -420,7 +432,9 @@ const ImageAccent = styled(Box)(({ theme }) => ({
 
 export default function Hero() {
   const t = useTranslation();
+  const { lang } = useLanguage();
   const shouldReduceMotion = useReducedMotion();
+  const heroSkills = t.hero.skillPills;
 
   return (
     <MotionSection
@@ -487,20 +501,16 @@ export default function Hero() {
         <MotionBox variants={itemVariants}>
           <CopyColumn>
             <HeroEyebrow>
-              <HeroKicker>Tech-driven delivery</HeroKicker>
-              <Typography variant='body2'>{SITE_CONFIG.location}</Typography>
+              <HeroKicker>{t.hero.kicker}</HeroKicker>
+              <HeroLocation variant='body2'>{t.hero.location}</HeroLocation>
             </HeroEyebrow>
 
             <MotionBox variants={itemVariants}>
-              <HeroTitle variant='h1'>
-                {t.hero.greeting}
-              </HeroTitle>
+              <HeroTitle variant='h1'>{t.hero.greeting}</HeroTitle>
             </MotionBox>
 
             <MotionBox variants={itemVariants}>
-              <HeroSubtitle>
-                {t.hero.subtitle}
-              </HeroSubtitle>
+              <HeroSubtitle>{t.hero.subtitle}</HeroSubtitle>
             </MotionBox>
 
             <MotionBox variants={itemVariants}>
@@ -524,17 +534,21 @@ export default function Hero() {
               </HeroActions>
             </MotionBox>
 
-            <MotionBox variants={itemVariants}>
+            <MotionBox key={`hero-meta-${lang}`} variants={itemVariants}>
               <HeroMeta>
-                {['React', 'Next.js', 'TypeScript', 'Scrum'].map((label, index) => (
+                {heroSkills.map((label, index) => (
                   <MetaChip
-                    key={label}
+                    key={`${lang}-${index}-${label}`}
                     label={label}
-                    initial={shouldReduceMotion ? undefined : { opacity: 0, y: 16 }}
-                    animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                    initial={
+                      shouldReduceMotion ? undefined : { opacity: 0, y: 16 }
+                    }
+                    animate={
+                      shouldReduceMotion ? undefined : { opacity: 1, y: 0 }
+                    }
                     transition={{
-                      duration: 0.45,
-                      delay: 0.35 + index * 0.06,
+                      duration: 0.38,
+                      delay: 0.18 + Math.min(index, 7) * 0.03,
                       ease: 'easeOut',
                     }}
                   />
@@ -544,18 +558,12 @@ export default function Hero() {
 
             <MotionBox variants={itemVariants}>
               <HeroSignals>
-                <SignalItem>
-                  <Typography component='strong'>5+</Typography>
-                  <Typography component='span'>years building polished digital products</Typography>
-                </SignalItem>
-                <SignalItem>
-                  <Typography component='strong'>UI + Delivery</Typography>
-                  <Typography component='span'>frontend execution paired with team momentum</Typography>
-                </SignalItem>
-                <SignalItem>
-                  <Typography component='strong'>Stockholm</Typography>
-                  <Typography component='span'>open to remote and hybrid collaboration</Typography>
-                </SignalItem>
+                {t.hero.signals.map((signal) => (
+                  <SignalItem key={signal.label}>
+                    <Typography component='strong'>{signal.value}</Typography>
+                    <Typography component='span'>{signal.label}</Typography>
+                  </SignalItem>
+                ))}
               </HeroSignals>
             </MotionBox>
           </CopyColumn>
@@ -587,11 +595,14 @@ export default function Hero() {
                 </motion.div>
 
                 <ImageAccent>
-                  <Typography variant='caption' sx={{ display: 'block', mb: 0.75 }}>
-                    Product-minded frontend leadership
+                  <Typography
+                    variant='caption'
+                    sx={{ display: 'block', mb: 0.75 }}
+                  >
+                    {t.hero.portraitparagraph1}
                   </Typography>
                   <Typography variant='body2'>
-                    Building polished user experiences with strong delivery rhythm.
+                    {t.hero.portraitparagraph2}
                   </Typography>
                 </ImageAccent>
               </ImageFrame>

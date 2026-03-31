@@ -10,10 +10,43 @@
     "language": "Språk"
   },
   "hero": {
+    "kicker": "Teknologi-driven leverans",
+    "location": "Stockholm, Sverige",
     "greeting": "Frontend Developer & Scrum Master",
-    "subtitle": "Jag hjälper team att leverera bättre produkter snabbare genom stark frontend-exekvering och delivery-ledarskap.",
+    "subtitle": "Jag kombinerar rollen som frontendutvecklare med leveransledarskap för att hjälpa organisationer öka leveranstakt och produktkvalitet genom teknisk excellens och starkt teamledarskap.",
     "primaryCta": "Se mitt arbete",
-    "secondaryCta": "Boka ett samtal"
+    "secondaryCta": "Boka ett samtal",
+    "portraitparagraph1": "Produktfokuserad frontend-ledarskap",
+    "portraitparagraph2": "Bygga välutvecklade UX med stark leveransrytm",
+    "skillPills": [
+      "React",
+      "Next.js",
+      "JavaScript",
+      "TypeScript",
+      "HTML5",
+      "CSS3",
+      "MUI",
+      "Responsiv design",
+      "UI/UX-samarbete",
+      "Prestandaoptimering",
+      "Processförbättring",
+      "GitLab",
+      "Azure DevOps"
+    ],
+    "signals": [
+      {
+        "value": "React + Next.js",
+        "label": "utveckling av centrala SaaS-funktioner i produktionsmiljö"
+      },
+      {
+        "value": "+15%",
+        "label": "ökad effektivitet genom optimerade frontendflöden och bättre samarbete i teamet"
+      },
+      {
+        "value": "Komponentarkitektur",
+        "label": "utveckling av skalbara, återanvändbara komponenter med fokus på prestanda"
+      }
+    ]
   },
   "about": {
     "title": "Produktfokuserad ingenjör med delivery-DNA",
@@ -22,6 +55,41 @@
       "Stark grund i React, Next.js och TypeScript med erfarenhet från produktion-SaaS.",
       "Dokumenterad Scrum-ledning: facilitering, planering, retrospektiv och stabil exekvering.",
       "Affärsdriven och ansvarstagande profil genom entreprenörskap."
+    ]
+  },
+  "proof": {
+    "cta": "Öppna bubbles",
+    "eyebrow": "Proof Signals",
+    "title": "Ett mer mänskligt sätt att visa bredd",
+    "description": "I stället för en platt kompetenslista visar den här sektionen styrkor som interaktiva signaler. Varje bubbla representerar ett arbetssätt jag tillför team och produkter.",
+    "detailEyebrow": "Vald signal",
+    "closeHint": "Klicka utanför för att stänga",
+    "items": [
+      {
+        "label": "Delivery-rytm",
+        "metric": "18 sprintar med full måluppfyllelse",
+        "description": "Jag hjälper team att bygga en stabil rytm där planering, exekvering och uppföljning håller ihop sprint efter sprint."
+      },
+      {
+        "label": "Frontend-ägarskap",
+        "metric": "React + Next.js + TypeScript",
+        "description": "Jag gillar att forma genomarbetade gränssnitt, hålla kodbaser tydliga och förvandla produktintention till pålitliga användarupplevelser."
+      },
+      {
+        "label": "Processklarhet",
+        "metric": "+15% effektivitet",
+        "description": "Jag letar efter friktion i arbetsflöden, beroenden och teamritualer och förenklar sedan systemet så att momentum blir lättare att behålla."
+      },
+      {
+        "label": "Kundförtroende",
+        "metric": "70%+ retention",
+        "description": "Långsiktiga relationer kommer oftast från tydlig kommunikation, lugn leverans och starkt ägarskap över resultatet."
+      },
+      {
+        "label": "Tvärfunktionell brygga",
+        "metric": "Produkt, design och teknik i synk",
+        "description": "Jag knyter naturligt ihop olika discipliner, minskar otydlighet och hjälper team att röra sig mot samma bild av framgång."
+      }
     ]
   },
   "impact": {
@@ -72,11 +140,7 @@
       },
       {
         "title": "Verktyg",
-        "items": [
-          "Git",
-          "GitLab",
-          "Azure DevOps"
-        ]
+        "items": ["Git", "GitLab", "Azure DevOps"]
       }
     ],
     "languagesTitle": "Språk",
@@ -155,6 +219,7 @@
     "message": "Ditt meddelande",
     "send": "Skicka meddelande",
     "locationLabel": "Plats",
+    "locationValue": "Stockholm, Sverige",
     "phoneLabel": "Telefon",
     "emailLabel": "E-post"
   },
