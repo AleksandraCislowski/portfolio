@@ -22,6 +22,10 @@ export default function Section({
       component='section'
       id={id}
       sx={{
+        scrollMarginTop: {
+          xs: '88px',
+          md: '96px',
+        },
         py: {
           xs: DESIGN_TOKENS.section.paddingYMobile,
           md: DESIGN_TOKENS.section.paddingYDesktop,
