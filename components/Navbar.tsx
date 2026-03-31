@@ -49,11 +49,22 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
 const StyledToolbar = styled(Toolbar)(() => ({
   gap: DESIGN_TOKENS.spacing.xs * 8,
   minHeight: 72,
+  paddingInline: 16,
+  '@media (max-width: 1180px)': {
+    gap: 12,
+    minHeight: 68,
+    paddingInline: 12,
+  },
+  '@media (max-width: 980px)': {
+    gap: 10,
+    minHeight: 64,
+    paddingInline: 10,
+  },
 }));
 
 const MobileMenuButton = styled(IconButton)(({ theme }) => ({
   marginRight: theme.spacing(DESIGN_TOKENS.spacing.xs),
-  [theme.breakpoints.up('sm')]: {
+  '@media (min-width: 901px)': {
     display: 'none',
   },
 }));
@@ -62,20 +73,39 @@ const Brand = styled(Typography)(() => ({
   flexGrow: 1,
   fontWeight: 800,
   letterSpacing: '-0.02em',
+  whiteSpace: 'nowrap',
+  fontSize: '1.4rem',
+  '@media (max-width: 1180px)': {
+    fontSize: '1.2rem',
+  },
+  '@media (max-width: 980px)': {
+    fontSize: '1.05rem',
+  },
 }));
 
-const DesktopNav = styled(Box)(({ theme }) => ({
+const DesktopNav = styled(Box)(() => ({
   alignItems: 'center',
   display: 'none',
-  [theme.breakpoints.up('sm')]: {
+  '@media (min-width: 901px)': {
     display: 'flex',
   },
 }));
 
 const NavButton = styled(Button)(({ theme }) => ({
-  marginInline: 4,
+  marginInline: 2,
   borderRadius: DESIGN_TOKENS.radius.sm,
-  paddingInline: theme.spacing(1.25),
+  minWidth: 'auto',
+  paddingInline: theme.spacing(1),
+  fontSize: '0.95rem',
+  whiteSpace: 'nowrap',
+  '@media (max-width: 1180px)': {
+    paddingInline: theme.spacing(0.75),
+    fontSize: '0.88rem',
+  },
+  '@media (max-width: 1024px)': {
+    paddingInline: theme.spacing(0.5),
+    fontSize: '0.82rem',
+  },
   '&:hover': {
     backgroundColor: alpha(theme.palette.primary.main, 0.12),
   },
@@ -87,6 +117,9 @@ const ThemeButton = styled(IconButton)(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(1),
   },
+  '@media (max-width: 1024px)': {
+    padding: 8,
+  },
   '&:hover': {
     backgroundColor: alpha(theme.palette.primary.main, 0.12),
   },
@@ -96,11 +129,21 @@ const LanguageFormControl = styled(FormControl)(({ theme }) => {
   return {
     marginLeft: theme.spacing(1),
     minWidth: DESIGN_TOKENS.size.languageSelectMinWidthMobile,
-    [theme.breakpoints.up('sm')]: {
+    '@media (min-width: 901px)': {
       minWidth: DESIGN_TOKENS.size.languageSelectMinWidthDesktop,
+    },
+    '@media (max-width: 1180px)': {
+      minWidth: 108,
+      marginLeft: theme.spacing(0.5),
+    },
+    '@media (max-width: 1024px)': {
+      minWidth: 96,
     },
     '& .MuiInputLabel-root': {
       color: alpha('#E2E8F0', 0.78),
+      '@media (max-width: 1024px)': {
+        fontSize: '0.82rem',
+      },
     },
     '& .MuiInputLabel-root.MuiInputLabel-shrink': {
       color: '#E2E8F0',
@@ -111,6 +154,9 @@ const LanguageFormControl = styled(FormControl)(({ theme }) => {
     '& .MuiOutlinedInput-root': {
       color: '#E2E8F0',
       backgroundColor: alpha('#0A1222', 0.35),
+      '@media (max-width: 1024px)': {
+        fontSize: '0.82rem',
+      },
     },
     '& .MuiOutlinedInput-input': {
       color: '#E2E8F0',

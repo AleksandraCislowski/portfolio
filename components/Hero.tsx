@@ -146,13 +146,14 @@ const HeroShell = styled(motion.div)(({ theme }) => ({
 
 const HeroScan = styled(motion.div)(({ theme }) => ({
   position: 'absolute',
-  inset: 0,
+  inset: '-18%',
   zIndex: 0,
-  background: `linear-gradient(115deg, transparent 0%, ${alpha(
+  background: `linear-gradient(132deg, transparent 20%, ${alpha(
     theme.palette.common.white,
-    theme.palette.mode === 'dark' ? 0.02 : 0.14,
-  )} 48%, transparent 64%)`,
+    theme.palette.mode === 'dark' ? 0.03 : 0.16,
+  )} 48%, transparent 68%)`,
   pointerEvents: 'none',
+  transform: 'rotate(-12deg)',
 }));
 
 const CopyColumn = styled(Box)(() => ({
@@ -487,7 +488,8 @@ export default function Hero() {
             shouldReduceMotion
               ? undefined
               : {
-                  x: ['-30%', '120%'],
+                  x: ['-28%', '92%'],
+                  y: ['-28%', '92%'],
                 }
           }
           transition={{
