@@ -28,6 +28,9 @@ export default function Navbar() {
   const t = useTranslation();
   const { mode, setMode } = useThemeMode();
   const [mobileNavOpen, setMobileNavOpen] = React.useState(false);
+  const [activeHref, setActiveHref] = React.useState<string>(
+    SITE_CONFIG.sections.home,
+  );
 
   const nextMode = mode === 'dark' ? 'light' : 'dark';
   const languageMenuProps: SelectProps<Language>['MenuProps'] = {
@@ -36,15 +39,52 @@ export default function Navbar() {
     },
   };
 
-  const navItems: readonly NavbarItem[] = [
-    { label: t.nav.home, href: SITE_CONFIG.sections.home },
-    { label: t.nav.about, href: SITE_CONFIG.sections.about },
-    { label: t.nav.impact, href: SITE_CONFIG.sections.impact },
-    { label: t.nav.skills, href: SITE_CONFIG.sections.skills },
-    { label: t.nav.projects, href: SITE_CONFIG.sections.projects },
-    { label: t.nav.downloads, href: SITE_CONFIG.sections.downloads },
-    { label: t.nav.contact, href: SITE_CONFIG.sections.contact },
-  ];
+  const navItems = React.useMemo<readonly NavbarItem[]>(
+    () => [
+      { label: t.nav.home, href: SITE_CONFIG.sections.home },
+      { label: t.nav.about, href: SITE_CONFIG.sections.about },
+      { label: t.nav.impact, href: SITE_CONFIG.sections.impact },
+      { label: t.nav.skills, href: SITE_CONFIG.sections.skills },
+      { label: t.nav.projects, href: SITE_CONFIG.sections.projects },
+      { label: t.nav.downloads, href: SITE_CONFIG.sections.downloads },
+      { label: t.nav.contact, href: SITE_CONFIG.sections.contact },
+    ],
+    [t],
+  );
+
+  React.useEffect(() => {
+    const sectionItems = navItems.filter((item) => item.href !== SITE_CONFIG.sections.home);
+    const resolveActiveHref = () => {
+      const scrollPosition = window.scrollY + 140;
+      let nextActiveHref: string = SITE_CONFIG.sections.home;
+
+      for (const item of sectionItems) {
+        const sectionId = item.href.replace(/^#/, '');
+        const section = document.getElementById(sectionId);
+
+        if (!section) {
+          continue;
+        }
+
+        if (section.offsetTop <= scrollPosition) {
+          nextActiveHref = item.href;
+        }
+      }
+
+      setActiveHref(nextActiveHref);
+    };
+
+    resolveActiveHref();
+    window.addEventListener('scroll', resolveActiveHref, { passive: true });
+    window.addEventListener('hashchange', resolveActiveHref);
+    window.addEventListener('resize', resolveActiveHref);
+
+    return () => {
+      window.removeEventListener('scroll', resolveActiveHref);
+      window.removeEventListener('hashchange', resolveActiveHref);
+      window.removeEventListener('resize', resolveActiveHref);
+    };
+  }, [navItems]);
 
   const handleLanguageChange = (event: SelectChangeEvent<Language>) => {
     setLang(event.target.value as Language);
@@ -68,7 +108,7 @@ export default function Navbar() {
         <NavbarBrand />
 
         <ToolbarRight>
-          <NavbarDesktopNav items={navItems} />
+          <NavbarDesktopNav items={navItems} activeHref={activeHref} />
 
           <NavbarLanguageSelect
             idPrefix='lang-select'
@@ -110,6 +150,7 @@ export default function Navbar() {
         onClose={handleCloseMobileNav}
         onToggleTheme={handleToggleTheme}
         themeModeLabel={mode === 'dark' ? 'Light mode' : 'Dark mode'}
+        activeHref={activeHref}
       />
     </StyledAppBar>
   );

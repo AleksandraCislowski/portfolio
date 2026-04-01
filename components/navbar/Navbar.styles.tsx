@@ -156,13 +156,22 @@ export const DesktopNav = styled(Box)(() => ({
   },
 }));
 
-export const NavButton = styled(Button)(({ theme }) => ({
+export const NavButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== 'active',
+})<{ active?: boolean }>(({ theme, active = false }) => ({
   marginInline: 2,
   borderRadius: DESIGN_TOKENS.radius.sm,
   minWidth: 'auto',
   paddingInline: theme.spacing(1),
   fontSize: '0.95rem',
   whiteSpace: 'nowrap',
+  color: active ? '#FFFFFF' : undefined,
+  backgroundColor: active
+    ? alpha(theme.palette.primary.main, 0.2)
+    : 'transparent',
+  boxShadow: active
+    ? `inset 0 0 0 1px ${alpha(theme.palette.primary.light, 0.26)}`
+    : 'none',
   '@media (max-width: 1180px)': {
     paddingInline: theme.spacing(0.75),
     fontSize: '0.88rem',
@@ -172,7 +181,9 @@ export const NavButton = styled(Button)(({ theme }) => ({
     fontSize: '0.82rem',
   },
   '&:hover': {
-    backgroundColor: alpha(theme.palette.primary.main, 0.12),
+    backgroundColor: active
+      ? alpha(theme.palette.primary.main, 0.24)
+      : alpha(theme.palette.primary.main, 0.12),
   },
 }));
 
@@ -275,6 +286,28 @@ export const DrawerLanguageFormControl = styled(FormControl)(({ theme }) => ({
 
 export const DrawerContent = styled(Box)(() => ({
   paddingTop: 16,
+}));
+
+export const DrawerNavItem = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'active',
+})<{ active?: boolean }>(({ theme, active = false }) => ({
+  '& .MuiListItemButton-root': {
+    borderLeft: active
+      ? `3px solid ${theme.palette.primary.main}`
+      : '3px solid transparent',
+    backgroundColor: active
+      ? alpha(theme.palette.primary.main, 0.1)
+      : 'transparent',
+  },
+  '& .MuiListItemButton-root:hover': {
+    backgroundColor: active
+      ? alpha(theme.palette.primary.main, 0.14)
+      : alpha(theme.palette.action.hover, 0.7),
+  },
+  '& .MuiListItemText-primary': {
+    fontWeight: active ? 700 : 500,
+    color: active ? theme.palette.primary.main : theme.palette.text.primary,
+  },
 }));
 
 export const drawerPaperSx = {

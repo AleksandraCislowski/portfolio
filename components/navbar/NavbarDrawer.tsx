@@ -3,7 +3,7 @@ import type { SelectChangeEvent, SelectProps } from '@mui/material/Select';
 
 import type { Language } from '../../i18n/LanguageContext';
 
-import { DrawerContent, drawerPaperSx } from './Navbar.styles';
+import { DrawerContent, DrawerNavItem, drawerPaperSx } from './Navbar.styles';
 import { NavbarLanguageSelect } from './NavbarLanguageSelect';
 import type { NavbarItem } from './navbar.constants';
 
@@ -17,6 +17,7 @@ type NavbarDrawerProps = {
   onClose: () => void;
   onToggleTheme: () => void;
   themeModeLabel: string;
+  activeHref: string;
 };
 
 export function NavbarDrawer({
@@ -29,6 +30,7 @@ export function NavbarDrawer({
   onClose,
   onToggleTheme,
   themeModeLabel,
+  activeHref,
 }: NavbarDrawerProps) {
   return (
     <Drawer
@@ -51,14 +53,16 @@ export function NavbarDrawer({
             <ListItemText primary={themeModeLabel} />
           </ListItemButton>
           {items.map((item) => (
-            <ListItemButton
-              key={item.href}
-              component='a'
-              href={item.href}
-              onClick={onClose}
-            >
-              <ListItemText primary={item.label} />
-            </ListItemButton>
+            <DrawerNavItem key={item.href} active={activeHref === item.href}>
+              <ListItemButton
+                component='a'
+                href={item.href}
+                onClick={onClose}
+                selected={activeHref === item.href}
+              >
+                <ListItemText primary={item.label} />
+              </ListItemButton>
+            </DrawerNavItem>
           ))}
         </List>
       </DrawerContent>
