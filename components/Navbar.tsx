@@ -148,8 +148,6 @@ export default function Navbar() {
         menuProps={languageMenuProps}
         mobileNavOpen={mobileNavOpen}
         onClose={handleCloseMobileNav}
-        onToggleTheme={handleToggleTheme}
-        themeModeLabel={mode === 'dark' ? 'Light mode' : 'Dark mode'}
         activeHref={activeHref}
       />
     </StyledAppBar>

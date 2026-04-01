@@ -15,8 +15,6 @@ type NavbarDrawerProps = {
   menuProps: SelectProps<Language>['MenuProps'];
   mobileNavOpen: boolean;
   onClose: () => void;
-  onToggleTheme: () => void;
-  themeModeLabel: string;
   activeHref: string;
 };
 
@@ -28,8 +26,6 @@ export function NavbarDrawer({
   menuProps,
   mobileNavOpen,
   onClose,
-  onToggleTheme,
-  themeModeLabel,
   activeHref,
 }: NavbarDrawerProps) {
   return (
@@ -49,9 +45,6 @@ export function NavbarDrawer({
           variant='drawer'
         />
         <List>
-          <ListItemButton onClick={onToggleTheme}>
-            <ListItemText primary={themeModeLabel} />
-          </ListItemButton>
           {items.map((item) => (
             <DrawerNavItem key={item.href} active={activeHref === item.href}>
               <ListItemButton
