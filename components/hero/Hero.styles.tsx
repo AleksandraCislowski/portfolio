@@ -283,10 +283,14 @@ export const SecondaryHeroButton = styled(Button)(({ theme }) => ({
 }));
 
 export const HeroMeta = styled(Stack)(({ theme }) => ({
-  flexDirection: 'row',
-  flexWrap: 'wrap',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
   gap: theme.spacing(1),
   marginBottom: theme.spacing(2.5),
+  maxWidth: 640,
+  [theme.breakpoints.up('md')]: {
+    gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+  },
 }));
 
 export const HeroSignals = styled(Stack)(({ theme }) => ({
@@ -312,13 +316,21 @@ export const SignalItem = styled(Box)(({ theme }) => ({
 }));
 
 export const MetaChip = styled(MotionChip)(({ theme }) => ({
+  width: '100%',
+  minHeight: 40,
   borderRadius: 999,
   backgroundColor: alpha(theme.palette.background.paper, 0.58),
   border: `1px solid ${alpha(theme.palette.divider, 0.9)}`,
   color: theme.palette.text.primary,
   boxShadow: `0 12px 24px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.14 : 0.06)}`,
+  justifyContent: 'center',
   '& .MuiChip-label': {
+    display: 'block',
     fontWeight: 700,
+    textAlign: 'center',
+    whiteSpace: 'normal',
+    lineHeight: 1.25,
+    paddingInline: theme.spacing(1.5),
   },
 }));
 
