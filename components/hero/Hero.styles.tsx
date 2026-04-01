@@ -14,6 +14,17 @@ export const HeroBackdrop = styled(Box)(() => ({
   zIndex: 3,
 }));
 
+export const RightOrbViewport = styled(Box)(() => ({
+  position: 'absolute',
+  inset: 0,
+  overflowX: 'clip',
+  overflowY: 'visible',
+  pointerEvents: 'none',
+  '@media (min-width: 1760px)': {
+    overflowX: 'visible',
+  },
+}));
+
 export const GlowOrb = styled(motion.div)<{ $variant: 'left' | 'right' }>(
   ({ theme, $variant }) => ({
     position: 'absolute',
