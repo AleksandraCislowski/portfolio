@@ -3,7 +3,6 @@
     "home": "Home",
     "about": "About",
     "impact": "Impact",
-    "skills": "Skills",
     "projects": "Work",
     "downloads": "Downloads",
     "contact": "Contact",
@@ -108,64 +107,6 @@
         "label": "client retention",
         "description": "Built long-term relationships and reliable value delivery as founder."
       }
-    ]
-  },
-  "skills": {
-    "title": "Core Skills",
-    "groups": [
-      {
-        "title": "Frontend Engineering",
-        "items": [
-          "React",
-          "Next.js",
-          "TypeScript",
-          "JavaScript",
-          "HTML5",
-          "CSS3",
-          "MUI"
-        ]
-      },
-      {
-        "title": "Delivery & Collaboration",
-        "items": [
-          "Agile / Scrum",
-          "Sprint Planning",
-          "Retrospectives",
-          "Cross-functional Facilitation",
-          "Stakeholder Communication",
-          "Delivery Optimization"
-        ]
-      },
-      {
-        "title": "Tooling",
-        "items": ["Git", "GitLab", "Azure DevOps"]
-      }
-    ],
-    "languagesTitle": "Languages",
-    "languageLevels": [
-      {
-        "name": "English",
-        "level": "C2",
-        "percent": 100
-      },
-      {
-        "name": "Polish",
-        "level": "C2",
-        "percent": 100
-      },
-      {
-        "name": "Swedish",
-        "level": "B2",
-        "percent": 75
-      }
-    ],
-    "certificationsTitle": "Recent Certifications",
-    "certifications": [
-      "CSS - The Complete Guide (Flexbox, Grid, Sass)",
-      "React Native - The Practical Guide",
-      "MERN Fullstack Guide",
-      "Next.js & React - The Complete Guide",
-      "React & TypeScript - The Practical Guide"
     ]
   },
   "projects": {

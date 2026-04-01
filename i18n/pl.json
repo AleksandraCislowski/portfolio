@@ -3,7 +3,6 @@
     "home": "Start",
     "about": "O mnie",
     "impact": "Wpływ",
-    "skills": "Umiejętności",
     "projects": "Realizacje",
     "downloads": "Do pobrania",
     "contact": "Kontakt",
@@ -108,64 +107,6 @@
         "label": "utrzymanie klientów",
         "description": "Długoterminowe relacje i konsekwentne dostarczanie wartości w działalności własnej."
       }
-    ]
-  },
-  "skills": {
-    "title": "Kluczowe umiejętności",
-    "groups": [
-      {
-        "title": "Frontend Engineering",
-        "items": [
-          "React",
-          "Next.js",
-          "TypeScript",
-          "JavaScript",
-          "HTML5",
-          "CSS3",
-          "MUI"
-        ]
-      },
-      {
-        "title": "Delivery i współpraca",
-        "items": [
-          "Agile / Scrum",
-          "Sprint Planning",
-          "Retrospectives",
-          "Cross-functional Facilitation",
-          "Stakeholder Communication",
-          "Delivery Optimization"
-        ]
-      },
-      {
-        "title": "Narzędzia",
-        "items": ["Git", "GitLab", "Azure DevOps"]
-      }
-    ],
-    "languagesTitle": "Języki",
-    "languageLevels": [
-      {
-        "name": "English",
-        "level": "C2",
-        "percent": 100
-      },
-      {
-        "name": "Polish",
-        "level": "C2",
-        "percent": 100
-      },
-      {
-        "name": "Swedish",
-        "level": "B2",
-        "percent": 75
-      }
-    ],
-    "certificationsTitle": "Najnowsze certyfikacje",
-    "certifications": [
-      "CSS - The Complete Guide (Flexbox, Grid, Sass)",
-      "React Native - The Practical Guide",
-      "MERN Fullstack Guide",
-      "Next.js & React - The Complete Guide",
-      "React & TypeScript - The Practical Guide"
     ]
   },
   "projects": {

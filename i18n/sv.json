@@ -3,7 +3,6 @@
     "home": "Hem",
     "about": "Om mig",
     "impact": "Effekt",
-    "skills": "Kompetenser",
     "projects": "Arbete",
     "downloads": "Nedladdningar",
     "contact": "Kontakt",
@@ -108,64 +107,6 @@
         "label": "kundretention",
         "description": "Långsiktiga relationer och stabilt värdeskapande i eget bolag."
       }
-    ]
-  },
-  "skills": {
-    "title": "Kärnkompetenser",
-    "groups": [
-      {
-        "title": "Frontend Engineering",
-        "items": [
-          "React",
-          "Next.js",
-          "TypeScript",
-          "JavaScript",
-          "HTML5",
-          "CSS3",
-          "MUI"
-        ]
-      },
-      {
-        "title": "Delivery & samarbete",
-        "items": [
-          "Agile / Scrum",
-          "Sprint Planning",
-          "Retrospectives",
-          "Cross-functional Facilitation",
-          "Stakeholder Communication",
-          "Delivery Optimization"
-        ]
-      },
-      {
-        "title": "Verktyg",
-        "items": ["Git", "GitLab", "Azure DevOps"]
-      }
-    ],
-    "languagesTitle": "Språk",
-    "languageLevels": [
-      {
-        "name": "English",
-        "level": "C2",
-        "percent": 100
-      },
-      {
-        "name": "Polish",
-        "level": "C2",
-        "percent": 100
-      },
-      {
-        "name": "Swedish",
-        "level": "B2",
-        "percent": 75
-      }
-    ],
-    "certificationsTitle": "Senaste certifieringar",
-    "certifications": [
-      "CSS - The Complete Guide (Flexbox, Grid, Sass)",
-      "React Native - The Practical Guide",
-      "MERN Fullstack Guide",
-      "Next.js & React - The Complete Guide",
-      "React & TypeScript - The Practical Guide"
     ]
   },
   "projects": {
