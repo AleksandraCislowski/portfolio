@@ -9,6 +9,7 @@ import {
   ImageAccent,
   ImageAccentEyebrow,
   ImageFrame,
+  ImageMediaClip,
   ImageLayer,
   MotionBox,
   VisualColumn,
@@ -25,20 +26,22 @@ export function HeroVisual({ t }: HeroVisualProps) {
       <VisualColumn>
         <VisualStack>
           <ImageFrame>
-            <ImageLayer>
-              <Image
-                src={heroImage}
-                alt='Aleksandra Cislowski in a modern, tech-driven portrait'
-                fill
-                priority
-                placeholder='blur'
-                sizes='(max-width: 900px) 100vw, 44vw'
-                style={{
-                  objectFit: 'cover',
-                  objectPosition: 'center 22%',
-                }}
-              />
-            </ImageLayer>
+            <ImageMediaClip>
+              <ImageLayer>
+                <Image
+                  src={heroImage}
+                  alt='Aleksandra Cislowski in a modern, tech-driven portrait'
+                  fill
+                  priority
+                  placeholder='blur'
+                  sizes='(max-width: 900px) 100vw, 44vw'
+                  style={{
+                    objectFit: 'cover',
+                    objectPosition: 'center 22%',
+                  }}
+                />
+              </ImageLayer>
+            </ImageMediaClip>
 
             <ImageAccent>
               <ImageAccentEyebrow variant='caption'>

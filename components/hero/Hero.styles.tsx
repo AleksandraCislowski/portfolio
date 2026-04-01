@@ -344,9 +344,20 @@ export const VisualColumn = styled(Box)(() => ({
 
 export const VisualStack = styled(Box)(() => ({
   position: 'relative',
+  overflow: 'visible',
 }));
 
 export const ImageFrame = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  overflow: 'visible',
+  borderRadius: 28,
+  minHeight: 420,
+  [theme.breakpoints.up('lg')]: {
+    minHeight: 560,
+  },
+}));
+
+export const ImageMediaClip = styled(Box)(({ theme }) => ({
   position: 'relative',
   overflow: 'hidden',
   borderRadius: 28,
@@ -377,10 +388,13 @@ export const ImageFrame = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const ImageLayer = styled(motion.div)(() => ({
+export const ImageLayer = styled(motion.div)(({ theme }) => ({
   position: 'absolute',
   inset: 0,
   zIndex: 0,
+  [theme.breakpoints.up('lg')]: {
+    right: -44,
+  },
 }));
 
 export const ImageAccent = styled(Box)(({ theme }) => ({
