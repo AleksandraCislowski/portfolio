@@ -35,6 +35,9 @@ export const GlowOrb = styled(motion.div)<{ $variant: 'left' | 'right' }>(
           width: 540,
           height: 540,
           background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.3)} 0%, transparent 67%)`,
+          '@media (max-width: 1680px)': {
+            display: 'none',
+          },
         }),
     [theme.breakpoints.down('md')]:
       $variant === 'left'
@@ -45,10 +48,7 @@ export const GlowOrb = styled(motion.div)<{ $variant: 'left' | 'right' }>(
             height: 300,
           }
         : {
-            right: -118,
-            bottom: -120,
-            width: 340,
-            height: 340,
+            display: 'none',
           },
   }),
 );

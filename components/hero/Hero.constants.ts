@@ -1,6 +1,7 @@
 export const heroSectionSx = {
   position: 'relative',
-  overflow: 'visible',
+  overflowX: 'visible',
+  overflowY: 'visible',
   px: {
     xs: 2,
     md: 4,
