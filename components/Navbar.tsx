@@ -31,6 +31,7 @@ export default function Navbar() {
   const [activeHref, setActiveHref] = React.useState<string>(
     SITE_CONFIG.sections.home,
   );
+  const navLockUntilRef = React.useRef(0);
 
   const nextMode = mode === 'dark' ? 'light' : 'dark';
   const languageMenuProps: SelectProps<Language>['MenuProps'] = {
@@ -44,7 +45,6 @@ export default function Navbar() {
       { label: t.nav.home, href: SITE_CONFIG.sections.home },
       { label: t.nav.about, href: SITE_CONFIG.sections.about },
       { label: t.nav.impact, href: SITE_CONFIG.sections.impact },
-      { label: t.nav.skills, href: SITE_CONFIG.sections.skills },
       { label: t.nav.projects, href: SITE_CONFIG.sections.projects },
       { label: t.nav.downloads, href: SITE_CONFIG.sections.downloads },
       { label: t.nav.contact, href: SITE_CONFIG.sections.contact },
@@ -53,9 +53,30 @@ export default function Navbar() {
   );
 
   React.useEffect(() => {
-    const sectionItems = navItems.filter((item) => item.href !== SITE_CONFIG.sections.home);
+    const sectionItems = navItems.filter(
+      (item) => item.href !== SITE_CONFIG.sections.home,
+    );
+
     const resolveActiveHref = () => {
-      const scrollPosition = window.scrollY + 140;
+      if (Date.now() < navLockUntilRef.current) {
+        return;
+      }
+
+      const topActivationLine = 132;
+      const pageBottom = window.innerHeight + window.scrollY;
+      const pageHeight = document.documentElement.scrollHeight;
+      const nearTop = window.scrollY < 96;
+
+      if (nearTop) {
+        setActiveHref(SITE_CONFIG.sections.home);
+        return;
+      }
+
+      if (pageBottom >= pageHeight - 8) {
+        setActiveHref(SITE_CONFIG.sections.contact);
+        return;
+      }
+
       let nextActiveHref: string = SITE_CONFIG.sections.home;
 
       for (const item of sectionItems) {
@@ -66,7 +87,9 @@ export default function Navbar() {
           continue;
         }
 
-        if (section.offsetTop <= scrollPosition) {
+        const { top } = section.getBoundingClientRect();
+
+        if (top <= topActivationLine) {
           nextActiveHref = item.href;
         }
       }
@@ -102,13 +125,22 @@ export default function Navbar() {
     setMode(nextMode);
   };
 
+  const handleNavigate = (href: string) => {
+    setActiveHref(href);
+    navLockUntilRef.current = Date.now() + 900;
+  };
+
   return (
     <StyledAppBar position='sticky' color='default' elevation={0}>
       <StyledToolbar>
         <NavbarBrand />
 
         <ToolbarRight>
-          <NavbarDesktopNav items={navItems} activeHref={activeHref} />
+          <NavbarDesktopNav
+            items={navItems}
+            activeHref={activeHref}
+            onNavigate={handleNavigate}
+          />
 
           <NavbarLanguageSelect
             idPrefix='lang-select'
@@ -149,6 +181,7 @@ export default function Navbar() {
         mobileNavOpen={mobileNavOpen}
         onClose={handleCloseMobileNav}
         activeHref={activeHref}
+        onNavigate={handleNavigate}
       />
     </StyledAppBar>
   );

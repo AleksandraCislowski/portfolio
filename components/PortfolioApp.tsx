@@ -6,7 +6,6 @@ import Navbar from './Navbar';
 import Hero from './Hero';
 import About from './About';
 import Impact from './Impact';
-import Skills from './Skills';
 import Projects from './Projects';
 import Downloads from './Downloads';
 import Contact from './Contact';
@@ -41,7 +40,6 @@ export default function PortfolioApp({
           <Hero />
           <About />
           <Impact />
-          <Skills />
           <Projects />
           <Downloads />
           <Contact />

@@ -1,7 +1,6 @@
 export const SECTION_IDS = {
   about: 'about',
   impact: 'impact',
-  skills: 'skills',
   projects: 'projects',
   downloads: 'downloads',
   contact: 'contact',
@@ -11,7 +10,6 @@ export const SECTION_ANCHORS = {
   home: '#',
   about: `#${SECTION_IDS.about}`,
   impact: `#${SECTION_IDS.impact}`,
-  skills: `#${SECTION_IDS.skills}`,
   projects: `#${SECTION_IDS.projects}`,
   downloads: `#${SECTION_IDS.downloads}`,
   contact: `#${SECTION_IDS.contact}`,

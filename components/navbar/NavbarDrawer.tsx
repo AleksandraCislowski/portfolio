@@ -16,6 +16,7 @@ type NavbarDrawerProps = {
   mobileNavOpen: boolean;
   onClose: () => void;
   activeHref: string;
+  onNavigate: (href: string) => void;
 };
 
 export function NavbarDrawer({
@@ -27,6 +28,7 @@ export function NavbarDrawer({
   mobileNavOpen,
   onClose,
   activeHref,
+  onNavigate,
 }: NavbarDrawerProps) {
   return (
     <Drawer
@@ -50,7 +52,10 @@ export function NavbarDrawer({
               <ListItemButton
                 component='a'
                 href={item.href}
-                onClick={onClose}
+                onClick={() => {
+                  onNavigate(item.href);
+                  onClose();
+                }}
                 selected={activeHref === item.href}
               >
                 <ListItemText primary={item.label} />
