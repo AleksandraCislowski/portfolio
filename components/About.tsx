@@ -4,12 +4,11 @@ import {
   Typography,
   Stack,
   Avatar,
-  IconButton,
   List,
   ListItem,
   ListItemText,
 } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { alpha, styled } from '@mui/material/styles';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { DESIGN_TOKENS } from '../theme/tokens';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -78,7 +77,39 @@ const AboutShell = styled(Box)(({ theme }) => ({
   },
 }));
 
+const AboutPanel = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  padding: theme.spacing(3),
+  borderRadius: 30,
+  overflow: 'hidden',
+  border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.65 : 0.9)}`,
+  background:
+    theme.palette.mode === 'dark'
+      ? `linear-gradient(145deg, ${alpha('#101A33', 0.84)} 0%, ${alpha('#16264B', 0.68)} 100%)`
+      : `linear-gradient(145deg, ${alpha('#FFFFFF', 0.86)} 0%, ${alpha('#EAF2FF', 0.8)} 100%)`,
+  boxShadow:
+    theme.palette.mode === 'dark'
+      ? '0 20px 48px rgba(2, 6, 23, 0.32)'
+      : '0 20px 48px rgba(37, 99, 235, 0.1)',
+  backdropFilter: 'blur(18px)',
+  [theme.breakpoints.up('md')]: {
+    padding: theme.spacing(4),
+  },
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    inset: 0,
+    pointerEvents: 'none',
+    background:
+      theme.palette.mode === 'dark'
+        ? 'radial-gradient(circle at 0% 0%, rgba(96,165,250,0.16), transparent 30%), radial-gradient(circle at 100% 100%, rgba(196,181,253,0.1), transparent 28%)'
+        : 'radial-gradient(circle at 0% 0%, rgba(59,130,246,0.12), transparent 28%), radial-gradient(circle at 100% 100%, rgba(139,92,246,0.1), transparent 30%)',
+  },
+}));
+
 const AboutLayout = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  zIndex: 1,
   display: 'grid',
   gap: theme.spacing(4),
   alignItems: 'center',
@@ -102,29 +133,134 @@ const AboutMedia = styled(Box)(({ theme }) => ({
   },
 }));
 
+const AboutAvatarFrame = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: theme.spacing(1),
+  borderRadius: 32,
+  background:
+    theme.palette.mode === 'dark'
+      ? `linear-gradient(145deg, ${alpha(theme.palette.primary.light, 0.2)} 0%, ${alpha(theme.palette.background.paper, 0.92)} 100%)`
+      : `linear-gradient(145deg, ${alpha(theme.palette.primary.light, 0.16)} 0%, ${alpha('#FFFFFF', 0.94)} 100%)`,
+  boxShadow:
+    theme.palette.mode === 'dark'
+      ? '0 22px 36px rgba(2, 6, 23, 0.34)'
+      : '0 22px 36px rgba(37, 99, 235, 0.14)',
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    inset: -10,
+    borderRadius: 40,
+    border: `1px solid ${alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.18 : 0.14)}`,
+    pointerEvents: 'none',
+  },
+}));
+
 const AboutAvatar = styled(Avatar)(({ theme }) => ({
   width: 132,
   height: 132,
   marginBottom: 0,
+  borderRadius: 24,
+  border: `3px solid ${alpha(theme.palette.common.white, theme.palette.mode === 'dark' ? 0.12 : 0.92)}`,
+  '& .MuiAvatar-img': {
+    objectFit: 'cover',
+    objectPosition: 'center top',
+    transform: 'scale(1.02)',
+  },
   [theme.breakpoints.up('md')]: {
     width: 156,
     height: 156,
   },
 }));
 
-const AboutDescription = styled(Typography)(() => ({
+const AboutDescription = styled(Typography)(({ theme }) => ({
   maxWidth: DESIGN_TOKENS.size.aboutDescriptionMaxWidth,
   marginBottom: 16,
+  color: theme.palette.text.secondary,
 }));
 
-const AboutTitle = styled(Typography)(() => ({
+const AboutTitle = styled(Typography)(({ theme }) => ({
   marginBottom: 8,
+  textWrap: 'balance',
+  color: theme.palette.text.primary,
 }));
 
 const HighlightsList = styled(List)(() => ({
   width: '100%',
   maxWidth: DESIGN_TOKENS.size.downloadsDescriptionMaxWidth,
   marginBottom: 16,
+  paddingTop: 0,
+  paddingBottom: 0,
+}));
+
+const HighlightItem = styled(ListItem)(({ theme }) => ({
+  alignItems: 'flex-start',
+  marginBottom: theme.spacing(1.2),
+  paddingInline: 0,
+  paddingBlock: theme.spacing(0.85),
+  borderRadius: 16,
+  backgroundColor: alpha(
+    theme.palette.background.paper,
+    theme.palette.mode === 'dark' ? 0.18 : 0.5,
+  ),
+  border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.35 : 0.8)}`,
+  boxShadow:
+    theme.palette.mode === 'dark'
+      ? '0 10px 24px rgba(2, 6, 23, 0.16)'
+      : '0 10px 24px rgba(15, 23, 42, 0.04)',
+}));
+
+const HighlightText = styled(ListItemText)(({ theme }) => ({
+  margin: 0,
+  paddingInline: theme.spacing(1.75),
+  '& .MuiListItemText-primary': {
+    color: theme.palette.text.primary,
+    fontWeight: 500,
+    lineHeight: 1.65,
+  },
+}));
+
+const SocialLinks = styled(Stack)(({ theme }) => ({
+  flexDirection: 'row',
+  gap: theme.spacing(1.5),
+  flexWrap: 'wrap',
+}));
+
+const SocialButton = styled('a')(({ theme }) => ({
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: 48,
+  height: 48,
+  borderRadius: 16,
+  color: theme.palette.primary.main,
+  textDecoration: 'none',
+  border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.4 : 0.8)}`,
+  backgroundColor: alpha(
+    theme.palette.background.paper,
+    theme.palette.mode === 'dark' ? 0.24 : 0.72,
+  ),
+  boxShadow:
+    theme.palette.mode === 'dark'
+      ? '0 14px 28px rgba(2, 6, 23, 0.2)'
+      : '0 14px 28px rgba(15, 23, 42, 0.06)',
+  backdropFilter: 'blur(10px)',
+  transition:
+    'transform 180ms ease, box-shadow 200ms ease, border-color 200ms ease, background-color 200ms ease',
+  '&:hover': {
+    transform: 'translateY(-2px)',
+    borderColor: alpha(theme.palette.primary.main, 0.42),
+    backgroundColor: alpha(
+      theme.palette.background.paper,
+      theme.palette.mode === 'dark' ? 0.34 : 0.92,
+    ),
+    boxShadow:
+      theme.palette.mode === 'dark'
+        ? `0 18px 34px ${alpha(theme.palette.primary.main, 0.16)}`
+        : `0 18px 34px ${alpha(theme.palette.primary.main, 0.12)}`,
+  },
 }));
 
 export default function About() {
@@ -140,60 +276,64 @@ export default function About() {
         viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.35 }}
       >
         <AboutShell>
-          <AboutLayout>
-            <MotionBox variants={shouldReduceMotion ? undefined : mediaVariants}>
-              <AboutMedia>
-                <AboutAvatar src={SITE_CONFIG.avatarImage} alt='Profile photo' />
-              </AboutMedia>
-            </MotionBox>
+          <AboutPanel>
+            <AboutLayout>
+              <MotionBox variants={shouldReduceMotion ? undefined : mediaVariants}>
+                <AboutMedia>
+                  <AboutAvatarFrame>
+                    <AboutAvatar
+                      src={SITE_CONFIG.avatarImage}
+                      alt='Profile photo'
+                    />
+                  </AboutAvatarFrame>
+                </AboutMedia>
+              </MotionBox>
 
-            <MotionBox
-              variants={shouldReduceMotion ? undefined : contentVariants}
-            >
-              <AboutContent>
-                <AboutTitle variant='h3'>
-                  {t.about.title}
-                </AboutTitle>
-                <AboutDescription variant='body2'>
-                  {t.about.description}
-                </AboutDescription>
-                <HighlightsList dense>
-                  {t.about.highlights.map((highlight) => (
-                    <ListItem key={highlight} disableGutters>
-                      <ListItemText primary={highlight} />
-                    </ListItem>
-                  ))}
-                </HighlightsList>
-                <Stack direction='row' spacing={2}>
-                  <IconButton
-                    color='primary'
-                    href={SITE_CONFIG.socialLinks.linkedIn}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    aria-label='Open LinkedIn profile'
-                  >
-                    <LinkedInIcon />
-                  </IconButton>
-                  <IconButton
-                    color='primary'
-                    href={SITE_CONFIG.socialLinks.github}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    aria-label='Open GitHub profile'
-                  >
-                    <GitHubIcon />
-                  </IconButton>
-                  <IconButton
-                    color='primary'
-                    href={`mailto:${SITE_CONFIG.contactEmail}`}
-                    aria-label='Send email'
-                  >
-                    <EmailIcon />
-                  </IconButton>
-                </Stack>
-              </AboutContent>
-            </MotionBox>
-          </AboutLayout>
+              <MotionBox
+                variants={shouldReduceMotion ? undefined : contentVariants}
+              >
+                <AboutContent>
+                  <AboutTitle variant='h3'>
+                    {t.about.title}
+                  </AboutTitle>
+                  <AboutDescription variant='body2'>
+                    {t.about.description}
+                  </AboutDescription>
+                  <HighlightsList dense>
+                    {t.about.highlights.map((highlight) => (
+                      <HighlightItem key={highlight} disableGutters>
+                        <HighlightText primary={highlight} />
+                      </HighlightItem>
+                    ))}
+                  </HighlightsList>
+                  <SocialLinks>
+                    <SocialButton
+                      href={SITE_CONFIG.socialLinks.linkedIn}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      aria-label='Open LinkedIn profile'
+                    >
+                      <LinkedInIcon />
+                    </SocialButton>
+                    <SocialButton
+                      href={SITE_CONFIG.socialLinks.github}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      aria-label='Open GitHub profile'
+                    >
+                      <GitHubIcon />
+                    </SocialButton>
+                    <SocialButton
+                      href={`mailto:${SITE_CONFIG.contactEmail}`}
+                      aria-label='Send email'
+                    >
+                      <EmailIcon />
+                    </SocialButton>
+                  </SocialLinks>
+                </AboutContent>
+              </MotionBox>
+            </AboutLayout>
+          </AboutPanel>
         </AboutShell>
       </MotionBox>
     </Section>
