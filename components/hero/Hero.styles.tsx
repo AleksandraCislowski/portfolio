@@ -244,10 +244,10 @@ export const SecondaryHeroButton = styled(Button)(({ theme }) => ({
   '&::before': {
     content: '""',
     position: 'absolute',
-    inset: -1,
-    background: `radial-gradient(circle at 18% 18%, ${alpha(theme.palette.secondary.light, 0.32)} 0%, transparent 42%), linear-gradient(135deg, ${alpha(theme.palette.background.paper, theme.palette.mode === 'dark' ? 0.14 : 0.6)} 0%, transparent 100%)`,
+    inset: 0,
+    background: `linear-gradient(135deg, ${alpha(theme.palette.secondary.light, theme.palette.mode === 'dark' ? 0.16 : 0.22)} 0%, transparent 58%)`,
     opacity: 0,
-    transform: 'scale(0.92)',
+    transform: 'translateX(-8%) scale(0.98)',
   },
   '&::after': {
     content: '""',
@@ -258,19 +258,20 @@ export const SecondaryHeroButton = styled(Button)(({ theme }) => ({
     opacity: 0,
   },
   '&:hover': {
+    transform: 'translateY(-3px) scale(1.01)',
     borderColor: alpha(theme.palette.secondary.main, 0.58),
     backgroundColor: alpha(
       theme.palette.background.paper,
       theme.palette.mode === 'dark' ? 0.28 : 0.66,
     ),
-    boxShadow: `0 22px 38px ${alpha(theme.palette.secondary.main, 0.18)}`,
+    boxShadow: `0 24px 46px ${alpha(theme.palette.secondary.main, 0.2)}, 0 0 0 1px ${alpha(theme.palette.secondary.light, 0.22)}`,
   },
   '&:hover::before': {
     opacity: 1,
-    transform: 'scale(1)',
+    transform: 'translateX(0) scale(1)',
   },
   '&:hover::after': {
-    opacity: 1,
+    opacity: 0.72,
   },
   '&:active': {
     transform: 'translateY(-1px) scale(0.99)',
