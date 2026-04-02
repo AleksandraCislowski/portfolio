@@ -51,7 +51,7 @@ export function NavbarDrawer({
             <DrawerNavItem key={item.href} active={activeHref === item.href}>
               <ListItemButton
                 component='a'
-                href={item.href}
+                href={item.targetHref ?? item.href}
                 onClick={() => {
                   onNavigate(item.href);
                   onClose();

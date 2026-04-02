@@ -1,9 +1,11 @@
+'use client';
 import * as React from 'react';
 import { SelectProps } from '@mui/material/Select';
 import MenuIcon from '@mui/icons-material/Menu';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import type { SelectChangeEvent } from '@mui/material/Select';
+import { usePathname } from 'next/navigation';
 import { useLanguage, type Language } from '../i18n/LanguageContext';
 import { useTranslation } from '../i18n/useTranslation';
 import { useThemeMode } from '../theme/ThemeModeContext';
@@ -24,6 +26,7 @@ import {
 import type { NavbarItem } from './navbar/navbar.constants';
 
 export default function Navbar() {
+  const pathname = usePathname();
   const { lang, setLang } = useLanguage();
   const t = useTranslation();
   const { mode, setMode } = useThemeMode();
@@ -32,6 +35,8 @@ export default function Navbar() {
     SITE_CONFIG.sections.home,
   );
   const navLockUntilRef = React.useRef(0);
+  const isHomePage = pathname === '/';
+  const rootPrefix = isHomePage ? '' : '/';
 
   const nextMode = mode === 'dark' ? 'light' : 'dark';
   const languageMenuProps: SelectProps<Language>['MenuProps'] = {
@@ -42,17 +47,46 @@ export default function Navbar() {
 
   const navItems = React.useMemo<readonly NavbarItem[]>(
     () => [
-      { label: t.nav.home, href: SITE_CONFIG.sections.home },
-      { label: t.nav.about, href: SITE_CONFIG.sections.about },
-      { label: t.nav.impact, href: SITE_CONFIG.sections.impact },
-      { label: t.nav.projects, href: SITE_CONFIG.sections.projects },
-      { label: t.nav.downloads, href: SITE_CONFIG.sections.downloads },
-      { label: t.nav.contact, href: SITE_CONFIG.sections.contact },
+      {
+        label: t.nav.home,
+        href: SITE_CONFIG.sections.home,
+        targetHref: isHomePage ? '/' : '/',
+      },
+      {
+        label: t.nav.about,
+        href: SITE_CONFIG.sections.about,
+        targetHref: `${rootPrefix}${SITE_CONFIG.sections.about}`,
+      },
+      {
+        label: t.nav.impact,
+        href: SITE_CONFIG.sections.impact,
+        targetHref: `${rootPrefix}${SITE_CONFIG.sections.impact}`,
+      },
+      {
+        label: t.nav.projects,
+        href: SITE_CONFIG.sections.projects,
+        targetHref: `${rootPrefix}${SITE_CONFIG.sections.projects}`,
+      },
+      {
+        label: t.nav.downloads,
+        href: SITE_CONFIG.sections.downloads,
+        targetHref: `${rootPrefix}${SITE_CONFIG.sections.downloads}`,
+      },
+      {
+        label: t.nav.contact,
+        href: SITE_CONFIG.sections.contact,
+        targetHref: `${rootPrefix}${SITE_CONFIG.sections.contact}`,
+      },
     ],
-    [t],
+    [isHomePage, rootPrefix, t],
   );
 
   React.useEffect(() => {
+    if (!isHomePage) {
+      setActiveHref(SITE_CONFIG.sections.home);
+      return;
+    }
+
     const sectionItems = navItems.filter(
       (item) => item.href !== SITE_CONFIG.sections.home,
     );
@@ -107,7 +141,7 @@ export default function Navbar() {
       window.removeEventListener('hashchange', resolveActiveHref);
       window.removeEventListener('resize', resolveActiveHref);
     };
-  }, [navItems]);
+  }, [isHomePage, navItems]);
 
   const handleLanguageChange = (event: SelectChangeEvent<Language>) => {
     setLang(event.target.value as Language);

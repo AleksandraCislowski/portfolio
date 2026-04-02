@@ -17,7 +17,7 @@ export function NavbarDesktopNav({
       {items.map((item) => (
         <NavButton
           key={item.href}
-          href={item.href}
+          href={item.targetHref ?? item.href}
           onClick={() => onNavigate(item.href)}
           color='inherit'
           active={activeHref === item.href}
