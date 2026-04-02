@@ -110,6 +110,22 @@
   },
   "projects": {
     "title": "Utvalt arbete",
+    "intro": "Bubble-idén passar den här sektionen väldigt bra, så projekten kan nu leva här som klickbara, mjukt rörliga former i stället för vanliga kort.",
+    "openProject": "Öppna projekt",
+    "bubbleHint": "Varje bubble svävar lätt och pulserar. Klicka för att öppna en egen projektsida.",
+    "backLabel": "Tillbaka till projekt",
+    "placeholderEyebrow": "Projektplaceholder",
+    "placeholderTitle": "Tillfällig case study-text",
+    "placeholderParagraphs": [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere, nibh et fermentum vulputate, eros turpis pretium risus, vitae facilisis libero lorem non massa.",
+      "Suspendisse potenti. Praesent ultricies, turpis a varius viverra, sapien augue tempus elit, quis suscipit sapien arcu non odio. Curabitur ac sem vitae nisl consequat tincidunt.",
+      "Vivamus feugiat, erat sed luctus pulvinar, neque purus fermentum justo, vel placerat lectus neque nec mi. Donec luctus urna et arcu volutpat, in interdum lacus maximus."
+    ],
+    "placeholderBulletPoints": [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Praesent efficitur sapien sed arcu facilisis, id suscipit neque feugiat.",
+      "Mauris blandit massa at justo malesuada, quis ultrices lorem eleifend."
+    ],
     "items": [
       {
         "title": "SaaS Delivery Leadership",

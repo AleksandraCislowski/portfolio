@@ -110,6 +110,22 @@
   },
   "projects": {
     "title": "Wybrane realizacje",
+    "intro": "Motyw bąbelków bardzo tu pasuje, więc projekty mogą żyć w tej sekcji jako klikane, lekko poruszające się formy zamiast statycznych kart.",
+    "openProject": "Otwórz projekt",
+    "bubbleHint": "Każdy bąbelek delikatnie unosi się i pulsuje. Kliknięcie przenosi na osobną podstronę projektu.",
+    "backLabel": "Wróć do realizacji",
+    "placeholderEyebrow": "Placeholder projektu",
+    "placeholderTitle": "Tymczasowy opis case study",
+    "placeholderParagraphs": [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere, nibh et fermentum vulputate, eros turpis pretium risus, vitae facilisis libero lorem non massa.",
+      "Suspendisse potenti. Praesent ultricies, turpis a varius viverra, sapien augue tempus elit, quis suscipit sapien arcu non odio. Curabitur ac sem vitae nisl consequat tincidunt.",
+      "Vivamus feugiat, erat sed luctus pulvinar, neque purus fermentum justo, vel placerat lectus neque nec mi. Donec luctus urna et arcu volutpat, in interdum lacus maximus."
+    ],
+    "placeholderBulletPoints": [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Praesent efficitur sapien sed arcu facilisis, id suscipit neque feugiat.",
+      "Mauris blandit massa at justo malesuada, quis ultrices lorem eleifend."
+    ],
     "items": [
       {
         "title": "SaaS Delivery Leadership",
