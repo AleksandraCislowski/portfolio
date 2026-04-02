@@ -64,18 +64,18 @@
       {
         "value": "+15%",
         "label": "ökad teameffektivitet",
-        "description": "Bättre förutsägbarhet och flow genom processoptimering och hinderhantering."
+        "description": "Förbättrad förutsägbarhet och arbetsflöde genom processförbättringar och borttagning av hinder."
       },
       {
-        "value": "70%+",
+        "value": "70%",
         "label": "kundretention",
-        "description": "Långsiktiga relationer och stabilt värdeskapande i eget bolag."
+        "description": "Byggde långsiktiga relationer och stabilt värdeskapande som grundare."
       }
     ]
   },
   "projects": {
     "title": "Utvalt arbete",
-    "intro": "Bubble-idén passar den här sektionen väldigt bra, så projekten kan nu leva här som klickbara, mjukt rörliga former i stället för vanliga kort.",
+    "intro": "Utvalda projekt som visar mitt arbetssätt — från idé och design till leverans och konkreta resultat.",
     "openProject": "Öppna projekt",
     "bubbleHint": "Varje bubble svävar lätt och pulserar. Klicka för att öppna en stor projektvy utan att lämna sektionen.",
     "closeProject": "Stäng projekt",
@@ -110,7 +110,7 @@
   },
   "downloads": {
     "title": "Nedladdningar",
-    "description": "Ladda ner mitt CV och kompletterande dokument. Allt är strukturerat för snabb rekryteringsgranskning.",
+    "description": "Ladda ner mitt CV och kompletterande material — tydligt strukturerat för en snabb överblick.",
     "items": [
       {
         "id": "cv",
@@ -133,8 +133,7 @@
     ]
   },
   "contact": {
-    "title": "Låt oss bygga något starkt",
-    "description": "Öppen för roller inom Frontend, Scrum Master och Delivery i Sverige samt EU-remote.",
+    "title": "Låt oss skapa något meningsfullt tillsammans!",
     "name": "Ditt namn",
     "email": "Din e-post",
     "message": "Ditt meddelande",

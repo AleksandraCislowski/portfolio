@@ -59,23 +59,23 @@
       {
         "value": "18 sprintów",
         "label": "100% realizacji celów sprintu",
-        "description": "Prowadzenie 5-osobowego zespołu cross-funkcyjnego z powtarzalnym dowożeniem."
+        "description": "Prowadzenie 5-osobowego zespołu międzyfunkcyjnego z konsekwentnym realizowaniem załoonych celów."
       },
       {
         "value": "+15%",
         "label": "wzrost efektywności zespołu",
-        "description": "Lepsza przewidywalność i flow dzięki optymalizacji procesu i usuwaniu blockerów."
+        "description": "Lepsza przewidywalność i płynność pracy dzięki optymalizacji procesu i usuwaniu przeszkód."
       },
       {
-        "value": "70%+",
+        "value": "70%",
         "label": "utrzymanie klientów",
-        "description": "Długoterminowe relacje i konsekwentne dostarczanie wartości w działalności własnej."
+        "description": "Budowanie długoterminowych relacji i stabilnego dostarczania wartości w działalności własnej."
       }
     ]
   },
   "projects": {
     "title": "Wybrane realizacje",
-    "intro": "Motyw bąbelków bardzo tu pasuje, więc projekty mogą żyć w tej sekcji jako klikane, lekko poruszające się formy zamiast statycznych kart.",
+    "intro": "Wybrane realizacje, które pokazują moje podejście do tworzenia produktów — od pomysłu, przez projektowanie, aż po wdrożenie i realne efekty.",
     "openProject": "Otwórz projekt",
     "bubbleHint": "Każdy bąbelek delikatnie unosi się i pulsuje. Kliknięcie otwiera duży podgląd projektu bez wychodzenia z tej sekcji.",
     "closeProject": "Zamknij projekt",
@@ -110,7 +110,7 @@
   },
   "downloads": {
     "title": "Do pobrania",
-    "description": "Pobierz moje CV i dokumenty wspierające. Wszystko jest uporządkowane pod szybki przegląd rekrutacyjny.",
+    "description": "Pobierz CV i materiały dodatkowe — wszystko uporządkowane tak, by szybko zobaczyć najważniejsze informacje.",
     "items": [
       {
         "id": "cv",
@@ -133,8 +133,7 @@
     ]
   },
   "contact": {
-    "title": "Zbudujmy razem coś świetnego",
-    "description": "Jestem otwarta na role Frontend Developer, Scrum Master i Delivery w Szwecji oraz model EU remote.",
+    "title": "Stwórzmy razem coś wartościowego!",
     "name": "Twoje imię",
     "email": "Twój email",
     "message": "Twoja wiadomość",

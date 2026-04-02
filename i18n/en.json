@@ -67,7 +67,7 @@
         "description": "Improved predictability and flow through process and impediment optimization."
       },
       {
-        "value": "70%+",
+        "value": "70%",
         "label": "client retention",
         "description": "Built long-term relationships and reliable value delivery as founder."
       }
@@ -75,7 +75,7 @@
   },
   "projects": {
     "title": "Selected Work",
-    "intro": "I think your bubble motif fits this section really well, so the projects now live as animated spheres instead of static cards.",
+    "intro": "Selected projects that reflect my approach to product development — from idea and design to delivery and real outcomes.",
     "openProject": "Open Project",
     "bubbleHint": "Each bubble drifts slightly in place. Click one to open a large project preview without leaving this section.",
     "closeProject": "Close project",
@@ -110,7 +110,7 @@
   },
   "downloads": {
     "title": "Downloads",
-    "description": "Grab my CV and supporting documents. Everything is grouped for quick recruiter review.",
+    "description": "Download my CV and supporting materials — everything structured for a quick and clear review.",
     "items": [
       {
         "id": "cv",
@@ -133,8 +133,7 @@
     ]
   },
   "contact": {
-    "title": "Let's Build Something Great",
-    "description": "Open to Frontend Developer, Scrum Master, and Delivery roles in Sweden and EU remote setups.",
+    "title": "Let's create something meaningful together!",
     "name": "Your Name",
     "email": "Your Email",
     "message": "Your Message",
