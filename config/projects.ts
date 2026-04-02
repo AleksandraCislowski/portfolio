@@ -18,9 +18,3 @@ export const PROJECTS = [
     mobile: { top: '58%', left: '56%', size: 192 },
   },
 ] as const;
-
-export type ProjectSlug = (typeof PROJECTS)[number]['slug'];
-
-export function getProjectBySlug(slug: string) {
-  return PROJECTS.find((project) => project.slug === slug) ?? null;
-}

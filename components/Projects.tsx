@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import NextLink from 'next/link';
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 import { useReducedMotion } from 'framer-motion';
@@ -334,6 +333,7 @@ const BubbleStage = styled(Box)(({ theme }) => ({
   position: 'relative',
   minHeight: 560,
   padding: theme.spacing(2, 2.5, 3),
+  overflow: 'visible',
   transition: 'opacity 820ms ease, transform 1100ms cubic-bezier(0.18, 0.9, 0.22, 1)',
   '[data-entered="false"] &': {
     opacity: 0,
@@ -353,18 +353,66 @@ const BubbleSlot = styled(Box)(() => ({
   position: 'absolute',
   willChange: 'transform',
   transition:
-    'transform 260ms cubic-bezier(0.22, 0.9, 0.24, 1), opacity 780ms ease, filter 980ms ease',
+    'transform 700ms cubic-bezier(0.18, 0.9, 0.22, 1), opacity 520ms ease, filter 520ms ease',
   zIndex: 2,
 }));
 
-const BubbleLink = styled(NextLink, {
+const BubbleDriftShell = styled(Box, {
   shouldForwardProp: (prop) =>
-    !['$tone', '$delay', '$reduceMotion'].includes(prop as string),
+    !['$tone', '$delay', '$reduceMotion', '$modalOpen', '$motionPaused'].includes(prop as string),
 })<{
   $tone: number;
   $delay: string;
   $reduceMotion: boolean;
-}>(({ theme, $tone, $delay, $reduceMotion }) => {
+  $modalOpen: boolean;
+  $motionPaused: boolean;
+}>(({ $tone, $delay, $reduceMotion, $modalOpen, $motionPaused }) => ({
+  width: '100%',
+  height: '100%',
+  willChange: 'transform',
+  animation: $modalOpen || $reduceMotion || $motionPaused
+    ? 'none'
+    : $tone % 3 === 0
+      ? `bubbleDriftA 11.5s cubic-bezier(0.42, 0.02, 0.21, 0.99) ${$delay} infinite`
+      : $tone % 3 === 1
+        ? `bubbleDriftB 13.4s cubic-bezier(0.47, 0.05, 0.18, 0.98) ${$delay} infinite`
+        : `bubbleDriftC 12.7s cubic-bezier(0.4, 0.08, 0.2, 0.98) ${$delay} infinite`,
+  transition: 'transform 700ms cubic-bezier(0.18, 0.9, 0.22, 1)',
+  '@keyframes bubbleDriftA': {
+    '0%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
+    '24%': { transform: 'translate3d(8px, -14px, 0) rotate(1.2deg)' },
+    '51%': { transform: 'translate3d(-10px, -4px, 0) rotate(-1deg)' },
+    '77%': { transform: 'translate3d(6px, 12px, 0) rotate(0.8deg)' },
+    '100%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
+  },
+  '@keyframes bubbleDriftB': {
+    '0%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
+    '18%': { transform: 'translate3d(-12px, -8px, 0) rotate(-1.4deg)' },
+    '43%': { transform: 'translate3d(10px, -18px, 0) rotate(1deg)' },
+    '66%': { transform: 'translate3d(14px, 8px, 0) rotate(-0.9deg)' },
+    '84%': { transform: 'translate3d(-6px, 12px, 0) rotate(0.7deg)' },
+    '100%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
+  },
+  '@keyframes bubbleDriftC': {
+    '0%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
+    '21%': { transform: 'translate3d(14px, -10px, 0) rotate(1deg)' },
+    '39%': { transform: 'translate3d(4px, -20px, 0) rotate(-1.2deg)' },
+    '63%': { transform: 'translate3d(-14px, -2px, 0) rotate(0.9deg)' },
+    '86%': { transform: 'translate3d(-8px, 14px, 0) rotate(-0.7deg)' },
+    '100%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
+  },
+}));
+
+const BubbleButton = styled('button', {
+  shouldForwardProp: (prop) =>
+    !['$tone', '$delay', '$reduceMotion', '$modalOpen', '$active'].includes(prop as string),
+})<{
+  $tone: number;
+  $delay: string;
+  $reduceMotion: boolean;
+  $modalOpen: boolean;
+  $active: boolean;
+}>(({ theme, $tone, $delay, $reduceMotion, $modalOpen, $active }) => {
   const gradients = [
     `radial-gradient(circle at 30% 24%, ${alpha('#FFFFFF', 0.95)} 0%, ${alpha('#9FD6FF', 0.4)} 18%, ${alpha('#2563EB', 0.92)} 58%, ${alpha('#081120', 0.98)} 100%)`,
     `radial-gradient(circle at 30% 24%, ${alpha('#FFFFFF', 0.94)} 0%, ${alpha('#B7F2E5', 0.42)} 18%, ${alpha('#0891B2', 0.9)} 56%, ${alpha('#06283D', 0.98)} 100%)`,
@@ -374,6 +422,11 @@ const BubbleLink = styled(NextLink, {
   return {
     position: 'relative',
     display: 'flex',
+    appearance: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    font: 'inherit',
+    textAlign: 'left',
     width: '100%',
     height: '100%',
     padding: theme.spacing(2.1),
@@ -385,37 +438,16 @@ const BubbleLink = styled(NextLink, {
     boxShadow: '0 22px 42px rgba(2, 6, 23, 0.34), inset 0 0 0 1px rgba(255,255,255,0.58)',
     animation: $reduceMotion
       ? 'none'
-      : $tone % 3 === 0
-        ? `bubbleDriftA 11.5s cubic-bezier(0.42, 0.02, 0.21, 0.99) ${$delay} infinite, bubblePulse 5.4s ease-in-out ${$delay} infinite, bubbleGlow 4.6s ease-in-out ${$delay} infinite`
-        : $tone % 3 === 1
-          ? `bubbleDriftB 13.4s cubic-bezier(0.47, 0.05, 0.18, 0.98) ${$delay} infinite, bubblePulse 4.9s ease-in-out ${$delay} infinite, bubbleGlow 5.2s ease-in-out ${$delay} infinite`
-          : `bubbleDriftC 12.7s cubic-bezier(0.4, 0.08, 0.2, 0.98) ${$delay} infinite, bubblePulse 5.8s ease-in-out ${$delay} infinite, bubbleGlow 4.9s ease-in-out ${$delay} infinite`,
-    transition: 'transform 240ms ease, box-shadow 240ms ease, filter 240ms ease, opacity 240ms ease',
+      : `bubblePulse 5.4s ease-in-out ${$delay} infinite, bubbleGlow 4.8s ease-in-out ${$delay} infinite`,
+    transform: $modalOpen
+      ? $active
+        ? 'scale(1.06)'
+        : 'scale(0.92)'
+      : 'scale(1)',
+    opacity: $modalOpen && !$active ? 0.88 : 1,
+    transition: 'transform 620ms cubic-bezier(0.18, 0.9, 0.22, 1), box-shadow 360ms ease, filter 360ms ease, opacity 360ms ease',
     willChange: 'transform, box-shadow, filter, opacity',
     zIndex: 1,
-    '@keyframes bubbleDriftA': {
-      '0%': { transform: 'translate3d(0, 0, 0) scale(1) rotate(0deg)' },
-      '24%': { transform: 'translate3d(8px, -14px, 0) scale(1.016) rotate(1.2deg)' },
-      '51%': { transform: 'translate3d(-10px, -4px, 0) scale(0.992) rotate(-1deg)' },
-      '77%': { transform: 'translate3d(6px, 12px, 0) scale(1.02) rotate(0.8deg)' },
-      '100%': { transform: 'translate3d(0, 0, 0) scale(1) rotate(0deg)' },
-    },
-    '@keyframes bubbleDriftB': {
-      '0%': { transform: 'translate3d(0, 0, 0) scale(1) rotate(0deg)' },
-      '18%': { transform: 'translate3d(-12px, -8px, 0) scale(1.018) rotate(-1.4deg)' },
-      '43%': { transform: 'translate3d(10px, -18px, 0) scale(1.01) rotate(1deg)' },
-      '66%': { transform: 'translate3d(14px, 8px, 0) scale(0.99) rotate(-0.9deg)' },
-      '84%': { transform: 'translate3d(-6px, 12px, 0) scale(1.024) rotate(0.7deg)' },
-      '100%': { transform: 'translate3d(0, 0, 0) scale(1) rotate(0deg)' },
-    },
-    '@keyframes bubbleDriftC': {
-      '0%': { transform: 'translate3d(0, 0, 0) scale(1) rotate(0deg)' },
-      '21%': { transform: 'translate3d(14px, -10px, 0) scale(1.024) rotate(1deg)' },
-      '39%': { transform: 'translate3d(4px, -20px, 0) scale(0.995) rotate(-1.2deg)' },
-      '63%': { transform: 'translate3d(-14px, -2px, 0) scale(1.012) rotate(0.9deg)' },
-      '86%': { transform: 'translate3d(-8px, 14px, 0) scale(1.02) rotate(-0.7deg)' },
-      '100%': { transform: 'translate3d(0, 0, 0) scale(1) rotate(0deg)' },
-    },
     '@keyframes bubblePulse': {
       '0%, 100%': {
         boxShadow:
@@ -467,6 +499,13 @@ const BubbleLink = styled(NextLink, {
     '& > *': {
       transition: 'transform 240ms ease, opacity 240ms ease',
     },
+    ...($modalOpen && $active
+      ? {
+          filter: 'saturate(1.14) brightness(1.06)',
+          boxShadow:
+            '0 34px 72px rgba(2, 6, 23, 0.42), 0 0 0 14px rgba(255,255,255,0.08), 0 0 64px rgba(125,211,252,0.34), inset 0 0 0 2px rgba(255,255,255,0.82)',
+        }
+      : {}),
     '&:hover': {
       transform: 'translateY(-16px) scale(1.13)',
       filter: 'saturate(1.26) brightness(1.12)',
@@ -543,6 +582,167 @@ const BubbleHintBody = styled(Typography)(() => ({
   zIndex: 1,
 }));
 
+const ProjectOverlay = styled(Box, {
+  shouldForwardProp: (prop) => prop !== '$visible',
+})<{ $visible: boolean }>(({ theme, $visible }) => ({
+  position: 'fixed',
+  inset: 0,
+  zIndex: 1200,
+  pointerEvents: $visible ? 'auto' : 'none',
+  opacity: $visible ? 1 : 0,
+  transition: 'opacity 380ms ease',
+  background: theme.palette.mode === 'dark'
+    ? 'linear-gradient(180deg, rgba(4, 10, 24, 0.34) 0%, rgba(4, 10, 24, 0.58) 100%)'
+    : 'linear-gradient(180deg, rgba(245, 251, 255, 0.3) 0%, rgba(217, 241, 255, 0.58) 100%)',
+  backdropFilter: $visible ? 'blur(12px) saturate(1.08)' : 'blur(0px)',
+}));
+
+const ProjectModal = styled(Box, {
+  shouldForwardProp: (prop) => !['$visible', '$reduceMotion'].includes(prop as string),
+})<{ $visible: boolean; $reduceMotion: boolean }>(({ theme, $visible, $reduceMotion }) => ({
+  position: 'fixed',
+  top: '50%',
+  left: '50%',
+  zIndex: 1201,
+  width: 'min(1280px, calc(100vw - 20px))',
+  height: 'min(920px, calc(100vh - 20px))',
+  maxHeight: 'calc(100vh - 20px)',
+  borderRadius: 38,
+  overflow: 'hidden',
+  border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.42 : 0.74)}`,
+  background: theme.palette.mode === 'dark'
+    ? `linear-gradient(155deg, ${alpha('#071225', 0.96)} 0%, ${alpha('#0A1A33', 0.92)} 38%, ${alpha('#10284C', 0.9)} 100%)`
+    : `linear-gradient(155deg, ${alpha('#FCFEFF', 0.9)} 0%, ${alpha('#E8F7FF', 0.92)} 42%, ${alpha('#D9F0FF', 0.9)} 100%)`,
+  boxShadow: theme.palette.mode === 'dark'
+    ? '0 42px 120px rgba(2, 6, 23, 0.6)'
+    : '0 42px 120px rgba(14, 116, 144, 0.24)',
+  transform: $visible
+    ? 'translate3d(-50%, -50%, 0) scale(1)'
+    : 'translate3d(-50%, -46%, 0) scale(0.82)',
+  opacity: $visible ? 1 : 0,
+  pointerEvents: $visible ? 'auto' : 'none',
+  transition: $reduceMotion
+    ? 'opacity 220ms ease'
+    : 'transform 520ms cubic-bezier(0.2, 0.9, 0.2, 1), opacity 360ms ease',
+  backdropFilter: 'blur(22px) saturate(1.18)',
+  [theme.breakpoints.down('sm')]: {
+    width: 'calc(100vw - 10px)',
+    height: 'calc(100vh - 10px)',
+    maxHeight: 'calc(100vh - 10px)',
+    borderRadius: 28,
+  },
+}));
+
+const ProjectModalGlow = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  inset: -80,
+  pointerEvents: 'none',
+  background: theme.palette.mode === 'dark'
+    ? `
+      radial-gradient(circle at 18% 18%, rgba(125,211,252,0.22), transparent 24%),
+      radial-gradient(circle at 78% 24%, rgba(45,212,191,0.18), transparent 22%),
+      radial-gradient(circle at 50% 100%, rgba(96,165,250,0.2), transparent 34%)
+    `
+    : `
+      radial-gradient(circle at 18% 18%, rgba(125,211,252,0.28), transparent 24%),
+      radial-gradient(circle at 78% 24%, rgba(45,212,191,0.18), transparent 22%),
+      radial-gradient(circle at 50% 100%, rgba(59,130,246,0.16), transparent 34%)
+    `,
+  filter: 'blur(20px)',
+  opacity: 0.95,
+}));
+
+const ProjectModalInner = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  height: '100%',
+  overflowY: 'auto',
+  display: 'grid',
+  gridTemplateColumns: 'minmax(0, 1.4fr) minmax(280px, 0.9fr)',
+  gap: theme.spacing(2.5),
+  padding: theme.spacing(3),
+  overscrollBehavior: 'contain',
+  scrollbarWidth: 'thin',
+  scrollbarColor: theme.palette.mode === 'dark'
+    ? 'rgba(186,230,253,0.22) transparent'
+    : 'rgba(14,165,233,0.2) transparent',
+  '&::-webkit-scrollbar': {
+    width: 8,
+  },
+  '&::-webkit-scrollbar-track': {
+    marginBlock: 18,
+    background: 'transparent',
+  },
+  '&::-webkit-scrollbar-thumb': {
+    borderRadius: 999,
+    border: '2px solid transparent',
+    backgroundClip: 'padding-box',
+    background: theme.palette.mode === 'dark'
+      ? 'linear-gradient(180deg, rgba(186,230,253,0.26) 0%, rgba(103,232,249,0.14) 100%)'
+      : 'linear-gradient(180deg, rgba(125,211,252,0.3) 0%, rgba(14,165,233,0.16) 100%)',
+  },
+  '&::-webkit-scrollbar-thumb:hover': {
+    background: theme.palette.mode === 'dark'
+      ? 'linear-gradient(180deg, rgba(186,230,253,0.38) 0%, rgba(103,232,249,0.22) 100%)'
+      : 'linear-gradient(180deg, rgba(125,211,252,0.42) 0%, rgba(14,165,233,0.22) 100%)',
+  },
+  [theme.breakpoints.down('md')]: {
+    gridTemplateColumns: '1fr',
+  },
+  [theme.breakpoints.down('sm')]: {
+    gap: theme.spacing(2),
+    padding: theme.spacing(2),
+  },
+}));
+
+const ProjectMain = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  zIndex: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: theme.spacing(2),
+}));
+
+const ProjectAside = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  zIndex: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: theme.spacing(1.5),
+}));
+
+const ProjectCard = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  borderRadius: 24,
+  border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.38 : 0.7)}`,
+  background: theme.palette.mode === 'dark'
+    ? `linear-gradient(150deg, ${alpha('#10213D', 0.7)} 0%, ${alpha('#0D1B31', 0.54)} 100%)`
+    : `linear-gradient(150deg, ${alpha('#FFFFFF', 0.74)} 0%, ${alpha('#ECF8FF', 0.68)} 100%)`,
+  boxShadow: `0 18px 44px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.18 : 0.06)}`,
+  backdropFilter: 'blur(18px)',
+}));
+
+const ProjectCloseButton = styled('button')(({ theme }) => ({
+  appearance: 'none',
+  alignSelf: 'flex-end',
+  border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.42 : 0.8)}`,
+  background: theme.palette.mode === 'dark'
+    ? alpha('#0F213E', 0.78)
+    : alpha('#FFFFFF', 0.76),
+  color: theme.palette.text.primary,
+  borderRadius: 999,
+  padding: theme.spacing(1, 1.5),
+  font: 'inherit',
+  fontWeight: 700,
+  letterSpacing: '0.04em',
+  cursor: 'pointer',
+  boxShadow: `0 12px 28px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.22 : 0.08)}`,
+  transition: 'transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease',
+  '&:hover, &:focus-visible': {
+    transform: 'translateY(-2px)',
+    boxShadow: `0 18px 36px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.3 : 0.12)}`,
+  },
+}));
+
 export default function Projects() {
   const t = useTranslation();
   const shouldReduceMotion = useReducedMotion();
@@ -550,7 +750,27 @@ export default function Projects() {
   const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
   const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
   const fieldRef = React.useRef<HTMLDivElement | null>(null);
+  const bubbleButtonRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
+  const hadActiveProjectRef = React.useRef(false);
   const [entered, setEntered] = React.useState(false);
+  const [activeProjectIndex, setActiveProjectIndex] = React.useState<number | null>(null);
+  const [bubbleMotionPaused, setBubbleMotionPaused] = React.useState(false);
+
+  const closeProjectModal = React.useCallback(() => {
+    if (typeof document !== 'undefined') {
+      const activeElement = document.activeElement;
+
+      if (activeElement instanceof HTMLElement) {
+        activeElement.blur();
+      }
+    }
+
+    if (activeProjectIndex !== null) {
+      bubbleButtonRefs.current[activeProjectIndex]?.blur();
+    }
+
+    setActiveProjectIndex(null);
+  }, [activeProjectIndex]);
 
   React.useEffect(() => {
     if (shouldReduceMotion) {
@@ -585,6 +805,61 @@ export default function Projects() {
       observer.disconnect();
     };
   }, [shouldReduceMotion]);
+
+  React.useEffect(() => {
+    if (shouldReduceMotion) {
+      setBubbleMotionPaused(true);
+      return;
+    }
+
+    if (activeProjectIndex !== null) {
+      hadActiveProjectRef.current = true;
+      setBubbleMotionPaused(true);
+      return;
+    }
+
+    if (!hadActiveProjectRef.current) {
+      return;
+    }
+
+    const timeout = window.setTimeout(() => {
+      setBubbleMotionPaused(false);
+      hadActiveProjectRef.current = false;
+    }, 760);
+
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, [activeProjectIndex, shouldReduceMotion]);
+
+  React.useEffect(() => {
+    if (activeProjectIndex === null) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeProjectModal();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [activeProjectIndex, closeProjectModal]);
+
+  const activeProject = activeProjectIndex === null
+    ? null
+    : {
+        project: PROJECTS[activeProjectIndex],
+        item: t.projects.items[activeProjectIndex],
+      };
 
   return (
     <Section id={SITE_CONFIG.sectionIds.projects} textAlign='center'>
@@ -633,6 +908,32 @@ export default function Projects() {
                 ? project.tablet
                 : project.desktop;
             const delay = `${index * 0.9}s`;
+            const isActive = activeProjectIndex === index;
+            const displacedTransform = isSmDown
+              ? index === 0
+                ? 'translate3d(-44px, -52px, 0) scale(0.72) rotate(-8deg)'
+                : index === 1
+                  ? 'translate3d(52px, -30px, 0) scale(0.7) rotate(8deg)'
+                  : 'translate3d(0, 66px, 0) scale(0.68) rotate(-6deg)'
+              : index === 0
+                ? 'translate3d(-96px, -18px, 0) scale(0.82) rotate(-7deg)'
+                : index === 1
+                  ? 'translate3d(102px, -10px, 0) scale(0.8) rotate(7deg)'
+                  : 'translate3d(0, 96px, 0) scale(0.78) rotate(-5deg)';
+            const introTransform = index === 0
+              ? 'translate3d(-38px, 60px, 0) scale(0.72) rotate(-8deg)'
+              : index === 1
+                ? 'translate3d(44px, 34px, 0) scale(0.76) rotate(9deg)'
+                : 'translate3d(0, 84px, 0) scale(0.66) rotate(-4deg)';
+            const slotTransform = activeProjectIndex !== null
+              ? isActive
+                ? isSmDown
+                  ? 'translate3d(0, 0, 0) scale(0.88)'
+                  : 'translate3d(0, 0, 0) scale(0.92)'
+                : displacedTransform
+              : entered || shouldReduceMotion
+                ? 'translate3d(0, 0, 0) scale(1)'
+                : introTransform;
 
             return (
               <BubbleSlot
@@ -642,51 +943,229 @@ export default function Projects() {
                   left: layout.left,
                   width: `${layout.size}px`,
                   height: `${layout.size}px`,
-                  opacity: entered || shouldReduceMotion ? 1 : 0,
-                  filter: entered || shouldReduceMotion ? 'blur(0px)' : 'blur(10px)',
-                  transform: entered || shouldReduceMotion
-                    ? 'translate3d(0, 0, 0) scale(1)'
-                    : index === 0
-                      ? 'translate3d(-38px, 60px, 0) scale(0.72) rotate(-8deg)'
-                      : index === 1
-                        ? 'translate3d(44px, 34px, 0) scale(0.76) rotate(9deg)'
-                        : 'translate3d(0, 84px, 0) scale(0.66) rotate(-4deg)',
+                  opacity: activeProjectIndex !== null
+                    ? isActive
+                      ? 0.22
+                      : 0.7
+                    : entered || shouldReduceMotion
+                      ? 1
+                      : 0,
+                  filter: activeProjectIndex !== null
+                    ? isActive
+                      ? 'blur(8px)'
+                      : 'blur(0.8px)'
+                    : entered || shouldReduceMotion
+                      ? 'blur(0px)'
+                      : 'blur(10px)',
+                  transform: slotTransform,
                   transitionDelay: entered || shouldReduceMotion
                     ? `${240 + index * 170}ms`
                     : '0ms',
+                  zIndex: isActive ? 4 : 2,
                 }}
               >
-                <BubbleLink
-                  href={`/projects/${project.slug}`}
+                <BubbleDriftShell
                   $tone={index}
                   $delay={delay}
                   $reduceMotion={Boolean(shouldReduceMotion)}
+                  $modalOpen={activeProjectIndex !== null}
+                  $motionPaused={bubbleMotionPaused}
                 >
-                  <Box className='bubble-hover-sweep' />
-                  <BubbleContent>
-                    <BubbleOpen variant='overline'>
-                      {t.projects.openProject}
-                    </BubbleOpen>
+                  <BubbleButton
+                    type='button'
+                    ref={(node) => {
+                      bubbleButtonRefs.current[index] = node;
+                    }}
+                    $tone={index}
+                    $delay={delay}
+                    $reduceMotion={Boolean(shouldReduceMotion)}
+                    $modalOpen={activeProjectIndex !== null}
+                    $active={isActive}
+                    onClick={() => setActiveProjectIndex(index)}
+                    aria-haspopup='dialog'
+                    aria-expanded={isActive}
+                    aria-controls='projects-modal'
+                  >
+                    <Box className='bubble-hover-sweep' />
+                    <BubbleContent>
+                      <BubbleOpen variant='overline'>
+                        {t.projects.openProject}
+                      </BubbleOpen>
+                      <Typography
+                        sx={{
+                          fontSize: {
+                            xs: index === 2 ? '1.15rem' : '1.05rem',
+                            md: index === 2 ? '1.45rem' : '1.2rem',
+                            lg: index === 2 ? '1.72rem' : '1.32rem',
+                          },
+                          fontWeight: 800,
+                          lineHeight: 1.04,
+                          letterSpacing: '-0.04em',
+                          textWrap: 'balance',
+                        }}
+                      >
+                        {item.title}
+                      </Typography>
+                    </BubbleContent>
+                  </BubbleButton>
+                </BubbleDriftShell>
+              </BubbleSlot>
+            );
+          })}
+
+          <ProjectOverlay
+            $visible={activeProject !== null}
+            onClick={closeProjectModal}
+          />
+          <ProjectModal
+            id='projects-modal'
+            role='dialog'
+            aria-modal='true'
+            aria-hidden={activeProject === null}
+            aria-labelledby={activeProject ? `project-modal-title-${activeProject.project.slug}` : undefined}
+            $visible={activeProject !== null}
+            $reduceMotion={Boolean(shouldReduceMotion)}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <ProjectModalGlow />
+            {activeProject ? (
+              <ProjectModalInner>
+                <ProjectMain>
+                  <ProjectCloseButton
+                    type='button'
+                    onClick={closeProjectModal}
+                    aria-label={t.projects.closeProject}
+                  >
+                    {t.projects.closeProject}
+                  </ProjectCloseButton>
+
+                  <ProjectCard sx={{ p: { xs: 2, sm: 3 } }}>
                     <Typography
+                      variant='overline'
+                      sx={{ color: 'primary.main', letterSpacing: '0.12em' }}
+                    >
+                      {t.projects.placeholderEyebrow}
+                    </Typography>
+                    <Typography
+                      id={`project-modal-title-${activeProject.project.slug}`}
+                      variant='h4'
                       sx={{
-                        fontSize: {
-                          xs: index === 2 ? '1.15rem' : '1.05rem',
-                          md: index === 2 ? '1.45rem' : '1.2rem',
-                          lg: index === 2 ? '1.72rem' : '1.32rem',
-                        },
+                        mt: 1,
+                        mb: 1.5,
                         fontWeight: 800,
-                        lineHeight: 1.04,
                         letterSpacing: '-0.04em',
                         textWrap: 'balance',
                       }}
                     >
-                      {item.title}
+                      {activeProject.item.title}
                     </Typography>
-                  </BubbleContent>
-                </BubbleLink>
-              </BubbleSlot>
-            );
-          })}
+                    <Typography
+                      variant='body1'
+                      sx={{ color: 'text.secondary', mb: 2.5, maxWidth: 680 }}
+                    >
+                      {activeProject.item.description}
+                    </Typography>
+
+                    <Box
+                      sx={{
+                        display: 'grid',
+                        gap: 1.5,
+                      }}
+                    >
+                      {t.projects.placeholderParagraphs.map((paragraph) => (
+                        <Typography
+                          key={paragraph}
+                          variant='body2'
+                          sx={{ color: 'text.secondary', lineHeight: 1.8 }}
+                        >
+                          {paragraph}
+                        </Typography>
+                      ))}
+                    </Box>
+                  </ProjectCard>
+                </ProjectMain>
+
+                <ProjectAside>
+                  <ProjectCard sx={{ p: { xs: 2, sm: 2.5 } }}>
+                    <Typography
+                      variant='overline'
+                      sx={{ color: 'primary.main', letterSpacing: '0.12em' }}
+                    >
+                      {t.projects.modalDetails}
+                    </Typography>
+                    <Box
+                      component='ul'
+                      sx={{
+                        mt: 1.5,
+                        mb: 0,
+                        pl: 2.5,
+                        display: 'grid',
+                        gap: 1.1,
+                        color: 'text.secondary',
+                      }}
+                    >
+                      {t.projects.placeholderBulletPoints.map((point) => (
+                        <Typography
+                          key={point}
+                          component='li'
+                          variant='body2'
+                          sx={{ lineHeight: 1.7 }}
+                        >
+                          {point}
+                        </Typography>
+                      ))}
+                    </Box>
+                  </ProjectCard>
+
+                  <ProjectCard
+                    sx={{
+                      p: { xs: 2, sm: 2.5 },
+                      minHeight: 220,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      background: theme.palette.mode === 'dark'
+                        ? `
+                          linear-gradient(160deg, rgba(8, 28, 52, 0.82) 0%, rgba(12, 41, 71, 0.52) 100%),
+                          radial-gradient(circle at 24% 20%, rgba(125,211,252,0.18), transparent 24%),
+                          radial-gradient(circle at 76% 82%, rgba(45,212,191,0.14), transparent 26%)
+                        `
+                        : `
+                          linear-gradient(160deg, rgba(255, 255, 255, 0.86) 0%, rgba(218, 242, 255, 0.72) 100%),
+                          radial-gradient(circle at 24% 20%, rgba(125,211,252,0.22), transparent 24%),
+                          radial-gradient(circle at 76% 82%, rgba(45,212,191,0.12), transparent 26%)
+                        `,
+                    }}
+                  >
+                    <Box>
+                      <Typography
+                        variant='overline'
+                        sx={{ color: 'primary.main', letterSpacing: '0.12em' }}
+                      >
+                        {t.projects.modalPreview}
+                      </Typography>
+                      <Typography variant='body2' sx={{ mt: 1.5, color: 'text.secondary', lineHeight: 1.8 }}>
+                        {t.projects.modalPreviewCopy}
+                      </Typography>
+                    </Box>
+
+                    <Box
+                      sx={{
+                        mt: 2,
+                        minHeight: 118,
+                        borderRadius: 20,
+                        border: `1px solid ${alpha(theme.palette.common.white, theme.palette.mode === 'dark' ? 0.14 : 0.42)}`,
+                        background: theme.palette.mode === 'dark'
+                          ? 'radial-gradient(circle at 30% 28%, rgba(255,255,255,0.12), transparent 24%), linear-gradient(145deg, rgba(255,255,255,0.04), rgba(125,211,252,0.08))'
+                          : 'radial-gradient(circle at 30% 28%, rgba(255,255,255,0.72), transparent 24%), linear-gradient(145deg, rgba(255,255,255,0.5), rgba(125,211,252,0.16))',
+                        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.2)',
+                      }}
+                    />
+                  </ProjectCard>
+                </ProjectAside>
+              </ProjectModalInner>
+            ) : null}
+          </ProjectModal>
         </BubbleStage>
       </BubbleField>
     </Section>
