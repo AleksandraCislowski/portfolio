@@ -3,7 +3,7 @@ import type { NavbarItem } from './navbar.constants';
 
 type NavbarDesktopNavProps = {
   items: readonly NavbarItem[];
-  activeHref: string;
+  activeHref: string | null;
   onNavigate: (href: string) => void;
 };
 

@@ -15,7 +15,7 @@ type NavbarDrawerProps = {
   menuProps: SelectProps<Language>['MenuProps'];
   mobileNavOpen: boolean;
   onClose: () => void;
-  activeHref: string;
+  activeHref: string | null;
   onNavigate: (href: string) => void;
 };
 

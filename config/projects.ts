@@ -1,21 +1,21 @@
 export const PROJECTS = [
   {
     slug: 'saas-delivery-leadership',
-    desktop: { top: '30%', left: '12%', size: 234 },
-    tablet: { top: '30%', left: '7%', size: 210 },
-    mobile: { top: '10%', left: '50%', size: 208 },
+    desktop: { top: '12%', left: '10%', size: 234 },
+    tablet: { top: '14%', left: '8%', size: 210 },
+    mobile: { top: '8%', left: '50%', size: 208 },
   },
   {
     slug: 'workflow-velocity-optimization',
-    desktop: { top: '16%', left: '66%', size: 194 },
-    tablet: { top: '16%', left: '68%', size: 172 },
-    mobile: { top: '43%', left: '18%', size: 174 },
+    desktop: { top: '10%', left: '66%', size: 194 },
+    tablet: { top: '14%', left: '66%', size: 172 },
+    mobile: { top: '42%', left: '14%', size: 174 },
   },
   {
     slug: 'stakeholder-feedback-engine',
-    desktop: { top: '50%', left: '44%', size: 258 },
-    tablet: { top: '52%', left: '36%', size: 224 },
-    mobile: { top: '58%', left: '58%', size: 192 },
+    desktop: { top: '44%', left: '34%', size: 258 },
+    tablet: { top: '46%', left: '34%', size: 224 },
+    mobile: { top: '58%', left: '56%', size: 192 },
   },
 ] as const;
 

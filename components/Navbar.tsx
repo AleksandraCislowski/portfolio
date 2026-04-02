@@ -31,9 +31,8 @@ export default function Navbar() {
   const t = useTranslation();
   const { mode, setMode } = useThemeMode();
   const [mobileNavOpen, setMobileNavOpen] = React.useState(false);
-  const [activeHref, setActiveHref] = React.useState<string>(
-    SITE_CONFIG.sections.home,
-  );
+  const [activeHref, setActiveHref] = React.useState<string | null>(null);
+  const [hasResolvedActiveHref, setHasResolvedActiveHref] = React.useState(false);
   const navLockUntilRef = React.useRef(0);
   const isHomePage = pathname === '/';
   const rootPrefix = isHomePage ? '' : '/';
@@ -81,57 +80,67 @@ export default function Navbar() {
     [isHomePage, rootPrefix, t],
   );
 
-  React.useEffect(() => {
+  const resolveActiveHref = React.useCallback(() => {
     if (!isHomePage) {
       setActiveHref(SITE_CONFIG.sections.home);
+      setHasResolvedActiveHref(true);
+      return;
+    }
+
+    if (Date.now() < navLockUntilRef.current) {
       return;
     }
 
     const sectionItems = navItems.filter(
       (item) => item.href !== SITE_CONFIG.sections.home,
     );
+    const topActivationLine = 132;
+    const pageBottom = window.innerHeight + window.scrollY;
+    const pageHeight = document.documentElement.scrollHeight;
+    const nearTop = window.scrollY < 96;
 
-    const resolveActiveHref = () => {
-      if (Date.now() < navLockUntilRef.current) {
-        return;
+    if (nearTop) {
+      setActiveHref(SITE_CONFIG.sections.home);
+      setHasResolvedActiveHref(true);
+      return;
+    }
+
+    if (pageBottom >= pageHeight - 8) {
+      setActiveHref(SITE_CONFIG.sections.contact);
+      setHasResolvedActiveHref(true);
+      return;
+    }
+
+    let nextActiveHref: string = SITE_CONFIG.sections.home;
+
+    for (const item of sectionItems) {
+      const sectionId = item.href.replace(/^#/, '');
+      const section = document.getElementById(sectionId);
+
+      if (!section) {
+        continue;
       }
 
-      const topActivationLine = 132;
-      const pageBottom = window.innerHeight + window.scrollY;
-      const pageHeight = document.documentElement.scrollHeight;
-      const nearTop = window.scrollY < 96;
+      const { top } = section.getBoundingClientRect();
 
-      if (nearTop) {
-        setActiveHref(SITE_CONFIG.sections.home);
-        return;
+      if (top <= topActivationLine) {
+        nextActiveHref = item.href;
       }
+    }
 
-      if (pageBottom >= pageHeight - 8) {
-        setActiveHref(SITE_CONFIG.sections.contact);
-        return;
-      }
+    setActiveHref(nextActiveHref);
+    setHasResolvedActiveHref(true);
+  }, [isHomePage, navItems]);
 
-      let nextActiveHref: string = SITE_CONFIG.sections.home;
-
-      for (const item of sectionItems) {
-        const sectionId = item.href.replace(/^#/, '');
-        const section = document.getElementById(sectionId);
-
-        if (!section) {
-          continue;
-        }
-
-        const { top } = section.getBoundingClientRect();
-
-        if (top <= topActivationLine) {
-          nextActiveHref = item.href;
-        }
-      }
-
-      setActiveHref(nextActiveHref);
-    };
-
+  React.useLayoutEffect(() => {
     resolveActiveHref();
+  }, [resolveActiveHref]);
+
+  React.useEffect(() => {
+    if (!isHomePage) {
+      return;
+    }
+
     window.addEventListener('scroll', resolveActiveHref, { passive: true });
     window.addEventListener('hashchange', resolveActiveHref);
     window.addEventListener('resize', resolveActiveHref);
@@ -141,7 +150,7 @@ export default function Navbar() {
       window.removeEventListener('hashchange', resolveActiveHref);
       window.removeEventListener('resize', resolveActiveHref);
     };
-  }, [isHomePage, navItems]);
+  }, [isHomePage, resolveActiveHref]);
 
   const handleLanguageChange = (event: SelectChangeEvent<Language>) => {
     setLang(event.target.value as Language);
@@ -161,6 +170,7 @@ export default function Navbar() {
 
   const handleNavigate = (href: string) => {
     setActiveHref(href);
+    setHasResolvedActiveHref(true);
     navLockUntilRef.current = Date.now() + 900;
   };
 
@@ -172,7 +182,7 @@ export default function Navbar() {
         <ToolbarRight>
           <NavbarDesktopNav
             items={navItems}
-            activeHref={activeHref}
+            activeHref={hasResolvedActiveHref ? activeHref : null}
             onNavigate={handleNavigate}
           />
 
@@ -214,7 +224,7 @@ export default function Navbar() {
         menuProps={languageMenuProps}
         mobileNavOpen={mobileNavOpen}
         onClose={handleCloseMobileNav}
-        activeHref={activeHref}
+        activeHref={hasResolvedActiveHref ? activeHref : null}
         onNavigate={handleNavigate}
       />
     </StyledAppBar>
