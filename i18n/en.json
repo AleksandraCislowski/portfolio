@@ -53,41 +53,6 @@
       "In team environments, I focus on clear communication, solid organization, and continuous improvements that make collaboration smoother and more predictable."
     ]
   },
-  "proof": {
-    "cta": "Open Proof Bubbles",
-    "eyebrow": "Proof Signals",
-    "title": "A More Human Way To Show Range",
-    "description": "This section turns core strengths into interactive signals instead of a flat list. Each bubble stands for a pattern I bring into teams and products.",
-    "detailEyebrow": "Selected Signal",
-    "closeHint": "Click outside to close",
-    "items": [
-      {
-        "label": "Delivery Rhythm",
-        "metric": "18 sprints with full goal completion",
-        "description": "I help teams build a repeatable cadence where planning, execution, and follow-through stay aligned sprint after sprint."
-      },
-      {
-        "label": "Frontend Ownership",
-        "metric": "React + Next.js + TypeScript",
-        "description": "I enjoy shaping polished interfaces, keeping codebases clear, and turning product intent into reliable user-facing experiences."
-      },
-      {
-        "label": "Process Clarity",
-        "metric": "+15% efficiency uplift",
-        "description": "I look for friction in workflows, dependencies, and team rituals, then simplify the system so momentum becomes easier to sustain."
-      },
-      {
-        "label": "Client Trust",
-        "metric": "70%+ retention",
-        "description": "Longer relationships usually come from consistent communication, calm execution, and a strong sense of ownership over outcomes."
-      },
-      {
-        "label": "Cross-Functional Bridge",
-        "metric": "Product, design, and engineering in sync",
-        "description": "I naturally connect disciplines, reduce ambiguity, and keep teams moving toward the same version of success."
-      }
-    ]
-  },
   "impact": {
     "title": "Delivery Impact",
     "items": [

@@ -12,7 +12,7 @@ type LanguageContextValue = {
 const STORAGE_KEY = 'lang';
 const LANGUAGE_EVENT = 'languagechange';
 
-export const LanguageContext = createContext<LanguageContextValue>({
+const LanguageContext = createContext<LanguageContextValue>({
   lang: 'en',
   setLang: () => {},
 });

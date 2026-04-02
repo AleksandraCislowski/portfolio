@@ -53,41 +53,6 @@
       "W pracy zespołowej stawiam na dobrą organizację, jasną komunikację i ciągłe usprawnienia, które pozwalają pracować sprawniej i z większą przewidywalnością."
     ]
   },
-  "proof": {
-    "cta": "Otwórz bubbles",
-    "eyebrow": "Sygnały wartości",
-    "title": "Bardziej ludzki sposób pokazania mojego zakresu",
-    "description": "Zamiast płaskiej listy kompetencji ta sekcja pokazuje mocne strony jako interaktywne sygnały. Każda bubble reprezentuje wzorzec pracy, który wnoszę do zespołów i produktów.",
-    "detailEyebrow": "Wybrany sygnał",
-    "closeHint": "Kliknij poza obszarem, aby zamknąć",
-    "items": [
-      {
-        "label": "Rytm delivery",
-        "metric": "18 sprintów z pełną realizacją celu",
-        "description": "Pomagam zespołom zbudować powtarzalny rytm, w którym planowanie, wykonanie i domykanie tematów pozostają ze sobą w syncu sprint po sprincie."
-      },
-      {
-        "label": "Ownership frontendowy",
-        "metric": "React + Next.js + TypeScript",
-        "description": "Lubię projektować dopracowane interfejsy, utrzymywać czytelny codebase i przekładać intencję produktową na solidne doświadczenia użytkownika."
-      },
-      {
-        "label": "Jasność procesu",
-        "metric": "+15% wzrostu efektywności",
-        "description": "Szukam tarcia w workflow, zależnościach i rytuałach zespołu, a potem upraszczam system tak, żeby łatwiej było utrzymać momentum."
-      },
-      {
-        "label": "Zaufanie klientów",
-        "metric": "70%+ retencji",
-        "description": "Długie relacje zwykle biorą się ze spójnej komunikacji, spokojnej egzekucji i silnego poczucia odpowiedzialności za rezultat."
-      },
-      {
-        "label": "Most cross-funkcyjny",
-        "metric": "Produkt, design i engineering w syncu",
-        "description": "Naturalnie łączę perspektywy różnych dyscyplin, zmniejszam niejasność i utrzymuję zespół wokół wspólnej definicji sukcesu."
-      }
-    ]
-  },
   "impact": {
     "title": "Wpływ na wyniki",
     "items": [

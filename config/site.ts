@@ -1,4 +1,4 @@
-export const SECTION_IDS = {
+const SECTION_IDS = {
   about: 'about',
   impact: 'impact',
   projects: 'projects',
@@ -6,7 +6,7 @@ export const SECTION_IDS = {
   contact: 'contact',
 } as const;
 
-export const SECTION_ANCHORS = {
+const SECTION_ANCHORS = {
   home: '#',
   about: `#${SECTION_IDS.about}`,
   impact: `#${SECTION_IDS.impact}`,
