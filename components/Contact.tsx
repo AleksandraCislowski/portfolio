@@ -29,6 +29,7 @@ const ContactMeta = styled(Stack)(() => ({
 export default function Contact() {
   const t = useTranslation();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const phoneHref = `tel:${SITE_CONFIG.contactPhone.replace(/\s+/g, '')}`;
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -58,7 +59,10 @@ export default function Contact() {
           {t.contact.locationLabel}: {t.contact.locationValue}
         </Typography>
         <Typography variant='body2'>
-          {t.contact.phoneLabel}: {SITE_CONFIG.contactPhone}
+          {t.contact.phoneLabel}:{' '}
+          <Link href={phoneHref} underline='hover'>
+            {SITE_CONFIG.contactPhone}
+          </Link>
         </Typography>
         <Typography variant='body2'>
           {t.contact.emailLabel}:{' '}
