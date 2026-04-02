@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Container, Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { usePathname } from 'next/navigation';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import About from './About';
@@ -31,18 +32,24 @@ export default function PortfolioApp({
   currentYear: number;
 }) {
   const t = useTranslation();
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
 
   return (
     <>
       <Navbar />
       <AppMain>
         <Container maxWidth='lg' disableGutters>
-          <Hero />
-          <About />
-          <Impact />
-          <Projects />
-          <Downloads />
-          <Contact />
+          {isHomePage ? (
+            <>
+              <Hero />
+              <About />
+              <Impact />
+              <Projects />
+              <Downloads />
+              <Contact />
+            </>
+          ) : null}
           {children}
         </Container>
         <Footer>
