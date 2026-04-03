@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Drawer, List, ListItemButton, ListItemText } from '@mui/material';
 import type { SelectChangeEvent, SelectProps } from '@mui/material/Select';
 
@@ -16,7 +17,11 @@ type NavbarDrawerProps = {
   mobileNavOpen: boolean;
   onClose: () => void;
   activeHref: string | null;
-  onNavigate: (href: string) => void;
+  onNavigate: (
+    event: React.MouseEvent<HTMLElement>,
+    href: string,
+    targetHref: string,
+  ) => void;
 };
 
 export function NavbarDrawer({
@@ -52,8 +57,8 @@ export function NavbarDrawer({
               <ListItemButton
                 component='a'
                 href={item.targetHref ?? item.href}
-                onClick={() => {
-                  onNavigate(item.href);
+                onClick={(event) => {
+                  onNavigate(event, item.href, item.targetHref ?? item.href);
                   onClose();
                 }}
                 selected={activeHref === item.href}

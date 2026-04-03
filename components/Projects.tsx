@@ -35,6 +35,7 @@ import {
   getBubbleVisualState,
   getProjectLayout,
 } from './projects/projects.utils';
+import { useSectionAnimationReplay } from './sectionAnimationReplay';
 
 export default function Projects() {
   const t = useTranslation();
@@ -51,6 +52,7 @@ export default function Projects() {
   const [bubbleRecovering, setBubbleRecovering] = React.useState(false);
   const [modalPhase, setModalPhase] = React.useState<ProjectsModalPhase>('closed');
   const [launchSnapshot, setLaunchSnapshot] = React.useState<ProjectLaunchSnapshot | null>(null);
+  const replayKey = useSectionAnimationReplay(SITE_CONFIG.sectionIds.projects);
 
   const clearModalPhaseTimeout = React.useCallback(() => {
     if (modalPhaseTimeoutRef.current !== null) {
@@ -120,6 +122,10 @@ export default function Projects() {
       return;
     }
 
+    if (replayKey > 0) {
+      setEntered(false);
+    }
+
     const node = fieldRef.current;
     if (!node) {
       return;
@@ -145,7 +151,7 @@ export default function Projects() {
     return () => {
       observer.disconnect();
     };
-  }, [shouldReduceMotion]);
+  }, [replayKey, shouldReduceMotion]);
 
   React.useEffect(() => {
     clearModalPhaseTimeout();
@@ -228,7 +234,7 @@ export default function Projects() {
         {t.projects.intro}
       </SectionIntro>
 
-      <BubbleField ref={fieldRef} data-entered={entered}>
+      <BubbleField key={`projects-${replayKey}`} ref={fieldRef} data-entered={entered}>
         <BubbleBackgroundVideo
           autoPlay
           muted

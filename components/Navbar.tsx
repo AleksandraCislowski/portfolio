@@ -24,6 +24,7 @@ import {
   languageMenuPaperSx,
 } from './navbar/Navbar.styles';
 import type { NavbarItem } from './navbar/navbar.constants';
+import { replaySectionAnimation } from './sectionAnimationReplay';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -168,16 +169,80 @@ export default function Navbar() {
     setMode(nextMode);
   };
 
-  const handleNavigate = (href: string) => {
+  const handleSamePageNavigation = React.useCallback((href: string) => {
     setActiveHref(href);
     setHasResolvedActiveHref(true);
     navLockUntilRef.current = Date.now() + 900;
-  };
+
+    const topOffset = 96;
+    const targetSectionId = href === SITE_CONFIG.sections.home ? null : href.replace(/^#/, '');
+    const targetNode = targetSectionId
+      ? document.getElementById(targetSectionId)
+      : null;
+    const targetY = targetNode
+      ? window.scrollY + targetNode.getBoundingClientRect().top - topOffset
+      : 0;
+
+    window.scrollTo({
+      top: Math.max(0, targetY),
+      behavior: 'smooth',
+    });
+
+    const maxWaitMs = 1400;
+    const tolerance = 10;
+    const startTime = window.performance.now();
+
+    const finishReplay = () => {
+      replaySectionAnimation(href);
+    };
+
+    const pollScroll = () => {
+      const currentTargetY = targetNode
+        ? window.scrollY + targetNode.getBoundingClientRect().top - topOffset
+        : 0;
+      const settled = Math.abs(window.scrollY - Math.max(0, currentTargetY)) <= tolerance;
+      const timedOut = window.performance.now() - startTime >= maxWaitMs;
+
+      if (settled || timedOut) {
+        finishReplay();
+        return;
+      }
+
+      window.requestAnimationFrame(pollScroll);
+    };
+
+    window.requestAnimationFrame(pollScroll);
+  }, []);
+
+  const handleNavigate = React.useCallback((
+    event: React.MouseEvent<HTMLElement>,
+    href: string,
+    targetHref: string,
+  ) => {
+    if (!isHomePage || !targetHref.startsWith('#')) {
+      setActiveHref(href);
+      setHasResolvedActiveHref(true);
+      navLockUntilRef.current = Date.now() + 900;
+      return;
+    }
+
+    event.preventDefault();
+    handleSamePageNavigation(href);
+  }, [handleSamePageNavigation, isHomePage]);
+
+  const handleNavigateHome = React.useCallback((event: React.MouseEvent<HTMLElement>) => {
+    if (!isHomePage) {
+      return;
+    }
+
+    event.preventDefault();
+    handleSamePageNavigation(SITE_CONFIG.sections.home);
+  }, [handleSamePageNavigation, isHomePage]);
 
   return (
     <StyledAppBar position='sticky' color='default' elevation={0}>
       <StyledToolbar>
-        <NavbarBrand />
+        <NavbarBrand onNavigateHome={handleNavigateHome} />
 
         <ToolbarRight>
           <NavbarDesktopNav

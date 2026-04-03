@@ -29,8 +29,8 @@ export const SITE_CONFIG = {
     lovorda: 'https://lovorda.com/me/Aleksandra',
   },
   documents: {
-    cv: '/documents/cv-aleksandra-cislowski.pdf',
-    portfolio: '/documents/portfolio-aleksandra-cislowski.pdf',
-    references: '/documents/references-aleksandra-cislowski.pdf',
+    cv: '',
+    portfolio: '',
+    references: '',
   },
 } as const;

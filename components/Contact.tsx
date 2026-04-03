@@ -15,14 +15,8 @@ const ContactTitle = styled(Typography)(() => ({
   marginBottom: 16,
 }));
 
-const ContactDescription = styled(Typography)(() => ({
-  marginBottom: 16,
-  textAlign: 'center',
-  maxWidth: 720,
-}));
-
 const ContactMeta = styled(Stack)(() => ({
-  marginBottom: 24,
+  marginBottom: 32,
   textAlign: 'center',
 }));
 
@@ -51,9 +45,6 @@ export default function Contact() {
       <ContactTitle variant='h3'>
         {t.contact.title}
       </ContactTitle>
-      <ContactDescription variant='body2'>
-        {t.contact.description}
-      </ContactDescription>
       <ContactMeta spacing={0.75}>
         <Typography variant='body2'>
           {t.contact.locationLabel}: {t.contact.locationValue}

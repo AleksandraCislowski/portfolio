@@ -1,6 +1,6 @@
 export const heroSectionSx = {
   position: 'relative',
-  overflowX: 'visible',
+  overflowX: 'clip',
   overflowY: 'visible',
   px: 0,
   pt: {

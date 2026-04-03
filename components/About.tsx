@@ -17,6 +17,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import { useTranslation } from '../i18n/useTranslation';
 import Section from './Section';
 import { SITE_CONFIG } from '../config/site';
+import { useSectionAnimationReplay } from './sectionAnimationReplay';
 
 const MotionBox = motion.create(Box);
 
@@ -266,10 +267,12 @@ const SocialButton = styled('a')(({ theme }) => ({
 export default function About() {
   const t = useTranslation();
   const shouldReduceMotion = useReducedMotion() ?? false;
+  const replayKey = useSectionAnimationReplay(SITE_CONFIG.sectionIds.about);
 
   return (
     <Section id={SITE_CONFIG.sectionIds.about}>
       <MotionBox
+        key={`about-${replayKey}`}
         variants={shouldReduceMotion ? undefined : sectionVariants}
         initial={shouldReduceMotion ? undefined : 'hidden'}
         whileInView={shouldReduceMotion ? undefined : 'visible'}

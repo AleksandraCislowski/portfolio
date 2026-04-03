@@ -39,10 +39,10 @@ export default function PortfolioApp({
     <>
       <Navbar />
       <AppMain>
+        {isHomePage ? <Hero /> : null}
         <Container maxWidth='lg' disableGutters>
           {isHomePage ? (
             <>
-              <Hero />
               <About />
               <Impact />
               <Projects />

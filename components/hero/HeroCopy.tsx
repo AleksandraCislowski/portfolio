@@ -8,6 +8,7 @@ import {
   CopyColumn,
   HeroActions,
   HeroEyebrow,
+  HeroInlineVisualSlot,
   HeroKicker,
   HeroLocation,
   HeroMeta,
@@ -25,9 +26,10 @@ type HeroCopyProps = {
   t: ReturnType<typeof import('../../i18n/useTranslation').useTranslation>;
   lang: string;
   shouldReduceMotion: boolean;
+  visualSlot?: React.ReactNode;
 };
 
-export function HeroCopy({ t, lang, shouldReduceMotion }: HeroCopyProps) {
+export function HeroCopy({ t, lang, shouldReduceMotion, visualSlot }: HeroCopyProps) {
   const heroSkills = t.hero.skillPills;
 
   return (
@@ -66,6 +68,12 @@ export function HeroCopy({ t, lang, shouldReduceMotion }: HeroCopyProps) {
             </SecondaryHeroButton>
           </HeroActions>
         </MotionBox>
+
+        {visualSlot ? (
+          <HeroInlineVisualSlot>
+            {visualSlot}
+          </HeroInlineVisualSlot>
+        ) : null}
 
         <MotionBox key={`hero-meta-${lang}`} variants={itemVariants}>
           <HeroMeta>

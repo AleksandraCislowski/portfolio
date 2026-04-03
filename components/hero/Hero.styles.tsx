@@ -24,7 +24,7 @@ export const HeroBackdrop = styled(Box)(() => ({
   left: '50%',
   width: '100vw',
   transform: 'translateX(-50%)',
-  overflow: 'visible',
+  overflow: 'hidden',
   pointerEvents: 'none',
   zIndex: 1,
 }));
@@ -53,6 +53,21 @@ export const HeroShell = styled(motion.div)(({ theme }) => ({
 export const CopyColumn = styled(Box)(() => ({
   position: 'relative',
   zIndex: 5,
+}));
+
+export const HeroInlineVisualSlot = styled(Box)(({ theme }) => ({
+  marginTop: theme.spacing(1),
+  marginBottom: theme.spacing(4),
+  [theme.breakpoints.up('md')]: {
+    marginTop: theme.spacing(1.5),
+    marginBottom: theme.spacing(4.5),
+  },
+  [theme.breakpoints.up('lg')]: {
+    display: 'none',
+  },
+  '& > *': {
+    width: '100%',
+  },
 }));
 
 export const HeroEyebrow = styled(motion.div)(({ theme }) => ({
@@ -225,6 +240,9 @@ export const HeroMeta = styled(Stack)(({ theme }) => ({
   gap: theme.spacing(1),
   marginBottom: theme.spacing(2.5),
   maxWidth: 640,
+  [theme.breakpoints.down('sm')]: {
+    gap: theme.spacing(1.1),
+  },
   [theme.breakpoints.up('md')]: {
     gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
   },

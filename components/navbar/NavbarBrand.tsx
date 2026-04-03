@@ -1,10 +1,19 @@
+import * as React from 'react';
 import { SITE_CONFIG } from '../../config/site';
 
 import { Brand, BrandImage, BrandLink, BrandLockup, BrandMark } from './Navbar.styles';
 
-export function NavbarBrand() {
+type NavbarBrandProps = {
+  onNavigateHome?: (event: React.MouseEvent<HTMLElement>) => void;
+};
+
+export function NavbarBrand({ onNavigateHome }: NavbarBrandProps) {
   return (
-    <BrandLink href={SITE_CONFIG.sections.home} aria-label='Go to top of page'>
+    <BrandLink
+      href={SITE_CONFIG.sections.home}
+      aria-label='Go to top of page'
+      onClick={onNavigateHome}
+    >
       <BrandLockup>
         <BrandMark>
           <BrandImage src='/images/profile/monogram.png' alt='AC monogram' />
