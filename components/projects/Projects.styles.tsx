@@ -370,33 +370,70 @@ export const BubbleDriftShell = styled(Box, {
   animation: $reduceMotion
     ? 'none'
     : $tone % 3 === 0
-      ? `bubbleDriftA 11.5s cubic-bezier(0.42, 0.02, 0.21, 0.99) ${$delay} infinite`
+      ? `bubbleDriftA 13.8s cubic-bezier(0.42, 0.02, 0.21, 0.99) ${$delay} infinite`
       : $tone % 3 === 1
-        ? `bubbleDriftB 13.4s cubic-bezier(0.47, 0.05, 0.18, 0.98) ${$delay} infinite`
-        : `bubbleDriftC 12.7s cubic-bezier(0.4, 0.08, 0.2, 0.98) ${$delay} infinite`,
+        ? `bubbleDriftB 15.1s cubic-bezier(0.47, 0.05, 0.18, 0.98) ${$delay} infinite`
+        : `bubbleDriftC 14.5s cubic-bezier(0.4, 0.08, 0.2, 0.98) ${$delay} infinite`,
   animationPlayState: $motionPaused ? 'paused' : 'running',
   transition: `transform ${$recovering ? '1040ms' : '700ms'} cubic-bezier(0.16, 0.84, 0.2, 1)`,
   '@keyframes bubbleDriftA': {
     '0%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
-    '24%': { transform: 'translate3d(8px, -14px, 0) rotate(1.2deg)' },
-    '51%': { transform: 'translate3d(-10px, -4px, 0) rotate(-1deg)' },
-    '77%': { transform: 'translate3d(6px, 12px, 0) rotate(0.8deg)' },
+    '19%': { transform: 'translate3d(16px, -22px, 0) rotate(2.2deg)' },
+    '42%': { transform: 'translate3d(-18px, -10px, 0) rotate(-2deg)' },
+    '68%': { transform: 'translate3d(14px, 18px, 0) rotate(1.6deg)' },
+    '84%': { transform: 'translate3d(-8px, 10px, 0) rotate(-0.9deg)' },
     '100%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
   },
   '@keyframes bubbleDriftB': {
     '0%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
-    '18%': { transform: 'translate3d(-12px, -8px, 0) rotate(-1.4deg)' },
-    '43%': { transform: 'translate3d(10px, -18px, 0) rotate(1deg)' },
-    '66%': { transform: 'translate3d(14px, 8px, 0) rotate(-0.9deg)' },
-    '84%': { transform: 'translate3d(-6px, 12px, 0) rotate(0.7deg)' },
+    '16%': { transform: 'translate3d(-18px, -14px, 0) rotate(-2.5deg)' },
+    '38%': { transform: 'translate3d(14px, -26px, 0) rotate(1.8deg)' },
+    '57%': { transform: 'translate3d(22px, 10px, 0) rotate(-1.4deg)' },
+    '78%': { transform: 'translate3d(-10px, 20px, 0) rotate(1.1deg)' },
+    '90%': { transform: 'translate3d(8px, 6px, 0) rotate(-0.6deg)' },
     '100%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
   },
   '@keyframes bubbleDriftC': {
     '0%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
-    '21%': { transform: 'translate3d(14px, -10px, 0) rotate(1deg)' },
-    '39%': { transform: 'translate3d(4px, -20px, 0) rotate(-1.2deg)' },
-    '63%': { transform: 'translate3d(-14px, -2px, 0) rotate(0.9deg)' },
-    '86%': { transform: 'translate3d(-8px, 14px, 0) rotate(-0.7deg)' },
+    '18%': { transform: 'translate3d(20px, -16px, 0) rotate(1.8deg)' },
+    '36%': { transform: 'translate3d(8px, -30px, 0) rotate(-2.2deg)' },
+    '58%': { transform: 'translate3d(-18px, -6px, 0) rotate(1.4deg)' },
+    '76%': { transform: 'translate3d(-14px, 22px, 0) rotate(-1.3deg)' },
+    '90%': { transform: 'translate3d(10px, 12px, 0) rotate(0.8deg)' },
+    '100%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
+  },
+  '@media (max-width: 599.95px)': {
+    animation: $reduceMotion
+      ? 'none'
+      : $tone % 3 === 0
+        ? `bubbleDriftMobileA 12.6s cubic-bezier(0.42, 0.02, 0.21, 0.99) ${$delay} infinite`
+        : $tone % 3 === 1
+          ? `bubbleDriftMobileB 13.7s cubic-bezier(0.47, 0.05, 0.18, 0.98) ${$delay} infinite`
+          : `bubbleDriftMobileC 13.1s cubic-bezier(0.4, 0.08, 0.2, 0.98) ${$delay} infinite`,
+  },
+  '@keyframes bubbleDriftMobileA': {
+    '0%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
+    '22%': { transform: 'translate3d(10px, -14px, 0) rotate(1.4deg)' },
+    '46%': { transform: 'translate3d(-12px, -6px, 0) rotate(-1.2deg)' },
+    '72%': { transform: 'translate3d(8px, 10px, 0) rotate(1deg)' },
+    '88%': { transform: 'translate3d(-5px, 6px, 0) rotate(-0.6deg)' },
+    '100%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
+  },
+  '@keyframes bubbleDriftMobileB': {
+    '0%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
+    '18%': { transform: 'translate3d(-12px, -10px, 0) rotate(-1.6deg)' },
+    '40%': { transform: 'translate3d(10px, -16px, 0) rotate(1.2deg)' },
+    '64%': { transform: 'translate3d(14px, 8px, 0) rotate(-1deg)' },
+    '84%': { transform: 'translate3d(-8px, 12px, 0) rotate(0.8deg)' },
+    '100%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
+  },
+  '@keyframes bubbleDriftMobileC': {
+    '0%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
+    '20%': { transform: 'translate3d(12px, -10px, 0) rotate(1.2deg)' },
+    '38%': { transform: 'translate3d(6px, -18px, 0) rotate(-1.5deg)' },
+    '60%': { transform: 'translate3d(-12px, -4px, 0) rotate(1deg)' },
+    '80%': { transform: 'translate3d(-10px, 14px, 0) rotate(-0.9deg)' },
+    '92%': { transform: 'translate3d(6px, 8px, 0) rotate(0.5deg)' },
     '100%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
   },
 }));
