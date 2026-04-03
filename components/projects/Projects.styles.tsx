@@ -3,32 +3,6 @@
 import { Box, Typography } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 
-function createWaterTexture(mode: 'light' | 'dark') {
-  const stroke = mode === 'dark' ? 'rgba(186,230,253,0.12)' : 'rgba(14,116,144,0.1)';
-  const glow = mode === 'dark' ? 'rgba(103,232,249,0.18)' : 'rgba(125,211,252,0.22)';
-  const foam = mode === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.28)';
-
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="none">
-      <defs>
-        <filter id="blur"><feGaussianBlur stdDeviation="10" /></filter>
-      </defs>
-      <g fill="none">
-        <path d="M-80 180C60 120 120 250 260 194S474 96 640 154s210 92 360 42 246-26 398 26 270-18 418-10" stroke="${stroke}" stroke-width="5" stroke-linecap="round"/>
-        <path d="M-60 330C88 286 190 384 340 346S570 238 740 304s214 98 382 44 234-34 382 20 242 16 366-18" stroke="${stroke}" stroke-width="4" stroke-linecap="round"/>
-        <path d="M-90 516C66 462 146 574 312 542s232-124 394-72 240 124 388 72 230-68 372-18 222 72 376 28" stroke="${stroke}" stroke-width="5" stroke-linecap="round"/>
-        <path d="M-40 714C96 668 186 738 350 712s232-106 378-72 212 104 356 66 228-88 396-40 218 88 340 62" stroke="${stroke}" stroke-width="4" stroke-linecap="round"/>
-        <ellipse cx="288" cy="244" rx="170" ry="52" fill="${glow}" filter="url(#blur)"/>
-        <ellipse cx="1180" cy="176" rx="220" ry="60" fill="${glow}" filter="url(#blur)"/>
-        <ellipse cx="852" cy="620" rx="260" ry="70" fill="${glow}" filter="url(#blur)"/>
-        <ellipse cx="494" cy="762" rx="210" ry="54" fill="${foam}" filter="url(#blur)"/>
-      </g>
-    </svg>
-  `;
-
-  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
-}
-
 export const SectionTitle = styled(Typography)(() => ({
   marginBottom: 12,
 }));
@@ -39,6 +13,17 @@ export const SectionIntro = styled(Typography)(({ theme }) => ({
   maxWidth: 620,
   color: theme.palette.text.secondary,
 }));
+
+export const BubbleBackgroundVideo = styled('video')({
+  position: 'absolute',
+  inset: 0,
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  objectPosition: 'center',
+  pointerEvents: 'none',
+  opacity: 0.5,
+});
 
 export const BubbleField = styled(Box)(({ theme }) => ({
   position: 'relative',
@@ -58,97 +43,46 @@ export const BubbleField = styled(Box)(({ theme }) => ({
     content: '""',
     position: 'absolute',
     inset: 0,
-    backgroundImage: createWaterTexture(theme.palette.mode),
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    mixBlendMode: theme.palette.mode === 'dark' ? 'screen' : 'multiply',
-    opacity: theme.palette.mode === 'dark' ? 0.86 : 0.74,
+    background:
+      theme.palette.mode === 'dark'
+        ? `
+        radial-gradient(circle at 18% 20%, rgba(125,211,252,0.18), transparent 24%),
+        radial-gradient(circle at 82% 18%, rgba(45,212,191,0.14), transparent 22%),
+        radial-gradient(circle at 54% 78%, rgba(96,165,250,0.12), transparent 26%)
+      `
+        : `
+        radial-gradient(circle at 18% 20%, rgba(125,211,252,0.22), transparent 24%),
+        radial-gradient(circle at 82% 18%, rgba(45,212,191,0.16), transparent 22%),
+        radial-gradient(circle at 54% 78%, rgba(96,165,250,0.14), transparent 26%)
+      `,
+    opacity: 0.68,
     pointerEvents: 'none',
-    transition: 'opacity 1000ms ease, transform 1400ms cubic-bezier(0.18, 0.9, 0.22, 1)',
+    transition:
+      'opacity 1000ms ease, transform 1400ms cubic-bezier(0.18, 0.9, 0.22, 1)',
   },
   '&::after': {
     content: '""',
     position: 'absolute',
     inset: '-12% -10%',
-    background: theme.palette.mode === 'dark'
-      ? `
-        radial-gradient(120% 56% at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 58%),
-        repeating-radial-gradient(ellipse at 50% 4%, rgba(125,211,252,0.09) 0 2px, transparent 2px 22px),
-        repeating-radial-gradient(ellipse at 50% 16%, rgba(255,255,255,0.04) 0 1px, transparent 1px 26px)
-      `
-      : `
-        radial-gradient(120% 56% at 50% 0%, rgba(255,255,255,0.4) 0%, transparent 58%),
-        repeating-radial-gradient(ellipse at 50% 4%, rgba(125,211,252,0.14) 0 2px, transparent 2px 22px),
-        repeating-radial-gradient(ellipse at 50% 16%, rgba(255,255,255,0.16) 0 1px, transparent 1px 26px)
-      `,
-    opacity: 0.9,
+    background:
+      theme.palette.mode === 'dark'
+        ? 'radial-gradient(120% 56% at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 58%)'
+        : 'radial-gradient(120% 56% at 50% 0%, rgba(255,255,255,0.32) 0%, transparent 58%)',
+    opacity: 0.5,
     transform: 'translate3d(0, 0, 0)',
     animation: 'waterDrift 18s linear infinite',
     pointerEvents: 'none',
-    transition: 'opacity 1000ms ease, transform 1400ms cubic-bezier(0.18, 0.9, 0.22, 1)',
-  },
-  '& .water-grid': {
-    position: 'absolute',
-    inset: 0,
-    background: theme.palette.mode === 'dark'
-      ? `
-        radial-gradient(circle at 16% 18%, rgba(125,211,252,0.22), transparent 20%),
-        radial-gradient(circle at 80% 12%, rgba(45,212,191,0.18), transparent 18%),
-        radial-gradient(circle at 56% 72%, rgba(96,165,250,0.14), transparent 24%),
-        linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.06) 36%, transparent 52%, rgba(103,232,249,0.08) 66%, transparent 78%)
-      `
-      : `
-        radial-gradient(circle at 16% 18%, rgba(125,211,252,0.3), transparent 20%),
-        radial-gradient(circle at 80% 12%, rgba(45,212,191,0.2), transparent 18%),
-        radial-gradient(circle at 56% 72%, rgba(96,165,250,0.18), transparent 24%),
-        linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.34) 36%, transparent 52%, rgba(103,232,249,0.18) 66%, transparent 78%)
-      `,
-    opacity: 0.95,
-    pointerEvents: 'none',
-  },
-  '& .water-current': {
-    position: 'absolute',
-    borderRadius: 999,
-    pointerEvents: 'none',
-    opacity: theme.palette.mode === 'dark' ? 0.34 : 0.42,
-    filter: 'blur(0.2px)',
-    background: theme.palette.mode === 'dark'
-      ? 'linear-gradient(90deg, transparent 0%, rgba(186,230,253,0.18) 18%, rgba(103,232,249,0.44) 48%, rgba(186,230,253,0.16) 82%, transparent 100%)'
-      : 'linear-gradient(90deg, transparent 0%, rgba(125,211,252,0.18) 18%, rgba(14,165,233,0.34) 48%, rgba(125,211,252,0.14) 82%, transparent 100%)',
-    transformOrigin: 'center',
-  },
-  '& .water-current-1': {
-    top: '30%',
-    left: '12%',
-    width: '36%',
-    height: 2,
-    transform: 'rotate(-10deg)',
-    animation: 'currentSlideOne 9.5s ease-in-out infinite',
-  },
-  '& .water-current-2': {
-    top: '56%',
-    left: '48%',
-    width: '28%',
-    height: 2,
-    transform: 'rotate(14deg)',
-    animation: 'currentSlideTwo 8.8s ease-in-out infinite',
-  },
-  '& .water-current-3': {
-    top: '76%',
-    left: '16%',
-    width: '32%',
-    height: 2,
-    transform: 'rotate(8deg)',
-    animation: 'currentSlideThree 10.4s ease-in-out infinite',
+    transition:
+      'opacity 1000ms ease, transform 1400ms cubic-bezier(0.18, 0.9, 0.22, 1)',
   },
   '& .bubble-wake': {
     position: 'absolute',
     borderRadius: '50%',
     pointerEvents: 'none',
-    background: theme.palette.mode === 'dark'
-      ? 'radial-gradient(circle, rgba(186,230,253,0.18) 0%, rgba(96,165,250,0.08) 38%, transparent 70%)'
-      : 'radial-gradient(circle, rgba(125,211,252,0.22) 0%, rgba(59,130,246,0.1) 40%, transparent 70%)',
+    background:
+      theme.palette.mode === 'dark'
+        ? 'radial-gradient(circle, rgba(186,230,253,0.18) 0%, rgba(96,165,250,0.08) 38%, transparent 70%)'
+        : 'radial-gradient(circle, rgba(125,211,252,0.22) 0%, rgba(59,130,246,0.1) 40%, transparent 70%)',
     mixBlendMode: theme.palette.mode === 'dark' ? 'screen' : 'multiply',
     animation: 'wakePulse 7.4s ease-in-out infinite',
   },
@@ -180,12 +114,14 @@ export const BubbleField = styled(Box)(({ theme }) => ({
     width: 120,
     height: 120,
     borderRadius: '50%',
-    border: theme.palette.mode === 'dark'
-      ? '1px solid rgba(186,230,253,0.26)'
-      : '1px solid rgba(14,165,233,0.22)',
-    boxShadow: theme.palette.mode === 'dark'
-      ? '0 0 24px rgba(103,232,249,0.12)'
-      : '0 0 24px rgba(125,211,252,0.18)',
+    border:
+      theme.palette.mode === 'dark'
+        ? '1px solid rgba(186,230,253,0.26)'
+        : '1px solid rgba(14,165,233,0.22)',
+    boxShadow:
+      theme.palette.mode === 'dark'
+        ? '0 0 24px rgba(103,232,249,0.12)'
+        : '0 0 24px rgba(125,211,252,0.18)',
     opacity: 0,
     pointerEvents: 'none',
     animation: 'collisionRing 8.6s ease-out infinite',
@@ -204,33 +140,10 @@ export const BubbleField = styled(Box)(({ theme }) => ({
     height: 102,
     animationDelay: '5.2s',
   },
-  '& .water-shimmer': {
-    position: 'absolute',
-    inset: '-12% -30%',
-    background: theme.palette.mode === 'dark'
-      ? 'linear-gradient(105deg, transparent 24%, rgba(255,255,255,0.06) 38%, rgba(186,230,253,0.14) 46%, rgba(255,255,255,0.04) 54%, transparent 68%)'
-      : 'linear-gradient(105deg, transparent 24%, rgba(255,255,255,0.24) 38%, rgba(125,211,252,0.26) 46%, rgba(255,255,255,0.12) 54%, transparent 68%)',
-    transform: 'translateX(-24%) skewX(-12deg)',
-    animation: 'shimmerDrift 12s linear infinite',
-    pointerEvents: 'none',
-    opacity: 0.68,
-  },
   '@keyframes waterDrift': {
     '0%': { transform: 'translate3d(-2%, 0, 0)' },
     '50%': { transform: 'translate3d(2%, 1.5%, 0)' },
     '100%': { transform: 'translate3d(-2%, 0, 0)' },
-  },
-  '@keyframes currentSlideOne': {
-    '0%, 100%': { transform: 'translate3d(0,0,0) rotate(-10deg) scaleX(1)' },
-    '50%': { transform: 'translate3d(18px,-8px,0) rotate(-7deg) scaleX(1.08)' },
-  },
-  '@keyframes currentSlideTwo': {
-    '0%, 100%': { transform: 'translate3d(0,0,0) rotate(14deg) scaleX(1)' },
-    '50%': { transform: 'translate3d(-14px,10px,0) rotate(18deg) scaleX(1.06)' },
-  },
-  '@keyframes currentSlideThree': {
-    '0%, 100%': { transform: 'translate3d(0,0,0) rotate(8deg) scaleX(1)' },
-    '50%': { transform: 'translate3d(20px,-6px,0) rotate(12deg) scaleX(1.1)' },
   },
   '@keyframes wakePulse': {
     '0%, 100%': { transform: 'scale(0.88)', opacity: 0.18 },
@@ -240,10 +153,6 @@ export const BubbleField = styled(Box)(({ theme }) => ({
     '0%': { transform: 'scale(0.35)', opacity: 0 },
     '12%': { opacity: 0.44 },
     '100%': { transform: 'scale(2.6)', opacity: 0 },
-  },
-  '@keyframes shimmerDrift': {
-    '0%': { transform: 'translateX(-28%) skewX(-12deg)' },
-    '100%': { transform: 'translateX(28%) skewX(-12deg)' },
   },
   '&[data-entered="false"]::before': {
     opacity: 0,
@@ -265,7 +174,8 @@ export const BubbleHeader = styled(Box)(({ theme }) => ({
     justifyContent: 'stretch',
     padding: theme.spacing(2, 2, 1),
   },
-  transition: 'opacity 720ms ease, transform 900ms cubic-bezier(0.18, 0.9, 0.22, 1)',
+  transition:
+    'opacity 720ms ease, transform 900ms cubic-bezier(0.18, 0.9, 0.22, 1)',
   '[data-entered="false"] &': {
     opacity: 0,
     transform: 'translate3d(0, -22px, 0) scale(0.96)',
@@ -302,9 +212,10 @@ export const BubbleHint = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2.1, 2.3),
   borderRadius: 26,
   color: theme.palette.text.primary,
-  background: theme.palette.mode === 'dark'
-    ? `linear-gradient(145deg, ${alpha('#0C1D38', 0.7)} 0%, ${alpha('#10294D', 0.64)} 100%)`
-    : `linear-gradient(145deg, ${alpha('#FFFFFF', 0.82)} 0%, ${alpha('#E7F6FF', 0.72)} 100%)`,
+  background:
+    theme.palette.mode === 'dark'
+      ? `linear-gradient(145deg, ${alpha('#0C1D38', 0.7)} 0%, ${alpha('#10294D', 0.64)} 100%)`
+      : `linear-gradient(145deg, ${alpha('#FFFFFF', 0.82)} 0%, ${alpha('#E7F6FF', 0.72)} 100%)`,
   border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.46 : 0.78)}`,
   boxShadow: `0 18px 42px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.26 : 0.08)}`,
   backdropFilter: 'blur(18px) saturate(1.12)',
@@ -313,9 +224,10 @@ export const BubbleHint = styled(Box)(({ theme }) => ({
     position: 'absolute',
     inset: 0,
     borderRadius: 26,
-    background: theme.palette.mode === 'dark'
-      ? 'linear-gradient(135deg, rgba(255,255,255,0.08), transparent 44%, rgba(103,232,249,0.1) 100%)'
-      : 'linear-gradient(135deg, rgba(255,255,255,0.46), transparent 44%, rgba(103,232,249,0.18) 100%)',
+    background:
+      theme.palette.mode === 'dark'
+        ? 'linear-gradient(135deg, rgba(255,255,255,0.08), transparent 44%, rgba(103,232,249,0.1) 100%)'
+        : 'linear-gradient(135deg, rgba(255,255,255,0.46), transparent 44%, rgba(103,232,249,0.18) 100%)',
     pointerEvents: 'none',
   },
   [theme.breakpoints.down('sm')]: {
@@ -325,10 +237,12 @@ export const BubbleHint = styled(Box)(({ theme }) => ({
 
 export const BubbleStage = styled(Box)(({ theme }) => ({
   position: 'relative',
+  zIndex: 3,
   minHeight: 560,
   padding: theme.spacing(2, 2.5, 3),
   overflow: 'visible',
-  transition: 'opacity 820ms ease, transform 1100ms cubic-bezier(0.18, 0.9, 0.22, 1)',
+  transition:
+    'opacity 820ms ease, transform 1100ms cubic-bezier(0.18, 0.9, 0.22, 1)',
   '[data-entered="false"] &': {
     opacity: 0,
     transform: 'translate3d(0, 26px, 0)',
@@ -348,14 +262,20 @@ export const BubbleSlot = styled(Box, {
 })<{ $recovering: boolean }>(({ $recovering }) => ({
   position: 'absolute',
   willChange: 'transform',
-  transition:
-    `transform ${$recovering ? '1240ms' : '700ms'} cubic-bezier(0.16, 0.84, 0.2, 1), opacity 520ms ease, filter 520ms ease`,
+  transition: `transform ${$recovering ? '1240ms' : '700ms'} cubic-bezier(0.16, 0.84, 0.2, 1), opacity 520ms ease, filter 520ms ease`,
   zIndex: 2,
 }));
 
 export const BubbleDriftShell = styled(Box, {
   shouldForwardProp: (prop) =>
-    !['$tone', '$delay', '$reduceMotion', '$modalOpen', '$motionPaused', '$recovering'].includes(prop as string),
+    ![
+      '$tone',
+      '$delay',
+      '$reduceMotion',
+      '$modalOpen',
+      '$motionPaused',
+      '$recovering',
+    ].includes(prop as string),
 })<{
   $tone: number;
   $delay: string;
@@ -440,7 +360,14 @@ export const BubbleDriftShell = styled(Box, {
 
 export const BubbleButton = styled('button', {
   shouldForwardProp: (prop) =>
-    !['$tone', '$delay', '$reduceMotion', '$modalOpen', '$active', '$recovering'].includes(prop as string),
+    ![
+      '$tone',
+      '$delay',
+      '$reduceMotion',
+      '$modalOpen',
+      '$active',
+      '$recovering',
+    ].includes(prop as string),
 })<{
   $tone: number;
   $delay: string;
@@ -448,7 +375,15 @@ export const BubbleButton = styled('button', {
   $modalOpen: boolean;
   $active: boolean;
   $recovering: boolean;
-}>(({ theme, $tone, $delay, $reduceMotion, $modalOpen, $active, $recovering }) => {
+}>(({
+  theme,
+  $tone,
+  $delay,
+  $reduceMotion,
+  $modalOpen,
+  $active,
+  $recovering,
+}) => {
   const gradients = [
     `radial-gradient(circle at 30% 24%, ${alpha('#FFFFFF', 0.95)} 0%, ${alpha('#9FD6FF', 0.4)} 18%, ${alpha('#2563EB', 0.92)} 58%, ${alpha('#081120', 0.98)} 100%)`,
     `radial-gradient(circle at 30% 24%, ${alpha('#FFFFFF', 0.94)} 0%, ${alpha('#B7F2E5', 0.42)} 18%, ${alpha('#0891B2', 0.9)} 56%, ${alpha('#06283D', 0.98)} 100%)`,
@@ -471,7 +406,8 @@ export const BubbleButton = styled('button', {
     textDecoration: 'none',
     color: '#F8FBFF',
     background: gradients[$tone % gradients.length],
-    boxShadow: '0 22px 42px rgba(2, 6, 23, 0.34), inset 0 0 0 1px rgba(255,255,255,0.58)',
+    boxShadow:
+      '0 22px 42px rgba(2, 6, 23, 0.34), inset 0 0 0 1px rgba(255,255,255,0.58)',
     animation: $reduceMotion
       ? 'none'
       : `bubblePulse 5.4s ease-in-out ${$delay} infinite, bubbleGlow 4.8s ease-in-out ${$delay} infinite`,
@@ -518,7 +454,8 @@ export const BubbleButton = styled('button', {
       boxShadow:
         'inset -18px -18px 28px rgba(7,16,35,0.34), inset 12px 12px 26px rgba(255,255,255,0.1), 0 0 28px rgba(125,211,252,0.14)',
       pointerEvents: 'none',
-      transition: 'box-shadow 240ms ease, opacity 240ms ease, transform 280ms ease',
+      transition:
+        'box-shadow 240ms ease, opacity 240ms ease, transform 280ms ease',
     },
     '& .bubble-hover-sweep': {
       position: 'absolute',
@@ -529,7 +466,8 @@ export const BubbleButton = styled('button', {
       opacity: 0,
       transform: 'translateX(-42%) rotate(-12deg)',
       pointerEvents: 'none',
-      transition: 'opacity 220ms ease, transform 420ms cubic-bezier(0.2, 0.9, 0.22, 1)',
+      transition:
+        'opacity 220ms ease, transform 420ms cubic-bezier(0.2, 0.9, 0.22, 1)',
       mixBlendMode: 'screen',
     },
     '& > *': {
@@ -620,29 +558,33 @@ export const BubbleHintBody = styled(Typography)(() => ({
 
 export const ProjectOverlay = styled(Box, {
   shouldForwardProp: (prop) => prop !== '$phase',
-})<{ $phase: 'closed' | 'opening' | 'open' | 'closing' }>(({ theme, $phase }) => ({
-  position: 'fixed',
-  inset: 0,
-  zIndex: 1200,
-  pointerEvents: $phase === 'closed' ? 'none' : 'auto',
-  opacity: $phase === 'closed' ? 0 : $phase === 'closing' ? 0 : 1,
-  transition: 'opacity 860ms cubic-bezier(0.2, 0.8, 0.18, 1)',
-  background: theme.palette.mode === 'dark'
-    ? 'linear-gradient(180deg, rgba(4, 10, 24, 0.34) 0%, rgba(4, 10, 24, 0.58) 100%)'
-    : 'linear-gradient(180deg, rgba(245, 251, 255, 0.3) 0%, rgba(217, 241, 255, 0.58) 100%)',
-  backdropFilter: $phase === 'closed' || $phase === 'closing'
-    ? 'blur(0px) saturate(1)'
-    : 'blur(12px) saturate(1.06)',
-}));
+})<{ $phase: 'closed' | 'opening' | 'open' | 'closing' }>(
+  ({ theme, $phase }) => ({
+    position: 'fixed',
+    inset: 0,
+    zIndex: 1200,
+    pointerEvents: $phase === 'closed' ? 'none' : 'auto',
+    opacity: $phase === 'closed' ? 0 : $phase === 'closing' ? 0 : 1,
+    transition: 'opacity 860ms cubic-bezier(0.2, 0.8, 0.18, 1)',
+    background:
+      theme.palette.mode === 'dark'
+        ? 'linear-gradient(180deg, rgba(4, 10, 24, 0.34) 0%, rgba(4, 10, 24, 0.58) 100%)'
+        : 'linear-gradient(180deg, rgba(245, 251, 255, 0.3) 0%, rgba(217, 241, 255, 0.58) 100%)',
+    backdropFilter:
+      $phase === 'closed' || $phase === 'closing'
+        ? 'blur(0px) saturate(1)'
+        : 'blur(12px) saturate(1.06)',
+  }),
+);
 
 export const ProjectModal = styled(Box, {
-  shouldForwardProp: (prop) => !['$phase', '$tone', '$reduceMotion'].includes(prop as string),
-})<{ $phase: 'closed' | 'opening' | 'open' | 'closing'; $tone: number; $reduceMotion: boolean }>(({
-  theme,
-  $phase,
-  $tone,
-  $reduceMotion,
-}) => ({
+  shouldForwardProp: (prop) =>
+    !['$phase', '$tone', '$reduceMotion'].includes(prop as string),
+})<{
+  $phase: 'closed' | 'opening' | 'open' | 'closing';
+  $tone: number;
+  $reduceMotion: boolean;
+}>(({ theme, $phase, $tone, $reduceMotion }) => ({
   position: 'fixed',
   top: '50%',
   left: '50%',
@@ -653,16 +595,19 @@ export const ProjectModal = styled(Box, {
   borderRadius: 38,
   overflow: 'hidden',
   border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.42 : 0.74)}`,
-  background: theme.palette.mode === 'dark'
-    ? `linear-gradient(155deg, ${alpha('#071225', 0.96)} 0%, ${alpha('#0A1A33', 0.92)} 38%, ${alpha('#10284C', 0.9)} 100%)`
-    : `linear-gradient(155deg, ${alpha('#FCFEFF', 0.9)} 0%, ${alpha('#E8F7FF', 0.92)} 42%, ${alpha('#D9F0FF', 0.9)} 100%)`,
-  boxShadow: theme.palette.mode === 'dark'
-    ? '0 42px 120px rgba(2, 6, 23, 0.6)'
-    : '0 42px 120px rgba(14, 116, 144, 0.24)',
+  background:
+    theme.palette.mode === 'dark'
+      ? `linear-gradient(155deg, ${alpha('#071225', 0.96)} 0%, ${alpha('#0A1A33', 0.92)} 38%, ${alpha('#10284C', 0.9)} 100%)`
+      : `linear-gradient(155deg, ${alpha('#FCFEFF', 0.9)} 0%, ${alpha('#E8F7FF', 0.92)} 42%, ${alpha('#D9F0FF', 0.9)} 100%)`,
+  boxShadow:
+    theme.palette.mode === 'dark'
+      ? '0 42px 120px rgba(2, 6, 23, 0.6)'
+      : '0 42px 120px rgba(14, 116, 144, 0.24)',
   isolation: 'isolate',
-  transform: $phase === 'open'
-    ? 'translate3d(-50%, -50%, 0) scale(1)'
-    : 'translate3d(-50%, -46%, 0) scale(0.82)',
+  transform:
+    $phase === 'open'
+      ? 'translate3d(-50%, -50%, 0) scale(1)'
+      : 'translate3d(-50%, -46%, 0) scale(0.82)',
   opacity: $phase === 'open' ? 1 : 0,
   pointerEvents: $phase === 'open' ? 'auto' : 'none',
   transition: $reduceMotion
@@ -715,7 +660,8 @@ export const ProjectModal = styled(Box, {
     })(),
     opacity: $phase === 'open' ? 0.64 : 0,
     transform: $phase === 'open' ? 'scale(1)' : 'scale(1.04)',
-    transition: 'opacity 700ms ease 160ms, transform 980ms cubic-bezier(0.16, 0.84, 0.2, 1)',
+    transition:
+      'opacity 700ms ease 160ms, transform 980ms cubic-bezier(0.16, 0.84, 0.2, 1)',
     pointerEvents: 'none',
   },
   '&::after': {
@@ -732,10 +678,12 @@ export const ProjectModal = styled(Box, {
       )} 48%, ${alpha(palette.glow, 0.1)} 58%, transparent 74%)`;
     })(),
     opacity: $phase === 'opening' || $phase === 'open' ? 0.5 : 0,
-    transform: $phase === 'opening' || $phase === 'open'
-      ? 'translate3d(6%, -1%, 0) rotate(-6deg)'
-      : 'translate3d(-18%, 0, 0) rotate(-8deg)',
-    transition: 'opacity 620ms ease, transform 980ms cubic-bezier(0.16, 0.84, 0.2, 1)',
+    transform:
+      $phase === 'opening' || $phase === 'open'
+        ? 'translate3d(6%, -1%, 0) rotate(-6deg)'
+        : 'translate3d(-18%, 0, 0) rotate(-8deg)',
+    transition:
+      'opacity 620ms ease, transform 980ms cubic-bezier(0.16, 0.84, 0.2, 1)',
     mixBlendMode: 'screen',
     filter: 'blur(2px)',
     pointerEvents: 'none',
@@ -789,7 +737,8 @@ type ProjectLaunchVisualProps = {
 };
 
 export const ProjectLaunchBeam = styled(Box, {
-  shouldForwardProp: (prop) => !['$tone', '$phase', '$x', '$y'].includes(prop as string),
+  shouldForwardProp: (prop) =>
+    !['$tone', '$phase', '$x', '$y'].includes(prop as string),
 })<ProjectLaunchVisualProps>(({ $tone, $phase, $x, $y }) => {
   const palette = getLaunchPalette($tone);
 
@@ -808,9 +757,10 @@ export const ProjectLaunchBeam = styled(Box, {
     transform: 'translate3d(-50%, -50%, 0) rotate(-14deg) scaleX(0.16)',
     filter: 'blur(6px)',
     mixBlendMode: 'screen',
-    animation: $phase === 'opening'
-      ? 'projectLaunchBeamOpen 1520ms cubic-bezier(0.16, 0.82, 0.18, 1) forwards'
-      : 'projectLaunchBeamClose 1040ms cubic-bezier(0.3, 0.08, 0.18, 1) forwards',
+    animation:
+      $phase === 'opening'
+        ? 'projectLaunchBeamOpen 1520ms cubic-bezier(0.16, 0.82, 0.18, 1) forwards'
+        : 'projectLaunchBeamClose 1040ms cubic-bezier(0.3, 0.08, 0.18, 1) forwards',
     '@keyframes projectLaunchBeamOpen': {
       '0%': {
         opacity: 0,
@@ -844,7 +794,9 @@ type ProjectLaunchPulseProps = ProjectLaunchVisualProps & {
 
 export const ProjectLaunchHalo = styled(Box, {
   shouldForwardProp: (prop) =>
-    !['$tone', '$phase', '$x', '$y', '$size', '$scale'].includes(prop as string),
+    !['$tone', '$phase', '$x', '$y', '$size', '$scale'].includes(
+      prop as string,
+    ),
 })<ProjectLaunchPulseProps>(({ $tone, $phase, $x, $y, $size, $scale }) => {
   const palette = getLaunchPalette($tone);
 
@@ -859,9 +811,10 @@ export const ProjectLaunchHalo = styled(Box, {
     boxShadow: `0 0 18px ${alpha(palette.glow, 0.18)}, inset 0 0 10px ${alpha(palette.beam, 0.08)}`,
     opacity: 0,
     transform: 'translate3d(-50%, -50%, 0) scale(0.92)',
-    animation: $phase === 'opening'
-      ? 'projectLaunchHaloOpen 1240ms cubic-bezier(0.18, 0.82, 0.16, 1) forwards'
-      : 'projectLaunchHaloClose 1120ms cubic-bezier(0.3, 0.08, 0.18, 1) forwards',
+    animation:
+      $phase === 'opening'
+        ? 'projectLaunchHaloOpen 1240ms cubic-bezier(0.18, 0.82, 0.16, 1) forwards'
+        : 'projectLaunchHaloClose 1120ms cubic-bezier(0.3, 0.08, 0.18, 1) forwards',
     '@keyframes projectLaunchHaloOpen': {
       '0%': {
         opacity: 0,
@@ -896,8 +849,18 @@ type ProjectLaunchMorphProps = ProjectLaunchVisualProps & {
 
 export const ProjectLaunchMorph = styled(Box, {
   shouldForwardProp: (prop) =>
-    !['$tone', '$phase', '$x', '$y', '$width', '$height', '$scale'].includes(prop as string),
-})<ProjectLaunchMorphProps>(({ $tone, $phase, $x, $y, $width, $height, $scale }) => {
+    !['$tone', '$phase', '$x', '$y', '$width', '$height', '$scale'].includes(
+      prop as string,
+    ),
+})<ProjectLaunchMorphProps>(({
+  $tone,
+  $phase,
+  $x,
+  $y,
+  $width,
+  $height,
+  $scale,
+}) => {
   const palette = getLaunchPalette($tone);
 
   return {
@@ -911,9 +874,10 @@ export const ProjectLaunchMorph = styled(Box, {
     boxShadow: `0 0 0 1px ${alpha('#FFFFFF', 0.34)}, 0 0 20px ${alpha(palette.glow, 0.18)}`,
     opacity: 0,
     transform: 'translate3d(-50%, -50%, 0) scale(1)',
-    animation: $phase === 'opening'
-      ? 'projectLaunchMorphOpen 1760ms cubic-bezier(0.16, 0.82, 0.18, 1) forwards'
-      : 'projectLaunchMorphClose 1120ms cubic-bezier(0.3, 0.08, 0.18, 1) forwards',
+    animation:
+      $phase === 'opening'
+        ? 'projectLaunchMorphOpen 1760ms cubic-bezier(0.16, 0.82, 0.18, 1) forwards'
+        : 'projectLaunchMorphClose 1120ms cubic-bezier(0.3, 0.08, 0.18, 1) forwards',
     '@keyframes projectLaunchMorphOpen': {
       '0%': {
         opacity: 0.62,
@@ -948,7 +912,9 @@ export const ProjectLaunchMorph = styled(Box, {
 
 export const ProjectLaunchCore = styled(Box, {
   shouldForwardProp: (prop) =>
-    !['$tone', '$phase', '$x', '$y', '$size', '$scale'].includes(prop as string),
+    !['$tone', '$phase', '$x', '$y', '$size', '$scale'].includes(
+      prop as string,
+    ),
 })<ProjectLaunchPulseProps>(({ $tone, $phase, $x, $y, $size, $scale }) => {
   const palette = getLaunchPalette($tone);
 
@@ -967,9 +933,10 @@ export const ProjectLaunchCore = styled(Box, {
     transform: 'translate3d(-50%, -50%, 0) scale(0.72)',
     filter: 'blur(0.5px)',
     mixBlendMode: 'screen',
-    animation: $phase === 'opening'
-      ? 'projectLaunchCoreOpen 920ms cubic-bezier(0.2, 0.82, 0.18, 1) forwards'
-      : 'projectLaunchCoreClose 940ms cubic-bezier(0.3, 0.08, 0.18, 1) forwards',
+    animation:
+      $phase === 'opening'
+        ? 'projectLaunchCoreOpen 920ms cubic-bezier(0.2, 0.82, 0.18, 1) forwards'
+        : 'projectLaunchCoreClose 940ms cubic-bezier(0.3, 0.08, 0.18, 1) forwards',
     '@keyframes projectLaunchCoreOpen': {
       '0%': {
         opacity: 0,
@@ -998,7 +965,9 @@ export const ProjectLaunchCore = styled(Box, {
 
 export const ProjectLaunchRipple = styled(Box, {
   shouldForwardProp: (prop) =>
-    !['$tone', '$phase', '$x', '$y', '$size', '$scale'].includes(prop as string),
+    !['$tone', '$phase', '$x', '$y', '$size', '$scale'].includes(
+      prop as string,
+    ),
 })<ProjectLaunchPulseProps>(({ $tone, $phase, $x, $y, $size, $scale }) => {
   const palette = getLaunchPalette($tone);
 
@@ -1018,9 +987,10 @@ export const ProjectLaunchRipple = styled(Box, {
     opacity: 0,
     transform: 'translate3d(-50%, -50%, 0) scale(0.2)',
     filter: 'blur(1px)',
-    animation: $phase === 'opening'
-      ? 'projectLaunchRippleOpen 1280ms cubic-bezier(0.16, 0.82, 0.16, 1) forwards'
-      : 'projectLaunchRippleClose 1180ms cubic-bezier(0.3, 0.08, 0.18, 1) forwards',
+    animation:
+      $phase === 'opening'
+        ? 'projectLaunchRippleOpen 1280ms cubic-bezier(0.16, 0.82, 0.16, 1) forwards'
+        : 'projectLaunchRippleClose 1180ms cubic-bezier(0.3, 0.08, 0.18, 1) forwards',
     '@keyframes projectLaunchRippleOpen': {
       '0%': {
         opacity: 0,
@@ -1051,13 +1021,14 @@ export const ProjectModalGlow = styled(Box)(({ theme }) => ({
   position: 'absolute',
   inset: -80,
   pointerEvents: 'none',
-  background: theme.palette.mode === 'dark'
-    ? `
+  background:
+    theme.palette.mode === 'dark'
+      ? `
       radial-gradient(circle at 18% 18%, rgba(125,211,252,0.22), transparent 24%),
       radial-gradient(circle at 78% 24%, rgba(45,212,191,0.18), transparent 22%),
       radial-gradient(circle at 50% 100%, rgba(96,165,250,0.2), transparent 34%)
     `
-    : `
+      : `
       radial-gradient(circle at 18% 18%, rgba(125,211,252,0.28), transparent 24%),
       radial-gradient(circle at 78% 24%, rgba(45,212,191,0.18), transparent 22%),
       radial-gradient(circle at 50% 100%, rgba(59,130,246,0.16), transparent 34%)
@@ -1077,9 +1048,10 @@ export const ProjectModalInner = styled(Box)(({ theme }) => ({
   padding: theme.spacing(3),
   overscrollBehavior: 'contain',
   scrollbarWidth: 'thin',
-  scrollbarColor: theme.palette.mode === 'dark'
-    ? 'rgba(186,230,253,0.22) transparent'
-    : 'rgba(14,165,233,0.2) transparent',
+  scrollbarColor:
+    theme.palette.mode === 'dark'
+      ? 'rgba(186,230,253,0.22) transparent'
+      : 'rgba(14,165,233,0.2) transparent',
   '&::-webkit-scrollbar': {
     width: 8,
   },
@@ -1091,19 +1063,22 @@ export const ProjectModalInner = styled(Box)(({ theme }) => ({
     borderRadius: 999,
     border: '2px solid transparent',
     backgroundClip: 'padding-box',
-    background: theme.palette.mode === 'dark'
-      ? 'linear-gradient(180deg, rgba(186,230,253,0.26) 0%, rgba(103,232,249,0.14) 100%)'
-      : 'linear-gradient(180deg, rgba(125,211,252,0.3) 0%, rgba(14,165,233,0.16) 100%)',
+    background:
+      theme.palette.mode === 'dark'
+        ? 'linear-gradient(180deg, rgba(186,230,253,0.26) 0%, rgba(103,232,249,0.14) 100%)'
+        : 'linear-gradient(180deg, rgba(125,211,252,0.3) 0%, rgba(14,165,233,0.16) 100%)',
   },
   '&::-webkit-scrollbar-thumb:hover': {
-    background: theme.palette.mode === 'dark'
-      ? 'linear-gradient(180deg, rgba(186,230,253,0.38) 0%, rgba(103,232,249,0.22) 100%)'
-      : 'linear-gradient(180deg, rgba(125,211,252,0.42) 0%, rgba(14,165,233,0.22) 100%)',
+    background:
+      theme.palette.mode === 'dark'
+        ? 'linear-gradient(180deg, rgba(186,230,253,0.38) 0%, rgba(103,232,249,0.22) 100%)'
+        : 'linear-gradient(180deg, rgba(125,211,252,0.42) 0%, rgba(14,165,233,0.22) 100%)',
   },
   '& > *': {
     opacity: 0,
     transform: 'translate3d(0, 16px, 0) scale(0.992)',
-    animation: 'projectModalColumnIn 760ms cubic-bezier(0.16, 0.82, 0.18, 1) forwards',
+    animation:
+      'projectModalColumnIn 760ms cubic-bezier(0.16, 0.82, 0.18, 1) forwards',
   },
   '& > *:first-of-type': {
     animationDelay: '140ms',
@@ -1150,9 +1125,10 @@ export const ProjectCard = styled(Box)(({ theme }) => ({
   position: 'relative',
   borderRadius: 24,
   border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.38 : 0.7)}`,
-  background: theme.palette.mode === 'dark'
-    ? `linear-gradient(150deg, ${alpha('#10213D', 0.7)} 0%, ${alpha('#0D1B31', 0.54)} 100%)`
-    : `linear-gradient(150deg, ${alpha('#FFFFFF', 0.74)} 0%, ${alpha('#ECF8FF', 0.68)} 100%)`,
+  background:
+    theme.palette.mode === 'dark'
+      ? `linear-gradient(150deg, ${alpha('#10213D', 0.7)} 0%, ${alpha('#0D1B31', 0.54)} 100%)`
+      : `linear-gradient(150deg, ${alpha('#FFFFFF', 0.74)} 0%, ${alpha('#ECF8FF', 0.68)} 100%)`,
   boxShadow: `0 18px 44px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.18 : 0.06)}`,
   backdropFilter: 'blur(18px)',
 }));
@@ -1161,9 +1137,10 @@ export const ProjectCloseButton = styled('button')(({ theme }) => ({
   appearance: 'none',
   alignSelf: 'flex-end',
   border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.42 : 0.8)}`,
-  background: theme.palette.mode === 'dark'
-    ? alpha('#0F213E', 0.78)
-    : alpha('#FFFFFF', 0.76),
+  background:
+    theme.palette.mode === 'dark'
+      ? alpha('#0F213E', 0.78)
+      : alpha('#FFFFFF', 0.76),
   color: theme.palette.text.primary,
   borderRadius: 999,
   padding: theme.spacing(1, 1.5),
@@ -1172,7 +1149,8 @@ export const ProjectCloseButton = styled('button')(({ theme }) => ({
   letterSpacing: '0.04em',
   cursor: 'pointer',
   boxShadow: `0 12px 28px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.22 : 0.08)}`,
-  transition: 'transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease',
+  transition:
+    'transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease',
   '&:hover, &:focus-visible': {
     transform: 'translateY(-2px)',
     boxShadow: `0 18px 36px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.3 : 0.12)}`,
@@ -1185,13 +1163,14 @@ export const ProjectPreviewCard = styled(ProjectCard)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  background: theme.palette.mode === 'dark'
-    ? `
+  background:
+    theme.palette.mode === 'dark'
+      ? `
       linear-gradient(160deg, rgba(8, 28, 52, 0.82) 0%, rgba(12, 41, 71, 0.52) 100%),
       radial-gradient(circle at 24% 20%, rgba(125,211,252,0.18), transparent 24%),
       radial-gradient(circle at 76% 82%, rgba(45,212,191,0.14), transparent 26%)
     `
-    : `
+      : `
       linear-gradient(160deg, rgba(255, 255, 255, 0.86) 0%, rgba(218, 242, 255, 0.72) 100%),
       radial-gradient(circle at 24% 20%, rgba(125,211,252,0.22), transparent 24%),
       radial-gradient(circle at 76% 82%, rgba(45,212,191,0.12), transparent 26%)
@@ -1203,8 +1182,9 @@ export const ProjectPreviewSurface = styled(Box)(({ theme }) => ({
   minHeight: 118,
   borderRadius: 20,
   border: `1px solid ${alpha(theme.palette.common.white, theme.palette.mode === 'dark' ? 0.14 : 0.42)}`,
-  background: theme.palette.mode === 'dark'
-    ? 'radial-gradient(circle at 30% 28%, rgba(255,255,255,0.12), transparent 24%), linear-gradient(145deg, rgba(255,255,255,0.04), rgba(125,211,252,0.08))'
-    : 'radial-gradient(circle at 30% 28%, rgba(255,255,255,0.72), transparent 24%), linear-gradient(145deg, rgba(255,255,255,0.5), rgba(125,211,252,0.16))',
+  background:
+    theme.palette.mode === 'dark'
+      ? 'radial-gradient(circle at 30% 28%, rgba(255,255,255,0.12), transparent 24%), linear-gradient(145deg, rgba(255,255,255,0.04), rgba(125,211,252,0.08))'
+      : 'radial-gradient(circle at 30% 28%, rgba(255,255,255,0.72), transparent 24%), linear-gradient(145deg, rgba(255,255,255,0.5), rgba(125,211,252,0.16))',
   boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.2)',
 }));

@@ -13,6 +13,7 @@ import {
   type ProjectsModalPhase,
 } from './projects/ProjectsModal';
 import {
+  BubbleBackgroundVideo,
   BubbleButton,
   BubbleContent,
   BubbleDriftShell,
@@ -228,11 +229,15 @@ export default function Projects() {
       </SectionIntro>
 
       <BubbleField ref={fieldRef} data-entered={entered}>
-        <Box className='water-grid' />
-        <Box className='water-shimmer' />
-        <Box className='water-current water-current-1' />
-        <Box className='water-current water-current-2' />
-        <Box className='water-current water-current-3' />
+        <BubbleBackgroundVideo
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden='true'
+        >
+          <source src='/images/projects/bubbles-background.mp4' type='video/mp4' />
+        </BubbleBackgroundVideo>
         <Box className='bubble-wake bubble-wake-1' />
         <Box className='bubble-wake bubble-wake-2' />
         <Box className='bubble-wake bubble-wake-3' />
@@ -242,7 +247,14 @@ export default function Projects() {
         <BubbleOrb $variant='left' />
         <BubbleOrb $variant='right' />
 
-        <BubbleHeader>
+        <BubbleHeader
+          sx={{
+            opacity: modalVisible ? 0 : 1,
+            transform: modalVisible ? 'translate3d(0, -12px, 0)' : 'translate3d(0, 0, 0)',
+            pointerEvents: modalVisible ? 'none' : 'auto',
+            transition: 'opacity 220ms ease, transform 320ms ease',
+          }}
+        >
           <BubbleHint>
             <BubbleHintLabel
               variant='overline'

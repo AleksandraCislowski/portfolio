@@ -6,72 +6,27 @@ export const MotionSection = motion.create(Box);
 export const MotionBox = motion.create(Box);
 export const MotionChip = motion.create(Chip);
 
+export const HeroBackgroundVideo = styled('video')({
+  position: 'absolute',
+  inset: 0,
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  objectPosition: 'center',
+  pointerEvents: 'none',
+  opacity: 0.42,
+});
+
 export const HeroBackdrop = styled(Box)(() => ({
   position: 'absolute',
-  inset: 0,
+  top: 0,
+  bottom: 0,
+  left: '50%',
+  width: '100vw',
+  transform: 'translateX(-50%)',
   overflow: 'visible',
   pointerEvents: 'none',
-  zIndex: 3,
-}));
-
-export const RightOrbViewport = styled(Box)(() => ({
-  position: 'absolute',
-  inset: 0,
-  overflowX: 'clip',
-  overflowY: 'visible',
-  pointerEvents: 'none',
-  '@media (min-width: 1760px)': {
-    overflowX: 'visible',
-  },
-}));
-
-export const GlowOrb = styled(motion.div)<{ $variant: 'left' | 'right' }>(
-  ({ theme, $variant }) => ({
-    position: 'absolute',
-    borderRadius: '50%',
-    filter: 'blur(14px)',
-    mixBlendMode: theme.palette.mode === 'dark' ? 'screen' : 'normal',
-    opacity: theme.palette.mode === 'dark' ? 0.9 : 1,
-    ...($variant === 'left'
-      ? {
-          top: -130,
-          left: -150,
-          width: 430,
-          height: 430,
-          background: `radial-gradient(circle, ${alpha(theme.palette.primary.light, 0.36)} 0%, transparent 65%)`,
-        }
-      : {
-          right: -180,
-          bottom: -220,
-          width: 540,
-          height: 540,
-          background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.3)} 0%, transparent 67%)`,
-        }),
-    [theme.breakpoints.down('md')]:
-      $variant === 'left'
-        ? {
-            top: -72,
-            left: -102,
-            width: 300,
-            height: 300,
-          }
-        : {
-            display: 'none',
-          },
-  }),
-);
-
-export const BackdropGrid = styled(Box)(({ theme }) => ({
-  position: 'absolute',
-  inset: '7% 6% 4%',
-  borderRadius: 34,
-  opacity: theme.palette.mode === 'dark' ? 0.22 : 0.28,
-  backgroundImage: `
-    linear-gradient(${alpha(theme.palette.common.white, theme.palette.mode === 'dark' ? 0.06 : 0.16)} 1px, transparent 1px),
-    linear-gradient(90deg, ${alpha(theme.palette.common.white, theme.palette.mode === 'dark' ? 0.06 : 0.16)} 1px, transparent 1px)
-  `,
-  backgroundSize: '32px 32px',
-  maskImage: 'linear-gradient(180deg, rgba(0,0,0,0.8), rgba(0,0,0,0.12))',
+  zIndex: 1,
 }));
 
 export const HeroShell = styled(motion.div)(({ theme }) => ({
@@ -80,37 +35,19 @@ export const HeroShell = styled(motion.div)(({ theme }) => ({
   gap: theme.spacing(5),
   alignItems: 'center',
   minHeight: 'calc(100dvh - 120px)',
-  padding: theme.spacing(4),
-  borderRadius: 36,
-  border: '1px solid transparent',
-  background:
-    theme.palette.mode === 'dark'
-      ? `linear-gradient(135deg, ${alpha('#09111F', 0.94)} 0%, ${alpha('#101A33', 0.98)} 52%, ${alpha('#16264B', 0.94)} 100%)`
-      : `linear-gradient(135deg, ${alpha('#E6EEFF', 0.96)} 0%, ${alpha('#DCE7FF', 0.98)} 54%, ${alpha('#D2E0FF', 0.95)} 100%)`,
-  boxShadow:
-    theme.palette.mode === 'dark'
-      ? `0 32px 80px rgba(2, 6, 23, 0.48), inset 0 1px 0 ${alpha('#FFFFFF', 0.06)}`
-      : `0 32px 80px rgba(37, 99, 235, 0.16), inset 0 1px 0 ${alpha('#FFFFFF', 0.9)}`,
-  backdropFilter: 'blur(16px)',
-  isolation: 'isolate',
+  width: 'min(1280px, calc(100vw - 24px))',
+  marginInline: 'auto',
+  padding: theme.spacing(4, 3),
   zIndex: 2,
-  overflow: 'hidden',
+  overflow: 'visible',
   [theme.breakpoints.up('lg')]: {
     gridTemplateColumns: 'minmax(0, 1.02fr) minmax(380px, 0.98fr)',
-    padding: theme.spacing(5),
+    padding: theme.spacing(5, 4),
   },
-}));
-
-export const HeroScan = styled(motion.div)(({ theme }) => ({
-  position: 'absolute',
-  inset: '-18%',
-  zIndex: 0,
-  background: `linear-gradient(132deg, transparent 20%, ${alpha(
-    theme.palette.common.white,
-    theme.palette.mode === 'dark' ? 0.03 : 0.16,
-  )} 48%, transparent 68%)`,
-  pointerEvents: 'none',
-  transform: 'rotate(-12deg)',
+  [theme.breakpoints.down('sm')]: {
+    width: 'calc(100vw - 20px)',
+    padding: theme.spacing(3, 2),
+  },
 }));
 
 export const CopyColumn = styled(Box)(() => ({
