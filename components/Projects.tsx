@@ -7,7 +7,11 @@ import { PROJECTS } from '../config/projects';
 import { SITE_CONFIG } from '../config/site';
 import { useTranslation } from '../i18n/useTranslation';
 import Section from './Section';
-import { ProjectsModal } from './projects/ProjectsModal';
+import {
+  ProjectsModal,
+  type ProjectLaunchSnapshot,
+  type ProjectsModalPhase,
+} from './projects/ProjectsModal';
 import {
   BubbleButton,
   BubbleContent,
@@ -40,12 +44,53 @@ export default function Projects() {
   const fieldRef = React.useRef<HTMLDivElement | null>(null);
   const bubbleButtonRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
   const hadActiveProjectRef = React.useRef(false);
+  const modalPhaseTimeoutRef = React.useRef<number | null>(null);
   const [entered, setEntered] = React.useState(false);
   const [activeProjectIndex, setActiveProjectIndex] = React.useState<number | null>(null);
   const [bubbleMotionPaused, setBubbleMotionPaused] = React.useState(false);
   const [bubbleRecovering, setBubbleRecovering] = React.useState(false);
+  const [modalPhase, setModalPhase] = React.useState<ProjectsModalPhase>('closed');
+  const [launchSnapshot, setLaunchSnapshot] = React.useState<ProjectLaunchSnapshot | null>(null);
+
+  const clearModalPhaseTimeout = React.useCallback(() => {
+    if (modalPhaseTimeoutRef.current !== null) {
+      window.clearTimeout(modalPhaseTimeoutRef.current);
+      modalPhaseTimeoutRef.current = null;
+    }
+  }, []);
+
+  const getBubbleSnapshot = React.useCallback((index: number | null) => {
+    if (index === null || typeof window === 'undefined') {
+      return null;
+    }
+
+    const node = bubbleButtonRefs.current[index];
+    if (!node) {
+      return null;
+    }
+
+    const rect = node.getBoundingClientRect();
+    const maxViewportEdge = Math.max(window.innerWidth, window.innerHeight);
+
+    return {
+      centerX: rect.left + rect.width / 2,
+      centerY: rect.top + rect.height / 2,
+      width: rect.width,
+      height: rect.height,
+      expandScale: Number(((maxViewportEdge / Math.max(rect.width, rect.height)) * 1.92).toFixed(3)),
+    };
+  }, []);
+
+  const openProjectModal = React.useCallback((index: number) => {
+    clearModalPhaseTimeout();
+    setLaunchSnapshot(getBubbleSnapshot(index));
+    setActiveProjectIndex(index);
+    setModalPhase(shouldReduceMotion ? 'open' : 'opening');
+  }, [clearModalPhaseTimeout, getBubbleSnapshot, shouldReduceMotion]);
 
   const closeProjectModal = React.useCallback(() => {
+    clearModalPhaseTimeout();
+
     if (typeof document !== 'undefined') {
       const activeElement = document.activeElement;
 
@@ -55,11 +100,19 @@ export default function Projects() {
     }
 
     if (activeProjectIndex !== null) {
+      setLaunchSnapshot(getBubbleSnapshot(activeProjectIndex));
       bubbleButtonRefs.current[activeProjectIndex]?.blur();
     }
 
-    setActiveProjectIndex(null);
-  }, [activeProjectIndex]);
+    if (shouldReduceMotion) {
+      setModalPhase('closed');
+      setActiveProjectIndex(null);
+      setLaunchSnapshot(null);
+      return;
+    }
+
+    setModalPhase('closing');
+  }, [activeProjectIndex, clearModalPhaseTimeout, getBubbleSnapshot, shouldReduceMotion]);
 
   React.useEffect(() => {
     if (shouldReduceMotion) {
@@ -95,13 +148,35 @@ export default function Projects() {
   }, [shouldReduceMotion]);
 
   React.useEffect(() => {
+    clearModalPhaseTimeout();
+
+    if (modalPhase === 'opening') {
+      modalPhaseTimeoutRef.current = window.setTimeout(() => {
+        setModalPhase('open');
+      }, 1320);
+    }
+
+    if (modalPhase === 'closing') {
+      modalPhaseTimeoutRef.current = window.setTimeout(() => {
+        setModalPhase('closed');
+        setActiveProjectIndex(null);
+        setLaunchSnapshot(null);
+      }, 1320);
+    }
+
+    return () => {
+      clearModalPhaseTimeout();
+    };
+  }, [clearModalPhaseTimeout, modalPhase]);
+
+  React.useEffect(() => {
     if (shouldReduceMotion) {
       setBubbleMotionPaused(true);
       setBubbleRecovering(false);
       return;
     }
 
-    if (activeProjectIndex !== null) {
+    if (modalPhase !== 'closed') {
       hadActiveProjectRef.current = true;
       setBubbleMotionPaused(true);
       setBubbleRecovering(false);
@@ -123,10 +198,10 @@ export default function Projects() {
     return () => {
       window.clearTimeout(timeout);
     };
-  }, [activeProjectIndex, shouldReduceMotion]);
+  }, [modalPhase, shouldReduceMotion]);
 
   React.useEffect(() => {
-    if (activeProjectIndex === null) {
+    if (modalPhase === 'closed') {
       return;
     }
 
@@ -145,9 +220,16 @@ export default function Projects() {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [activeProjectIndex, closeProjectModal]);
+  }, [closeProjectModal, modalPhase]);
+
+  React.useEffect(() => {
+    return () => {
+      clearModalPhaseTimeout();
+    };
+  }, [clearModalPhaseTimeout]);
 
   const activeProject = getActiveProject(activeProjectIndex, t.projects);
+  const modalVisible = modalPhase !== 'closed';
 
   return (
     <Section id={SITE_CONFIG.sectionIds.projects} textAlign='center'>
@@ -191,8 +273,8 @@ export default function Projects() {
           {PROJECTS.map((project, index) => {
             const item = t.projects.items[index];
             const layout = getProjectLayout(index, isSmDown, isMdDown);
-            const isActive = activeProjectIndex === index;
-            const hasActiveProject = activeProjectIndex !== null;
+            const isActive = activeProjectIndex === index && modalVisible;
+            const hasActiveProject = modalVisible;
             const delay = `${index * 0.9}s`;
             const visualState = getBubbleVisualState(
               isActive,
@@ -245,7 +327,7 @@ export default function Projects() {
                     $modalOpen={hasActiveProject}
                     $active={isActive}
                     $recovering={bubbleRecovering}
-                    onClick={() => setActiveProjectIndex(index)}
+                    onClick={() => openProjectModal(index)}
                     aria-haspopup='dialog'
                     aria-expanded={isActive}
                     aria-controls='projects-modal'
@@ -279,6 +361,10 @@ export default function Projects() {
 
           <ProjectsModal
             activeProject={activeProject}
+            visible={modalVisible}
+            phase={modalPhase}
+            launchSource={launchSnapshot}
+            launchTone={activeProjectIndex ?? 0}
             closeLabel={t.projects.closeProject}
             detailsLabel={t.projects.modalDetails}
             previewLabel={t.projects.modalPreview}

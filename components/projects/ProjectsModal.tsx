@@ -3,6 +3,12 @@
 import * as React from 'react';
 import { Box, Typography } from '@mui/material';
 import {
+  ProjectLaunchBeam,
+  ProjectLaunchCore,
+  ProjectLaunchHalo,
+  ProjectLaunchLayer,
+  ProjectLaunchMorph,
+  ProjectLaunchRipple,
   ProjectAside,
   ProjectCard,
   ProjectCloseButton,
@@ -15,6 +21,16 @@ import {
   ProjectPreviewSurface,
 } from './Projects.styles';
 
+export type ProjectsModalPhase = 'closed' | 'opening' | 'open' | 'closing';
+
+export type ProjectLaunchSnapshot = {
+  centerX: number;
+  centerY: number;
+  width: number;
+  height: number;
+  expandScale: number;
+};
+
 type ActiveProject = {
   slug: string;
   title: string;
@@ -23,6 +39,10 @@ type ActiveProject = {
 
 type ProjectsModalProps = {
   activeProject: ActiveProject | null;
+  visible: boolean;
+  phase: ProjectsModalPhase;
+  launchSource: ProjectLaunchSnapshot | null;
+  launchTone: number;
   closeLabel: string;
   detailsLabel: string;
   previewLabel: string;
@@ -36,6 +56,10 @@ type ProjectsModalProps = {
 
 export function ProjectsModal({
   activeProject,
+  visible,
+  phase,
+  launchSource,
+  launchTone,
   closeLabel,
   detailsLabel,
   previewLabel,
@@ -46,18 +70,92 @@ export function ProjectsModal({
   onClose,
   shouldReduceMotion,
 }: ProjectsModalProps) {
-  const visible = activeProject !== null;
-
   return (
     <>
-      <ProjectOverlay $visible={visible} onClick={onClose} />
+      <ProjectOverlay $phase={phase} onClick={onClose} />
+      {!shouldReduceMotion && launchSource && phase !== 'closed' && phase !== 'open' ? (
+        <ProjectLaunchLayer>
+          {phase === 'opening' ? (
+            <>
+              <ProjectLaunchRipple
+                $tone={launchTone}
+                $phase={phase}
+                $x={launchSource.centerX}
+                $y={launchSource.centerY}
+                $size={Math.max(launchSource.width, launchSource.height) * 1.18}
+                $scale={launchSource.expandScale * 1.05}
+              />
+              <ProjectLaunchHalo
+                $tone={launchTone}
+                $phase={phase}
+                $x={launchSource.centerX}
+                $y={launchSource.centerY}
+                $size={Math.max(launchSource.width, launchSource.height) * 0.96}
+                $scale={launchSource.expandScale * 0.72}
+              />
+              <ProjectLaunchCore
+                $tone={launchTone}
+                $phase={phase}
+                $x={launchSource.centerX}
+                $y={launchSource.centerY}
+                $size={Math.max(launchSource.width, launchSource.height) * 0.42}
+                $scale={launchSource.expandScale * 0.48}
+              />
+            </>
+          ) : null}
+          {phase === 'closing' ? (
+            <>
+              <ProjectLaunchRipple
+                $tone={launchTone}
+                $phase={phase}
+                $x={launchSource.centerX}
+                $y={launchSource.centerY}
+                $size={Math.max(launchSource.width, launchSource.height) * 1.4}
+                $scale={launchSource.expandScale * 1.6}
+              />
+              <ProjectLaunchBeam
+                $tone={launchTone}
+                $phase={phase}
+                $x={launchSource.centerX}
+                $y={launchSource.centerY}
+              />
+              <ProjectLaunchHalo
+                $tone={launchTone}
+                $phase={phase}
+                $x={launchSource.centerX}
+                $y={launchSource.centerY}
+                $size={Math.max(launchSource.width, launchSource.height) * 1.1}
+                $scale={launchSource.expandScale * 1.12}
+              />
+              <ProjectLaunchMorph
+                $tone={launchTone}
+                $phase={phase}
+                $x={launchSource.centerX}
+                $y={launchSource.centerY}
+                $width={launchSource.width}
+                $height={launchSource.height}
+                $scale={launchSource.expandScale}
+              />
+              <ProjectLaunchCore
+                $tone={launchTone}
+                $phase={phase}
+                $x={launchSource.centerX}
+                $y={launchSource.centerY}
+                $size={Math.max(launchSource.width, launchSource.height) * 0.58}
+                $scale={launchSource.expandScale * 0.72}
+              />
+            </>
+          ) : null}
+        </ProjectLaunchLayer>
+      ) : null}
       <ProjectModal
         id='projects-modal'
         role='dialog'
         aria-modal='true'
         aria-hidden={!visible}
         aria-labelledby={activeProject ? `project-modal-title-${activeProject.slug}` : undefined}
-        $visible={visible}
+        $phase={phase}
+        $tone={launchTone}
         $reduceMotion={shouldReduceMotion}
         onClick={(event) => event.stopPropagation()}
       >

@@ -582,23 +582,30 @@ export const BubbleHintBody = styled(Typography)(() => ({
 }));
 
 export const ProjectOverlay = styled(Box, {
-  shouldForwardProp: (prop) => prop !== '$visible',
-})<{ $visible: boolean }>(({ theme, $visible }) => ({
+  shouldForwardProp: (prop) => prop !== '$phase',
+})<{ $phase: 'closed' | 'opening' | 'open' | 'closing' }>(({ theme, $phase }) => ({
   position: 'fixed',
   inset: 0,
   zIndex: 1200,
-  pointerEvents: $visible ? 'auto' : 'none',
-  opacity: $visible ? 1 : 0,
-  transition: 'opacity 380ms ease',
+  pointerEvents: $phase === 'closed' ? 'none' : 'auto',
+  opacity: $phase === 'closed' ? 0 : $phase === 'closing' ? 0 : 1,
+  transition: 'opacity 860ms cubic-bezier(0.2, 0.8, 0.18, 1)',
   background: theme.palette.mode === 'dark'
     ? 'linear-gradient(180deg, rgba(4, 10, 24, 0.34) 0%, rgba(4, 10, 24, 0.58) 100%)'
     : 'linear-gradient(180deg, rgba(245, 251, 255, 0.3) 0%, rgba(217, 241, 255, 0.58) 100%)',
-  backdropFilter: $visible ? 'blur(12px) saturate(1.08)' : 'blur(0px)',
+  backdropFilter: $phase === 'closed' || $phase === 'closing'
+    ? 'blur(0px) saturate(1)'
+    : 'blur(12px) saturate(1.06)',
 }));
 
 export const ProjectModal = styled(Box, {
-  shouldForwardProp: (prop) => !['$visible', '$reduceMotion'].includes(prop as string),
-})<{ $visible: boolean; $reduceMotion: boolean }>(({ theme, $visible, $reduceMotion }) => ({
+  shouldForwardProp: (prop) => !['$phase', '$tone', '$reduceMotion'].includes(prop as string),
+})<{ $phase: 'closed' | 'opening' | 'open' | 'closing'; $tone: number; $reduceMotion: boolean }>(({
+  theme,
+  $phase,
+  $tone,
+  $reduceMotion,
+}) => ({
   position: 'fixed',
   top: '50%',
   left: '50%',
@@ -615,15 +622,87 @@ export const ProjectModal = styled(Box, {
   boxShadow: theme.palette.mode === 'dark'
     ? '0 42px 120px rgba(2, 6, 23, 0.6)'
     : '0 42px 120px rgba(14, 116, 144, 0.24)',
-  transform: $visible
+  isolation: 'isolate',
+  transform: $phase === 'open'
     ? 'translate3d(-50%, -50%, 0) scale(1)'
     : 'translate3d(-50%, -46%, 0) scale(0.82)',
-  opacity: $visible ? 1 : 0,
-  pointerEvents: $visible ? 'auto' : 'none',
+  opacity: $phase === 'open' ? 1 : 0,
+  pointerEvents: $phase === 'open' ? 'auto' : 'none',
   transition: $reduceMotion
     ? 'opacity 220ms ease'
-    : 'transform 520ms cubic-bezier(0.2, 0.9, 0.2, 1), opacity 360ms ease',
-  backdropFilter: 'blur(22px) saturate(1.18)',
+    : 'transform 900ms cubic-bezier(0.16, 0.84, 0.2, 1), opacity 680ms ease',
+  backdropFilter: 'blur(20px) saturate(1.12)',
+  animation: $reduceMotion
+    ? 'none'
+    : $phase === 'opening'
+      ? 'projectModalReveal 1120ms cubic-bezier(0.24, 0.08, 0.18, 1) forwards'
+      : $phase === 'closing'
+        ? 'projectModalDismiss 980ms cubic-bezier(0.3, 0.08, 0.18, 1) forwards'
+        : 'none',
+  '@keyframes projectModalReveal': {
+    '0%': {
+      opacity: 0,
+      transform: 'translate3d(-50%, -48.6%, 0) scale(0.97)',
+    },
+    '100%': {
+      opacity: 1,
+      transform: 'translate3d(-50%, -50%, 0) scale(1)',
+    },
+  },
+  '@keyframes projectModalDismiss': {
+    '0%': {
+      opacity: 1,
+      transform: 'translate3d(-50%, -50%, 0) scale(1)',
+    },
+    '100%': {
+      opacity: 0,
+      transform: 'translate3d(-50%, -48.6%, 0) scale(0.97)',
+    },
+  },
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    inset: -2,
+    zIndex: 0,
+    borderRadius: 'inherit',
+    background: (() => {
+      const palette = getLaunchPalette($tone);
+      return `
+        radial-gradient(circle at 20% 18%, ${alpha(palette.beam, 0.18)} 0%, transparent 26%),
+        radial-gradient(circle at 82% 16%, ${alpha(palette.glow, 0.16)} 0%, transparent 24%),
+        linear-gradient(128deg, ${alpha('#FFFFFF', 0.16)} 0%, transparent 28%, ${alpha(
+          palette.core,
+          0.14,
+        )} 48%, transparent 72%)
+      `;
+    })(),
+    opacity: $phase === 'open' ? 0.64 : 0,
+    transform: $phase === 'open' ? 'scale(1)' : 'scale(1.04)',
+    transition: 'opacity 700ms ease 160ms, transform 980ms cubic-bezier(0.16, 0.84, 0.2, 1)',
+    pointerEvents: 'none',
+  },
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    inset: '-18% -30%',
+    zIndex: 0,
+    borderRadius: '42%',
+    background: (() => {
+      const palette = getLaunchPalette($tone);
+      return `linear-gradient(104deg, transparent 18%, ${alpha(palette.beam, 0.08)} 34%, ${alpha(
+        '#FFFFFF',
+        0.28,
+      )} 48%, ${alpha(palette.glow, 0.1)} 58%, transparent 74%)`;
+    })(),
+    opacity: $phase === 'opening' || $phase === 'open' ? 0.5 : 0,
+    transform: $phase === 'opening' || $phase === 'open'
+      ? 'translate3d(6%, -1%, 0) rotate(-6deg)'
+      : 'translate3d(-18%, 0, 0) rotate(-8deg)',
+    transition: 'opacity 620ms ease, transform 980ms cubic-bezier(0.16, 0.84, 0.2, 1)',
+    mixBlendMode: 'screen',
+    filter: 'blur(2px)',
+    pointerEvents: 'none',
+  },
   [theme.breakpoints.down('sm')]: {
     width: 'calc(100vw - 10px)',
     height: 'calc(100vh - 10px)',
@@ -631,6 +710,305 @@ export const ProjectModal = styled(Box, {
     borderRadius: 28,
   },
 }));
+
+function getLaunchPalette(tone: number) {
+  const palettes = [
+    {
+      core: 'rgba(159,214,255,0.9)',
+      edge: 'rgba(37,99,235,0.84)',
+      glow: 'rgba(125,211,252,0.46)',
+      beam: 'rgba(191,219,254,0.92)',
+    },
+    {
+      core: 'rgba(183,242,229,0.9)',
+      edge: 'rgba(8,145,178,0.82)',
+      glow: 'rgba(94,234,212,0.42)',
+      beam: 'rgba(204,251,241,0.94)',
+    },
+    {
+      core: 'rgba(199,184,255,0.92)',
+      edge: 'rgba(124,58,237,0.8)',
+      glow: 'rgba(196,181,253,0.44)',
+      beam: 'rgba(233,213,255,0.92)',
+    },
+  ];
+
+  return palettes[tone % palettes.length];
+}
+
+export const ProjectLaunchLayer = styled(Box)(() => ({
+  position: 'fixed',
+  inset: 0,
+  zIndex: 1201,
+  pointerEvents: 'none',
+  overflow: 'hidden',
+}));
+
+type ProjectLaunchVisualProps = {
+  $tone: number;
+  $phase: 'closed' | 'opening' | 'open' | 'closing';
+  $x: number;
+  $y: number;
+};
+
+export const ProjectLaunchBeam = styled(Box, {
+  shouldForwardProp: (prop) => !['$tone', '$phase', '$x', '$y'].includes(prop as string),
+})<ProjectLaunchVisualProps>(({ $tone, $phase, $x, $y }) => {
+  const palette = getLaunchPalette($tone);
+
+  return {
+    position: 'fixed',
+    top: $y,
+    left: $x,
+    width: '140vmax',
+    height: 140,
+    borderRadius: 999,
+    background: `linear-gradient(102deg, transparent 16%, ${alpha(palette.beam, 0.18)} 32%, ${alpha(
+      palette.beam,
+      0.9,
+    )} 48%, ${alpha(palette.glow, 0.54)} 58%, transparent 74%)`,
+    opacity: 0,
+    transform: 'translate3d(-50%, -50%, 0) rotate(-14deg) scaleX(0.16)',
+    filter: 'blur(6px)',
+    mixBlendMode: 'screen',
+    animation: $phase === 'opening'
+      ? 'projectLaunchBeamOpen 1520ms cubic-bezier(0.16, 0.82, 0.18, 1) forwards'
+      : 'projectLaunchBeamClose 1040ms cubic-bezier(0.3, 0.08, 0.18, 1) forwards',
+    '@keyframes projectLaunchBeamOpen': {
+      '0%': {
+        opacity: 0,
+        transform: 'translate3d(-50%, -50%, 0) rotate(-14deg) scaleX(0.16)',
+      },
+      '24%': {
+        opacity: 0.42,
+      },
+      '100%': {
+        opacity: 0,
+        transform: 'translate3d(-50%, -50%, 0) rotate(-14deg) scaleX(0.9)',
+      },
+    },
+    '@keyframes projectLaunchBeamClose': {
+      '0%': {
+        opacity: 0.16,
+        transform: 'translate3d(-50%, -50%, 0) rotate(-14deg) scaleX(0.58)',
+      },
+      '100%': {
+        opacity: 0,
+        transform: 'translate3d(-50%, -50%, 0) rotate(-14deg) scaleX(0.08)',
+      },
+    },
+  };
+});
+
+type ProjectLaunchPulseProps = ProjectLaunchVisualProps & {
+  $size: number;
+  $scale: number;
+};
+
+export const ProjectLaunchHalo = styled(Box, {
+  shouldForwardProp: (prop) =>
+    !['$tone', '$phase', '$x', '$y', '$size', '$scale'].includes(prop as string),
+})<ProjectLaunchPulseProps>(({ $tone, $phase, $x, $y, $size, $scale }) => {
+  const palette = getLaunchPalette($tone);
+
+  return {
+    position: 'fixed',
+    top: $y,
+    left: $x,
+    width: $size,
+    height: $size,
+    borderRadius: '50%',
+    border: `1px solid ${alpha(palette.beam, 0.54)}`,
+    boxShadow: `0 0 18px ${alpha(palette.glow, 0.18)}, inset 0 0 10px ${alpha(palette.beam, 0.08)}`,
+    opacity: 0,
+    transform: 'translate3d(-50%, -50%, 0) scale(0.92)',
+    animation: $phase === 'opening'
+      ? 'projectLaunchHaloOpen 1240ms cubic-bezier(0.18, 0.82, 0.16, 1) forwards'
+      : 'projectLaunchHaloClose 1120ms cubic-bezier(0.3, 0.08, 0.18, 1) forwards',
+    '@keyframes projectLaunchHaloOpen': {
+      '0%': {
+        opacity: 0,
+        transform: 'translate3d(-50%, -50%, 0) scale(0.92)',
+      },
+      '18%': {
+        opacity: 0.3,
+      },
+      '100%': {
+        opacity: 0,
+        transform: `translate3d(-50%, -50%, 0) scale(${($scale * 0.92).toFixed(3)})`,
+      },
+    },
+    '@keyframes projectLaunchHaloClose': {
+      '0%': {
+        opacity: 0.28,
+        transform: `translate3d(-50%, -50%, 0) scale(${($scale * 0.66).toFixed(3)})`,
+      },
+      '100%': {
+        opacity: 0,
+        transform: 'translate3d(-50%, -50%, 0) scale(0.9)',
+      },
+    },
+  };
+});
+
+type ProjectLaunchMorphProps = ProjectLaunchVisualProps & {
+  $width: number;
+  $height: number;
+  $scale: number;
+};
+
+export const ProjectLaunchMorph = styled(Box, {
+  shouldForwardProp: (prop) =>
+    !['$tone', '$phase', '$x', '$y', '$width', '$height', '$scale'].includes(prop as string),
+})<ProjectLaunchMorphProps>(({ $tone, $phase, $x, $y, $width, $height, $scale }) => {
+  const palette = getLaunchPalette($tone);
+
+  return {
+    position: 'fixed',
+    top: $y,
+    left: $x,
+    width: $width,
+    height: $height,
+    borderRadius: '50%',
+    background: `radial-gradient(circle at 34% 24%, rgba(255,255,255,0.96) 0%, ${palette.core} 16%, ${palette.edge} 54%, rgba(7,16,35,0.94) 100%)`,
+    boxShadow: `0 0 0 1px ${alpha('#FFFFFF', 0.34)}, 0 0 20px ${alpha(palette.glow, 0.18)}`,
+    opacity: 0,
+    transform: 'translate3d(-50%, -50%, 0) scale(1)',
+    animation: $phase === 'opening'
+      ? 'projectLaunchMorphOpen 1760ms cubic-bezier(0.16, 0.82, 0.18, 1) forwards'
+      : 'projectLaunchMorphClose 1120ms cubic-bezier(0.3, 0.08, 0.18, 1) forwards',
+    '@keyframes projectLaunchMorphOpen': {
+      '0%': {
+        opacity: 0.62,
+        transform: 'translate3d(-50%, -50%, 0) scale(1) rotate(0deg)',
+        borderRadius: '50%',
+      },
+      '44%': {
+        opacity: 0.44,
+        transform: `translate3d(-50%, -50%, 0) scale(${($scale * 0.2).toFixed(3)}) rotate(0deg)`,
+        borderRadius: '50%',
+      },
+      '100%': {
+        opacity: 0,
+        transform: `translate3d(-50%, -50%, 0) scale(${($scale * 0.58).toFixed(3)}) rotate(0deg)`,
+        borderRadius: '50%',
+      },
+    },
+    '@keyframes projectLaunchMorphClose': {
+      '0%': {
+        opacity: 0.14,
+        transform: `translate3d(-50%, -50%, 0) scale(${($scale * 0.34).toFixed(3)}) rotate(4deg)`,
+        borderRadius: 42,
+      },
+      '100%': {
+        opacity: 0,
+        transform: 'translate3d(-50%, -50%, 0) scale(1) rotate(0deg)',
+        borderRadius: '50%',
+      },
+    },
+  };
+});
+
+export const ProjectLaunchCore = styled(Box, {
+  shouldForwardProp: (prop) =>
+    !['$tone', '$phase', '$x', '$y', '$size', '$scale'].includes(prop as string),
+})<ProjectLaunchPulseProps>(({ $tone, $phase, $x, $y, $size, $scale }) => {
+  const palette = getLaunchPalette($tone);
+
+  return {
+    position: 'fixed',
+    top: $y,
+    left: $x,
+    width: $size,
+    height: $size,
+    borderRadius: '50%',
+    background: `radial-gradient(circle, ${alpha('#FFFFFF', 0.96)} 0%, ${alpha(palette.beam, 0.88)} 30%, ${alpha(
+      palette.glow,
+      0.46,
+    )} 60%, transparent 100%)`,
+    opacity: 0,
+    transform: 'translate3d(-50%, -50%, 0) scale(0.72)',
+    filter: 'blur(0.5px)',
+    mixBlendMode: 'screen',
+    animation: $phase === 'opening'
+      ? 'projectLaunchCoreOpen 920ms cubic-bezier(0.2, 0.82, 0.18, 1) forwards'
+      : 'projectLaunchCoreClose 940ms cubic-bezier(0.3, 0.08, 0.18, 1) forwards',
+    '@keyframes projectLaunchCoreOpen': {
+      '0%': {
+        opacity: 0,
+        transform: 'translate3d(-50%, -50%, 0) scale(0.72)',
+      },
+      '18%': {
+        opacity: 0.46,
+      },
+      '100%': {
+        opacity: 0,
+        transform: `translate3d(-50%, -50%, 0) scale(${($scale * 0.7).toFixed(3)})`,
+      },
+    },
+    '@keyframes projectLaunchCoreClose': {
+      '0%': {
+        opacity: 0.2,
+        transform: `translate3d(-50%, -50%, 0) scale(${($scale * 0.42).toFixed(3)})`,
+      },
+      '100%': {
+        opacity: 0,
+        transform: 'translate3d(-50%, -50%, 0) scale(0.72)',
+      },
+    },
+  };
+});
+
+export const ProjectLaunchRipple = styled(Box, {
+  shouldForwardProp: (prop) =>
+    !['$tone', '$phase', '$x', '$y', '$size', '$scale'].includes(prop as string),
+})<ProjectLaunchPulseProps>(({ $tone, $phase, $x, $y, $size, $scale }) => {
+  const palette = getLaunchPalette($tone);
+
+  return {
+    position: 'fixed',
+    top: $y,
+    left: $x,
+    width: $size,
+    height: $size,
+    borderRadius: '50%',
+    background: `radial-gradient(circle, ${alpha(palette.beam, 0.18)} 0%, ${alpha(
+      palette.glow,
+      0.1,
+    )} 26%, rgba(255,255,255,0.02) 46%, transparent 70%)`,
+    border: `1px solid ${alpha(palette.beam, 0.14)}`,
+    boxShadow: `0 0 44px ${alpha(palette.glow, 0.1)}`,
+    opacity: 0,
+    transform: 'translate3d(-50%, -50%, 0) scale(0.2)',
+    filter: 'blur(1px)',
+    animation: $phase === 'opening'
+      ? 'projectLaunchRippleOpen 1280ms cubic-bezier(0.16, 0.82, 0.16, 1) forwards'
+      : 'projectLaunchRippleClose 1180ms cubic-bezier(0.3, 0.08, 0.18, 1) forwards',
+    '@keyframes projectLaunchRippleOpen': {
+      '0%': {
+        opacity: 0,
+        transform: 'translate3d(-50%, -50%, 0) scale(0.2)',
+      },
+      '16%': {
+        opacity: 0.12,
+      },
+      '100%': {
+        opacity: 0,
+        transform: `translate3d(-50%, -50%, 0) scale(${($scale * 0.78).toFixed(3)})`,
+      },
+    },
+    '@keyframes projectLaunchRippleClose': {
+      '0%': {
+        opacity: 0.16,
+        transform: `translate3d(-50%, -50%, 0) scale(${($scale * 0.8).toFixed(3)})`,
+      },
+      '100%': {
+        opacity: 0,
+        transform: 'translate3d(-50%, -50%, 0) scale(0.24)',
+      },
+    },
+  };
+});
 
 export const ProjectModalGlow = styled(Box)(({ theme }) => ({
   position: 'absolute',
@@ -647,12 +1025,13 @@ export const ProjectModalGlow = styled(Box)(({ theme }) => ({
       radial-gradient(circle at 78% 24%, rgba(45,212,191,0.18), transparent 22%),
       radial-gradient(circle at 50% 100%, rgba(59,130,246,0.16), transparent 34%)
     `,
-  filter: 'blur(20px)',
-  opacity: 0.95,
+  filter: 'blur(16px)',
+  opacity: 0.58,
 }));
 
 export const ProjectModalInner = styled(Box)(({ theme }) => ({
   position: 'relative',
+  zIndex: 1,
   height: '100%',
   overflowY: 'auto',
   display: 'grid',
@@ -683,6 +1062,27 @@ export const ProjectModalInner = styled(Box)(({ theme }) => ({
     background: theme.palette.mode === 'dark'
       ? 'linear-gradient(180deg, rgba(186,230,253,0.38) 0%, rgba(103,232,249,0.22) 100%)'
       : 'linear-gradient(180deg, rgba(125,211,252,0.42) 0%, rgba(14,165,233,0.22) 100%)',
+  },
+  '& > *': {
+    opacity: 0,
+    transform: 'translate3d(0, 16px, 0) scale(0.992)',
+    animation: 'projectModalColumnIn 760ms cubic-bezier(0.16, 0.82, 0.18, 1) forwards',
+  },
+  '& > *:first-of-type': {
+    animationDelay: '140ms',
+  },
+  '& > *:last-child': {
+    animationDelay: '220ms',
+  },
+  '@keyframes projectModalColumnIn': {
+    '0%': {
+      opacity: 0,
+      transform: 'translate3d(0, 16px, 0) scale(0.992)',
+    },
+    '100%': {
+      opacity: 1,
+      transform: 'translate3d(0, 0, 0) scale(1)',
+    },
   },
   [theme.breakpoints.down('md')]: {
     gridTemplateColumns: '1fr',
