@@ -43,6 +43,7 @@ export default function Projects() {
   const [entered, setEntered] = React.useState(false);
   const [activeProjectIndex, setActiveProjectIndex] = React.useState<number | null>(null);
   const [bubbleMotionPaused, setBubbleMotionPaused] = React.useState(false);
+  const [bubbleRecovering, setBubbleRecovering] = React.useState(false);
 
   const closeProjectModal = React.useCallback(() => {
     if (typeof document !== 'undefined') {
@@ -96,12 +97,14 @@ export default function Projects() {
   React.useEffect(() => {
     if (shouldReduceMotion) {
       setBubbleMotionPaused(true);
+      setBubbleRecovering(false);
       return;
     }
 
     if (activeProjectIndex !== null) {
       hadActiveProjectRef.current = true;
       setBubbleMotionPaused(true);
+      setBubbleRecovering(false);
       return;
     }
 
@@ -109,10 +112,13 @@ export default function Projects() {
       return;
     }
 
+    setBubbleRecovering(true);
+
     const timeout = window.setTimeout(() => {
       setBubbleMotionPaused(false);
+      setBubbleRecovering(false);
       hadActiveProjectRef.current = false;
-    }, 760);
+    }, 1240);
 
     return () => {
       window.clearTimeout(timeout);
@@ -198,6 +204,7 @@ export default function Projects() {
             return (
               <BubbleSlot
                 key={project.slug}
+                $recovering={bubbleRecovering}
                 style={{
                   top: layout.top,
                   left: layout.left,
@@ -225,6 +232,7 @@ export default function Projects() {
                   $reduceMotion={shouldReduceMotion}
                   $modalOpen={hasActiveProject}
                   $motionPaused={bubbleMotionPaused}
+                  $recovering={bubbleRecovering}
                 >
                   <BubbleButton
                     type='button'
@@ -236,6 +244,7 @@ export default function Projects() {
                     $reduceMotion={shouldReduceMotion}
                     $modalOpen={hasActiveProject}
                     $active={isActive}
+                    $recovering={bubbleRecovering}
                     onClick={() => setActiveProjectIndex(index)}
                     aria-haspopup='dialog'
                     aria-expanded={isActive}
