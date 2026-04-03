@@ -363,7 +363,7 @@ export const BubbleDriftShell = styled(Box, {
   $modalOpen: boolean;
   $motionPaused: boolean;
   $recovering: boolean;
-}>(({ $tone, $delay, $reduceMotion, $modalOpen, $motionPaused, $recovering }) => ({
+}>(({ $tone, $delay, $reduceMotion, $motionPaused, $recovering }) => ({
   width: '100%',
   height: '100%',
   willChange: 'transform',
@@ -374,7 +374,7 @@ export const BubbleDriftShell = styled(Box, {
       : $tone % 3 === 1
         ? `bubbleDriftB 13.4s cubic-bezier(0.47, 0.05, 0.18, 0.98) ${$delay} infinite`
         : `bubbleDriftC 12.7s cubic-bezier(0.4, 0.08, 0.2, 0.98) ${$delay} infinite`,
-  animationPlayState: $modalOpen || $motionPaused ? 'paused' : 'running',
+  animationPlayState: $motionPaused ? 'paused' : 'running',
   transition: `transform ${$recovering ? '1040ms' : '700ms'} cubic-bezier(0.16, 0.84, 0.2, 1)`,
   '@keyframes bubbleDriftA': {
     '0%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
@@ -440,10 +440,10 @@ export const BubbleButton = styled('button', {
       : `bubblePulse 5.4s ease-in-out ${$delay} infinite, bubbleGlow 4.8s ease-in-out ${$delay} infinite`,
     transform: $modalOpen
       ? $active
-        ? 'scale(1.06)'
-        : 'scale(0.92)'
+        ? 'scale(1.02)'
+        : 'scale(0.97)'
       : 'scale(1)',
-    opacity: $modalOpen && !$active ? 0.88 : 1,
+    opacity: $modalOpen && !$active ? 0.92 : 1,
     transition: `transform ${$recovering ? '1120ms' : '620ms'} cubic-bezier(0.16, 0.84, 0.2, 1), box-shadow 360ms ease, filter 360ms ease, opacity 360ms ease`,
     willChange: 'transform, box-shadow, filter, opacity',
     zIndex: 1,

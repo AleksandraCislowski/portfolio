@@ -43,7 +43,6 @@ export default function Projects() {
   const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
   const fieldRef = React.useRef<HTMLDivElement | null>(null);
   const bubbleButtonRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
-  const hadActiveProjectRef = React.useRef(false);
   const modalPhaseTimeoutRef = React.useRef<number | null>(null);
   const [entered, setEntered] = React.useState(false);
   const [activeProjectIndex, setActiveProjectIndex] = React.useState<number | null>(null);
@@ -176,28 +175,8 @@ export default function Projects() {
       return;
     }
 
-    if (modalPhase !== 'closed') {
-      hadActiveProjectRef.current = true;
-      setBubbleMotionPaused(true);
-      setBubbleRecovering(false);
-      return;
-    }
-
-    if (!hadActiveProjectRef.current) {
-      return;
-    }
-
-    setBubbleRecovering(true);
-
-    const timeout = window.setTimeout(() => {
-      setBubbleMotionPaused(false);
-      setBubbleRecovering(false);
-      hadActiveProjectRef.current = false;
-    }, 1240);
-
-    return () => {
-      window.clearTimeout(timeout);
-    };
+    setBubbleMotionPaused(false);
+    setBubbleRecovering(false);
   }, [modalPhase, shouldReduceMotion]);
 
   React.useEffect(() => {
@@ -206,6 +185,13 @@ export default function Projects() {
     }
 
     const previousOverflow = document.body.style.overflow;
+    const previousPaddingRight = document.body.style.paddingRight;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
+
     document.body.style.overflow = 'hidden';
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -218,6 +204,7 @@ export default function Projects() {
 
     return () => {
       document.body.style.overflow = previousOverflow;
+      document.body.style.paddingRight = previousPaddingRight;
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [closeProjectModal, modalPhase]);

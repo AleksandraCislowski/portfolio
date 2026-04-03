@@ -19,18 +19,6 @@ export function getBubbleTransforms(
   entered: boolean,
   shouldReduceMotion: boolean,
 ) {
-  const displacedTransform = isSmDown
-    ? index === 0
-      ? 'translate3d(-44px, -52px, 0) scale(0.72) rotate(-8deg)'
-      : index === 1
-        ? 'translate3d(52px, -30px, 0) scale(0.7) rotate(8deg)'
-        : 'translate3d(0, 66px, 0) scale(0.68) rotate(-6deg)'
-    : index === 0
-      ? 'translate3d(-96px, -18px, 0) scale(0.82) rotate(-7deg)'
-      : index === 1
-        ? 'translate3d(102px, -10px, 0) scale(0.8) rotate(7deg)'
-        : 'translate3d(0, 96px, 0) scale(0.78) rotate(-5deg)';
-
   const introTransform = index === 0
     ? 'translate3d(-38px, 60px, 0) scale(0.72) rotate(-8deg)'
     : index === 1
@@ -38,13 +26,9 @@ export function getBubbleTransforms(
       : 'translate3d(0, 84px, 0) scale(0.66) rotate(-4deg)';
 
   if (hasActiveProject) {
-    if (isActive) {
-      return isSmDown
-        ? 'translate3d(0, 0, 0) scale(0.88)'
-        : 'translate3d(0, 0, 0) scale(0.92)';
-    }
-
-    return displacedTransform;
+    return isActive
+      ? 'translate3d(0, 0, 0) scale(0.98)'
+      : 'translate3d(0, 0, 0) scale(1)';
   }
 
   if (entered || shouldReduceMotion) {
@@ -63,15 +47,15 @@ export function getBubbleVisualState(
   return {
     opacity: hasActiveProject
       ? isActive
-        ? 0.22
-        : 0.7
+        ? 0.34
+        : 0.78
       : entered || shouldReduceMotion
         ? 1
         : 0,
     filter: hasActiveProject
       ? isActive
-        ? 'blur(8px)'
-        : 'blur(0.8px)'
+        ? 'blur(3px)'
+        : 'blur(0px)'
       : entered || shouldReduceMotion
         ? 'blur(0px)'
         : 'blur(10px)',
