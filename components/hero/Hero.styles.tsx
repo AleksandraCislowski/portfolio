@@ -33,21 +33,23 @@ export const HeroShell = styled(motion.div)(({ theme }) => ({
   boxSizing: 'border-box',
   position: 'relative',
   display: 'grid',
-  gap: theme.spacing(5),
+  gap: theme.spacing(4),
   alignItems: 'center',
-  minHeight: 'calc(100dvh - 120px)',
+  minHeight: 'calc(82dvh - 96px)',
   width: 'min(1280px, 100%)',
   maxWidth: '100%',
   marginInline: 'auto',
-  padding: theme.spacing(4, 3),
+  padding: theme.spacing(3, 3),
   zIndex: 2,
   overflow: 'visible',
   [theme.breakpoints.up('lg')]: {
     gridTemplateColumns: 'minmax(0, 1.02fr) minmax(380px, 0.98fr)',
-    padding: theme.spacing(5, 4),
+    padding: theme.spacing(4, 4),
   },
   [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(3, 2),
+    minHeight: 'auto',
+    gap: theme.spacing(3),
+    padding: theme.spacing(2, 2),
   },
 }));
 
@@ -115,14 +117,14 @@ export const HeroLocation = styled(Typography)(({ theme }) => ({
 
 export const HeroTitle = styled(Typography)(({ theme }) => ({
   maxWidth: 620,
-  marginBottom: theme.spacing(2.5),
+  marginBottom: theme.spacing(2),
   textWrap: 'balance',
   textShadow: '0 10px 30px rgba(15, 23, 42, 0.28)',
 }));
 
 export const HeroSubtitle = styled(Typography)(({ theme }) => ({
   maxWidth: 600,
-  marginBottom: theme.spacing(3.5),
+  marginBottom: theme.spacing(2.5),
   fontSize: 'clamp(1.05rem, 1.7vw, 1.2rem)',
   color: theme.palette.text.secondary,
 }));
@@ -131,7 +133,7 @@ export const HeroActions = styled(Stack)(({ theme }) => ({
   flexDirection: 'row',
   flexWrap: 'wrap',
   gap: theme.spacing(1.5),
-  marginBottom: theme.spacing(3),
+  marginBottom: theme.spacing(2),
   [theme.breakpoints.down('sm')]: {
     width: '100%',
   },

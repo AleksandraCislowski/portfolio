@@ -4,11 +4,11 @@ export const heroSectionSx = {
   overflowY: 'visible',
   px: 0,
   pt: {
-    xs: 4,
-    md: 6,
+    xs: 3,
+    md: 4,
   },
   pb: {
-    xs: 7,
-    md: 12,
+    xs: 4,
+    md: 6,
   },
 } as const;
