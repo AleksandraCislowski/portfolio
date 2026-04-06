@@ -30,30 +30,17 @@ export const BubbleField = styled(Box)(({ theme }) => ({
   width: '100%',
   borderRadius: 34,
   overflow: 'hidden',
-  border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.48 : 0.78)}`,
-  background:
-    theme.palette.mode === 'dark'
-      ? `linear-gradient(180deg, ${alpha('#06101F', 0.99)} 0%, ${alpha('#0A1730', 0.98)} 34%, ${alpha('#102445', 0.98)} 68%, ${alpha('#143057', 0.98)} 100%)`
-      : `linear-gradient(180deg, ${alpha('#F5FBFF', 0.99)} 0%, ${alpha('#E8F6FF', 0.98)} 34%, ${alpha('#D8EEFF', 0.98)} 70%, ${alpha('#CAE6FF', 0.98)} 100%)`,
-  boxShadow:
-    theme.palette.mode === 'dark'
-      ? '0 28px 70px rgba(2, 6, 23, 0.34)'
-      : '0 28px 70px rgba(37, 99, 235, 0.16)',
+  border: `1px solid ${alpha(theme.palette.divider, 0.48)}`,
+  background: `linear-gradient(180deg, ${alpha('#06101F', 0.99)} 0%, ${alpha('#0A1730', 0.98)} 34%, ${alpha('#102445', 0.98)} 68%, ${alpha('#143057', 0.98)} 100%)`,
+  boxShadow: '0 28px 70px rgba(2, 6, 23, 0.34)',
   '&::before': {
     content: '""',
     position: 'absolute',
     inset: 0,
-    background:
-      theme.palette.mode === 'dark'
-        ? `
+    background: `
         radial-gradient(circle at 18% 20%, rgba(125,211,252,0.18), transparent 24%),
         radial-gradient(circle at 82% 18%, rgba(45,212,191,0.14), transparent 22%),
         radial-gradient(circle at 54% 78%, rgba(96,165,250,0.12), transparent 26%)
-      `
-        : `
-        radial-gradient(circle at 18% 20%, rgba(125,211,252,0.22), transparent 24%),
-        radial-gradient(circle at 82% 18%, rgba(45,212,191,0.16), transparent 22%),
-        radial-gradient(circle at 54% 78%, rgba(96,165,250,0.14), transparent 26%)
       `,
     opacity: 0.68,
     pointerEvents: 'none',
@@ -65,9 +52,7 @@ export const BubbleField = styled(Box)(({ theme }) => ({
     position: 'absolute',
     inset: '-12% -10%',
     background:
-      theme.palette.mode === 'dark'
-        ? 'radial-gradient(120% 56% at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 58%)'
-        : 'radial-gradient(120% 56% at 50% 0%, rgba(255,255,255,0.32) 0%, transparent 58%)',
+      'radial-gradient(120% 56% at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 58%)',
     opacity: 0.5,
     transform: 'translate3d(0, 0, 0)',
     animation: 'waterDrift 18s linear infinite',
@@ -80,10 +65,8 @@ export const BubbleField = styled(Box)(({ theme }) => ({
     borderRadius: '50%',
     pointerEvents: 'none',
     background:
-      theme.palette.mode === 'dark'
-        ? 'radial-gradient(circle, rgba(186,230,253,0.18) 0%, rgba(96,165,250,0.08) 38%, transparent 70%)'
-        : 'radial-gradient(circle, rgba(125,211,252,0.22) 0%, rgba(59,130,246,0.1) 40%, transparent 70%)',
-    mixBlendMode: theme.palette.mode === 'dark' ? 'screen' : 'multiply',
+      'radial-gradient(circle, rgba(186,230,253,0.18) 0%, rgba(96,165,250,0.08) 38%, transparent 70%)',
+    mixBlendMode: 'screen',
     animation: 'wakePulse 7.4s ease-in-out infinite',
   },
   '& .bubble-wake-1': {
@@ -114,14 +97,8 @@ export const BubbleField = styled(Box)(({ theme }) => ({
     width: 120,
     height: 120,
     borderRadius: '50%',
-    border:
-      theme.palette.mode === 'dark'
-        ? '1px solid rgba(186,230,253,0.26)'
-        : '1px solid rgba(14,165,233,0.22)',
-    boxShadow:
-      theme.palette.mode === 'dark'
-        ? '0 0 24px rgba(103,232,249,0.12)'
-        : '0 0 24px rgba(125,211,252,0.18)',
+    border: '1px solid rgba(186,230,253,0.26)',
+    boxShadow: '0 0 24px rgba(103,232,249,0.12)',
     opacity: 0,
     pointerEvents: 'none',
     animation: 'collisionRing 8.6s ease-out infinite',
@@ -212,12 +189,9 @@ export const BubbleHint = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2.1, 2.3),
   borderRadius: 26,
   color: theme.palette.text.primary,
-  background:
-    theme.palette.mode === 'dark'
-      ? `linear-gradient(145deg, ${alpha('#0C1D38', 0.7)} 0%, ${alpha('#10294D', 0.64)} 100%)`
-      : `linear-gradient(145deg, ${alpha('#FFFFFF', 0.82)} 0%, ${alpha('#E7F6FF', 0.72)} 100%)`,
-  border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.46 : 0.78)}`,
-  boxShadow: `0 18px 42px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.26 : 0.08)}`,
+  background: `linear-gradient(145deg, ${alpha('#0C1D38', 0.7)} 0%, ${alpha('#10294D', 0.64)} 100%)`,
+  border: `1px solid ${alpha(theme.palette.divider, 0.46)}`,
+  boxShadow: `0 18px 42px ${alpha(theme.palette.common.black, 0.26)}`,
   backdropFilter: 'blur(18px) saturate(1.12)',
   '&::before': {
     content: '""',
@@ -225,9 +199,7 @@ export const BubbleHint = styled(Box)(({ theme }) => ({
     inset: 0,
     borderRadius: 26,
     background:
-      theme.palette.mode === 'dark'
-        ? 'linear-gradient(135deg, rgba(255,255,255,0.08), transparent 44%, rgba(103,232,249,0.1) 100%)'
-        : 'linear-gradient(135deg, rgba(255,255,255,0.46), transparent 44%, rgba(103,232,249,0.18) 100%)',
+      'linear-gradient(135deg, rgba(255,255,255,0.08), transparent 44%, rgba(103,232,249,0.1) 100%)',
     pointerEvents: 'none',
   },
   [theme.breakpoints.down('sm')]: {
@@ -559,7 +531,7 @@ export const BubbleHintBody = styled(Typography)(() => ({
 export const ProjectOverlay = styled(Box, {
   shouldForwardProp: (prop) => prop !== '$phase',
 })<{ $phase: 'closed' | 'opening' | 'open' | 'closing' }>(
-  ({ theme, $phase }) => ({
+  ({ $phase }) => ({
     position: 'fixed',
     inset: 0,
     zIndex: 1200,
@@ -567,9 +539,7 @@ export const ProjectOverlay = styled(Box, {
     opacity: $phase === 'closed' ? 0 : $phase === 'closing' ? 0 : 1,
     transition: 'opacity 860ms cubic-bezier(0.2, 0.8, 0.18, 1)',
     background:
-      theme.palette.mode === 'dark'
-        ? 'linear-gradient(180deg, rgba(4, 10, 24, 0.34) 0%, rgba(4, 10, 24, 0.58) 100%)'
-        : 'linear-gradient(180deg, rgba(245, 251, 255, 0.3) 0%, rgba(217, 241, 255, 0.58) 100%)',
+      'linear-gradient(180deg, rgba(4, 10, 24, 0.34) 0%, rgba(4, 10, 24, 0.58) 100%)',
     backdropFilter:
       $phase === 'closed' || $phase === 'closing'
         ? 'blur(0px) saturate(1)'
@@ -594,15 +564,9 @@ export const ProjectModal = styled(Box, {
   maxHeight: 'calc(100vh - 20px)',
   borderRadius: 38,
   overflow: 'hidden',
-  border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.42 : 0.74)}`,
-  background:
-    theme.palette.mode === 'dark'
-      ? `linear-gradient(155deg, ${alpha('#071225', 0.96)} 0%, ${alpha('#0A1A33', 0.92)} 38%, ${alpha('#10284C', 0.9)} 100%)`
-      : `linear-gradient(155deg, ${alpha('#FCFEFF', 0.9)} 0%, ${alpha('#E8F7FF', 0.92)} 42%, ${alpha('#D9F0FF', 0.9)} 100%)`,
-  boxShadow:
-    theme.palette.mode === 'dark'
-      ? '0 42px 120px rgba(2, 6, 23, 0.6)'
-      : '0 42px 120px rgba(14, 116, 144, 0.24)',
+  border: `1px solid ${alpha(theme.palette.divider, 0.42)}`,
+  background: `linear-gradient(155deg, ${alpha('#071225', 0.96)} 0%, ${alpha('#0A1A33', 0.92)} 38%, ${alpha('#10284C', 0.9)} 100%)`,
+  boxShadow: '0 42px 120px rgba(2, 6, 23, 0.6)',
   isolation: 'isolate',
   transform:
     $phase === 'open'
@@ -1017,21 +981,14 @@ export const ProjectLaunchRipple = styled(Box, {
   };
 });
 
-export const ProjectModalGlow = styled(Box)(({ theme }) => ({
+export const ProjectModalGlow = styled(Box)(() => ({
   position: 'absolute',
   inset: -80,
   pointerEvents: 'none',
-  background:
-    theme.palette.mode === 'dark'
-      ? `
+  background: `
       radial-gradient(circle at 18% 18%, rgba(125,211,252,0.22), transparent 24%),
       radial-gradient(circle at 78% 24%, rgba(45,212,191,0.18), transparent 22%),
       radial-gradient(circle at 50% 100%, rgba(96,165,250,0.2), transparent 34%)
-    `
-      : `
-      radial-gradient(circle at 18% 18%, rgba(125,211,252,0.28), transparent 24%),
-      radial-gradient(circle at 78% 24%, rgba(45,212,191,0.18), transparent 22%),
-      radial-gradient(circle at 50% 100%, rgba(59,130,246,0.16), transparent 34%)
     `,
   filter: 'blur(16px)',
   opacity: 0.58,
@@ -1048,10 +1005,7 @@ export const ProjectModalInner = styled(Box)(({ theme }) => ({
   padding: theme.spacing(3),
   overscrollBehavior: 'contain',
   scrollbarWidth: 'thin',
-  scrollbarColor:
-    theme.palette.mode === 'dark'
-      ? 'rgba(186,230,253,0.22) transparent'
-      : 'rgba(14,165,233,0.2) transparent',
+  scrollbarColor: 'rgba(186,230,253,0.22) transparent',
   '&::-webkit-scrollbar': {
     width: 8,
   },
@@ -1064,15 +1018,11 @@ export const ProjectModalInner = styled(Box)(({ theme }) => ({
     border: '2px solid transparent',
     backgroundClip: 'padding-box',
     background:
-      theme.palette.mode === 'dark'
-        ? 'linear-gradient(180deg, rgba(186,230,253,0.26) 0%, rgba(103,232,249,0.14) 100%)'
-        : 'linear-gradient(180deg, rgba(125,211,252,0.3) 0%, rgba(14,165,233,0.16) 100%)',
+      'linear-gradient(180deg, rgba(186,230,253,0.26) 0%, rgba(103,232,249,0.14) 100%)',
   },
   '&::-webkit-scrollbar-thumb:hover': {
     background:
-      theme.palette.mode === 'dark'
-        ? 'linear-gradient(180deg, rgba(186,230,253,0.38) 0%, rgba(103,232,249,0.22) 100%)'
-        : 'linear-gradient(180deg, rgba(125,211,252,0.42) 0%, rgba(14,165,233,0.22) 100%)',
+      'linear-gradient(180deg, rgba(186,230,253,0.38) 0%, rgba(103,232,249,0.22) 100%)',
   },
   '& > *': {
     opacity: 0,
@@ -1124,23 +1074,17 @@ export const ProjectAside = styled(Box)(({ theme }) => ({
 export const ProjectCard = styled(Box)(({ theme }) => ({
   position: 'relative',
   borderRadius: 24,
-  border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.38 : 0.7)}`,
-  background:
-    theme.palette.mode === 'dark'
-      ? `linear-gradient(150deg, ${alpha('#10213D', 0.7)} 0%, ${alpha('#0D1B31', 0.54)} 100%)`
-      : `linear-gradient(150deg, ${alpha('#FFFFFF', 0.74)} 0%, ${alpha('#ECF8FF', 0.68)} 100%)`,
-  boxShadow: `0 18px 44px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.18 : 0.06)}`,
+  border: `1px solid ${alpha(theme.palette.divider, 0.38)}`,
+  background: `linear-gradient(150deg, ${alpha('#10213D', 0.7)} 0%, ${alpha('#0D1B31', 0.54)} 100%)`,
+  boxShadow: `0 18px 44px ${alpha(theme.palette.common.black, 0.18)}`,
   backdropFilter: 'blur(18px)',
 }));
 
 export const ProjectCloseButton = styled('button')(({ theme }) => ({
   appearance: 'none',
   alignSelf: 'flex-end',
-  border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.42 : 0.8)}`,
-  background:
-    theme.palette.mode === 'dark'
-      ? alpha('#0F213E', 0.78)
-      : alpha('#FFFFFF', 0.76),
+  border: `1px solid ${alpha(theme.palette.divider, 0.42)}`,
+  background: alpha('#0F213E', 0.78),
   color: theme.palette.text.primary,
   borderRadius: 999,
   padding: theme.spacing(1, 1.5),
@@ -1148,12 +1092,12 @@ export const ProjectCloseButton = styled('button')(({ theme }) => ({
   fontWeight: 700,
   letterSpacing: '0.04em',
   cursor: 'pointer',
-  boxShadow: `0 12px 28px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.22 : 0.08)}`,
+  boxShadow: `0 12px 28px ${alpha(theme.palette.common.black, 0.22)}`,
   transition:
     'transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease',
   '&:hover, &:focus-visible': {
     transform: 'translateY(-2px)',
-    boxShadow: `0 18px 36px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.3 : 0.12)}`,
+    boxShadow: `0 18px 36px ${alpha(theme.palette.common.black, 0.3)}`,
   },
 }));
 
@@ -1163,17 +1107,10 @@ export const ProjectPreviewCard = styled(ProjectCard)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  background:
-    theme.palette.mode === 'dark'
-      ? `
+  background: `
       linear-gradient(160deg, rgba(8, 28, 52, 0.82) 0%, rgba(12, 41, 71, 0.52) 100%),
       radial-gradient(circle at 24% 20%, rgba(125,211,252,0.18), transparent 24%),
       radial-gradient(circle at 76% 82%, rgba(45,212,191,0.14), transparent 26%)
-    `
-      : `
-      linear-gradient(160deg, rgba(255, 255, 255, 0.86) 0%, rgba(218, 242, 255, 0.72) 100%),
-      radial-gradient(circle at 24% 20%, rgba(125,211,252,0.22), transparent 24%),
-      radial-gradient(circle at 76% 82%, rgba(45,212,191,0.12), transparent 26%)
     `,
 }));
 
@@ -1181,10 +1118,8 @@ export const ProjectPreviewSurface = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(2),
   minHeight: 118,
   borderRadius: 20,
-  border: `1px solid ${alpha(theme.palette.common.white, theme.palette.mode === 'dark' ? 0.14 : 0.42)}`,
+  border: `1px solid ${alpha(theme.palette.common.white, 0.14)}`,
   background:
-    theme.palette.mode === 'dark'
-      ? 'radial-gradient(circle at 30% 28%, rgba(255,255,255,0.12), transparent 24%), linear-gradient(145deg, rgba(255,255,255,0.04), rgba(125,211,252,0.08))'
-      : 'radial-gradient(circle at 30% 28%, rgba(255,255,255,0.72), transparent 24%), linear-gradient(145deg, rgba(255,255,255,0.5), rgba(125,211,252,0.16))',
+    'radial-gradient(circle at 30% 28%, rgba(255,255,255,0.12), transparent 24%), linear-gradient(145deg, rgba(255,255,255,0.04), rgba(125,211,252,0.08))',
   boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.2)',
 }));

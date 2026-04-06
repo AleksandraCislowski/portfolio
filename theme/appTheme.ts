@@ -1,31 +1,5 @@
 import { alpha, createTheme, type ThemeOptions } from '@mui/material/styles';
-import type { ThemeMode } from './types';
 import { DESIGN_TOKENS } from './tokens';
-
-const lightPalette: ThemeOptions['palette'] = {
-  mode: 'light',
-  primary: {
-    main: '#2563EB',
-    light: '#3B82F6',
-    dark: '#1D4ED8',
-    contrastText: '#EFF6FF',
-  },
-  secondary: {
-    main: '#7C3AED',
-    light: '#A78BFA',
-    dark: '#6D28D9',
-    contrastText: '#F5F3FF',
-  },
-  background: {
-    default: '#F6F9FF',
-    paper: '#FFFFFF',
-  },
-  text: {
-    primary: '#0F172A',
-    secondary: '#475569',
-  },
-  divider: '#D9E5FF',
-};
 
 const darkPalette: ThemeOptions['palette'] = {
   mode: 'dark',
@@ -96,20 +70,16 @@ const sharedThemeOptions: ThemeOptions = {
   },
 };
 
-export function getAppTheme(mode: ThemeMode) {
-  const palette = mode === 'dark' ? darkPalette : lightPalette;
-
+export function getAppTheme() {
   return createTheme({
     ...sharedThemeOptions,
-    palette,
+    palette: darkPalette,
     components: {
       MuiCssBaseline: {
         styleOverrides: {
           body: {
             backgroundImage:
-              mode === 'dark'
-                ? 'radial-gradient(circle at 18% 18%, rgba(96,165,250,0.16), transparent 42%), radial-gradient(circle at 82% 0%, rgba(124,58,237,0.14), transparent 36%)'
-                : 'radial-gradient(circle at 10% 8%, rgba(59,130,246,0.14), transparent 34%), radial-gradient(circle at 90% 2%, rgba(139,92,246,0.12), transparent 38%), radial-gradient(circle at 50% 100%, rgba(45,212,191,0.08), transparent 40%)',
+              'radial-gradient(circle at 18% 18%, rgba(96,165,250,0.16), transparent 42%), radial-gradient(circle at 82% 0%, rgba(124,58,237,0.14), transparent 36%)',
             backgroundAttachment: 'fixed',
           },
         },
@@ -134,10 +104,7 @@ export function getAppTheme(mode: ThemeMode) {
           root: ({ theme }) => ({
             backgroundColor: alpha(theme.palette.background.paper, 0.9),
             border: `1px solid ${alpha(theme.palette.divider, 0.6)}`,
-            boxShadow:
-              mode === 'dark'
-                ? '0 12px 28px rgba(2, 6, 23, 0.4)'
-                : '0 12px 28px rgba(15, 23, 42, 0.08)',
+            boxShadow: '0 12px 28px rgba(2, 6, 23, 0.4)',
           }),
         },
       },

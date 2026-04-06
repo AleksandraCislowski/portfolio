@@ -108,10 +108,7 @@ export const HeroTitle = styled(Typography)(({ theme }) => ({
   maxWidth: 620,
   marginBottom: theme.spacing(2.5),
   textWrap: 'balance',
-  textShadow:
-    theme.palette.mode === 'dark'
-      ? '0 10px 30px rgba(15, 23, 42, 0.28)'
-      : '0 10px 30px rgba(59, 130, 246, 0.12)',
+  textShadow: '0 10px 30px rgba(15, 23, 42, 0.28)',
 }));
 
 export const HeroSubtitle = styled(Typography)(({ theme }) => ({
@@ -171,7 +168,7 @@ export const PrimaryHeroButton = styled(Button)(({ theme }) => ({
     transform: 'translateY(-1px) scale(0.99)',
   },
   '&.Mui-focusVisible': {
-    outline: `2px solid ${alpha(theme.palette.common.white, theme.palette.mode === 'dark' ? 0.82 : 0.96)}`,
+    outline: `2px solid ${alpha(theme.palette.common.white, 0.82)}`,
     outlineOffset: 3,
   },
 }));
@@ -188,16 +185,13 @@ export const SecondaryHeroButton = styled(Button)(({ theme }) => ({
   borderWidth: 1.5,
   backgroundColor: alpha(theme.palette.background.paper, 0.22),
   backdropFilter: 'blur(12px)',
-  borderColor: alpha(
-    theme.palette.secondary.main,
-    theme.palette.mode === 'dark' ? 0.4 : 0.26,
-  ),
-  boxShadow: `0 14px 30px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.22 : 0.08)}`,
+  borderColor: alpha(theme.palette.secondary.main, 0.4),
+  boxShadow: `0 14px 30px ${alpha(theme.palette.common.black, 0.22)}`,
   '&::before': {
     content: '""',
     position: 'absolute',
     inset: 0,
-    background: `linear-gradient(135deg, ${alpha(theme.palette.secondary.light, theme.palette.mode === 'dark' ? 0.16 : 0.22)} 0%, transparent 58%)`,
+    background: `linear-gradient(135deg, ${alpha(theme.palette.secondary.light, 0.16)} 0%, transparent 58%)`,
     opacity: 0,
     transform: 'translateX(-8%) scale(0.98)',
   },
@@ -206,16 +200,13 @@ export const SecondaryHeroButton = styled(Button)(({ theme }) => ({
     position: 'absolute',
     inset: 0,
     borderRadius: 16,
-    border: `1px solid ${alpha(theme.palette.common.white, theme.palette.mode === 'dark' ? 0.22 : 0.54)}`,
+    border: `1px solid ${alpha(theme.palette.common.white, 0.22)}`,
     opacity: 0,
   },
   '&:hover': {
     transform: 'translateY(-3px) scale(1.01)',
     borderColor: alpha(theme.palette.secondary.main, 0.58),
-    backgroundColor: alpha(
-      theme.palette.background.paper,
-      theme.palette.mode === 'dark' ? 0.28 : 0.66,
-    ),
+    backgroundColor: alpha(theme.palette.background.paper, 0.28),
     boxShadow: `0 24px 46px ${alpha(theme.palette.secondary.main, 0.2)}, 0 0 0 1px ${alpha(theme.palette.secondary.light, 0.22)}`,
   },
   '&:hover::before': {
@@ -229,7 +220,7 @@ export const SecondaryHeroButton = styled(Button)(({ theme }) => ({
     transform: 'translateY(-1px) scale(0.99)',
   },
   '&.Mui-focusVisible': {
-    outline: `2px solid ${alpha(theme.palette.common.white, theme.palette.mode === 'dark' ? 0.82 : 0.96)}`,
+    outline: `2px solid ${alpha(theme.palette.common.white, 0.82)}`,
     outlineOffset: 3,
   },
 }));
@@ -277,7 +268,7 @@ export const MetaChip = styled(MotionChip)(({ theme }) => ({
   backgroundColor: alpha(theme.palette.background.paper, 0.58),
   border: `1px solid ${alpha(theme.palette.divider, 0.9)}`,
   color: theme.palette.text.primary,
-  boxShadow: `0 12px 24px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.14 : 0.06)}`,
+  boxShadow: `0 12px 24px ${alpha(theme.palette.common.black, 0.14)}`,
   justifyContent: 'center',
   '& .MuiChip-label': {
     display: 'block',
@@ -317,15 +308,9 @@ export const ImageMediaClip = styled(Box)(({ theme }) => ({
   overflow: 'hidden',
   borderRadius: 28,
   minHeight: 420,
-  border: `1px solid ${alpha(theme.palette.common.white, theme.palette.mode === 'dark' ? 0.16 : 0.7)}`,
-  background:
-    theme.palette.mode === 'dark'
-      ? `linear-gradient(180deg, ${alpha('#111827', 0.9)} 0%, ${alpha('#1E3A8A', 0.32)} 100%)`
-      : `linear-gradient(180deg, ${alpha('#DBEAFE', 0.92)} 0%, ${alpha('#BFDBFE', 0.72)} 100%)`,
-  boxShadow:
-    theme.palette.mode === 'dark'
-      ? '0 28px 60px rgba(2, 6, 23, 0.42)'
-      : '0 28px 60px rgba(37, 99, 235, 0.22)',
+  border: `1px solid ${alpha(theme.palette.common.white, 0.16)}`,
+  background: `linear-gradient(180deg, ${alpha('#111827', 0.9)} 0%, ${alpha('#1E3A8A', 0.32)} 100%)`,
+  boxShadow: '0 28px 60px rgba(2, 6, 23, 0.42)',
   transition: 'transform 220ms ease, box-shadow 260ms ease',
   [theme.breakpoints.up('lg')]: {
     minHeight: 560,
@@ -335,9 +320,7 @@ export const ImageMediaClip = styled(Box)(({ theme }) => ({
     position: 'absolute',
     inset: 0,
     background:
-      theme.palette.mode === 'dark'
-        ? 'linear-gradient(180deg, rgba(9,17,31,0.04) 0%, rgba(9,17,31,0.28) 100%)'
-        : 'linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(15,23,42,0.08) 100%)',
+      'linear-gradient(180deg, rgba(9,17,31,0.04) 0%, rgba(9,17,31,0.28) 100%)',
     pointerEvents: 'none',
     zIndex: 1,
   },
@@ -361,15 +344,9 @@ export const ImageAccent = styled(Box)(({ theme }) => ({
   padding: theme.spacing(1.75, 2),
   borderRadius: 22,
   border: `1px solid ${alpha(theme.palette.common.white, 0.18)}`,
-  background:
-    theme.palette.mode === 'dark'
-      ? alpha('#0F172A', 0.74)
-      : alpha('#FFFFFF', 0.78),
+  background: alpha('#0F172A', 0.74),
   color: theme.palette.text.primary,
-  boxShadow:
-    theme.palette.mode === 'dark'
-      ? '0 18px 40px rgba(2, 6, 23, 0.36)'
-      : '0 18px 40px rgba(37, 99, 235, 0.18)',
+  boxShadow: '0 18px 40px rgba(2, 6, 23, 0.36)',
   backdropFilter: 'blur(14px)',
   [theme.breakpoints.down('sm')]: {
     right: 16,

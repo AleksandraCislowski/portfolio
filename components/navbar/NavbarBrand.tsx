@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { SITE_CONFIG } from '../../config/site';
 
-import { Brand, BrandImage, BrandLink, BrandLockup, BrandMark } from './Navbar.styles';
+import { Brand, BrandLink, BrandLockup } from './Navbar.styles';
 
 type NavbarBrandProps = {
   onNavigateHome?: (event: React.MouseEvent<HTMLElement>) => void;
@@ -15,9 +15,6 @@ export function NavbarBrand({ onNavigateHome }: NavbarBrandProps) {
       onClick={onNavigateHome}
     >
       <BrandLockup>
-        <BrandMark>
-          <BrandImage src='/images/profile/monogram.png' alt='AC monogram' />
-        </BrandMark>
         <Brand variant='h5'>{SITE_CONFIG.brandName}</Brand>
       </BrandLockup>
     </BrandLink>

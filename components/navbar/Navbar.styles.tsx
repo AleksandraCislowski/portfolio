@@ -26,19 +26,26 @@ export const StyledAppBar = styled(AppBar)(({ theme }) => ({
 export const StyledToolbar = styled(Toolbar)(() => ({
   display: 'flex',
   alignItems: 'center',
-  width: '100%',
+  width: 'min(1280px, calc(100vw - 24px))',
+  marginInline: 'auto',
   gap: DESIGN_TOKENS.spacing.xs * 8,
   minHeight: 72,
-  paddingInline: 16,
+  boxSizing: 'border-box',
+  paddingInline: 24,
   '@media (max-width: 1180px)': {
     gap: 12,
     minHeight: 68,
-    paddingInline: 12,
   },
   '@media (max-width: 980px)': {
     gap: 10,
     minHeight: 64,
-    paddingInline: 10,
+  },
+  '@media (min-width: 1200px)': {
+    paddingInline: 32,
+  },
+  '@media (max-width: 600px)': {
+    width: 'calc(100vw - 20px)',
+    paddingInline: 16,
   },
 }));
 
@@ -70,20 +77,6 @@ export const MobileMenuButton = styled(IconButton)(() => ({
   },
 }));
 
-export const ThemeButton = styled(IconButton)(({ theme }) => ({
-  marginLeft: theme.spacing(0),
-  border: `1px solid ${alpha('#E2E8F0', 0.28)}`,
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
-  },
-  '@media (max-width: 1024px)': {
-    padding: 8,
-  },
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.primary.main, 0.12),
-  },
-}));
-
 export const BrandLink = styled('a')(({ theme }) => ({
   display: 'inline-flex',
   alignItems: 'center',
@@ -100,35 +93,9 @@ export const BrandLink = styled('a')(({ theme }) => ({
 export const BrandLockup = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',
-  gap: 8.8,
   '@media (max-width: 1024px)': {
     flexShrink: 0,
   },
-}));
-
-export const BrandMark = styled(Box)(({ theme }) => ({
-  position: 'relative',
-  width: 42,
-  height: 42,
-  flexShrink: 0,
-  overflow: 'visible',
-  borderRadius: 0,
-  filter: `drop-shadow(0 8px 18px ${alpha(theme.palette.common.black, 0.2)})`,
-  '@media (max-width: 1180px)': {
-    width: 38,
-    height: 38,
-  },
-  '@media (max-width: 980px)': {
-    width: 34,
-    height: 34,
-  },
-}));
-
-export const BrandImage = styled('img')(() => ({
-  display: 'block',
-  width: '100%',
-  height: '100%',
-  objectFit: 'contain',
 }));
 
 export const Brand = styled(Typography)(({ theme }) => ({
@@ -141,10 +108,10 @@ export const Brand = styled(Typography)(({ theme }) => ({
     fontSize: '1.2rem',
   },
   '@media (max-width: 980px)': {
-    fontSize: '1.05rem',
+    fontSize: '1.12rem',
   },
   '@media (max-width: 1024px)': {
-    fontSize: '0.98rem',
+    fontSize: '1.08rem',
   },
 }));
 

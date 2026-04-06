@@ -83,15 +83,9 @@ const AboutPanel = styled(Box)(({ theme }) => ({
   padding: theme.spacing(3),
   borderRadius: 30,
   overflow: 'hidden',
-  border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.65 : 0.9)}`,
-  background:
-    theme.palette.mode === 'dark'
-      ? `linear-gradient(145deg, ${alpha('#101A33', 0.84)} 0%, ${alpha('#16264B', 0.68)} 100%)`
-      : `linear-gradient(145deg, ${alpha('#FFFFFF', 0.86)} 0%, ${alpha('#EAF2FF', 0.8)} 100%)`,
-  boxShadow:
-    theme.palette.mode === 'dark'
-      ? '0 20px 48px rgba(2, 6, 23, 0.32)'
-      : '0 20px 48px rgba(37, 99, 235, 0.1)',
+  border: `1px solid ${alpha(theme.palette.divider, 0.65)}`,
+  background: `linear-gradient(145deg, ${alpha('#101A33', 0.84)} 0%, ${alpha('#16264B', 0.68)} 100%)`,
+  boxShadow: '0 20px 48px rgba(2, 6, 23, 0.32)',
   backdropFilter: 'blur(18px)',
   [theme.breakpoints.up('md')]: {
     padding: theme.spacing(4),
@@ -102,9 +96,7 @@ const AboutPanel = styled(Box)(({ theme }) => ({
     inset: 0,
     pointerEvents: 'none',
     background:
-      theme.palette.mode === 'dark'
-        ? 'radial-gradient(circle at 0% 0%, rgba(96,165,250,0.16), transparent 30%), radial-gradient(circle at 100% 100%, rgba(196,181,253,0.1), transparent 28%)'
-        : 'radial-gradient(circle at 0% 0%, rgba(59,130,246,0.12), transparent 28%), radial-gradient(circle at 100% 100%, rgba(139,92,246,0.1), transparent 30%)',
+      'radial-gradient(circle at 0% 0%, rgba(96,165,250,0.16), transparent 30%), radial-gradient(circle at 100% 100%, rgba(196,181,253,0.1), transparent 28%)',
   },
 }));
 
@@ -141,20 +133,14 @@ const AboutAvatarFrame = styled(Box)(({ theme }) => ({
   justifyContent: 'center',
   padding: theme.spacing(1),
   borderRadius: 32,
-  background:
-    theme.palette.mode === 'dark'
-      ? `linear-gradient(145deg, ${alpha(theme.palette.primary.light, 0.2)} 0%, ${alpha(theme.palette.background.paper, 0.92)} 100%)`
-      : `linear-gradient(145deg, ${alpha(theme.palette.primary.light, 0.16)} 0%, ${alpha('#FFFFFF', 0.94)} 100%)`,
-  boxShadow:
-    theme.palette.mode === 'dark'
-      ? '0 22px 36px rgba(2, 6, 23, 0.34)'
-      : '0 22px 36px rgba(37, 99, 235, 0.14)',
+  background: `linear-gradient(145deg, ${alpha(theme.palette.primary.light, 0.2)} 0%, ${alpha(theme.palette.background.paper, 0.92)} 100%)`,
+  boxShadow: '0 22px 36px rgba(2, 6, 23, 0.34)',
   '&::after': {
     content: '""',
     position: 'absolute',
     inset: -10,
     borderRadius: 40,
-    border: `1px solid ${alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.18 : 0.14)}`,
+    border: `1px solid ${alpha(theme.palette.primary.main, 0.18)}`,
     pointerEvents: 'none',
   },
 }));
@@ -164,7 +150,7 @@ const AboutAvatar = styled(Avatar)(({ theme }) => ({
   height: 132,
   marginBottom: 0,
   borderRadius: 24,
-  border: `3px solid ${alpha(theme.palette.common.white, theme.palette.mode === 'dark' ? 0.12 : 0.92)}`,
+  border: `3px solid ${alpha(theme.palette.common.white, 0.12)}`,
   '& .MuiAvatar-img': {
     objectFit: 'cover',
     objectPosition: 'center top',
@@ -202,15 +188,9 @@ const HighlightItem = styled(ListItem)(({ theme }) => ({
   paddingInline: 0,
   paddingBlock: theme.spacing(0.85),
   borderRadius: 16,
-  backgroundColor: alpha(
-    theme.palette.background.paper,
-    theme.palette.mode === 'dark' ? 0.18 : 0.5,
-  ),
-  border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.35 : 0.8)}`,
-  boxShadow:
-    theme.palette.mode === 'dark'
-      ? '0 10px 24px rgba(2, 6, 23, 0.16)'
-      : '0 10px 24px rgba(15, 23, 42, 0.04)',
+  backgroundColor: alpha(theme.palette.background.paper, 0.18),
+  border: `1px solid ${alpha(theme.palette.divider, 0.35)}`,
+  boxShadow: '0 10px 24px rgba(2, 6, 23, 0.16)',
 }));
 
 const HighlightText = styled(ListItemText)(({ theme }) => ({
@@ -238,29 +218,17 @@ const SocialButton = styled('a')(({ theme }) => ({
   borderRadius: 16,
   color: theme.palette.primary.main,
   textDecoration: 'none',
-  border: `1px solid ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.4 : 0.8)}`,
-  backgroundColor: alpha(
-    theme.palette.background.paper,
-    theme.palette.mode === 'dark' ? 0.24 : 0.72,
-  ),
-  boxShadow:
-    theme.palette.mode === 'dark'
-      ? '0 14px 28px rgba(2, 6, 23, 0.2)'
-      : '0 14px 28px rgba(15, 23, 42, 0.06)',
+  border: `1px solid ${alpha(theme.palette.divider, 0.4)}`,
+  backgroundColor: alpha(theme.palette.background.paper, 0.24),
+  boxShadow: '0 14px 28px rgba(2, 6, 23, 0.2)',
   backdropFilter: 'blur(10px)',
   transition:
     'transform 180ms ease, box-shadow 200ms ease, border-color 200ms ease, background-color 200ms ease',
   '&:hover': {
     transform: 'translateY(-2px)',
     borderColor: alpha(theme.palette.primary.main, 0.42),
-    backgroundColor: alpha(
-      theme.palette.background.paper,
-      theme.palette.mode === 'dark' ? 0.34 : 0.92,
-    ),
-    boxShadow:
-      theme.palette.mode === 'dark'
-        ? `0 18px 34px ${alpha(theme.palette.primary.main, 0.16)}`
-        : `0 18px 34px ${alpha(theme.palette.primary.main, 0.12)}`,
+    backgroundColor: alpha(theme.palette.background.paper, 0.34),
+    boxShadow: `0 18px 34px ${alpha(theme.palette.primary.main, 0.16)}`,
   },
 }));
 

@@ -34,24 +34,16 @@ const DownloadsPreview = styled(Box)(({ theme }) => ({
   position: 'relative',
   minHeight: 220,
   borderRadius: 28,
-  border: `1px dashed ${alpha(theme.palette.divider, theme.palette.mode === 'dark' ? 0.55 : 0.9)}`,
-  background:
-    theme.palette.mode === 'dark'
-      ? `linear-gradient(160deg, ${alpha('#0F1B33', 0.72)} 0%, ${alpha('#15284B', 0.54)} 100%)`
-      : `linear-gradient(160deg, ${alpha('#FFFFFF', 0.88)} 0%, ${alpha('#EEF6FF', 0.92)} 100%)`,
-  boxShadow:
-    theme.palette.mode === 'dark'
-      ? '0 20px 48px rgba(2, 6, 23, 0.22)'
-      : '0 20px 48px rgba(37, 99, 235, 0.08)',
+  border: `1px dashed ${alpha(theme.palette.divider, 0.55)}`,
+  background: `linear-gradient(160deg, ${alpha('#0F1B33', 0.72)} 0%, ${alpha('#15284B', 0.54)} 100%)`,
+  boxShadow: '0 20px 48px rgba(2, 6, 23, 0.22)',
   overflow: 'hidden',
   '&::before': {
     content: '""',
     position: 'absolute',
     inset: 0,
     background:
-      theme.palette.mode === 'dark'
-        ? 'radial-gradient(circle at 18% 18%, rgba(125,211,252,0.12), transparent 28%), radial-gradient(circle at 82% 78%, rgba(96,165,250,0.12), transparent 32%)'
-        : 'radial-gradient(circle at 18% 18%, rgba(125,211,252,0.14), transparent 28%), radial-gradient(circle at 82% 78%, rgba(96,165,250,0.12), transparent 32%)',
+      'radial-gradient(circle at 18% 18%, rgba(125,211,252,0.12), transparent 28%), radial-gradient(circle at 82% 78%, rgba(96,165,250,0.12), transparent 32%)',
     pointerEvents: 'none',
   },
   [theme.breakpoints.down('lg')]: {

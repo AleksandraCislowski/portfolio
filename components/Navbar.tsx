@@ -2,13 +2,10 @@
 import * as React from 'react';
 import { SelectProps } from '@mui/material/Select';
 import MenuIcon from '@mui/icons-material/Menu';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
 import type { SelectChangeEvent } from '@mui/material/Select';
 import { usePathname } from 'next/navigation';
 import { useLanguage, type Language } from '../i18n/LanguageContext';
 import { useTranslation } from '../i18n/useTranslation';
-import { useThemeMode } from '../theme/ThemeModeContext';
 import { SITE_CONFIG } from '../config/site';
 import { NavbarBrand } from './navbar/NavbarBrand';
 import { NavbarDesktopNav } from './navbar/NavbarDesktopNav';
@@ -19,7 +16,6 @@ import {
   StyledToolbar,
   ToolbarRight,
   RightControls,
-  ThemeButton,
   MobileMenuButton,
   languageMenuPaperSx,
 } from './navbar/Navbar.styles';
@@ -30,15 +26,12 @@ export default function Navbar() {
   const pathname = usePathname();
   const { lang, setLang } = useLanguage();
   const t = useTranslation();
-  const { mode, setMode } = useThemeMode();
   const [mobileNavOpen, setMobileNavOpen] = React.useState(false);
   const [activeHref, setActiveHref] = React.useState<string | null>(null);
   const [hasResolvedActiveHref, setHasResolvedActiveHref] = React.useState(false);
   const navLockUntilRef = React.useRef(0);
   const isHomePage = pathname === '/';
   const rootPrefix = isHomePage ? '' : '/';
-
-  const nextMode = mode === 'dark' ? 'light' : 'dark';
   const languageMenuProps: SelectProps<Language>['MenuProps'] = {
     PaperProps: {
       sx: languageMenuPaperSx,
@@ -165,10 +158,6 @@ export default function Navbar() {
     setMobileNavOpen(false);
   };
 
-  const handleToggleTheme = () => {
-    setMode(nextMode);
-  };
-
   const handleSamePageNavigation = React.useCallback((href: string) => {
     setActiveHref(href);
     setHasResolvedActiveHref(true);
@@ -241,7 +230,7 @@ export default function Navbar() {
 
   return (
     <StyledAppBar position='sticky' color='default' elevation={0}>
-      <StyledToolbar>
+      <StyledToolbar disableGutters>
         <NavbarBrand onNavigateHome={handleNavigateHome} />
 
         <ToolbarRight>
@@ -261,14 +250,6 @@ export default function Navbar() {
           />
 
           <RightControls>
-            <ThemeButton
-              onClick={handleToggleTheme}
-              color='inherit'
-              aria-label={`Switch to ${nextMode} mode`}
-            >
-              {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-            </ThemeButton>
-
             <MobileMenuButton
               edge='end'
               color='inherit'
