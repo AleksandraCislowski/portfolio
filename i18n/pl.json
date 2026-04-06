@@ -120,21 +120,21 @@
       },
       {
         "id": "portfolio",
-        "title": "Portfolio Snapshot",
-        "description": "Krótki przegląd projektów i wyników delivery.",
-        "cta": "Pobierz Portfolio"
+        "title": "Profil osobowości",
+        "description": "Połączone podsumowanie profilu zawodowego i wniosków osobowościowych.",
+        "cta": "Pobierz Profil"
       },
       {
         "id": "references",
-        "title": "Referencje",
-        "description": "Kontakty referencyjne i rekomendacje zawodowe.",
-        "cta": "Pobierz Referencje"
+        "title": "Raport z testu logicznego",
+        "description": "Raport Alva Labs z uporządkowanymi wynikami testu logicznego.",
+        "cta": "Pobierz Raport"
       },
       {
         "id": "coverLetter",
-        "title": "List motywacyjny",
-        "description": "Krótki opis mojego profilu, mocnych stron i preferowanego stylu współpracy.",
-        "cta": "Pobierz List"
+        "title": "Raport osobowości",
+        "description": "Raport Alva Labs pokazujący styl pracy i cechy współpracy.",
+        "cta": "Pobierz Raport"
       }
     ]
   },

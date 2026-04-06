@@ -120,21 +120,21 @@
       },
       {
         "id": "portfolio",
-        "title": "Portfolio Snapshot",
-        "description": "Kort sammanfattning av projekt och delivery-resultat.",
-        "cta": "Ladda ner Portfolio"
+        "title": "Personlighetsprofil",
+        "description": "En kombinerad profil som kopplar personliga insikter till yrkesbakgrund.",
+        "cta": "Ladda ner Profil"
       },
       {
         "id": "references",
-        "title": "Referenser",
-        "description": "Professionella referenser och kontaktuppgifter.",
-        "cta": "Ladda ner Referenser"
+        "title": "Logiktestrapport",
+        "description": "Alva Labs-rapport med strukturerade resultat från logiktestet.",
+        "cta": "Ladda ner Rapport"
       },
       {
         "id": "coverLetter",
-        "title": "Personligt brev",
-        "description": "En kort introduktion av min profil, mina styrkor och hur jag helst samarbetar.",
-        "cta": "Ladda ner Brev"
+        "title": "Personlighetsrapport",
+        "description": "Alva Labs personlighetstest som lyfter arbetssätt och samarbetsdrag.",
+        "cta": "Ladda ner Rapport"
       }
     ]
   },

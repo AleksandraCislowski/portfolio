@@ -120,21 +120,21 @@
       },
       {
         "id": "portfolio",
-        "title": "Portfolio Snapshot",
-        "description": "Short project and delivery summary for fast screening.",
-        "cta": "Download Portfolio"
+        "title": "Personality profile",
+        "description": "Combined profile summary connecting personality insights with career background.",
+        "cta": "Download Profile"
       },
       {
         "id": "references",
-        "title": "References",
-        "description": "Professional references and recommendation contacts.",
-        "cta": "Download References"
+        "title": "Logic Test Report",
+        "description": "Alva Labs assessment report with structured logic test results.",
+        "cta": "Download Report"
       },
       {
         "id": "coverLetter",
-        "title": "Cover Letter",
-        "description": "Short introduction outlining my profile, strengths, and preferred collaboration style.",
-        "cta": "Download Cover Letter"
+        "title": "Personality Test Report",
+        "description": "Alva Labs personality assessment highlighting work style and collaboration traits.",
+        "cta": "Download Report"
       }
     ]
   },

@@ -29,9 +29,11 @@ export const SITE_CONFIG = {
     lovorda: 'https://lovorda.com/me/Aleksandra',
   },
   documents: {
-    cv: '',
-    portfolio: '',
-    references: '',
-    coverLetter: '',
+    cv: '/documents/Frontend&Scrum_Master_CV.pdf',
+    portfolio: '/documents/Personality and CV profile.pdf',
+    references:
+      '/documents/Alva Labs Logic Test Report - Aleksandra Cislowski.pdf',
+    coverLetter:
+      '/documents/Alva Labs Personality Test Report - Aleksandra Cislowski.pdf',
   },
 } as const;
