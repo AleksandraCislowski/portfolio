@@ -341,6 +341,18 @@ export const BubbleButton = styled('button', {
       transition:
         'box-shadow 240ms ease, opacity 240ms ease, transform 280ms ease',
     },
+    '& .bubble-planet-shadow': {
+      position: 'absolute',
+      inset: '18% 12% 10% 16%',
+      borderRadius: '50%',
+      background:
+        'radial-gradient(circle at 35% 28%, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.04) 18%, rgba(7,16,35,0) 42%), radial-gradient(circle at 70% 74%, rgba(7,16,35,0.34) 0%, rgba(7,16,35,0.12) 34%, rgba(7,16,35,0) 66%)',
+      opacity: 0.88,
+      pointerEvents: 'none',
+      filter: 'blur(2px)',
+      transition: 'transform 260ms ease, opacity 220ms ease',
+      zIndex: 1,
+    },
     '& .bubble-hover-sweep': {
       position: 'absolute',
       inset: '-14% -34%',
@@ -381,6 +393,10 @@ export const BubbleButton = styled('button', {
       boxShadow:
         'inset -22px -22px 32px rgba(7,16,35,0.28), inset 16px 16px 34px rgba(255,255,255,0.16), 0 0 0 3px rgba(255,255,255,0.3), 0 0 88px rgba(125,211,252,0.44)',
     },
+    '&:hover .bubble-planet-shadow': {
+      transform: 'scale(1.04) translate3d(4px, 4px, 0)',
+      opacity: 0.96,
+    },
     '&:hover .bubble-hover-sweep': {
       opacity: 1,
       transform: 'translateX(36%) rotate(-12deg)',
@@ -404,6 +420,10 @@ export const BubbleButton = styled('button', {
       boxShadow:
         'inset -22px -22px 32px rgba(7,16,35,0.28), inset 16px 16px 34px rgba(255,255,255,0.16), 0 0 0 3px rgba(255,255,255,0.3), 0 0 88px rgba(125,211,252,0.44)',
     },
+    '&:focus-visible .bubble-planet-shadow': {
+      transform: 'scale(1.04) translate3d(4px, 4px, 0)',
+      opacity: 0.96,
+    },
     '&:focus-visible .bubble-hover-sweep': {
       opacity: 1,
       transform: 'translateX(36%) rotate(-12deg)',
@@ -414,20 +434,53 @@ export const BubbleButton = styled('button', {
   };
 });
 
-export const BubbleContent = styled(Box)(({ theme }) => ({
-  position: 'relative',
-  zIndex: 1,
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'flex-end',
-  width: '100%',
-  height: '100%',
-  gap: theme.spacing(0.7),
+export const BubbleOrbitBack = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  inset: '-28%',
+  width: '156%',
+  height: '156%',
+  pointerEvents: 'none',
+  overflow: 'visible',
+  zIndex: 3,
+  transform: 'rotate(-14deg)',
+  transformOrigin: '50% 50%',
+  perspective: '900px',
+  transformStyle: 'preserve-3d',
+  [theme.breakpoints.down('sm')]: {
+    inset: '-22%',
+    width: '144%',
+    height: '144%',
+  },
 }));
 
-export const BubbleOpen = styled(Typography)(() => ({
-  opacity: 0.78,
-  letterSpacing: '0.12em',
+export const BubbleOrbitTextRun = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  inset: 0,
+  pointerEvents: 'none',
+  filter: 'drop-shadow(0 0 12px rgba(186,230,253,0.14))',
+  [theme.breakpoints.down('sm')]: {
+    filter: 'drop-shadow(0 0 10px rgba(186,230,253,0.12))',
+  },
+}));
+
+export const BubbleOrbitChar = styled('span')(({ theme }) => ({
+  position: 'absolute',
+  left: '50%',
+  top: '50%',
+  display: 'inline-block',
+  color: alpha(theme.palette.common.white, 0.98),
+  fontSize: '13px',
+  fontWeight: 800,
+  lineHeight: 1,
+  textTransform: 'uppercase',
+  whiteSpace: 'pre',
+  transformOrigin: 'center center',
+  backfaceVisibility: 'hidden',
+  WebkitTextStroke: `0.35px ${alpha(theme.palette.common.white, 0.22)}`,
+  textShadow: `0 0 10px ${alpha(theme.palette.common.white, 0.26)}, 0 0 18px ${alpha(
+    theme.palette.primary.light,
+    0.16,
+  )}`,
 }));
 
 export const BubbleHintLabel = styled(Typography)(() => ({

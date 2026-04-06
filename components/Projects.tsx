@@ -1,7 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { startTransition } from 'react';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { useReducedMotion } from 'framer-motion';
 import { PROJECTS } from '../config/projects';
 import { SITE_CONFIG } from '../config/site';
@@ -16,14 +17,15 @@ import {
   BubbleBackgroundImage,
   BubbleBackgroundVideo,
   BubbleButton,
-  BubbleContent,
   BubbleDriftShell,
   BubbleField,
   BubbleHeader,
   BubbleHint,
   BubbleHintBody,
   BubbleHintLabel,
-  BubbleOpen,
+  BubbleOrbitBack,
+  BubbleOrbitChar,
+  BubbleOrbitTextRun,
   BubbleSlot,
   BubbleStage,
   SectionIntro,
@@ -36,6 +38,56 @@ import {
   getProjectLayout,
 } from './projects/projects.utils';
 import { useSectionAnimationReplay } from './sectionAnimationReplay';
+
+const ORBIT_DURATION_MS = 30000;
+
+function buildOrbitLabel(title: string) {
+  const chunk = `${title.toUpperCase()} • `;
+  let output = '';
+
+  while (output.length < 44) {
+    output += chunk;
+  }
+
+  return Array.from(output.slice(0, 44));
+}
+
+function getOrbitCharStyle(
+  charIndex: number,
+  totalChars: number,
+  orbitProgress: number,
+  bubbleSize: number,
+) {
+  const progress = ((totalChars - charIndex) / totalChars + orbitProgress) % 1;
+  const angle = progress * Math.PI * 2 - Math.PI / 2;
+  const ringRadiusX = bubbleSize * 0.74;
+  const ringRadiusY = bubbleSize * 0.16;
+  const x = Math.cos(angle) * ringRadiusX;
+  const verticalOffset = bubbleSize * -0.092;
+  const y = Math.sin(angle) * ringRadiusY + verticalOffset;
+  const normalizedX = x / ringRadiusX;
+  const rotateY = normalizedX * 78;
+  const normalizedY = (y - verticalOffset) / ringRadiusY;
+  const frontThreshold = -0.02;
+  const frontFactor = normalizedY < frontThreshold
+    ? 0
+    : Math.max(0, Math.min(1, (normalizedY - frontThreshold) / (1 - frontThreshold)));
+  const sideFade = Math.max(0, 1 - Math.max(0, Math.abs(normalizedX) - 0.72) / 0.28);
+  const opacity = frontFactor * sideFade;
+  const scale = 0.92 + frontFactor * 0.16;
+  const fontSize = Math.max(14, Math.min(24, bubbleSize * 0.086));
+  const xPx = `${x.toFixed(2)}px`;
+  const yPx = `${y.toFixed(2)}px`;
+  const opacityValue = opacity.toFixed(6);
+  const rotateYValue = `${rotateY.toFixed(2)}deg`;
+  const scaleValue = scale.toFixed(3);
+
+  return {
+    fontSize: `${fontSize.toFixed(2)}px`,
+    opacity: opacityValue,
+    transform: `translate(-50%, -50%) translate3d(${xPx}, ${yPx}, 0px) rotateY(${rotateYValue}) scale(${scaleValue})`,
+  };
+}
 
 export default function Projects() {
   const t = useTranslation();
@@ -52,7 +104,12 @@ export default function Projects() {
   const [bubbleRecovering, setBubbleRecovering] = React.useState(false);
   const [modalPhase, setModalPhase] = React.useState<ProjectsModalPhase>('closed');
   const [launchSnapshot, setLaunchSnapshot] = React.useState<ProjectLaunchSnapshot | null>(null);
+  const [orbitProgress, setOrbitProgress] = React.useState(0);
+  const [hasHydrated, setHasHydrated] = React.useState(false);
   const replayKey = useSectionAnimationReplay(SITE_CONFIG.sectionIds.projects);
+  const effectiveIsMdDown = hasHydrated ? isMdDown : false;
+  const effectiveIsSmDown = hasHydrated ? isSmDown : false;
+  const effectiveOrbitProgress = hasHydrated ? orbitProgress : 0;
 
   const clearModalPhaseTimeout = React.useCallback(() => {
     if (modalPhaseTimeoutRef.current !== null) {
@@ -222,6 +279,32 @@ export default function Projects() {
     };
   }, [clearModalPhaseTimeout]);
 
+  React.useEffect(() => {
+    setHasHydrated(true);
+  }, []);
+
+  React.useEffect(() => {
+    if (shouldReduceMotion) {
+      setOrbitProgress(0);
+      return;
+    }
+
+    let frameId = 0;
+
+    const animate = (now: number) => {
+      startTransition(() => {
+        setOrbitProgress((now % ORBIT_DURATION_MS) / ORBIT_DURATION_MS);
+      });
+      frameId = window.requestAnimationFrame(animate);
+    };
+
+    frameId = window.requestAnimationFrame(animate);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+    };
+  }, [shouldReduceMotion]);
+
   const activeProject = getActiveProject(activeProjectIndex, t.projects);
   const modalVisible = modalPhase !== 'closed';
 
@@ -274,10 +357,11 @@ export default function Projects() {
         <BubbleStage>
           {PROJECTS.map((project, index) => {
             const item = t.projects.items[index];
-            const layout = getProjectLayout(index, isSmDown, isMdDown);
+            const layout = getProjectLayout(index, effectiveIsSmDown, effectiveIsMdDown);
             const isActive = activeProjectIndex === index && modalVisible;
             const hasActiveProject = modalVisible;
             const delay = `${index * 0.9}s`;
+            const orbitChars = buildOrbitLabel(item.title);
             const visualState = getBubbleVisualState(
               isActive,
               hasActiveProject,
@@ -298,7 +382,7 @@ export default function Projects() {
                   filter: visualState.filter,
                   transform: getBubbleTransforms(
                     index,
-                    isSmDown,
+                    effectiveIsSmDown,
                     isActive,
                     hasActiveProject,
                     entered,
@@ -318,6 +402,23 @@ export default function Projects() {
                   $motionPaused={bubbleMotionPaused}
                   $recovering={bubbleRecovering}
                 >
+                  <BubbleOrbitBack aria-hidden='true'>
+                    <BubbleOrbitTextRun>
+                      {orbitChars.map((char, charIndex) => (
+                        <BubbleOrbitChar
+                          key={`${project.slug}-${charIndex}-${char}`}
+                          style={getOrbitCharStyle(
+                            charIndex,
+                            orbitChars.length,
+                            (effectiveOrbitProgress + index * 0.09) % 1,
+                            layout.size,
+                          )}
+                        >
+                          {char}
+                        </BubbleOrbitChar>
+                      ))}
+                    </BubbleOrbitTextRun>
+                  </BubbleOrbitBack>
                   <BubbleButton
                     type='button'
                     ref={(node) => {
@@ -335,26 +436,7 @@ export default function Projects() {
                     aria-controls='projects-modal'
                   >
                     <Box className='bubble-hover-sweep' />
-                    <BubbleContent>
-                      <BubbleOpen variant='overline'>
-                        {t.projects.openProject}
-                      </BubbleOpen>
-                      <Typography
-                        sx={{
-                          fontSize: {
-                            xs: index === 2 ? '1.15rem' : '1.05rem',
-                            md: index === 2 ? '1.45rem' : '1.2rem',
-                            lg: index === 2 ? '1.72rem' : '1.32rem',
-                          },
-                          fontWeight: 800,
-                          lineHeight: 1.04,
-                          letterSpacing: '-0.04em',
-                          textWrap: 'balance',
-                        }}
-                      >
-                        {item.title}
-                      </Typography>
-                    </BubbleContent>
+                    <Box className='bubble-planet-shadow' />
                   </BubbleButton>
                 </BubbleDriftShell>
               </BubbleSlot>
