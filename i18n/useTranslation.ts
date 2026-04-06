@@ -1,7 +1,8 @@
 import en from './en.json';
 import pl from './pl.json';
 import sv from './sv.json';
-import { Language, useLanguage } from './LanguageContext';
+import { useLanguage } from './LanguageContext';
+import type { Language } from './config';
 
 export type TranslationDict = typeof en;
 

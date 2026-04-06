@@ -1,7 +1,7 @@
 import { InputLabel, MenuItem, Select } from '@mui/material';
 import type { SelectChangeEvent, SelectProps } from '@mui/material/Select';
 
-import { LANGUAGES, type Language } from '../../i18n/LanguageContext';
+import { LANGUAGES, type Language } from '../../i18n/config';
 
 import { LANGUAGE_LABELS } from './navbar.constants';
 import { DrawerLanguageFormControl, LanguageFormControl } from './Navbar.styles';
