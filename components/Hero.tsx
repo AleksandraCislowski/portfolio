@@ -3,9 +3,7 @@
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useReducedMotion } from 'framer-motion';
 import { useTranslation } from '../i18n/useTranslation';
-import { useLanguage } from '../i18n/LanguageContext';
 import { HeroBackground } from './hero/HeroBackground';
 import { HeroCopy } from './hero/HeroCopy';
 import { HeroVisual } from './hero/HeroVisual';
@@ -16,10 +14,8 @@ import { HOME_SECTION_REPLAY_ID, useSectionAnimationReplay } from './sectionAnim
 
 export default function Hero() {
   const t = useTranslation();
-  const { lang } = useLanguage();
   const theme = useTheme();
   const isCompactHeroLayout = useMediaQuery(theme.breakpoints.down('lg'));
-  const shouldReduceMotion = useReducedMotion() ?? false;
   const replayKey = useSectionAnimationReplay(HOME_SECTION_REPLAY_ID);
 
   return (
@@ -36,8 +32,6 @@ export default function Hero() {
       <HeroShell>
         <HeroCopy
           t={t}
-          lang={lang}
-          shouldReduceMotion={shouldReduceMotion}
           visualSlot={isCompactHeroLayout ? <HeroVisual t={t} /> : null}
         />
         {isCompactHeroLayout ? null : <HeroVisual t={t} />}
