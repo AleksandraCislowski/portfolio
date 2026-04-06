@@ -14,6 +14,7 @@ import { DESIGN_TOKENS } from '../theme/tokens';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import EmailIcon from '@mui/icons-material/Email';
+import TravelExploreRoundedIcon from '@mui/icons-material/TravelExploreRounded';
 import { useTranslation } from '../i18n/useTranslation';
 import Section from './Section';
 import { SITE_CONFIG } from '../config/site';
@@ -279,6 +280,12 @@ export default function About() {
                   </HighlightsList>
                   <SocialLinks>
                     <SocialButton
+                      href={`mailto:${SITE_CONFIG.contactEmail}`}
+                      aria-label='Send email'
+                    >
+                      <EmailIcon />
+                    </SocialButton>
+                    <SocialButton
                       href={SITE_CONFIG.socialLinks.linkedIn}
                       target='_blank'
                       rel='noopener noreferrer'
@@ -295,10 +302,12 @@ export default function About() {
                       <GitHubIcon />
                     </SocialButton>
                     <SocialButton
-                      href={`mailto:${SITE_CONFIG.contactEmail}`}
-                      aria-label='Send email'
+                      href={SITE_CONFIG.socialLinks.lovorda}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      aria-label='Open Lovorda profile'
                     >
-                      <EmailIcon />
+                      <TravelExploreRoundedIcon />
                     </SocialButton>
                   </SocialLinks>
                 </AboutContent>
