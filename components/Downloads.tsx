@@ -173,17 +173,14 @@ const DownloadsCardsRight = styled(DownloadsCards)(({ theme }) => ({
   },
 }));
 
-const DownloadsPreviewImageWrap = styled(Box)(({ theme }) => ({
+const DownloadsPreviewImageWrap = styled(Box)(() => ({
   position: 'relative',
-  width: 220,
+  width: 250,
   maxWidth: '100%',
   aspectRatio: '4 / 5',
   borderRadius: 14,
   overflow: 'hidden',
   boxShadow: '0 22px 42px rgba(15, 23, 42, 0.16)',
-  [theme.breakpoints.down('lg')]: {
-    width: 180,
-  },
 }));
 
 const RecommendationsTriggerButton = styled(Button)(() => ({
