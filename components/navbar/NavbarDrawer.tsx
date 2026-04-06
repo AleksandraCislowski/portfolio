@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Drawer, List, ListItemButton, ListItemText } from '@mui/material';
 import type { SelectChangeEvent, SelectProps } from '@mui/material/Select';
 
-import type { Language } from '../../i18n/LanguageContext';
+import type { Language } from '../../i18n/config';
 
 import { DrawerContent, DrawerNavItem, drawerPaperSx } from './Navbar.styles';
 import { NavbarLanguageSelect } from './NavbarLanguageSelect';
