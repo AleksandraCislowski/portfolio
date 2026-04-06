@@ -21,21 +21,23 @@ export const HeroBackdrop = styled(Box)(() => ({
   position: 'absolute',
   top: 0,
   bottom: 0,
-  left: '50%',
-  width: '100vw',
-  transform: 'translateX(-50%)',
+  left: 0,
+  right: 0,
+  width: '100%',
   overflow: 'hidden',
   pointerEvents: 'none',
   zIndex: 1,
 }));
 
 export const HeroShell = styled(motion.div)(({ theme }) => ({
+  boxSizing: 'border-box',
   position: 'relative',
   display: 'grid',
   gap: theme.spacing(5),
   alignItems: 'center',
   minHeight: 'calc(100dvh - 120px)',
-  width: 'min(1280px, calc(100vw - 24px))',
+  width: 'min(1280px, 100%)',
+  maxWidth: '100%',
   marginInline: 'auto',
   padding: theme.spacing(4, 3),
   zIndex: 2,
@@ -45,7 +47,6 @@ export const HeroShell = styled(motion.div)(({ theme }) => ({
     padding: theme.spacing(5, 4),
   },
   [theme.breakpoints.down('sm')]: {
-    width: 'calc(100vw - 20px)',
     padding: theme.spacing(3, 2),
   },
 }));
@@ -73,19 +74,21 @@ export const HeroInlineVisualSlot = styled(Box)(({ theme }) => ({
 export const HeroEyebrow = styled(motion.div)(({ theme }) => ({
   display: 'inline-flex',
   alignItems: 'center',
-  flexWrap: 'nowrap',
+  flexWrap: 'wrap',
   gap: theme.spacing(1.25),
   marginBottom: theme.spacing(2.5),
   padding: theme.spacing(0.9, 1.4),
   minHeight: 56,
-  borderRadius: 999,
+  borderRadius: 12,
   border: `1px solid ${alpha(theme.palette.primary.main, 0.22)}`,
   backgroundColor: alpha(theme.palette.background.paper, 0.5),
   color: theme.palette.text.secondary,
   backdropFilter: 'blur(10px)',
   boxShadow: `0 14px 36px ${alpha(theme.palette.primary.main, 0.12)}`,
   [theme.breakpoints.down('sm')]: {
-    minHeight: 56,
+    width: '100%',
+    minHeight: 'auto',
+    alignItems: 'flex-start',
   },
 }));
 
@@ -97,11 +100,17 @@ export const HeroKicker = styled(Typography)(({ theme }) => ({
   color: alpha(theme.palette.primary.main, 0.95),
   whiteSpace: 'nowrap',
   lineHeight: 1.1,
+  [theme.breakpoints.down('sm')]: {
+    whiteSpace: 'normal',
+  },
 }));
 
-export const HeroLocation = styled(Typography)(() => ({
+export const HeroLocation = styled(Typography)(({ theme }) => ({
   whiteSpace: 'nowrap',
   lineHeight: 1.1,
+  [theme.breakpoints.down('sm')]: {
+    whiteSpace: 'normal',
+  },
 }));
 
 export const HeroTitle = styled(Typography)(({ theme }) => ({
@@ -123,9 +132,13 @@ export const HeroActions = styled(Stack)(({ theme }) => ({
   flexWrap: 'wrap',
   gap: theme.spacing(1.5),
   marginBottom: theme.spacing(3),
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+  },
 }));
 
 export const PrimaryHeroButton = styled(Button)(({ theme }) => ({
+  maxWidth: '100%',
   position: 'relative',
   overflow: 'hidden',
   isolation: 'isolate',
@@ -171,9 +184,13 @@ export const PrimaryHeroButton = styled(Button)(({ theme }) => ({
     outline: `2px solid ${alpha(theme.palette.common.white, 0.82)}`,
     outlineOffset: 3,
   },
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+  },
 }));
 
 export const SecondaryHeroButton = styled(Button)(({ theme }) => ({
+  maxWidth: '100%',
   position: 'relative',
   overflow: 'hidden',
   isolation: 'isolate',
@@ -223,6 +240,9 @@ export const SecondaryHeroButton = styled(Button)(({ theme }) => ({
     outline: `2px solid ${alpha(theme.palette.common.white, 0.82)}`,
     outlineOffset: 3,
   },
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+  },
 }));
 
 export const HeroMeta = styled(Stack)(({ theme }) => ({
@@ -248,6 +268,7 @@ export const HeroSignals = styled(Stack)(({ theme }) => ({
 
 export const SignalItem = styled(Box)(({ theme }) => ({
   minWidth: 128,
+  maxWidth: '100%',
   '& strong': {
     display: 'block',
     marginBottom: 2,
@@ -283,6 +304,7 @@ export const MetaChip = styled(MotionChip)(({ theme }) => ({
 export const VisualColumn = styled(Box)(() => ({
   position: 'relative',
   zIndex: 5,
+  maxWidth: '100%',
   '@media (max-width: 1199px)': {
     order: 2,
   },
@@ -291,10 +313,14 @@ export const VisualColumn = styled(Box)(() => ({
 export const VisualStack = styled(Box)(() => ({
   position: 'relative',
   overflow: 'visible',
+  maxWidth: '100%',
 }));
 
 export const ImageFrame = styled(Box)(({ theme }) => ({
+  boxSizing: 'border-box',
   position: 'relative',
+  width: '100%',
+  maxWidth: '100%',
   overflow: 'visible',
   borderRadius: 28,
   minHeight: 420,
@@ -304,7 +330,10 @@ export const ImageFrame = styled(Box)(({ theme }) => ({
 }));
 
 export const ImageMediaClip = styled(Box)(({ theme }) => ({
+  boxSizing: 'border-box',
   position: 'relative',
+  width: '100%',
+  maxWidth: '100%',
   overflow: 'hidden',
   borderRadius: 28,
   minHeight: 420,

@@ -29,7 +29,12 @@ type HeroCopyProps = {
   visualSlot?: React.ReactNode;
 };
 
-export function HeroCopy({ t, lang, shouldReduceMotion, visualSlot }: HeroCopyProps) {
+export function HeroCopy({
+  t,
+  lang,
+  shouldReduceMotion,
+  visualSlot,
+}: HeroCopyProps) {
   const heroSkills = t.hero.skillPills;
 
   return (
@@ -70,9 +75,7 @@ export function HeroCopy({ t, lang, shouldReduceMotion, visualSlot }: HeroCopyPr
         </MotionBox>
 
         {visualSlot ? (
-          <HeroInlineVisualSlot>
-            {visualSlot}
-          </HeroInlineVisualSlot>
+          <HeroInlineVisualSlot>{visualSlot}</HeroInlineVisualSlot>
         ) : null}
 
         <MotionBox key={`hero-meta-${lang}`} variants={itemVariants}>
