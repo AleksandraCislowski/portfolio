@@ -13,6 +13,7 @@ const ContactForm = styled('form')(() => ({
 
 const ContactTitle = styled(Typography)(() => ({
   marginBottom: 16,
+  textAlign: 'center',
 }));
 
 const ContactMeta = styled(Stack)(() => ({
