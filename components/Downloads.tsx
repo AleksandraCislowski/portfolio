@@ -1,6 +1,7 @@
 import * as React from 'react';
+import Image from 'next/image';
 import { Box, Typography, Card, CardContent, Button } from '@mui/material';
-import { alpha, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import DownloadIcon from '@mui/icons-material/Download';
 import Section from './Section';
 import { SITE_CONFIG } from '../config/site';
@@ -18,10 +19,11 @@ const SectionDescription = styled(Typography)(() => ({
 const DownloadsLayout = styled(Box)(({ theme }) => ({
   display: 'grid',
   gap: theme.spacing(3),
-  alignItems: 'start',
+  alignItems: 'center',
   [theme.breakpoints.up('lg')]: {
-    gridTemplateColumns: 'minmax(0, 0.9fr) minmax(280px, 0.7fr)',
+    gridTemplateColumns: 'minmax(0, 1fr) minmax(220px, 0.7fr) minmax(0, 1fr)',
     gap: theme.spacing(4),
+    alignItems: 'center',
   },
 }));
 
@@ -31,34 +33,28 @@ const DownloadsCards = styled(Box)(({ theme }) => ({
 }));
 
 const DownloadsPreview = styled(Box)(({ theme }) => ({
-  position: 'relative',
+  display: 'grid',
+  placeItems: 'center',
+  width: '100%',
   minHeight: 220,
-  borderRadius: 28,
-  border: `1px dashed ${alpha(theme.palette.divider, 0.55)}`,
-  background: `linear-gradient(160deg, ${alpha('#0F1B33', 0.72)} 0%, ${alpha('#15284B', 0.54)} 100%)`,
-  boxShadow: '0 20px 48px rgba(2, 6, 23, 0.22)',
-  overflow: 'hidden',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    inset: 0,
-    background:
-      'radial-gradient(circle at 18% 18%, rgba(125,211,252,0.12), transparent 28%), radial-gradient(circle at 82% 78%, rgba(96,165,250,0.12), transparent 32%)',
-    pointerEvents: 'none',
-  },
+  alignSelf: 'center',
+  justifySelf: 'center',
   [theme.breakpoints.down('lg')]: {
     minHeight: 160,
   },
 }));
 
-const DownloadsPreviewLabel = styled(Typography)(({ theme }) => ({
-  position: 'absolute',
-  inset: 0,
-  display: 'grid',
-  placeItems: 'center',
-  padding: theme.spacing(3),
-  textAlign: 'center',
-  color: alpha(theme.palette.text.secondary, 0.88),
+const DownloadsPreviewImageWrap = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  width: 220,
+  maxWidth: '100%',
+  aspectRatio: '4 / 5',
+  borderRadius: 28,
+  overflow: 'hidden',
+  boxShadow: '0 22px 42px rgba(15, 23, 42, 0.16)',
+  [theme.breakpoints.down('lg')]: {
+    width: 180,
+  },
 }));
 
 const CardTitle = styled(Typography)(() => ({
@@ -71,6 +67,8 @@ const CardDescription = styled(Typography)(() => ({
 
 export default function Downloads() {
   const t = useTranslation();
+  const leftItems = t.downloads.items.slice(0, 2);
+  const rightItems = t.downloads.items.slice(2, 4);
 
   return (
     <Section id={SITE_CONFIG.sectionIds.downloads}>
@@ -81,7 +79,7 @@ export default function Downloads() {
 
       <DownloadsLayout>
         <DownloadsCards>
-          {t.downloads.items.map((item) => {
+          {leftItems.map((item) => {
             const href =
               SITE_CONFIG.documents[item.id as keyof typeof SITE_CONFIG.documents];
 
@@ -110,10 +108,48 @@ export default function Downloads() {
         </DownloadsCards>
 
         <DownloadsPreview aria-hidden='true'>
-          <DownloadsPreviewLabel variant='body2'>
-            Image placeholder
-          </DownloadsPreviewLabel>
+          <DownloadsPreviewImageWrap>
+            <Image
+              src='/images/profile/download.png'
+              alt=''
+              fill
+              sizes='(max-width: 1200px) 240px, 320px'
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'center',
+              }}
+            />
+          </DownloadsPreviewImageWrap>
         </DownloadsPreview>
+
+        <DownloadsCards>
+          {rightItems.map((item) => {
+            const href =
+              SITE_CONFIG.documents[item.id as keyof typeof SITE_CONFIG.documents];
+
+            return (
+              <Card key={item.id}>
+                <CardContent>
+                  <CardTitle variant='h6'>{item.title}</CardTitle>
+                  <CardDescription variant='body2'>
+                    {item.description}
+                  </CardDescription>
+                  <Button
+                    component='a'
+                    href={href}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    variant='outlined'
+                    startIcon={<DownloadIcon />}
+                    disabled={!href}
+                  >
+                    {item.cta}
+                  </Button>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </DownloadsCards>
       </DownloadsLayout>
     </Section>
   );

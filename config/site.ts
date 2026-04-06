@@ -32,5 +32,6 @@ export const SITE_CONFIG = {
     cv: '',
     portfolio: '',
     references: '',
+    coverLetter: '',
   },
 } as const;

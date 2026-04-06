@@ -129,6 +129,12 @@
         "title": "Referenser",
         "description": "Professionella referenser och kontaktuppgifter.",
         "cta": "Ladda ner Referenser"
+      },
+      {
+        "id": "coverLetter",
+        "title": "Personligt brev",
+        "description": "En kort introduktion av min profil, mina styrkor och hur jag helst samarbetar.",
+        "cta": "Ladda ner Brev"
       }
     ]
   },

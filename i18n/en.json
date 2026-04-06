@@ -129,6 +129,12 @@
         "title": "References",
         "description": "Professional references and recommendation contacts.",
         "cta": "Download References"
+      },
+      {
+        "id": "coverLetter",
+        "title": "Cover Letter",
+        "description": "Short introduction outlining my profile, strengths, and preferred collaboration style.",
+        "cta": "Download Cover Letter"
       }
     ]
   },

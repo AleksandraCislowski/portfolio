@@ -129,6 +129,12 @@
         "title": "Referencje",
         "description": "Kontakty referencyjne i rekomendacje zawodowe.",
         "cta": "Pobierz Referencje"
+      },
+      {
+        "id": "coverLetter",
+        "title": "List motywacyjny",
+        "description": "Krótki opis mojego profilu, mocnych stron i preferowanego stylu współpracy.",
+        "cta": "Pobierz List"
       }
     ]
   },
