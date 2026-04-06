@@ -111,30 +111,34 @@
   "downloads": {
     "title": "Downloads",
     "description": "Download my CV and supporting materials — everything structured for a quick and clear review.",
+    "downloadCta": "Download",
+    "viewCta": "View",
+    "recommendations": {
+      "button": "Recommendations",
+      "closeLabel": "Close recommendations",
+      "empty": "Materials coming soon.",
+      "items": []
+    },
     "items": [
       {
         "id": "cv",
         "title": "Curriculum Vitae",
-        "description": "Complete professional profile, impact metrics, and role history.",
-        "cta": "Download CV"
+        "description": "Complete professional profile, impact metrics, and role history."
       },
       {
         "id": "portfolio",
         "title": "Personality profile",
-        "description": "Combined profile summary connecting personality insights with career background.",
-        "cta": "Download Profile"
+        "description": "Combined profile summary connecting personality insights with career background."
       },
       {
         "id": "references",
         "title": "Logic Test Report",
-        "description": "Alva Labs assessment report with structured logic test results.",
-        "cta": "Download Report"
+        "description": "Alva Labs assessment report with structured logic test results."
       },
       {
         "id": "coverLetter",
         "title": "Personality Test Report",
-        "description": "Alva Labs personality assessment highlighting work style and collaboration traits.",
-        "cta": "Download Report"
+        "description": "Alva Labs personality assessment highlighting work style and collaboration traits."
       }
     ]
   },

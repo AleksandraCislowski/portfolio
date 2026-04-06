@@ -111,30 +111,34 @@
   "downloads": {
     "title": "Nedladdningar",
     "description": "Ladda ner mitt CV och kompletterande material — tydligt strukturerat för en snabb överblick.",
+    "downloadCta": "Ladda ner",
+    "viewCta": "Visa",
+    "recommendations": {
+      "button": "Rekommendationer",
+      "closeLabel": "Stäng rekommendationer",
+      "empty": "Material kommer snart.",
+      "items": []
+    },
     "items": [
       {
         "id": "cv",
         "title": "Curriculum Vitae",
-        "description": "Full professionell profil, effektmått och rollerfarenhet.",
-        "cta": "Ladda ner CV"
+        "description": "Full professionell profil, effektmått och rollerfarenhet."
       },
       {
         "id": "portfolio",
         "title": "Personlighetsprofil",
-        "description": "En kombinerad profil som kopplar personliga insikter till yrkesbakgrund.",
-        "cta": "Ladda ner Profil"
+        "description": "En kombinerad profil som kopplar personliga insikter till yrkesbakgrund."
       },
       {
         "id": "references",
         "title": "Logiktestrapport",
-        "description": "Alva Labs-rapport med strukturerade resultat från logiktestet.",
-        "cta": "Ladda ner Rapport"
+        "description": "Alva Labs-rapport med strukturerade resultat från logiktestet."
       },
       {
         "id": "coverLetter",
         "title": "Personlighetsrapport",
-        "description": "Alva Labs personlighetstest som lyfter arbetssätt och samarbetsdrag.",
-        "cta": "Ladda ner Rapport"
+        "description": "Alva Labs personlighetstest som lyfter arbetssätt och samarbetsdrag."
       }
     ]
   },

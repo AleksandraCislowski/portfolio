@@ -111,30 +111,34 @@
   "downloads": {
     "title": "Do pobrania",
     "description": "Pobierz CV i materiały dodatkowe — wszystko uporządkowane tak, by szybko zobaczyć najważniejsze informacje.",
+    "downloadCta": "Pobierz",
+    "viewCta": "Podgląd",
+    "recommendations": {
+      "button": "Rekomendacje",
+      "closeLabel": "Zamknij rekomendacje",
+      "empty": "Wkrótce dodamy materiały.",
+      "items": []
+    },
     "items": [
       {
         "id": "cv",
         "title": "Curriculum Vitae",
-        "description": "Pełny profil zawodowy, metryki wpływu i historia ról.",
-        "cta": "Pobierz CV"
+        "description": "Pełny profil zawodowy, metryki wpływu i historia ról."
       },
       {
         "id": "portfolio",
         "title": "Profil osobowości",
-        "description": "Połączone podsumowanie profilu zawodowego i wniosków osobowościowych.",
-        "cta": "Pobierz Profil"
+        "description": "Połączone podsumowanie profilu zawodowego i wniosków osobowościowych."
       },
       {
         "id": "references",
         "title": "Raport z testu logicznego",
-        "description": "Raport Alva Labs z uporządkowanymi wynikami testu logicznego.",
-        "cta": "Pobierz Raport"
+        "description": "Raport Alva Labs z uporządkowanymi wynikami testu logicznego."
       },
       {
         "id": "coverLetter",
         "title": "Raport osobowości",
-        "description": "Raport Alva Labs pokazujący styl pracy i cechy współpracy.",
-        "cta": "Pobierz Raport"
+        "description": "Raport Alva Labs pokazujący styl pracy i cechy współpracy."
       }
     ]
   },
