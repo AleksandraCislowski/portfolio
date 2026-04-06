@@ -33,16 +33,19 @@
     ],
     "signals": [
       {
-        "value": "React + Next.js",
-        "label": "utveckling av centrala SaaS-funktioner i produktionsmiljö"
+        "value": "Responsivt UI",
+        "label": "gränssnittsflöden redo för produktion",
+        "description": "Bygger genomarbetade frontendupplevelser med React, Next.js och TypeScript."
       },
       {
-        "value": "+15%",
-        "label": "ökad effektivitet genom optimerade frontendflöden och bättre samarbete i teamet"
+        "value": "Från design till kod",
+        "label": "designsamarbete i leverans",
+        "description": "Översätter designbeslut till användarcentrerade gränssnitt redo för produktion."
       },
       {
-        "value": "Komponentarkitektur",
-        "label": "utveckling av skalbara, återanvändbara komponenter med fokus på prestanda"
+        "value": "Fokus på UX",
+        "label": "användbarhet i produktleverans",
+        "description": "Skapar tydligare och mer intuitiva upplevelser genom ett praktiskt arbetssätt."
       }
     ]
   },
@@ -143,11 +146,11 @@
     ]
   },
   "contact": {
-    "title": "Låt oss skapa något meningsfullt tillsammans!",
-    "name": "Ditt namn",
-    "email": "Din e-post",
-    "message": "Ditt meddelande",
-    "send": "Skicka meddelande",
+    "kicker": "Kontakt",
+    "title": "Öppen för Frontend, Scrum och utvalda projekt",
+    "description": "Jag är öppen för frontendroller, Scrum-inriktade samarbeten och utvalda projekt där kvalitet, användbarhet och stark leveransförmåga spelar roll.",
+    "send": "Starta en konversation",
+    "helper": "Det snabbaste sättet att nå mig är via e-post!",
     "locationLabel": "Plats",
     "locationValue": "Stockholm, Sverige",
     "phoneLabel": "Telefon",

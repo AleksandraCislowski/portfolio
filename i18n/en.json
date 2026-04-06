@@ -33,16 +33,19 @@
     ],
     "signals": [
       {
-        "value": "React + Next.js",
-        "label": "developing core SaaS features in a production environment"
+        "value": "Responsive UI",
+        "label": "production-ready interface flows",
+        "description": "Building polished frontend experiences with React, Next.js, and TypeScript."
       },
       {
-        "value": "+15%",
-        "label": "improved efficiency through optimized frontend workflows and better team alignment"
+        "value": "Design to Code",
+        "label": "design collaboration in delivery",
+        "description": "Translating design decisions into user-centered interfaces ready for production."
       },
       {
-        "value": "Component Architecture",
-        "label": "building scalable, reusable components with a focus on performance"
+        "value": "UX Focus",
+        "label": "usability in product delivery",
+        "description": "Shaping clearer, more intuitive product experiences through practical thinking."
       }
     ]
   },
@@ -143,11 +146,11 @@
     ]
   },
   "contact": {
-    "title": "Let's create something meaningful together!",
-    "name": "Your Name",
-    "email": "Your Email",
-    "message": "Your Message",
-    "send": "Send Message",
+    "kicker": "Contact",
+    "title": "Open to Frontend, Scrum, and selected projects",
+    "description": "I am open to frontend roles, Scrum-focused collaboration, and selected projects where quality, usability, and strong delivery matter.",
+    "send": "Start the Conversation",
+    "helper": "The fastest way to reach me is by email!",
     "locationLabel": "Location",
     "locationValue": "Stockholm, Sweden",
     "phoneLabel": "Phone",

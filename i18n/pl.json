@@ -33,16 +33,19 @@
     ],
     "signals": [
       {
-        "value": "React + Next.js",
-        "label": "rozwój kluczowych funkcjonalności SaaS w środowisku produkcyjnym"
+        "value": "Responsywne UI",
+        "label": "gotowe do wdrożenia flow interfejsu",
+        "description": "Tworzenie dopracowanych doświadczeń frontendowych w React, Next.js i TypeScript."
       },
       {
-        "value": "+15%",
-        "label": "wzrost efektywności dzięki usprawnieniu procesów frontendowych i lepszej organizacji pracy zespołu"
+        "value": "Projekt → produkt",
+        "label": "współpraca projektowa",
+        "description": "Przekładanie decyzji projektowych na użyteczne interfejsy gotowe do produkcji."
       },
       {
-        "value": "Architektura UI",
-        "label": "tworzenie skalowalnych komponentów wielokrotnego użytku z naciskiem na wydajność"
+        "value": "Skupienie na UX",
+        "label": "użyteczność w tworzeniu produktu",
+        "description": "Tworzenie bardziej intuicyjnych doświadczeń produktowych dzięki praktycznemu podejściu."
       }
     ]
   },
@@ -143,11 +146,11 @@
     ]
   },
   "contact": {
-    "title": "Stwórzmy razem coś wartościowego!",
-    "name": "Twoje imię",
-    "email": "Twój email",
-    "message": "Twoja wiadomość",
-    "send": "Wyślij wiadomość",
+    "kicker": "Kontakt",
+    "title": "Otwarta na Frontend, Scrum i wybrane projekty",
+    "description": "Jestem otwarta na role frontendowe, współpracę w obszarze Scrum oraz wybrane projekty, w których liczy się jakość, użyteczność i sprawne dostarczanie.",
+    "send": "Zacznijmy rozmowę",
+    "helper": "Najszybciej skontaktujesz się ze mną przez e-mail!",
     "locationLabel": "Lokalizacja",
     "locationValue": "Sztokholm, Szwecja",
     "phoneLabel": "Telefon",
