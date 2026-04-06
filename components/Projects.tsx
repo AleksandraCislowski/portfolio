@@ -13,6 +13,7 @@ import {
   type ProjectsModalPhase,
 } from './projects/ProjectsModal';
 import {
+  BubbleBackgroundImage,
   BubbleBackgroundVideo,
   BubbleButton,
   BubbleContent,
@@ -23,7 +24,6 @@ import {
   BubbleHintBody,
   BubbleHintLabel,
   BubbleOpen,
-  BubbleOrb,
   BubbleSlot,
   BubbleStage,
   SectionIntro,
@@ -235,6 +235,11 @@ export default function Projects() {
       </SectionIntro>
 
       <BubbleField key={`projects-${replayKey}`} ref={fieldRef} data-entered={entered}>
+        <BubbleBackgroundImage
+          src='/images/profile/Cosmic-background.png'
+          alt=''
+          aria-hidden='true'
+        />
         <BubbleBackgroundVideo
           autoPlay
           muted
@@ -244,14 +249,6 @@ export default function Projects() {
         >
           <source src='/images/projects/bubbles-background.mp4' type='video/mp4' />
         </BubbleBackgroundVideo>
-        <Box className='bubble-wake bubble-wake-1' />
-        <Box className='bubble-wake bubble-wake-2' />
-        <Box className='bubble-wake bubble-wake-3' />
-        <Box className='bubble-collision-ring' />
-        <Box className='bubble-collision-ring bubble-collision-ring-2' />
-        <Box className='bubble-collision-ring bubble-collision-ring-3' />
-        <BubbleOrb $variant='left' />
-        <BubbleOrb $variant='right' />
 
         <BubbleHeader
           sx={{

@@ -22,7 +22,20 @@ export const BubbleBackgroundVideo = styled('video')({
   objectFit: 'cover',
   objectPosition: 'center',
   pointerEvents: 'none',
-  opacity: 0.5,
+  opacity: 0.16,
+});
+
+export const BubbleBackgroundImage = styled('img')({
+  position: 'absolute',
+  inset: 0,
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  objectPosition: 'center',
+  pointerEvents: 'none',
+  opacity: 0.62,
+  transform: 'scale(1.02)',
+  filter: 'saturate(1.14) contrast(1.06)',
 });
 
 export const BubbleField = styled(Box)(({ theme }) => ({
@@ -31,18 +44,14 @@ export const BubbleField = styled(Box)(({ theme }) => ({
   borderRadius: 34,
   overflow: 'hidden',
   border: `1px solid ${alpha(theme.palette.divider, 0.48)}`,
-  background: `linear-gradient(180deg, ${alpha('#06101F', 0.99)} 0%, ${alpha('#0A1730', 0.98)} 34%, ${alpha('#102445', 0.98)} 68%, ${alpha('#143057', 0.98)} 100%)`,
+  background: `linear-gradient(180deg, ${alpha('#06101F', 0.92)} 0%, ${alpha('#0A1730', 0.9)} 34%, ${alpha('#102445', 0.88)} 68%, ${alpha('#143057', 0.9)} 100%)`,
   boxShadow: '0 28px 70px rgba(2, 6, 23, 0.34)',
   '&::before': {
     content: '""',
     position: 'absolute',
     inset: 0,
-    background: `
-        radial-gradient(circle at 18% 20%, rgba(125,211,252,0.18), transparent 24%),
-        radial-gradient(circle at 82% 18%, rgba(45,212,191,0.14), transparent 22%),
-        radial-gradient(circle at 54% 78%, rgba(96,165,250,0.12), transparent 26%)
-      `,
-    opacity: 0.68,
+    background: 'linear-gradient(180deg, rgba(6,16,31,0.08) 0%, rgba(6,16,31,0.16) 100%)',
+    opacity: 1,
     pointerEvents: 'none',
     transition:
       'opacity 1000ms ease, transform 1400ms cubic-bezier(0.18, 0.9, 0.22, 1)',
@@ -50,94 +59,21 @@ export const BubbleField = styled(Box)(({ theme }) => ({
   '&::after': {
     content: '""',
     position: 'absolute',
-    inset: '-12% -10%',
+    inset: 0,
     background:
-      'radial-gradient(120% 56% at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 58%)',
-    opacity: 0.5,
-    transform: 'translate3d(0, 0, 0)',
-    animation: 'waterDrift 18s linear infinite',
+      'linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 26%, rgba(7,16,34,0.22) 100%)',
+    opacity: 0.72,
     pointerEvents: 'none',
     transition:
       'opacity 1000ms ease, transform 1400ms cubic-bezier(0.18, 0.9, 0.22, 1)',
   },
-  '& .bubble-wake': {
-    position: 'absolute',
-    borderRadius: '50%',
-    pointerEvents: 'none',
-    background:
-      'radial-gradient(circle, rgba(186,230,253,0.18) 0%, rgba(96,165,250,0.08) 38%, transparent 70%)',
-    mixBlendMode: 'screen',
-    animation: 'wakePulse 7.4s ease-in-out infinite',
-  },
-  '& .bubble-wake-1': {
-    top: '22%',
-    left: '8%',
-    width: 280,
-    height: 280,
-    animationDelay: '0.2s',
-  },
-  '& .bubble-wake-2': {
-    top: '18%',
-    left: '64%',
-    width: 240,
-    height: 240,
-    animationDelay: '1.4s',
-  },
-  '& .bubble-wake-3': {
-    top: '54%',
-    left: '36%',
-    width: 320,
-    height: 320,
-    animationDelay: '0.9s',
-  },
-  '& .bubble-collision-ring': {
-    position: 'absolute',
-    top: '46%',
-    left: '43%',
-    width: 120,
-    height: 120,
-    borderRadius: '50%',
-    border: '1px solid rgba(186,230,253,0.26)',
-    boxShadow: '0 0 24px rgba(103,232,249,0.12)',
-    opacity: 0,
-    pointerEvents: 'none',
-    animation: 'collisionRing 8.6s ease-out infinite',
-  },
-  '& .bubble-collision-ring-2': {
-    top: '26%',
-    left: '60%',
-    width: 88,
-    height: 88,
-    animationDelay: '2.8s',
-  },
-  '& .bubble-collision-ring-3': {
-    top: '66%',
-    left: '26%',
-    width: 102,
-    height: 102,
-    animationDelay: '5.2s',
-  },
-  '@keyframes waterDrift': {
-    '0%': { transform: 'translate3d(-2%, 0, 0)' },
-    '50%': { transform: 'translate3d(2%, 1.5%, 0)' },
-    '100%': { transform: 'translate3d(-2%, 0, 0)' },
-  },
-  '@keyframes wakePulse': {
-    '0%, 100%': { transform: 'scale(0.88)', opacity: 0.18 },
-    '50%': { transform: 'scale(1.1)', opacity: 0.34 },
-  },
-  '@keyframes collisionRing': {
-    '0%': { transform: 'scale(0.35)', opacity: 0 },
-    '12%': { opacity: 0.44 },
-    '100%': { transform: 'scale(2.6)', opacity: 0 },
-  },
   '&[data-entered="false"]::before': {
     opacity: 0,
-    transform: 'scale(1.08)',
+    transform: 'scale(1.02)',
   },
   '&[data-entered="false"]::after': {
     opacity: 0,
-    transform: 'translate3d(0, 24px, 0) scale(1.06)',
+    transform: 'translate3d(0, 12px, 0) scale(1.02)',
   },
 }));
 
@@ -157,30 +93,6 @@ export const BubbleHeader = styled(Box)(({ theme }) => ({
     opacity: 0,
     transform: 'translate3d(0, -22px, 0) scale(0.96)',
   },
-}));
-
-export const BubbleOrb = styled(Box, {
-  shouldForwardProp: (prop) => prop !== '$variant',
-})<{ $variant: 'left' | 'right' }>(({ theme, $variant }) => ({
-  position: 'absolute',
-  borderRadius: '50%',
-  filter: 'blur(22px)',
-  pointerEvents: 'none',
-  ...($variant === 'left'
-    ? {
-        width: 360,
-        height: 360,
-        top: -110,
-        left: -100,
-        background: `radial-gradient(circle, ${alpha(theme.palette.primary.main, 0.26)} 0%, transparent 72%)`,
-      }
-    : {
-        width: 420,
-        height: 420,
-        right: -130,
-        bottom: -130,
-        background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.24)} 0%, transparent 70%)`,
-      }),
 }));
 
 export const BubbleHint = styled(Box)(({ theme }) => ({
