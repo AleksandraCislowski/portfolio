@@ -1,9 +1,59 @@
 import * as React from 'react';
 import { Box, Typography, Card, CardContent, Chip, Stack } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import Section from './Section';
 import { SITE_CONFIG } from '../config/site';
 import { useTranslation } from '../i18n/useTranslation';
+
+const MotionBox = motion.create(Box);
+
+const sectionVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const headingVariants: Variants = {
+  hidden: { opacity: 0, y: -16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.58, ease: 'easeOut' },
+  },
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 26 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.62, ease: 'easeOut' },
+  },
+};
+
+const visualVariants: Variants = {
+  hidden: { opacity: 0, x: -26, y: 12 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: { duration: 0.72, ease: 'easeOut' },
+  },
+};
+
+const chipVariants: Variants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.42, ease: 'easeOut' },
+  },
+};
 
 const HeadingRow = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -37,6 +87,8 @@ const ImpactCardShell = styled(Box, {
     order: 'initial',
   },
 }));
+
+const MotionImpactCardShell = motion.create(ImpactCardShell);
 
 const ImpactCard = styled(Card)(() => ({
   height: '100%',
@@ -107,6 +159,8 @@ const ImpactVisual = styled(Box)(({ theme }) => ({
   },
 }));
 
+const MotionImpactVisual = motion.create(ImpactVisual);
+
 const ImpactVisualImage = styled('img')(() => ({
   position: 'absolute',
   inset: 0,
@@ -138,6 +192,8 @@ const SkillsWrap = styled(Stack)(({ theme }) => ({
   justifyContent: 'center',
 }));
 
+const MotionSkillsWrap = motion.create(SkillsWrap);
+
 const SkillChip = styled(Chip)(({ theme }) => ({
   borderRadius: 999,
   color: theme.palette.text.primary,
@@ -152,6 +208,7 @@ const SkillChip = styled(Chip)(({ theme }) => ({
 
 export default function Impact() {
   const t = useTranslation();
+  const shouldReduceMotion = useReducedMotion() ?? false;
   const impactCards = React.useMemo(
     () => [
       ...t.impact.items,
@@ -162,44 +219,61 @@ export default function Impact() {
 
   return (
     <Section id={SITE_CONFIG.sectionIds.impact}>
-      <HeadingRow>
-        <Typography variant='h3'>
-          {t.impact.title}
-        </Typography>
-      </HeadingRow>
-      <ImpactGrid>
-        {impactCards.map((item, index) => (
-          <React.Fragment key={item.label}>
-            <ImpactCardShell $index={index}>
-              <ImpactCard>
-                <ImpactCardContent>
-                  <MetricValue variant='h4'>{item.value}</MetricValue>
-                  <ImpactLabel variant='h6'>
-                    {item.label}
-                  </ImpactLabel>
-                  <ImpactDescription variant='body2'>
-                    {item.description}
-                  </ImpactDescription>
-                </ImpactCardContent>
-              </ImpactCard>
-            </ImpactCardShell>
-            {index === 0 ? (
-              <ImpactVisual aria-hidden='true'>
-                <ImpactVisualImage
-                  src='/images/profile/impact.png'
-                  alt=''
-                />
-                <ImpactVisualOverlay />
-              </ImpactVisual>
-            ) : null}
-          </React.Fragment>
-        ))}
-      </ImpactGrid>
-      <SkillsWrap>
-        {t.hero.skillPills.map((skill) => (
-          <SkillChip key={skill} label={skill} />
-        ))}
-      </SkillsWrap>
+      <MotionBox
+        variants={shouldReduceMotion ? undefined : sectionVariants}
+        initial={shouldReduceMotion ? undefined : 'hidden'}
+        whileInView={shouldReduceMotion ? undefined : 'visible'}
+        viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.28 }}
+      >
+        <MotionBox variants={shouldReduceMotion ? undefined : headingVariants}>
+          <HeadingRow>
+            <Typography variant='h3'>
+              {t.impact.title}
+            </Typography>
+          </HeadingRow>
+        </MotionBox>
+        <ImpactGrid>
+          {impactCards.map((item, index) => (
+            <React.Fragment key={item.label}>
+              <MotionImpactCardShell
+                $index={index}
+                variants={shouldReduceMotion ? undefined : cardVariants}
+              >
+                <ImpactCard>
+                  <ImpactCardContent>
+                    <MetricValue variant='h4'>{item.value}</MetricValue>
+                    <ImpactLabel variant='h6'>
+                      {item.label}
+                    </ImpactLabel>
+                    <ImpactDescription variant='body2'>
+                      {item.description}
+                    </ImpactDescription>
+                  </ImpactCardContent>
+                </ImpactCard>
+              </MotionImpactCardShell>
+              {index === 0 ? (
+                <MotionImpactVisual
+                  aria-hidden='true'
+                  variants={shouldReduceMotion ? undefined : visualVariants}
+                >
+                  <ImpactVisualImage
+                    src='/images/profile/impact.png'
+                    alt=''
+                  />
+                  <ImpactVisualOverlay />
+                </MotionImpactVisual>
+              ) : null}
+            </React.Fragment>
+          ))}
+        </ImpactGrid>
+        <MotionSkillsWrap variants={shouldReduceMotion ? undefined : sectionVariants}>
+          {t.hero.skillPills.map((skill) => (
+            <MotionBox key={skill} variants={shouldReduceMotion ? undefined : chipVariants}>
+              <SkillChip label={skill} />
+            </MotionBox>
+          ))}
+        </MotionSkillsWrap>
+      </MotionBox>
     </Section>
   );
 }

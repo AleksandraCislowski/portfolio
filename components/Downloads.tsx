@@ -15,6 +15,7 @@ import {
   ListItemText,
 } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import DownloadIcon from '@mui/icons-material/Download';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
@@ -22,6 +23,65 @@ import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import Section from './Section';
 import { SITE_CONFIG } from '../config/site';
 import { useTranslation } from '../i18n/useTranslation';
+
+const MotionBox = motion.create(Box);
+
+const sectionVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.04,
+    },
+  },
+};
+
+const headerVariants: Variants = {
+  hidden: { opacity: 0, y: -18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.56, ease: 'easeOut' },
+  },
+};
+
+const leftColumnVariants: Variants = {
+  hidden: { opacity: 0, x: -26, y: 12 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: { duration: 0.68, ease: 'easeOut', staggerChildren: 0.1 },
+  },
+};
+
+const rightColumnVariants: Variants = {
+  hidden: { opacity: 0, x: 26, y: 12 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: { duration: 0.68, ease: 'easeOut', staggerChildren: 0.1 },
+  },
+};
+
+const previewVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.72, ease: 'easeOut' },
+  },
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.52, ease: 'easeOut' },
+  },
+};
 
 const SectionTitle = styled(Typography)(() => ({
   marginBottom: 12,
@@ -47,6 +107,8 @@ const DownloadsLayout = styled(Box)(({ theme }) => ({
     alignItems: 'center',
   },
 }));
+
+const MotionDownloadsLayout = motion.create(DownloadsLayout);
 
 const DownloadsCards = styled(Box)(({ theme }) => ({
   display: 'grid',
@@ -140,6 +202,8 @@ const DownloadsPreview = styled(Box)(({ theme }) => ({
   },
 }));
 
+const MotionDownloadsPreview = motion.create(DownloadsPreview);
+
 const DownloadsPreviewInner = styled(Box)(({ theme }) => ({
   width: 'min(100%, 320px)',
   display: 'grid',
@@ -157,6 +221,8 @@ const MobileDownloadsCards = styled(DownloadsCards)(({ theme }) => ({
   },
 }));
 
+const MotionMobileDownloadsCards = motion.create(MobileDownloadsCards);
+
 const DownloadsCardsLeft = styled(DownloadsCards)(({ theme }) => ({
   display: 'none',
   [theme.breakpoints.up('lg')]: {
@@ -165,6 +231,8 @@ const DownloadsCardsLeft = styled(DownloadsCards)(({ theme }) => ({
   },
 }));
 
+const MotionDownloadsCardsLeft = motion.create(DownloadsCardsLeft);
+
 const DownloadsCardsRight = styled(DownloadsCards)(({ theme }) => ({
   display: 'none',
   [theme.breakpoints.up('lg')]: {
@@ -172,6 +240,8 @@ const DownloadsCardsRight = styled(DownloadsCards)(({ theme }) => ({
     order: 3,
   },
 }));
+
+const MotionDownloadsCardsRight = motion.create(DownloadsCardsRight);
 
 const DownloadsPreviewImageWrap = styled(Box)(() => ({
   position: 'relative',
@@ -266,6 +336,7 @@ type RecommendationItem = {
 
 export default function Downloads() {
   const t = useTranslation();
+  const shouldReduceMotion = useReducedMotion() ?? false;
   const [recommendationsOpen, setRecommendationsOpen] = React.useState(false);
   const allItems = t.downloads.items;
   const leftItems = t.downloads.items.slice(0, 2);
@@ -279,93 +350,108 @@ export default function Downloads() {
     const meta = documentMeta[item.id as keyof typeof documentMeta];
 
     return (
-      <DownloadCard key={item.id}>
-        <DownloadCardContent>
-          <DownloadCardTop>
-            <DownloadCardBadge>
-              <DescriptionOutlinedIcon sx={{ fontSize: 16 }} />
-              <Typography variant='caption'>{meta.label}</Typography>
-            </DownloadCardBadge>
-            <DownloadCardMeta variant='caption'>{meta.size}</DownloadCardMeta>
-          </DownloadCardTop>
-          <CardTitle variant='h6'>{item.title}</CardTitle>
-          <CardDescription variant='body2'>{item.description}</CardDescription>
-          <DownloadCardActions>
-            <Button
-              component='a'
-              href={href}
-              target='_blank'
-              rel='noopener noreferrer'
-              variant='outlined'
-              disabled={!href}
-              fullWidth
-              size='small'
-            >
-              {t.downloads.viewCta}
-            </Button>
-            <Button
-              component='a'
-              href={href}
-              target='_blank'
-              rel='noopener noreferrer'
-              variant='outlined'
-              startIcon={<DownloadIcon />}
-              disabled={!href}
-              fullWidth
-              size='small'
-            >
-              {t.downloads.downloadCta}
-            </Button>
-          </DownloadCardActions>
-        </DownloadCardContent>
-      </DownloadCard>
+      <MotionBox
+        key={item.id}
+        variants={shouldReduceMotion ? undefined : cardVariants}
+        sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+      >
+        <DownloadCard>
+          <DownloadCardContent>
+            <DownloadCardTop>
+              <DownloadCardBadge>
+                <DescriptionOutlinedIcon sx={{ fontSize: 16 }} />
+                <Typography variant='caption'>{meta.label}</Typography>
+              </DownloadCardBadge>
+              <DownloadCardMeta variant='caption'>{meta.size}</DownloadCardMeta>
+            </DownloadCardTop>
+            <CardTitle variant='h6'>{item.title}</CardTitle>
+            <CardDescription variant='body2'>{item.description}</CardDescription>
+            <DownloadCardActions>
+              <Button
+                component='a'
+                href={href}
+                target='_blank'
+                rel='noopener noreferrer'
+                variant='outlined'
+                disabled={!href}
+                fullWidth
+                size='small'
+              >
+                {t.downloads.viewCta}
+              </Button>
+              <Button
+                component='a'
+                href={href}
+                target='_blank'
+                rel='noopener noreferrer'
+                variant='outlined'
+                startIcon={<DownloadIcon />}
+                disabled={!href}
+                fullWidth
+                size='small'
+              >
+                {t.downloads.downloadCta}
+              </Button>
+            </DownloadCardActions>
+          </DownloadCardContent>
+        </DownloadCard>
+      </MotionBox>
     );
   };
 
   return (
     <Section id={SITE_CONFIG.sectionIds.downloads}>
-      <SectionTitle variant='h3'>{t.downloads.title}</SectionTitle>
-      <SectionDescription variant='body2'>
-        {t.downloads.description}
-      </SectionDescription>
+      <MotionBox
+        variants={shouldReduceMotion ? undefined : sectionVariants}
+        initial={shouldReduceMotion ? undefined : 'hidden'}
+        whileInView={shouldReduceMotion ? undefined : 'visible'}
+        viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.24 }}
+      >
+        <MotionBox variants={shouldReduceMotion ? undefined : headerVariants}>
+          <SectionTitle variant='h3'>{t.downloads.title}</SectionTitle>
+          <SectionDescription variant='body2'>
+            {t.downloads.description}
+          </SectionDescription>
+        </MotionBox>
 
-      <DownloadsLayout>
-        <MobileDownloadsCards>
-          {allItems.map((item) => renderDownloadCard(item))}
-        </MobileDownloadsCards>
+        <MotionDownloadsLayout variants={shouldReduceMotion ? undefined : sectionVariants}>
+          <MotionMobileDownloadsCards variants={shouldReduceMotion ? undefined : sectionVariants}>
+            {allItems.map((item) => renderDownloadCard(item))}
+          </MotionMobileDownloadsCards>
 
-        <DownloadsCardsLeft>
-          {leftItems.map((item) => renderDownloadCard(item))}
-        </DownloadsCardsLeft>
+          <MotionDownloadsCardsLeft variants={shouldReduceMotion ? undefined : leftColumnVariants}>
+            {leftItems.map((item) => renderDownloadCard(item))}
+          </MotionDownloadsCardsLeft>
 
-        <DownloadsPreview>
-          <DownloadsPreviewInner>
-            <DownloadsPreviewImageWrap>
-              <Image
-                src='/images/profile/download.png'
-                alt=''
-                fill
-                sizes='(max-width: 1200px) 240px, 320px'
-                style={{
-                  objectFit: 'cover',
-                  objectPosition: 'center',
-                }}
-              />
-            </DownloadsPreviewImageWrap>
+          <MotionDownloadsPreview variants={shouldReduceMotion ? undefined : previewVariants}>
+            <DownloadsPreviewInner>
+              <DownloadsPreviewImageWrap>
+                <Image
+                  src='/images/profile/download.png'
+                  alt=''
+                  fill
+                  sizes='(max-width: 1200px) 240px, 320px'
+                  style={{
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                  }}
+                />
+              </DownloadsPreviewImageWrap>
 
-            <RecommendationsTriggerButton
-              variant='outlined'
-              onClick={() => setRecommendationsOpen(true)}
-            >
-              {t.downloads.recommendations.button}
-            </RecommendationsTriggerButton>
-          </DownloadsPreviewInner>
-        </DownloadsPreview>
+              <RecommendationsTriggerButton
+                variant='outlined'
+                onClick={() => setRecommendationsOpen(true)}
+              >
+                {t.downloads.recommendations.button}
+              </RecommendationsTriggerButton>
+            </DownloadsPreviewInner>
+          </MotionDownloadsPreview>
 
-        <DownloadsCardsRight>
-          {rightItems.map((item) => renderDownloadCard(item))}
-        </DownloadsCardsRight>
-      </DownloadsLayout>
+          <MotionDownloadsCardsRight variants={shouldReduceMotion ? undefined : rightColumnVariants}>
+            {rightItems.map((item) => renderDownloadCard(item))}
+          </MotionDownloadsCardsRight>
+        </MotionDownloadsLayout>
+      </MotionBox>
 
       <Dialog
         open={recommendationsOpen}

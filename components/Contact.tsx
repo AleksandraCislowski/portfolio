@@ -1,9 +1,40 @@
 import { Box, Typography, Button, Stack, Link } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { DESIGN_TOKENS } from '../theme/tokens';
 import { useTranslation } from '../i18n/useTranslation';
 import Section from './Section';
 import { SITE_CONFIG } from '../config/site';
+
+const sectionVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.14,
+      delayChildren: 0.06,
+    },
+  },
+};
+
+const contentVariants: Variants = {
+  hidden: { opacity: 0, x: -32, y: 12 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: { duration: 0.68, ease: 'easeOut' },
+  },
+};
+
+const visualVariants: Variants = {
+  hidden: { opacity: 0, x: 34, y: 18 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: { duration: 0.76, ease: 'easeOut' },
+  },
+};
 
 const ContactShell = styled(Box)(({ theme }) => ({
   width: '100%',
@@ -18,6 +49,8 @@ const ContactShell = styled(Box)(({ theme }) => ({
     alignItems: 'center',
   },
 }));
+
+const MotionContactShell = motion.create(ContactShell);
 
 const ContactContent = styled(Box)(({ theme }) => ({
   position: 'relative',
@@ -40,6 +73,8 @@ const ContactContent = styled(Box)(({ theme }) => ({
       'radial-gradient(circle at top left, rgba(96,165,250,0.16), transparent 28%), radial-gradient(circle at bottom right, rgba(196,181,253,0.12), transparent 30%)',
   },
 }));
+
+const MotionContactContent = motion.create(ContactContent);
 
 const ContactContentInner = styled(Box)(() => ({
   position: 'relative',
@@ -98,6 +133,8 @@ const ContactVisual = styled(Box)(({ theme }) => ({
   },
 }));
 
+const MotionContactVisual = motion.create(ContactVisual);
+
 const ContactVisualImage = styled('img')(() => ({
   position: 'absolute',
   inset: 0,
@@ -127,12 +164,18 @@ const ContactVisualOverlay = styled(Box)(() => ({
 
 export default function Contact() {
   const t = useTranslation();
+  const shouldReduceMotion = useReducedMotion() ?? false;
   const mailtoHref = `mailto:${SITE_CONFIG.contactEmail}`;
 
   return (
     <Section id={SITE_CONFIG.sectionIds.contact}>
-      <ContactShell>
-        <ContactContent>
+      <MotionContactShell
+        variants={shouldReduceMotion ? undefined : sectionVariants}
+        initial={shouldReduceMotion ? undefined : 'hidden'}
+        whileInView={shouldReduceMotion ? undefined : 'visible'}
+        viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.3 }}
+      >
+        <MotionContactContent variants={shouldReduceMotion ? undefined : contentVariants}>
           <ContactContentInner>
             <ContactEyebrow variant='caption'>
               {t.contact.kicker}
@@ -161,15 +204,15 @@ export default function Contact() {
               </ContactHelper>
             </ContactActions>
           </ContactContentInner>
-        </ContactContent>
-        <ContactVisual>
+        </MotionContactContent>
+        <MotionContactVisual variants={shouldReduceMotion ? undefined : visualVariants}>
           <ContactVisualImage
             src='/images/profile/contact.png'
             alt='Contact illustration'
           />
           <ContactVisualOverlay />
-        </ContactVisual>
-      </ContactShell>
+        </MotionContactVisual>
+      </MotionContactShell>
     </Section>
   );
 }
