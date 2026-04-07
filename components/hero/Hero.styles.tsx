@@ -35,7 +35,7 @@ export const HeroShell = styled(motion.div)(({ theme }) => ({
   display: 'grid',
   gap: theme.spacing(4),
   alignItems: 'center',
-  minHeight: 'calc(82dvh - 96px)',
+  minHeight: 'calc(92dvh - 96px)',
   width: 'min(1280px, 100%)',
   maxWidth: '100%',
   marginInline: 'auto',
