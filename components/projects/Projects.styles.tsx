@@ -14,7 +14,7 @@ export const SectionIntro = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export const BubbleBackgroundVideo = styled('video')({
+export const PlanetBackgroundVideo = styled('video')({
   position: 'absolute',
   inset: 0,
   width: '100%',
@@ -25,7 +25,7 @@ export const BubbleBackgroundVideo = styled('video')({
   opacity: 0.16,
 });
 
-export const BubbleBackgroundImage = styled('img')({
+export const PlanetBackgroundImage = styled('img')({
   position: 'absolute',
   inset: 0,
   width: '100%',
@@ -38,7 +38,7 @@ export const BubbleBackgroundImage = styled('img')({
   filter: 'saturate(1.14) contrast(1.06)',
 });
 
-export const BubbleField = styled(Box)(({ theme }) => ({
+export const PlanetField = styled(Box)(({ theme }) => ({
   position: 'relative',
   width: '100%',
   borderRadius: 34,
@@ -84,7 +84,7 @@ export const BubbleField = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const BubbleHeader = styled(Box)(({ theme }) => ({
+export const PlanetHeader = styled(Box)(({ theme }) => ({
   position: 'relative',
   zIndex: 4,
   display: 'flex',
@@ -102,7 +102,7 @@ export const BubbleHeader = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const BubbleHint = styled(Box)(({ theme }) => ({
+export const PlanetHint = styled(Box)(({ theme }) => ({
   position: 'relative',
   maxWidth: 330,
   padding: theme.spacing(2.1, 2.3),
@@ -126,7 +126,7 @@ export const BubbleHint = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const BubbleStage = styled(Box)(({ theme }) => ({
+export const PlanetStage = styled(Box)(({ theme }) => ({
   position: 'relative',
   zIndex: 3,
   minHeight: 560,
@@ -172,7 +172,7 @@ export const BubbleStage = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const BubbleSlot = styled(Box, {
+export const PlanetSlot = styled(Box, {
   shouldForwardProp: (prop) => prop !== '$recovering',
 })<{ $recovering: boolean }>(({ $recovering }) => ({
   position: 'absolute',
@@ -181,7 +181,7 @@ export const BubbleSlot = styled(Box, {
   zIndex: 2,
 }));
 
-export const BubbleDriftShell = styled(Box, {
+export const PlanetDriftShell = styled(Box, {
   shouldForwardProp: (prop) =>
     ![
       '$tone',
@@ -205,13 +205,13 @@ export const BubbleDriftShell = styled(Box, {
   animation: $reduceMotion
     ? 'none'
     : $tone % 3 === 0
-      ? `bubbleDriftA 13.8s cubic-bezier(0.42, 0.02, 0.21, 0.99) ${$delay} infinite`
+      ? `planetDriftA 13.8s cubic-bezier(0.42, 0.02, 0.21, 0.99) ${$delay} infinite`
       : $tone % 3 === 1
-        ? `bubbleDriftB 15.1s cubic-bezier(0.47, 0.05, 0.18, 0.98) ${$delay} infinite`
-        : `bubbleDriftC 14.5s cubic-bezier(0.4, 0.08, 0.2, 0.98) ${$delay} infinite`,
+        ? `planetDriftB 15.1s cubic-bezier(0.47, 0.05, 0.18, 0.98) ${$delay} infinite`
+        : `planetDriftC 14.5s cubic-bezier(0.4, 0.08, 0.2, 0.98) ${$delay} infinite`,
   animationPlayState: $motionPaused ? 'paused' : 'running',
   transition: `transform ${$recovering ? '1040ms' : '700ms'} cubic-bezier(0.16, 0.84, 0.2, 1)`,
-  '@keyframes bubbleDriftA': {
+  '@keyframes planetDriftA': {
     '0%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
     '19%': { transform: 'translate3d(16px, -22px, 0) rotate(2.2deg)' },
     '42%': { transform: 'translate3d(-18px, -10px, 0) rotate(-2deg)' },
@@ -219,7 +219,7 @@ export const BubbleDriftShell = styled(Box, {
     '84%': { transform: 'translate3d(-8px, 10px, 0) rotate(-0.9deg)' },
     '100%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
   },
-  '@keyframes bubbleDriftB': {
+  '@keyframes planetDriftB': {
     '0%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
     '16%': { transform: 'translate3d(-18px, -14px, 0) rotate(-2.5deg)' },
     '38%': { transform: 'translate3d(14px, -26px, 0) rotate(1.8deg)' },
@@ -228,7 +228,7 @@ export const BubbleDriftShell = styled(Box, {
     '90%': { transform: 'translate3d(8px, 6px, 0) rotate(-0.6deg)' },
     '100%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
   },
-  '@keyframes bubbleDriftC': {
+  '@keyframes planetDriftC': {
     '0%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
     '18%': { transform: 'translate3d(20px, -16px, 0) rotate(1.8deg)' },
     '36%': { transform: 'translate3d(8px, -30px, 0) rotate(-2.2deg)' },
@@ -241,12 +241,12 @@ export const BubbleDriftShell = styled(Box, {
     animation: $reduceMotion
       ? 'none'
       : $tone % 3 === 0
-        ? `bubbleDriftMobileA 12.6s cubic-bezier(0.42, 0.02, 0.21, 0.99) ${$delay} infinite`
+        ? `planetDriftMobileA 12.6s cubic-bezier(0.42, 0.02, 0.21, 0.99) ${$delay} infinite`
         : $tone % 3 === 1
-          ? `bubbleDriftMobileB 13.7s cubic-bezier(0.47, 0.05, 0.18, 0.98) ${$delay} infinite`
-          : `bubbleDriftMobileC 13.1s cubic-bezier(0.4, 0.08, 0.2, 0.98) ${$delay} infinite`,
+          ? `planetDriftMobileB 13.7s cubic-bezier(0.47, 0.05, 0.18, 0.98) ${$delay} infinite`
+          : `planetDriftMobileC 13.1s cubic-bezier(0.4, 0.08, 0.2, 0.98) ${$delay} infinite`,
   },
-  '@keyframes bubbleDriftMobileA': {
+  '@keyframes planetDriftMobileA': {
     '0%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
     '22%': { transform: 'translate3d(10px, -14px, 0) rotate(1.4deg)' },
     '46%': { transform: 'translate3d(-12px, -6px, 0) rotate(-1.2deg)' },
@@ -254,7 +254,7 @@ export const BubbleDriftShell = styled(Box, {
     '88%': { transform: 'translate3d(-5px, 6px, 0) rotate(-0.6deg)' },
     '100%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
   },
-  '@keyframes bubbleDriftMobileB': {
+  '@keyframes planetDriftMobileB': {
     '0%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
     '18%': { transform: 'translate3d(-12px, -10px, 0) rotate(-1.6deg)' },
     '40%': { transform: 'translate3d(10px, -16px, 0) rotate(1.2deg)' },
@@ -262,7 +262,7 @@ export const BubbleDriftShell = styled(Box, {
     '84%': { transform: 'translate3d(-8px, 12px, 0) rotate(0.8deg)' },
     '100%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
   },
-  '@keyframes bubbleDriftMobileC': {
+  '@keyframes planetDriftMobileC': {
     '0%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
     '20%': { transform: 'translate3d(12px, -10px, 0) rotate(1.2deg)' },
     '38%': { transform: 'translate3d(6px, -18px, 0) rotate(-1.5deg)' },
@@ -273,7 +273,7 @@ export const BubbleDriftShell = styled(Box, {
   },
 }));
 
-export const BubbleButton = styled('button', {
+export const PlanetButton = styled('button', {
   shouldForwardProp: (prop) =>
     ![
       '$tone',
@@ -368,7 +368,7 @@ export const BubbleButton = styled('button', {
       '0 22px 42px rgba(2, 6, 23, 0.34), inset 0 0 0 1px rgba(255,255,255,0.58)',
     animation: $reduceMotion
       ? 'none'
-      : `bubblePulse 5.4s ease-in-out ${$delay} infinite, bubbleGlow 4.8s ease-in-out ${$delay} infinite`,
+      : `planetPulse 5.4s ease-in-out ${$delay} infinite, planetGlow 4.8s ease-in-out ${$delay} infinite`,
     transform: $modalOpen
       ? $active
         ? 'scale(1.02)'
@@ -378,7 +378,7 @@ export const BubbleButton = styled('button', {
     transition: `transform ${$recovering ? '1120ms' : '620ms'} cubic-bezier(0.16, 0.84, 0.2, 1), box-shadow 360ms ease, filter 360ms ease, opacity 360ms ease`,
     willChange: 'transform, box-shadow, filter, opacity',
     zIndex: 1,
-    '@keyframes bubblePulse': {
+    '@keyframes planetPulse': {
       '0%, 100%': {
         boxShadow:
           '0 22px 42px rgba(2, 6, 23, 0.34), inset 0 0 0 1px rgba(255,255,255,0.58)',
@@ -390,7 +390,7 @@ export const BubbleButton = styled('button', {
         filter: 'saturate(1.08) brightness(1.04)',
       },
     },
-    '@keyframes bubbleGlow': {
+    '@keyframes planetGlow': {
       '0%, 100%': { opacity: 0.98 },
       '50%': { opacity: 1 },
     },
@@ -415,7 +415,7 @@ export const BubbleButton = styled('button', {
       transition:
         'box-shadow 240ms ease, opacity 240ms ease, transform 280ms ease',
     },
-    '& .bubble-atmosphere': {
+    '& .planet-atmosphere': {
       position: 'absolute',
       inset: '-2%',
       borderRadius: '50%',
@@ -428,7 +428,7 @@ export const BubbleButton = styled('button', {
       transition: 'opacity 260ms ease, transform 320ms ease, filter 260ms ease',
       zIndex: 2,
     },
-    '& .bubble-surface-detail': {
+    '& .planet-surface-detail': {
       position: 'absolute',
       borderRadius: '48% 52% 44% 56%',
       filter: 'blur(0.3px)',
@@ -438,7 +438,7 @@ export const BubbleButton = styled('button', {
       transition: 'opacity 260ms ease, transform 360ms cubic-bezier(0.2, 0.9, 0.22, 1)',
       zIndex: 2,
     },
-    '& .bubble-surface-detail-a': {
+    '& .planet-surface-detail-a': {
       width: '42%',
       height: '24%',
       left: '18%',
@@ -446,7 +446,7 @@ export const BubbleButton = styled('button', {
       background: planetTheme.surfaceA,
       transform: 'rotate(-19deg)',
     },
-    '& .bubble-surface-detail-b': {
+    '& .planet-surface-detail-b': {
       width: '32%',
       height: '18%',
       right: '16%',
@@ -455,7 +455,7 @@ export const BubbleButton = styled('button', {
       transform: 'rotate(24deg)',
       opacity: 0.24,
     },
-    '& .bubble-rim-light': {
+    '& .planet-rim-light': {
       position: 'absolute',
       inset: '4%',
       borderRadius: '50%',
@@ -467,7 +467,75 @@ export const BubbleButton = styled('button', {
       transition: 'opacity 260ms ease, transform 380ms cubic-bezier(0.2, 0.9, 0.22, 1)',
       zIndex: 2,
     },
-    '& .bubble-mars-storm': {
+    '& .planet-mars-ufo': {
+      position: 'absolute',
+      left: '58%',
+      top: '28%',
+      width: '25%',
+      height: '9%',
+      borderRadius: '50%',
+      background:
+        'linear-gradient(180deg, rgba(226,232,240,0.96) 0%, rgba(148,163,184,0.82) 46%, rgba(51,65,85,0.7) 100%)',
+      boxShadow:
+        '0 4px 12px rgba(15,23,42,0.28), 0 0 14px rgba(186,230,253,0.22), inset 0 1px 3px rgba(255,255,255,0.72)',
+      opacity: 0,
+      pointerEvents: 'none',
+      transform: 'translate3d(-50%, -50%, 0) rotate(-8deg)',
+      transformOrigin: '50% 50%',
+      animation: $reduceMotion ? 'none' : `marsUfoLanding 4.8s ease-in-out ${$delay} infinite`,
+      zIndex: 5,
+      '&::before': {
+        content: '""',
+        position: 'absolute',
+        left: '50%',
+        top: '-42%',
+        width: '46%',
+        height: '76%',
+        borderRadius: '50% 50% 42% 42%',
+        background:
+          'radial-gradient(ellipse at 42% 30%, rgba(255,255,255,0.92) 0%, rgba(186,230,253,0.58) 34%, rgba(59,130,246,0.16) 76%, transparent 100%)',
+        boxShadow: 'inset 0 1px 4px rgba(255,255,255,0.72)',
+        transform: 'translateX(-50%)',
+      },
+      '&::after': {
+        content: '""',
+        position: 'absolute',
+        left: '50%',
+        top: '62%',
+        width: '48%',
+        height: '260%',
+        background:
+          'linear-gradient(180deg, rgba(186,230,253,0.28) 0%, rgba(254,215,170,0.14) 42%, transparent 100%)',
+        clipPath: 'polygon(38% 0%, 62% 0%, 100% 100%, 0% 100%)',
+        filter: 'blur(2px)',
+        opacity: 0.7,
+        transform: 'translateX(-50%)',
+        transformOrigin: '50% 0%',
+      },
+    },
+    '@keyframes marsUfoLanding': {
+      '0%, 14%, 100%': {
+        opacity: 0,
+        transform: 'translate3d(-50%, -50%, 0) translateY(-10px) scale(0.86) rotate(-8deg)',
+      },
+      '24%': {
+        opacity: 0.88,
+        transform: 'translate3d(-50%, -50%, 0) translateY(-4px) scale(1) rotate(-8deg)',
+      },
+      '58%': {
+        opacity: 0.94,
+        transform: 'translate3d(-50%, -50%, 0) translateY(4px) scale(1.02) rotate(-5deg)',
+      },
+      '78%': {
+        opacity: 0.92,
+        transform: 'translate3d(-50%, -50%, 0) translateY(2px) scale(1) rotate(-6deg)',
+      },
+      '94%': {
+        opacity: 0,
+        transform: 'translate3d(-50%, -50%, 0) translateY(-8px) scale(0.88) rotate(-8deg)',
+      },
+    },
+    '& .planet-mars-storm': {
       position: 'absolute',
       right: '20%',
       top: '72%',
@@ -486,7 +554,7 @@ export const BubbleButton = styled('button', {
       transition: 'opacity 260ms ease, transform 380ms cubic-bezier(0.2, 0.9, 0.22, 1)',
       zIndex: 4,
     },
-    '& .bubble-earth-clouds': {
+    '& .planet-earth-clouds': {
       position: 'absolute',
       inset: '9% 7%',
       borderRadius: '50%',
@@ -499,7 +567,7 @@ export const BubbleButton = styled('button', {
       transition: 'opacity 260ms ease, transform 380ms cubic-bezier(0.2, 0.9, 0.22, 1)',
       zIndex: 3,
     },
-    '& .bubble-planet-shadow': {
+    '& .planet-shadow': {
       position: 'absolute',
       inset: '18% 12% 10% 16%',
       borderRadius: '50%',
@@ -511,7 +579,7 @@ export const BubbleButton = styled('button', {
       transition: 'transform 260ms ease, opacity 220ms ease',
       zIndex: 1,
     },
-    '& .bubble-hover-sweep': {
+    '& .planet-hover-sweep': {
       position: 'absolute',
       inset: '-14% -34%',
       borderRadius: '50%',
@@ -551,36 +619,36 @@ export const BubbleButton = styled('button', {
       boxShadow:
         'inset -22px -22px 32px rgba(7,16,35,0.28), inset 16px 16px 34px rgba(255,255,255,0.16), 0 0 0 3px rgba(255,255,255,0.3), 0 0 88px rgba(125,211,252,0.44)',
     },
-    '&:hover .bubble-planet-shadow': {
+    '&:hover .planet-shadow': {
       transform: 'scale(1.04) translate3d(4px, 4px, 0)',
       opacity: 0.96,
     },
-    '&:hover .bubble-atmosphere': {
+    '&:hover .planet-atmosphere': {
       opacity: 0.95,
       filter: 'brightness(1.12)',
       transform: 'scale(1.05) rotate(4deg)',
     },
-    '&:hover .bubble-surface-detail-a': {
+    '&:hover .planet-surface-detail-a': {
       opacity: 0.48,
       transform: 'translate3d(-3px, -2px, 0) rotate(-13deg)',
     },
-    '&:hover .bubble-surface-detail-b': {
+    '&:hover .planet-surface-detail-b': {
       opacity: 0.34,
       transform: 'translate3d(3px, 2px, 0) rotate(18deg)',
     },
-    '&:hover .bubble-rim-light': {
+    '&:hover .planet-rim-light': {
       opacity: 0.82,
       transform: 'scale(1.04) rotate(8deg)',
     },
-    '&:hover .bubble-mars-storm': {
+    '&:hover .planet-mars-storm': {
       opacity: 0.88,
       transform: 'scale(1.08) rotate(-6deg)',
     },
-    '&:hover .bubble-earth-clouds': {
+    '&:hover .planet-earth-clouds': {
       opacity: 0.74,
       transform: 'scale(1.04) rotate(-8deg)',
     },
-    '&:hover .bubble-hover-sweep': {
+    '&:hover .planet-hover-sweep': {
       opacity: 1,
       transform: 'translateX(36%) rotate(-12deg)',
     },
@@ -603,36 +671,36 @@ export const BubbleButton = styled('button', {
       boxShadow:
         'inset -22px -22px 32px rgba(7,16,35,0.28), inset 16px 16px 34px rgba(255,255,255,0.16), 0 0 0 3px rgba(255,255,255,0.3), 0 0 88px rgba(125,211,252,0.44)',
     },
-    '&:focus-visible .bubble-planet-shadow': {
+    '&:focus-visible .planet-shadow': {
       transform: 'scale(1.04) translate3d(4px, 4px, 0)',
       opacity: 0.96,
     },
-    '&:focus-visible .bubble-atmosphere': {
+    '&:focus-visible .planet-atmosphere': {
       opacity: 0.95,
       filter: 'brightness(1.12)',
       transform: 'scale(1.05) rotate(4deg)',
     },
-    '&:focus-visible .bubble-surface-detail-a': {
+    '&:focus-visible .planet-surface-detail-a': {
       opacity: 0.48,
       transform: 'translate3d(-3px, -2px, 0) rotate(-13deg)',
     },
-    '&:focus-visible .bubble-surface-detail-b': {
+    '&:focus-visible .planet-surface-detail-b': {
       opacity: 0.34,
       transform: 'translate3d(3px, 2px, 0) rotate(18deg)',
     },
-    '&:focus-visible .bubble-rim-light': {
+    '&:focus-visible .planet-rim-light': {
       opacity: 0.82,
       transform: 'scale(1.04) rotate(8deg)',
     },
-    '&:focus-visible .bubble-mars-storm': {
+    '&:focus-visible .planet-mars-storm': {
       opacity: 0.88,
       transform: 'scale(1.08) rotate(-6deg)',
     },
-    '&:focus-visible .bubble-earth-clouds': {
+    '&:focus-visible .planet-earth-clouds': {
       opacity: 0.74,
       transform: 'scale(1.04) rotate(-8deg)',
     },
-    '&:focus-visible .bubble-hover-sweep': {
+    '&:focus-visible .planet-hover-sweep': {
       opacity: 1,
       transform: 'translateX(36%) rotate(-12deg)',
     },
@@ -642,7 +710,7 @@ export const BubbleButton = styled('button', {
   };
 });
 
-export const BubbleOrbitBack = styled(Box, {
+export const PlanetOrbitBack = styled(Box, {
   shouldForwardProp: (prop) => prop !== '$tone',
 })<{ $tone: number }>(({ theme, $tone }) => {
   const ringTilt = $tone % 3 === 0 ? '-22deg' : $tone % 3 === 1 ? '18deg' : '0deg';
@@ -688,7 +756,7 @@ export const BubbleOrbitBack = styled(Box, {
       borderColor: 'rgba(251,191,36,0.3)',
       opacity: isSaturn ? 0.82 : 0,
     },
-    '& .bubble-orbit-arc': {
+    '& .planet-orbit-arc': {
       position: 'absolute',
       left: '50%',
       top: '50%',
@@ -699,13 +767,13 @@ export const BubbleOrbitBack = styled(Box, {
       opacity: isSaturn ? 1 : 0,
       pointerEvents: 'none',
     },
-    '& .bubble-orbit-arc-a': {
+    '& .planet-orbit-arc-a': {
       width: '96%',
       height: '28%',
       borderWidth: '1px 0 0',
       transform: 'translate3d(-50%, -96%, 0) scaleX(0.98)',
     },
-    '& .bubble-orbit-arc-b': {
+    '& .planet-orbit-arc-b': {
       width: '104%',
       height: '30%',
       borderWidth: '0 0 1px',
@@ -713,7 +781,7 @@ export const BubbleOrbitBack = styled(Box, {
       opacity: isSaturn ? 0.72 : 0,
       transform: 'translate3d(-50%, 0%, 0) scaleX(1.02)',
     },
-    '& .bubble-orbit-arc-c': {
+    '& .planet-orbit-arc-c': {
       width: '72%',
       height: '18%',
       borderWidth: '1px 0 0',
@@ -721,7 +789,7 @@ export const BubbleOrbitBack = styled(Box, {
       opacity: isSaturn ? 0.56 : 0,
       transform: 'translate3d(-50%, -122%, 0) scaleX(0.9)',
     },
-    '& .bubble-orbit-arc-d': {
+    '& .planet-orbit-arc-d': {
       width: '74%',
       height: '18%',
       borderWidth: '0 0 1px',
@@ -729,7 +797,7 @@ export const BubbleOrbitBack = styled(Box, {
       opacity: isSaturn ? 0.5 : 0,
       transform: 'translate3d(-50%, 34%, 0) scaleX(1.14)',
     },
-    '& .bubble-mars-comet': {
+    '& .planet-mars-comet': {
       position: 'absolute',
       left: '50%',
       top: '50%',
@@ -809,7 +877,7 @@ export const BubbleOrbitBack = styled(Box, {
           'translate3d(-50%, -50%, 0) translate3d(clamp(128px, 9.6vw, 172px), clamp(-66px, -6.6vw, -44px), 0) rotate(-24deg) scale(0.7)',
       },
     },
-    '& .bubble-earth-moon': {
+    '& .planet-earth-moon': {
       position: 'absolute',
       left: '50%',
       top: '50%',
@@ -832,42 +900,42 @@ export const BubbleOrbitBack = styled(Box, {
         transform:
           'translate3d(-50%, -50%, 0) translate3d(clamp(-154px, -10.6vw, -104px), clamp(-22px, -2vw, -10px), 0) scale(0.74)',
       },
-      '7%': {
-        opacity: 0.42,
+      '4%': {
+        opacity: 0.46,
         transform:
-          'translate3d(-50%, -50%, 0) translate3d(clamp(-132px, -9.2vw, -90px), clamp(4px, 0.6vw, 12px), 0) scale(0.8)',
+          'translate3d(-50%, -50%, 0) translate3d(clamp(-138px, -9.6vw, -94px), clamp(-2px, -0.2vw, -1px), 0) scale(0.78)',
       },
-      '15%': {
-        opacity: 0.82,
+      '11%': {
+        opacity: 0.86,
         transform:
-          'translate3d(-50%, -50%, 0) translate3d(clamp(-102px, -7.2vw, -70px), clamp(26px, 3vw, 42px), 0) scale(0.9)',
+          'translate3d(-50%, -50%, 0) translate3d(clamp(-106px, -7.4vw, -72px), clamp(22px, 2.6vw, 38px), 0) scale(0.9)',
       },
-      '25%': {
+      '22%': {
         opacity: 0.96,
         transform:
           'translate3d(-50%, -50%, 0) translate3d(clamp(-56px, -4vw, -34px), clamp(40px, 4.6vw, 60px), 0) scale(1)',
       },
-      '36%': {
+      '34%': {
         opacity: 1,
         transform:
           'translate3d(-50%, -50%, 0) translate3d(clamp(-10px, -0.8vw, -4px), clamp(42px, 4.8vw, 64px), 0) scale(1.08)',
       },
-      '46%': {
+      '47%': {
         opacity: 0.96,
         transform:
           'translate3d(-50%, -50%, 0) translate3d(clamp(56px, 4.6vw, 80px), clamp(32px, 3.6vw, 52px), 0) scale(1)',
       },
-      '54%': {
-        opacity: 0.64,
+      '57%': {
+        opacity: 0.72,
         transform:
           'translate3d(-50%, -50%, 0) translate3d(clamp(104px, 7.6vw, 136px), clamp(16px, 2vw, 30px), 0) scale(0.9)',
       },
-      '60%': {
-        opacity: 0.24,
+      '64%': {
+        opacity: 0.28,
         transform:
           'translate3d(-50%, -50%, 0) translate3d(clamp(122px, 8.8vw, 156px), clamp(-4px, -0.4vw, -2px), 0) scale(0.84)',
       },
-      '64%, 78%': {
+      '70%, 78%': {
         opacity: 0,
         transform:
           'translate3d(-50%, -50%, 0) translate3d(clamp(88px, 6.6vw, 118px), clamp(-30px, -3.2vw, -16px), 0) scale(0.74)',
@@ -889,10 +957,10 @@ export const BubbleOrbitBack = styled(Box, {
       },
     },
     '@media (prefers-reduced-motion: reduce)': {
-      '& .bubble-mars-comet': {
+      '& .planet-mars-comet': {
         animation: 'none',
       },
-      '& .bubble-earth-moon': {
+      '& .planet-earth-moon': {
         animation: 'none',
         opacity: isEarth ? 0.92 : 0,
         transform: 'translate3d(-50%, -50%, 0)',
@@ -906,19 +974,19 @@ export const BubbleOrbitBack = styled(Box, {
         width: '86%',
         height: '22%',
       },
-      '& .bubble-orbit-arc-a': {
+      '& .planet-orbit-arc-a': {
         transform: 'translate3d(-50%, -92%, 0) scaleX(0.98)',
       },
-      '& .bubble-orbit-arc-b': {
+      '& .planet-orbit-arc-b': {
         transform: 'translate3d(-50%, 0%, 0) scaleX(1.02)',
       },
-      '& .bubble-orbit-arc-c': {
+      '& .planet-orbit-arc-c': {
         transform: 'translate3d(-50%, -116%, 0) scaleX(0.9)',
       },
-      '& .bubble-orbit-arc-d': {
+      '& .planet-orbit-arc-d': {
         transform: 'translate3d(-50%, 28%, 0) scaleX(1.14)',
       },
-      '& .bubble-mars-comet, & .bubble-earth-moon': {
+      '& .planet-mars-comet, & .planet-earth-moon': {
         width: 14,
         height: 14,
       },
@@ -926,7 +994,7 @@ export const BubbleOrbitBack = styled(Box, {
   };
 });
 
-export const BubbleOrbitTextRun = styled(Box)(({ theme }) => ({
+export const PlanetOrbitTextRun = styled(Box)(({ theme }) => ({
   position: 'absolute',
   inset: 0,
   pointerEvents: 'none',
@@ -936,7 +1004,7 @@ export const BubbleOrbitTextRun = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const BubbleOrbitChar = styled('span')(({ theme }) => ({
+export const PlanetOrbitChar = styled('span')(({ theme }) => ({
   position: 'absolute',
   left: '50%',
   top: '50%',
@@ -956,12 +1024,12 @@ export const BubbleOrbitChar = styled('span')(({ theme }) => ({
   )}`,
 }));
 
-export const BubbleHintLabel = styled(Typography)(() => ({
+export const PlanetHintLabel = styled(Typography)(() => ({
   position: 'relative',
   zIndex: 1,
 }));
 
-export const BubbleHintBody = styled(Typography)(() => ({
+export const PlanetHintBody = styled(Typography)(() => ({
   position: 'relative',
   zIndex: 1,
 }));

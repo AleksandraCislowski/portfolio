@@ -11,7 +11,7 @@ export function getProjectLayout(
   return isSmDown ? project.mobile : isMdDown ? project.tablet : project.desktop;
 }
 
-export function getBubbleTransforms(
+export function getPlanetTransforms(
   index: number,
   isSmDown: boolean,
   isActive: boolean,
@@ -38,7 +38,7 @@ export function getBubbleTransforms(
   return introTransform;
 }
 
-export function getBubbleVisualState(
+export function getPlanetVisualState(
   isActive: boolean,
   hasActiveProject: boolean,
   entered: boolean,

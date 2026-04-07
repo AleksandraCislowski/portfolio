@@ -14,27 +14,27 @@ import {
   type ProjectsModalPhase,
 } from './projects/ProjectsModal';
 import {
-  BubbleBackgroundImage,
-  BubbleBackgroundVideo,
-  BubbleButton,
-  BubbleDriftShell,
-  BubbleField,
-  BubbleHeader,
-  BubbleHint,
-  BubbleHintBody,
-  BubbleHintLabel,
-  BubbleOrbitBack,
-  BubbleOrbitChar,
-  BubbleOrbitTextRun,
-  BubbleSlot,
-  BubbleStage,
+  PlanetBackgroundImage,
+  PlanetBackgroundVideo,
+  PlanetButton,
+  PlanetDriftShell,
+  PlanetField,
+  PlanetHeader,
+  PlanetHint,
+  PlanetHintBody,
+  PlanetHintLabel,
+  PlanetOrbitBack,
+  PlanetOrbitChar,
+  PlanetOrbitTextRun,
+  PlanetSlot,
+  PlanetStage,
   SectionIntro,
   SectionTitle,
 } from './projects/Projects.styles';
 import {
   getActiveProject,
-  getBubbleTransforms,
-  getBubbleVisualState,
+  getPlanetTransforms,
+  getPlanetVisualState,
   getProjectLayout,
 } from './projects/projects.utils';
 import { useSectionAnimationReplay } from './sectionAnimationReplay';
@@ -56,14 +56,14 @@ function getOrbitCharStyle(
   charIndex: number,
   totalChars: number,
   orbitProgress: number,
-  bubbleSize: number,
+  planetSize: number,
 ) {
   const progress = ((totalChars - charIndex) / totalChars + orbitProgress) % 1;
   const angle = progress * Math.PI * 2 - Math.PI / 2;
-  const ringRadiusX = bubbleSize * 0.74;
-  const ringRadiusY = bubbleSize * 0.16;
+  const ringRadiusX = planetSize * 0.74;
+  const ringRadiusY = planetSize * 0.16;
   const x = Math.cos(angle) * ringRadiusX;
-  const verticalOffset = bubbleSize * -0.092;
+  const verticalOffset = planetSize * -0.092;
   const y = Math.sin(angle) * ringRadiusY + verticalOffset;
   const normalizedX = x / ringRadiusX;
   const rotateY = normalizedX * 78;
@@ -75,7 +75,7 @@ function getOrbitCharStyle(
   const sideFade = Math.max(0, 1 - Math.max(0, Math.abs(normalizedX) - 0.72) / 0.28);
   const opacity = frontFactor * sideFade;
   const scale = 0.92 + frontFactor * 0.16;
-  const fontSize = Math.max(14, Math.min(24, bubbleSize * 0.086));
+  const fontSize = Math.max(14, Math.min(24, planetSize * 0.086));
   const xPx = `${x.toFixed(2)}px`;
   const yPx = `${y.toFixed(2)}px`;
   const opacityValue = opacity.toFixed(6);
@@ -96,12 +96,12 @@ export default function Projects() {
   const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
   const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
   const fieldRef = React.useRef<HTMLDivElement | null>(null);
-  const bubbleButtonRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
+  const planetButtonRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
   const modalPhaseTimeoutRef = React.useRef<number | null>(null);
   const [entered, setEntered] = React.useState(false);
   const [activeProjectIndex, setActiveProjectIndex] = React.useState<number | null>(null);
-  const [bubbleMotionPaused, setBubbleMotionPaused] = React.useState(false);
-  const [bubbleRecovering, setBubbleRecovering] = React.useState(false);
+  const [planetMotionPaused, setPlanetMotionPaused] = React.useState(false);
+  const [planetRecovering, setPlanetRecovering] = React.useState(false);
   const [modalPhase, setModalPhase] = React.useState<ProjectsModalPhase>('closed');
   const [launchSnapshot, setLaunchSnapshot] = React.useState<ProjectLaunchSnapshot | null>(null);
   const [orbitProgress, setOrbitProgress] = React.useState(0);
@@ -118,12 +118,12 @@ export default function Projects() {
     }
   }, []);
 
-  const getBubbleSnapshot = React.useCallback((index: number | null) => {
+  const getPlanetSnapshot = React.useCallback((index: number | null) => {
     if (index === null || typeof window === 'undefined') {
       return null;
     }
 
-    const node = bubbleButtonRefs.current[index];
+    const node = planetButtonRefs.current[index];
     if (!node) {
       return null;
     }
@@ -142,10 +142,10 @@ export default function Projects() {
 
   const openProjectModal = React.useCallback((index: number) => {
     clearModalPhaseTimeout();
-    setLaunchSnapshot(getBubbleSnapshot(index));
+    setLaunchSnapshot(getPlanetSnapshot(index));
     setActiveProjectIndex(index);
     setModalPhase(shouldReduceMotion ? 'open' : 'opening');
-  }, [clearModalPhaseTimeout, getBubbleSnapshot, shouldReduceMotion]);
+  }, [clearModalPhaseTimeout, getPlanetSnapshot, shouldReduceMotion]);
 
   const closeProjectModal = React.useCallback(() => {
     clearModalPhaseTimeout();
@@ -159,8 +159,8 @@ export default function Projects() {
     }
 
     if (activeProjectIndex !== null) {
-      setLaunchSnapshot(getBubbleSnapshot(activeProjectIndex));
-      bubbleButtonRefs.current[activeProjectIndex]?.blur();
+      setLaunchSnapshot(getPlanetSnapshot(activeProjectIndex));
+      planetButtonRefs.current[activeProjectIndex]?.blur();
     }
 
     if (shouldReduceMotion) {
@@ -171,7 +171,7 @@ export default function Projects() {
     }
 
     setModalPhase('closing');
-  }, [activeProjectIndex, clearModalPhaseTimeout, getBubbleSnapshot, shouldReduceMotion]);
+  }, [activeProjectIndex, clearModalPhaseTimeout, getPlanetSnapshot, shouldReduceMotion]);
 
   React.useEffect(() => {
     if (shouldReduceMotion) {
@@ -234,13 +234,13 @@ export default function Projects() {
 
   React.useEffect(() => {
     if (shouldReduceMotion) {
-      setBubbleMotionPaused(true);
-      setBubbleRecovering(false);
+      setPlanetMotionPaused(true);
+      setPlanetRecovering(false);
       return;
     }
 
-    setBubbleMotionPaused(false);
-    setBubbleRecovering(false);
+    setPlanetMotionPaused(false);
+    setPlanetRecovering(false);
   }, [modalPhase, shouldReduceMotion]);
 
   React.useEffect(() => {
@@ -317,23 +317,23 @@ export default function Projects() {
         {t.projects.intro}
       </SectionIntro>
 
-      <BubbleField key={`projects-${replayKey}`} ref={fieldRef} data-entered={entered}>
-        <BubbleBackgroundImage
+      <PlanetField key={`projects-${replayKey}`} ref={fieldRef} data-entered={entered}>
+        <PlanetBackgroundImage
           src='/images/profile/Cosmic-background.png'
           alt=''
           aria-hidden='true'
         />
-        <BubbleBackgroundVideo
+        <PlanetBackgroundVideo
           autoPlay
           muted
           loop
           playsInline
           aria-hidden='true'
         >
-          <source src='/images/projects/bubbles-background.mp4' type='video/mp4' />
-        </BubbleBackgroundVideo>
+          <source src='/images/projects/planets-background.mp4' type='video/mp4' />
+        </PlanetBackgroundVideo>
 
-        <BubbleHeader
+        <PlanetHeader
           sx={{
             opacity: modalVisible ? 0 : 1,
             transform: modalVisible ? 'translate3d(0, -12px, 0)' : 'translate3d(0, 0, 0)',
@@ -341,20 +341,20 @@ export default function Projects() {
             transition: 'opacity 220ms ease, transform 320ms ease',
           }}
         >
-          <BubbleHint>
-            <BubbleHintLabel
+          <PlanetHint>
+            <PlanetHintLabel
               variant='overline'
               sx={{ color: 'primary.main', letterSpacing: '0.12em' }}
             >
               {t.projects.openProject}
-            </BubbleHintLabel>
-            <BubbleHintBody variant='body2' sx={{ mt: 0.75 }}>
-              {t.projects.bubbleHint}
-            </BubbleHintBody>
-          </BubbleHint>
-        </BubbleHeader>
+            </PlanetHintLabel>
+            <PlanetHintBody variant='body2' sx={{ mt: 0.75 }}>
+              {t.projects.planetHint}
+            </PlanetHintBody>
+          </PlanetHint>
+        </PlanetHeader>
 
-        <BubbleStage>
+        <PlanetStage>
           {PROJECTS.map((project, index) => {
             const item = t.projects.items[index];
             const layout = getProjectLayout(index, effectiveIsSmDown, effectiveIsMdDown);
@@ -362,7 +362,7 @@ export default function Projects() {
             const hasActiveProject = modalVisible;
             const delay = `${index * 0.9}s`;
             const orbitChars = buildOrbitLabel(item.title);
-            const visualState = getBubbleVisualState(
+            const visualState = getPlanetVisualState(
               isActive,
               hasActiveProject,
               entered,
@@ -370,9 +370,9 @@ export default function Projects() {
             );
 
             return (
-              <BubbleSlot
+              <PlanetSlot
                 key={project.slug}
-                $recovering={bubbleRecovering}
+                $recovering={planetRecovering}
                 style={{
                   top: layout.top,
                   left: layout.left,
@@ -380,7 +380,7 @@ export default function Projects() {
                   height: `${layout.size}px`,
                   opacity: visualState.opacity,
                   filter: visualState.filter,
-                  transform: getBubbleTransforms(
+                  transform: getPlanetTransforms(
                     index,
                     effectiveIsSmDown,
                     isActive,
@@ -394,28 +394,28 @@ export default function Projects() {
                   zIndex: isActive ? 4 : 2,
                 }}
               >
-                <BubbleDriftShell
+                <PlanetDriftShell
                   $tone={index}
                   $delay={delay}
                   $reduceMotion={shouldReduceMotion}
                   $modalOpen={hasActiveProject}
-                  $motionPaused={bubbleMotionPaused}
-                  $recovering={bubbleRecovering}
+                  $motionPaused={planetMotionPaused}
+                  $recovering={planetRecovering}
                 >
-                  <BubbleOrbitBack $tone={index} aria-hidden='true'>
-                    {index === 0 && <Box className='bubble-mars-comet' />}
+                  <PlanetOrbitBack $tone={index} aria-hidden='true'>
+                    {index === 0 && <Box className='planet-mars-comet' />}
                     {index === 1 && (
                       <>
-                        <Box className='bubble-orbit-arc bubble-orbit-arc-a' />
-                        <Box className='bubble-orbit-arc bubble-orbit-arc-b' />
-                        <Box className='bubble-orbit-arc bubble-orbit-arc-c' />
-                        <Box className='bubble-orbit-arc bubble-orbit-arc-d' />
+                        <Box className='planet-orbit-arc planet-orbit-arc-a' />
+                        <Box className='planet-orbit-arc planet-orbit-arc-b' />
+                        <Box className='planet-orbit-arc planet-orbit-arc-c' />
+                        <Box className='planet-orbit-arc planet-orbit-arc-d' />
                       </>
                     )}
-                    {index === 2 && <Box className='bubble-earth-moon' />}
-                    <BubbleOrbitTextRun>
+                    {index === 2 && <Box className='planet-earth-moon' />}
+                    <PlanetOrbitTextRun>
                       {orbitChars.map((char, charIndex) => (
-                        <BubbleOrbitChar
+                        <PlanetOrbitChar
                           key={`${project.slug}-${charIndex}-${char}`}
                           style={getOrbitCharStyle(
                             charIndex,
@@ -425,42 +425,43 @@ export default function Projects() {
                           )}
                         >
                           {char}
-                        </BubbleOrbitChar>
+                        </PlanetOrbitChar>
                       ))}
-                    </BubbleOrbitTextRun>
-                  </BubbleOrbitBack>
-                  <BubbleButton
+                    </PlanetOrbitTextRun>
+                  </PlanetOrbitBack>
+                  <PlanetButton
                     type='button'
                     ref={(node) => {
-                      bubbleButtonRefs.current[index] = node;
+                      planetButtonRefs.current[index] = node;
                     }}
                     $tone={index}
                     $delay={delay}
                     $reduceMotion={shouldReduceMotion}
                     $modalOpen={hasActiveProject}
                     $active={isActive}
-                    $recovering={bubbleRecovering}
+                    $recovering={planetRecovering}
                     onClick={() => openProjectModal(index)}
                     aria-haspopup='dialog'
                     aria-expanded={isActive}
                     aria-controls='projects-modal'
                     aria-label={`${t.projects.openProject}: ${item.title}`}
                   >
-                    <Box className='bubble-hover-sweep' />
-                    <Box className='bubble-atmosphere' />
-                    <Box className='bubble-surface-detail bubble-surface-detail-a' />
-                    <Box className='bubble-surface-detail bubble-surface-detail-b' />
+                    <Box className='planet-hover-sweep' />
+                    <Box className='planet-atmosphere' />
+                    <Box className='planet-surface-detail planet-surface-detail-a' />
+                    <Box className='planet-surface-detail planet-surface-detail-b' />
                     {index === 0 && (
                       <>
-                        <Box className='bubble-mars-storm' />
+                        <Box className='planet-mars-ufo' />
+                        <Box className='planet-mars-storm' />
                       </>
                     )}
-                    {index === 2 && <Box className='bubble-earth-clouds' />}
-                    <Box className='bubble-rim-light' />
-                    <Box className='bubble-planet-shadow' />
-                  </BubbleButton>
-                </BubbleDriftShell>
-              </BubbleSlot>
+                    {index === 2 && <Box className='planet-earth-clouds' />}
+                    <Box className='planet-rim-light' />
+                    <Box className='planet-shadow' />
+                  </PlanetButton>
+                </PlanetDriftShell>
+              </PlanetSlot>
             );
           })}
 
@@ -480,8 +481,8 @@ export default function Projects() {
             onClose={closeProjectModal}
             shouldReduceMotion={shouldReduceMotion}
           />
-        </BubbleStage>
-      </BubbleField>
+        </PlanetStage>
+      </PlanetField>
     </Section>
   );
 }
