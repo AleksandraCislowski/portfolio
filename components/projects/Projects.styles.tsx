@@ -181,6 +181,205 @@ export const PlanetSlot = styled(Box, {
   zIndex: 2,
 }));
 
+export const PlanetCourierUfo = styled(Box, {
+  shouldForwardProp: (prop) => prop !== '$reduceMotion',
+})<{ $reduceMotion: boolean }>(({ theme, $reduceMotion }) => ({
+  position: 'absolute',
+  left: '46%',
+  top: '60%',
+  width: 54,
+  height: 18,
+  borderRadius: '50%',
+  background:
+    'linear-gradient(180deg, rgba(226,232,240,0.98) 0%, rgba(148,163,184,0.86) 46%, rgba(51,65,85,0.78) 100%)',
+  boxShadow:
+    '0 6px 16px rgba(15,23,42,0.34), 0 0 18px rgba(186,230,253,0.28), inset 0 1px 3px rgba(255,255,255,0.72)',
+  opacity: $reduceMotion ? 0.72 : 0,
+  pointerEvents: 'none',
+  transform: 'translate3d(-50%, -50%, 0) rotate(-6deg) scale(0.86)',
+  transformOrigin: '50% 50%',
+  zIndex: 5,
+  animation: $reduceMotion ? 'none' : 'planetCourierFlight 24s ease-in-out infinite',
+  '& .planet-courier-dome': {
+    position: 'absolute',
+    left: '50%',
+    top: '-48%',
+    width: '44%',
+    height: '88%',
+    borderRadius: '50% 50% 42% 42%',
+    background:
+      'radial-gradient(ellipse at 42% 30%, rgba(255,255,255,0.94) 0%, rgba(186,230,253,0.62) 34%, rgba(59,130,246,0.18) 76%, transparent 100%)',
+    boxShadow: 'inset 0 1px 4px rgba(255,255,255,0.72)',
+    transform: 'translateX(-50%)',
+  },
+  '& .planet-courier-beam': {
+    position: 'absolute',
+    left: '50%',
+    top: '66%',
+    width: '38%',
+    height: 54,
+    background:
+      'linear-gradient(180deg, rgba(186,230,253,0.26) 0%, rgba(254,215,170,0.13) 48%, transparent 100%)',
+    clipPath: 'polygon(38% 0%, 62% 0%, 100% 100%, 0% 100%)',
+    filter: 'blur(2px)',
+    opacity: 0,
+    transform: 'translateX(-50%)',
+    transformOrigin: '50% 0%',
+    animation: $reduceMotion ? 'none' : 'planetCourierBeam 24s ease-in-out infinite',
+  },
+  '& .planet-courier-cargo': {
+    position: 'absolute',
+    left: '50%',
+    top: '158%',
+    opacity: 0,
+    pointerEvents: 'none',
+    transform: 'translate3d(-50%, -50%, 0) scale(0.9)',
+  },
+  '& .planet-courier-cow': {
+    width: 24,
+    height: 16,
+    animation: $reduceMotion ? 'none' : 'planetCourierCow 24s ease-in-out infinite',
+    '& .planet-cow-body': {
+      position: 'absolute',
+      left: 2,
+      top: 5,
+      width: 18,
+      height: 10,
+      borderRadius: '48% 44% 42% 48%',
+      background:
+        'radial-gradient(circle at 34% 48%, rgba(15,23,42,0.78) 0 2px, transparent 2.4px), radial-gradient(circle at 70% 42%, rgba(15,23,42,0.7) 0 2px, transparent 2.4px), #f8fafc',
+      boxShadow: '0 2px 4px rgba(15,23,42,0.2)',
+      '&::before': {
+        content: '""',
+        position: 'absolute',
+        right: -5,
+        top: 1,
+        width: 8,
+        height: 7,
+        borderRadius: '42% 50% 48% 42%',
+        background: '#f8fafc',
+        boxShadow: 'inset -2px 0 0 rgba(15,23,42,0.18)',
+      },
+      '&::after': {
+        content: '""',
+        position: 'absolute',
+        left: 3,
+        bottom: -3,
+        width: 12,
+        height: 4,
+        background:
+          'linear-gradient(90deg, #334155 0 2px, transparent 2px 5px, #334155 5px 7px, transparent 7px 10px, #334155 10px 12px)',
+      },
+    },
+  },
+  '@keyframes planetCourierFlight': {
+    '0%, 4%': {
+      left: '46%',
+      top: '60%',
+      opacity: 0,
+      transform: 'translate3d(-50%, -50%, 0) rotate(-7deg) scale(0.82)',
+    },
+    '9%': {
+      left: '46%',
+      top: '56%',
+      opacity: 1,
+      transform: 'translate3d(-50%, -50%, 0) rotate(-6deg) scale(0.92)',
+    },
+    '22%': {
+      left: '22%',
+      top: '22%',
+      opacity: 1,
+      transform: 'translate3d(-50%, -50%, 0) rotate(-18deg) scale(0.94)',
+    },
+    '30%': {
+      left: '20%',
+      top: '18%',
+      opacity: 1,
+      transform: 'translate3d(-50%, -50%, 0) rotate(18deg) scale(0.92)',
+    },
+    '56%': {
+      left: '48%',
+      top: '58%',
+      opacity: 1,
+      transform: 'translate3d(-50%, -50%, 0) rotate(28deg) scale(0.94)',
+    },
+    '78%': {
+      left: '46%',
+      top: '56%',
+      opacity: 1,
+      transform: 'translate3d(-50%, -50%, 0) rotate(-7deg) scale(0.92)',
+    },
+    '88%, 100%': {
+      left: '46%',
+      top: '60%',
+      opacity: 0,
+      transform: 'translate3d(-50%, -50%, 0) rotate(-7deg) scale(0.82)',
+    },
+  },
+  '@keyframes planetCourierBeam': {
+    '0%, 5%, 18%, 34%, 50%, 82%, 100%': { opacity: 0 },
+    '9%, 28%, 75%': { opacity: 0.76 },
+  },
+  '@keyframes planetCourierCow': {
+    '0%, 6%, 32%, 100%': { opacity: 0 },
+    '9%, 24%': { opacity: 1 },
+  },
+  [theme.breakpoints.down('md')]: {
+    '&': {
+      width: 46,
+      height: 16,
+    },
+  },
+  [theme.breakpoints.down('sm')]: {
+    width: 42,
+    height: 14,
+    '@keyframes planetCourierFlight': {
+      '0%, 4%': {
+        left: '54%',
+        top: '70%',
+        opacity: 0,
+        transform: 'translate3d(-50%, -50%, 0) rotate(-7deg) scale(0.82)',
+      },
+      '9%': {
+        left: '54%',
+        top: '66%',
+        opacity: 1,
+        transform: 'translate3d(-50%, -50%, 0) rotate(-6deg) scale(0.92)',
+      },
+      '22%': {
+        left: '51%',
+        top: '18%',
+        opacity: 1,
+        transform: 'translate3d(-50%, -50%, 0) rotate(-18deg) scale(0.94)',
+      },
+      '30%': {
+        left: '48%',
+        top: '14%',
+        opacity: 1,
+        transform: 'translate3d(-50%, -50%, 0) rotate(18deg) scale(0.92)',
+      },
+      '56%': {
+        left: '56%',
+        top: '68%',
+        opacity: 1,
+        transform: 'translate3d(-50%, -50%, 0) rotate(28deg) scale(0.94)',
+      },
+      '78%': {
+        left: '54%',
+        top: '66%',
+        opacity: 1,
+        transform: 'translate3d(-50%, -50%, 0) rotate(-7deg) scale(0.92)',
+      },
+      '88%, 100%': {
+        left: '54%',
+        top: '70%',
+        opacity: 0,
+        transform: 'translate3d(-50%, -50%, 0) rotate(-7deg) scale(0.82)',
+      },
+    },
+  },
+}));
+
 export const PlanetDriftShell = styled(Box, {
   shouldForwardProp: (prop) =>
     ![
@@ -466,74 +665,6 @@ export const PlanetButton = styled('button', {
       pointerEvents: 'none',
       transition: 'opacity 260ms ease, transform 380ms cubic-bezier(0.2, 0.9, 0.22, 1)',
       zIndex: 2,
-    },
-    '& .planet-mars-ufo': {
-      position: 'absolute',
-      left: '58%',
-      top: '28%',
-      width: '25%',
-      height: '9%',
-      borderRadius: '50%',
-      background:
-        'linear-gradient(180deg, rgba(226,232,240,0.96) 0%, rgba(148,163,184,0.82) 46%, rgba(51,65,85,0.7) 100%)',
-      boxShadow:
-        '0 4px 12px rgba(15,23,42,0.28), 0 0 14px rgba(186,230,253,0.22), inset 0 1px 3px rgba(255,255,255,0.72)',
-      opacity: 0,
-      pointerEvents: 'none',
-      transform: 'translate3d(-50%, -50%, 0) rotate(-8deg)',
-      transformOrigin: '50% 50%',
-      animation: $reduceMotion ? 'none' : `marsUfoLanding 4.8s ease-in-out ${$delay} infinite`,
-      zIndex: 5,
-      '&::before': {
-        content: '""',
-        position: 'absolute',
-        left: '50%',
-        top: '-42%',
-        width: '46%',
-        height: '76%',
-        borderRadius: '50% 50% 42% 42%',
-        background:
-          'radial-gradient(ellipse at 42% 30%, rgba(255,255,255,0.92) 0%, rgba(186,230,253,0.58) 34%, rgba(59,130,246,0.16) 76%, transparent 100%)',
-        boxShadow: 'inset 0 1px 4px rgba(255,255,255,0.72)',
-        transform: 'translateX(-50%)',
-      },
-      '&::after': {
-        content: '""',
-        position: 'absolute',
-        left: '50%',
-        top: '62%',
-        width: '48%',
-        height: '260%',
-        background:
-          'linear-gradient(180deg, rgba(186,230,253,0.28) 0%, rgba(254,215,170,0.14) 42%, transparent 100%)',
-        clipPath: 'polygon(38% 0%, 62% 0%, 100% 100%, 0% 100%)',
-        filter: 'blur(2px)',
-        opacity: 0.7,
-        transform: 'translateX(-50%)',
-        transformOrigin: '50% 0%',
-      },
-    },
-    '@keyframes marsUfoLanding': {
-      '0%, 14%, 100%': {
-        opacity: 0,
-        transform: 'translate3d(-50%, -50%, 0) translateY(-10px) scale(0.86) rotate(-8deg)',
-      },
-      '24%': {
-        opacity: 0.88,
-        transform: 'translate3d(-50%, -50%, 0) translateY(-4px) scale(1) rotate(-8deg)',
-      },
-      '58%': {
-        opacity: 0.94,
-        transform: 'translate3d(-50%, -50%, 0) translateY(4px) scale(1.02) rotate(-5deg)',
-      },
-      '78%': {
-        opacity: 0.92,
-        transform: 'translate3d(-50%, -50%, 0) translateY(2px) scale(1) rotate(-6deg)',
-      },
-      '94%': {
-        opacity: 0,
-        transform: 'translate3d(-50%, -50%, 0) translateY(-8px) scale(0.88) rotate(-8deg)',
-      },
     },
     '& .planet-mars-storm': {
       position: 'absolute',

@@ -23,6 +23,7 @@ import {
   PlanetHint,
   PlanetHintBody,
   PlanetHintLabel,
+  PlanetCourierUfo,
   PlanetOrbitBack,
   PlanetOrbitChar,
   PlanetOrbitTextRun,
@@ -452,7 +453,6 @@ export default function Projects() {
                     <Box className='planet-surface-detail planet-surface-detail-b' />
                     {index === 0 && (
                       <>
-                        <Box className='planet-mars-ufo' />
                         <Box className='planet-mars-storm' />
                       </>
                     )}
@@ -464,6 +464,14 @@ export default function Projects() {
               </PlanetSlot>
             );
           })}
+
+          <PlanetCourierUfo aria-hidden='true' $reduceMotion={shouldReduceMotion}>
+            <Box className='planet-courier-dome' />
+            <Box className='planet-courier-beam' />
+            <Box className='planet-courier-cargo planet-courier-cow'>
+              <Box className='planet-cow-body' />
+            </Box>
+          </PlanetCourierUfo>
 
           <ProjectsModal
             activeProject={activeProject}
