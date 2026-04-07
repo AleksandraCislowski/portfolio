@@ -172,17 +172,23 @@ export default function Navbar() {
     const targetY = targetNode
       ? window.scrollY + targetNode.getBoundingClientRect().top - topOffset
       : 0;
+    const normalizedTargetY = Math.max(0, targetY);
+    const tolerance = 10;
+    const isAlreadyAtTarget = Math.abs(window.scrollY - normalizedTargetY) <= tolerance;
 
     window.scrollTo({
-      top: Math.max(0, targetY),
+      top: normalizedTargetY,
       behavior: 'smooth',
     });
 
     const maxWaitMs = 1400;
-    const tolerance = 10;
     const startTime = window.performance.now();
 
     const finishReplay = () => {
+      if (!isAlreadyAtTarget) {
+        return;
+      }
+
       replaySectionAnimation(href);
     };
 
