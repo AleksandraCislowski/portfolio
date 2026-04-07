@@ -402,7 +402,17 @@ export default function Projects() {
                   $motionPaused={bubbleMotionPaused}
                   $recovering={bubbleRecovering}
                 >
-                  <BubbleOrbitBack aria-hidden='true'>
+                  <BubbleOrbitBack $tone={index} aria-hidden='true'>
+                    {index === 0 && <Box className='bubble-mars-comet' />}
+                    {index === 1 && (
+                      <>
+                        <Box className='bubble-orbit-arc bubble-orbit-arc-a' />
+                        <Box className='bubble-orbit-arc bubble-orbit-arc-b' />
+                        <Box className='bubble-orbit-arc bubble-orbit-arc-c' />
+                        <Box className='bubble-orbit-arc bubble-orbit-arc-d' />
+                      </>
+                    )}
+                    {index === 2 && <Box className='bubble-earth-moon' />}
                     <BubbleOrbitTextRun>
                       {orbitChars.map((char, charIndex) => (
                         <BubbleOrbitChar
@@ -434,8 +444,19 @@ export default function Projects() {
                     aria-haspopup='dialog'
                     aria-expanded={isActive}
                     aria-controls='projects-modal'
+                    aria-label={`${t.projects.openProject}: ${item.title}`}
                   >
                     <Box className='bubble-hover-sweep' />
+                    <Box className='bubble-atmosphere' />
+                    <Box className='bubble-surface-detail bubble-surface-detail-a' />
+                    <Box className='bubble-surface-detail bubble-surface-detail-b' />
+                    {index === 0 && (
+                      <>
+                        <Box className='bubble-mars-storm' />
+                      </>
+                    )}
+                    {index === 2 && <Box className='bubble-earth-clouds' />}
+                    <Box className='bubble-rim-light' />
                     <Box className='bubble-planet-shadow' />
                   </BubbleButton>
                 </BubbleDriftShell>

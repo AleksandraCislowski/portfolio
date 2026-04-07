@@ -50,7 +50,12 @@ export const BubbleField = styled(Box)(({ theme }) => ({
     content: '""',
     position: 'absolute',
     inset: 0,
-    background: 'linear-gradient(180deg, rgba(6,16,31,0.08) 0%, rgba(6,16,31,0.16) 100%)',
+    background: `
+      radial-gradient(circle at 16% 20%, rgba(96,165,250,0.2) 0%, transparent 28%),
+      radial-gradient(circle at 84% 28%, rgba(196,181,253,0.16) 0%, transparent 30%),
+      radial-gradient(circle at 48% 76%, rgba(45,212,191,0.12) 0%, transparent 34%),
+      linear-gradient(180deg, rgba(6,16,31,0.08) 0%, rgba(6,16,31,0.18) 100%)
+    `,
     opacity: 1,
     pointerEvents: 'none',
     transition:
@@ -61,9 +66,11 @@ export const BubbleField = styled(Box)(({ theme }) => ({
     position: 'absolute',
     inset: 0,
     background:
-      'linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 26%, rgba(7,16,34,0.22) 100%)',
-    opacity: 0.72,
+      'radial-gradient(circle at 12% 18%, rgba(255,255,255,0.28) 0 1px, transparent 1.4px), radial-gradient(circle at 28% 72%, rgba(255,255,255,0.2) 0 1px, transparent 1.4px), radial-gradient(circle at 46% 26%, rgba(255,255,255,0.24) 0 1px, transparent 1.4px), radial-gradient(circle at 66% 64%, rgba(255,255,255,0.22) 0 1px, transparent 1.4px), radial-gradient(circle at 88% 34%, rgba(255,255,255,0.26) 0 1px, transparent 1.4px), linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 26%, rgba(7,16,34,0.24) 100%)',
+    opacity: 0.76,
     pointerEvents: 'none',
+    backgroundSize: '220px 180px, 260px 210px, 300px 240px, 240px 200px, 280px 220px, auto',
+    backgroundPosition: '12% 8%, 88% 76%, 44% 20%, 58% 86%, 96% 30%, center',
     transition:
       'opacity 1000ms ease, transform 1400ms cubic-bezier(0.18, 0.9, 0.22, 1)',
   },
@@ -125,6 +132,30 @@ export const BubbleStage = styled(Box)(({ theme }) => ({
   minHeight: 560,
   padding: theme.spacing(2, 2.5, 3),
   overflow: 'visible',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    inset: '4% 6% 10%',
+    borderRadius: '48%',
+    background:
+      'radial-gradient(ellipse at 50% 50%, rgba(125,211,252,0.1) 0%, rgba(96,165,250,0.06) 28%, transparent 62%)',
+    filter: 'blur(24px)',
+    opacity: 0.9,
+    pointerEvents: 'none',
+    transform: 'rotate(-8deg)',
+  },
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    inset: '14% 10% 8%',
+    borderRadius: '50%',
+    border: '1px solid rgba(186,230,253,0.1)',
+    boxShadow:
+      'inset 0 0 42px rgba(125,211,252,0.06), 0 0 70px rgba(96,165,250,0.08)',
+    opacity: 0.62,
+    pointerEvents: 'none',
+    transform: 'rotate(-11deg) scaleY(0.42)',
+  },
   transition:
     'opacity 820ms ease, transform 1100ms cubic-bezier(0.18, 0.9, 0.22, 1)',
   '[data-entered="false"] &': {
@@ -268,11 +299,54 @@ export const BubbleButton = styled('button', {
   $active,
   $recovering,
 }) => {
-  const gradients = [
-    `radial-gradient(circle at 30% 24%, ${alpha('#FFFFFF', 0.95)} 0%, ${alpha('#9FD6FF', 0.4)} 18%, ${alpha('#2563EB', 0.92)} 58%, ${alpha('#081120', 0.98)} 100%)`,
-    `radial-gradient(circle at 30% 24%, ${alpha('#FFFFFF', 0.94)} 0%, ${alpha('#B7F2E5', 0.42)} 18%, ${alpha('#0891B2', 0.9)} 56%, ${alpha('#06283D', 0.98)} 100%)`,
-    `radial-gradient(circle at 30% 24%, ${alpha('#FFFFFF', 0.95)} 0%, ${alpha('#C7B8FF', 0.42)} 18%, ${alpha('#7C3AED', 0.88)} 54%, ${alpha('#140A2E', 0.98)} 100%)`,
+  const planetThemes = [
+    {
+      body: `
+        radial-gradient(circle at 30% 24%, ${alpha('#FFF3D8', 0.94)} 0%, ${alpha('#F2B36D', 0.72)} 15%, ${alpha('#B85A32', 0.96)} 42%, ${alpha('#6F2C1E', 0.98)} 70%, ${alpha('#1F0B0A', 0.98)} 100%),
+        radial-gradient(ellipse at 52% 62%, ${alpha('#8A3A24', 0.7)} 0%, transparent 36%),
+        radial-gradient(ellipse at 72% 46%, ${alpha('#D99055', 0.42)} 0%, transparent 22%)
+      `,
+      atmosphere:
+        'radial-gradient(circle at 28% 22%, rgba(255,236,206,0.24) 0%, rgba(245,158,91,0.1) 24%, transparent 48%), radial-gradient(circle at 74% 82%, rgba(248,113,113,0.2) 0%, transparent 36%)',
+      surfaceA:
+        'radial-gradient(ellipse at 34% 40%, rgba(254,215,170,0.32) 0%, rgba(154,52,18,0.18) 42%, transparent 74%)',
+      surfaceB:
+        'radial-gradient(ellipse at 42% 44%, rgba(127,29,29,0.34) 0%, rgba(251,146,60,0.12) 44%, transparent 74%)',
+      rim:
+        'conic-gradient(from 210deg, transparent 0deg, rgba(254,215,170,0.08) 54deg, rgba(251,146,60,0.44) 112deg, rgba(185,28,28,0.18) 154deg, transparent 218deg, transparent 360deg)',
+    },
+    {
+      body: `
+        radial-gradient(circle at 30% 24%, ${alpha('#FFF7D6', 0.96)} 0%, ${alpha('#FDE68A', 0.78)} 18%, ${alpha('#C9974B', 0.96)} 48%, ${alpha('#7C4A25', 0.96)} 76%, ${alpha('#24120A', 0.98)} 100%),
+        linear-gradient(168deg, transparent 0%, transparent 25%, ${alpha('#F8E7B0', 0.22)} 32%, ${alpha('#8B5E34', 0.2)} 40%, transparent 48%, transparent 100%),
+        linear-gradient(12deg, transparent 0%, transparent 52%, ${alpha('#FDE68A', 0.2)} 58%, ${alpha('#6B3F22', 0.2)} 65%, transparent 73%, transparent 100%)
+      `,
+      atmosphere:
+        'radial-gradient(circle at 28% 22%, rgba(255,247,214,0.26) 0%, rgba(253,230,138,0.1) 26%, transparent 52%), radial-gradient(circle at 74% 82%, rgba(217,119,6,0.18) 0%, transparent 38%)',
+      surfaceA:
+        'linear-gradient(170deg, transparent 0%, rgba(255,247,214,0.22) 34%, rgba(146,64,14,0.18) 52%, transparent 78%)',
+      surfaceB:
+        'linear-gradient(12deg, transparent 0%, rgba(120,53,15,0.18) 24%, rgba(254,243,199,0.18) 44%, transparent 70%)',
+      rim:
+        'conic-gradient(from 210deg, transparent 0deg, rgba(254,243,199,0.1) 54deg, rgba(251,191,36,0.42) 112deg, rgba(217,119,6,0.18) 154deg, transparent 218deg, transparent 360deg)',
+    },
+    {
+      body: `
+        radial-gradient(circle at 30% 24%, ${alpha('#F0FDFF', 0.96)} 0%, ${alpha('#93C5FD', 0.58)} 17%, ${alpha('#2563EB', 0.94)} 45%, ${alpha('#0F766E', 0.88)} 67%, ${alpha('#071A2D', 0.98)} 100%),
+        radial-gradient(ellipse at 42% 50%, ${alpha('#22C55E', 0.5)} 0%, transparent 24%),
+        radial-gradient(ellipse at 64% 34%, ${alpha('#A7F3D0', 0.38)} 0%, transparent 18%)
+      `,
+      atmosphere:
+        'radial-gradient(circle at 28% 22%, rgba(240,253,255,0.32) 0%, rgba(147,197,253,0.14) 24%, transparent 48%), radial-gradient(circle at 74% 82%, rgba(34,197,94,0.18) 0%, transparent 36%)',
+      surfaceA:
+        'radial-gradient(ellipse at 34% 40%, rgba(187,247,208,0.3) 0%, rgba(22,163,74,0.18) 42%, transparent 74%)',
+      surfaceB:
+        'radial-gradient(ellipse at 42% 44%, rgba(224,242,254,0.34) 0%, rgba(14,165,233,0.12) 44%, transparent 74%)',
+      rim:
+        'conic-gradient(from 210deg, transparent 0deg, rgba(224,242,254,0.08) 54deg, rgba(125,211,252,0.46) 112deg, rgba(34,197,94,0.18) 154deg, transparent 218deg, transparent 360deg)',
+    },
   ];
+  const planetTheme = planetThemes[$tone % planetThemes.length];
 
   return {
     position: 'relative',
@@ -289,7 +363,7 @@ export const BubbleButton = styled('button', {
     overflow: 'hidden',
     textDecoration: 'none',
     color: '#F8FBFF',
-    background: gradients[$tone % gradients.length],
+    background: planetTheme.body,
     boxShadow:
       '0 22px 42px rgba(2, 6, 23, 0.34), inset 0 0 0 1px rgba(255,255,255,0.58)',
     animation: $reduceMotion
@@ -340,6 +414,90 @@ export const BubbleButton = styled('button', {
       pointerEvents: 'none',
       transition:
         'box-shadow 240ms ease, opacity 240ms ease, transform 280ms ease',
+    },
+    '& .bubble-atmosphere': {
+      position: 'absolute',
+      inset: '-2%',
+      borderRadius: '50%',
+      background: planetTheme.atmosphere,
+      boxShadow:
+        'inset 0 0 18px rgba(255,255,255,0.16), 0 0 34px rgba(125,211,252,0.2)',
+      mixBlendMode: 'screen',
+      opacity: 0.72,
+      pointerEvents: 'none',
+      transition: 'opacity 260ms ease, transform 320ms ease, filter 260ms ease',
+      zIndex: 2,
+    },
+    '& .bubble-surface-detail': {
+      position: 'absolute',
+      borderRadius: '48% 52% 44% 56%',
+      filter: 'blur(0.3px)',
+      mixBlendMode: 'screen',
+      opacity: 0.36,
+      pointerEvents: 'none',
+      transition: 'opacity 260ms ease, transform 360ms cubic-bezier(0.2, 0.9, 0.22, 1)',
+      zIndex: 2,
+    },
+    '& .bubble-surface-detail-a': {
+      width: '42%',
+      height: '24%',
+      left: '18%',
+      top: '38%',
+      background: planetTheme.surfaceA,
+      transform: 'rotate(-19deg)',
+    },
+    '& .bubble-surface-detail-b': {
+      width: '32%',
+      height: '18%',
+      right: '16%',
+      bottom: '28%',
+      background: planetTheme.surfaceB,
+      transform: 'rotate(24deg)',
+      opacity: 0.24,
+    },
+    '& .bubble-rim-light': {
+      position: 'absolute',
+      inset: '4%',
+      borderRadius: '50%',
+      background: planetTheme.rim,
+      filter: 'blur(1px)',
+      mixBlendMode: 'screen',
+      opacity: 0.56,
+      pointerEvents: 'none',
+      transition: 'opacity 260ms ease, transform 380ms cubic-bezier(0.2, 0.9, 0.22, 1)',
+      zIndex: 2,
+    },
+    '& .bubble-mars-storm': {
+      position: 'absolute',
+      right: '20%',
+      top: '72%',
+      width: '24%',
+      height: '14%',
+      borderRadius: '50%',
+      background:
+        'radial-gradient(ellipse at 34% 34%, rgba(254,202,202,0.34) 0%, rgba(248,113,113,0.24) 28%, rgba(185,28,28,0.14) 58%, transparent 86%), radial-gradient(ellipse at 58% 62%, rgba(251,146,60,0.16) 0%, rgba(127,29,29,0.12) 42%, transparent 76%)',
+      boxShadow:
+        '0 0 14px rgba(248,113,113,0.12), inset 0 0 10px rgba(254,202,202,0.08)',
+      filter: 'blur(2.4px)',
+      mixBlendMode: 'screen',
+      opacity: 0.42,
+      pointerEvents: 'none',
+      transform: 'rotate(-12deg)',
+      transition: 'opacity 260ms ease, transform 380ms cubic-bezier(0.2, 0.9, 0.22, 1)',
+      zIndex: 4,
+    },
+    '& .bubble-earth-clouds': {
+      position: 'absolute',
+      inset: '9% 7%',
+      borderRadius: '50%',
+      background:
+        'radial-gradient(ellipse at 28% 32%, rgba(255,255,255,0.42) 0%, rgba(255,255,255,0.2) 18%, transparent 38%), radial-gradient(ellipse at 62% 48%, rgba(255,255,255,0.36) 0%, rgba(255,255,255,0.16) 20%, transparent 42%), radial-gradient(ellipse at 44% 70%, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.12) 18%, transparent 38%)',
+      filter: 'blur(0.8px)',
+      mixBlendMode: 'screen',
+      opacity: 0.54,
+      pointerEvents: 'none',
+      transition: 'opacity 260ms ease, transform 380ms cubic-bezier(0.2, 0.9, 0.22, 1)',
+      zIndex: 3,
     },
     '& .bubble-planet-shadow': {
       position: 'absolute',
@@ -397,6 +555,31 @@ export const BubbleButton = styled('button', {
       transform: 'scale(1.04) translate3d(4px, 4px, 0)',
       opacity: 0.96,
     },
+    '&:hover .bubble-atmosphere': {
+      opacity: 0.95,
+      filter: 'brightness(1.12)',
+      transform: 'scale(1.05) rotate(4deg)',
+    },
+    '&:hover .bubble-surface-detail-a': {
+      opacity: 0.48,
+      transform: 'translate3d(-3px, -2px, 0) rotate(-13deg)',
+    },
+    '&:hover .bubble-surface-detail-b': {
+      opacity: 0.34,
+      transform: 'translate3d(3px, 2px, 0) rotate(18deg)',
+    },
+    '&:hover .bubble-rim-light': {
+      opacity: 0.82,
+      transform: 'scale(1.04) rotate(8deg)',
+    },
+    '&:hover .bubble-mars-storm': {
+      opacity: 0.88,
+      transform: 'scale(1.08) rotate(-6deg)',
+    },
+    '&:hover .bubble-earth-clouds': {
+      opacity: 0.74,
+      transform: 'scale(1.04) rotate(-8deg)',
+    },
     '&:hover .bubble-hover-sweep': {
       opacity: 1,
       transform: 'translateX(36%) rotate(-12deg)',
@@ -424,6 +607,31 @@ export const BubbleButton = styled('button', {
       transform: 'scale(1.04) translate3d(4px, 4px, 0)',
       opacity: 0.96,
     },
+    '&:focus-visible .bubble-atmosphere': {
+      opacity: 0.95,
+      filter: 'brightness(1.12)',
+      transform: 'scale(1.05) rotate(4deg)',
+    },
+    '&:focus-visible .bubble-surface-detail-a': {
+      opacity: 0.48,
+      transform: 'translate3d(-3px, -2px, 0) rotate(-13deg)',
+    },
+    '&:focus-visible .bubble-surface-detail-b': {
+      opacity: 0.34,
+      transform: 'translate3d(3px, 2px, 0) rotate(18deg)',
+    },
+    '&:focus-visible .bubble-rim-light': {
+      opacity: 0.82,
+      transform: 'scale(1.04) rotate(8deg)',
+    },
+    '&:focus-visible .bubble-mars-storm': {
+      opacity: 0.88,
+      transform: 'scale(1.08) rotate(-6deg)',
+    },
+    '&:focus-visible .bubble-earth-clouds': {
+      opacity: 0.74,
+      transform: 'scale(1.04) rotate(-8deg)',
+    },
     '&:focus-visible .bubble-hover-sweep': {
       opacity: 1,
       transform: 'translateX(36%) rotate(-12deg)',
@@ -434,24 +642,289 @@ export const BubbleButton = styled('button', {
   };
 });
 
-export const BubbleOrbitBack = styled(Box)(({ theme }) => ({
-  position: 'absolute',
-  inset: '-28%',
-  width: '156%',
-  height: '156%',
-  pointerEvents: 'none',
-  overflow: 'visible',
-  zIndex: 3,
-  transform: 'rotate(-14deg)',
-  transformOrigin: '50% 50%',
-  perspective: '900px',
-  transformStyle: 'preserve-3d',
-  [theme.breakpoints.down('sm')]: {
-    inset: '-22%',
-    width: '144%',
-    height: '144%',
-  },
-}));
+export const BubbleOrbitBack = styled(Box, {
+  shouldForwardProp: (prop) => prop !== '$tone',
+})<{ $tone: number }>(({ theme, $tone }) => {
+  const ringTilt = $tone % 3 === 0 ? '-22deg' : $tone % 3 === 1 ? '18deg' : '0deg';
+  const isMars = $tone % 3 === 0;
+  const isSaturn = $tone % 3 === 1;
+  const isEarth = $tone % 3 === 2;
+
+  return {
+    position: 'absolute',
+    inset: '-28%',
+    width: '156%',
+    height: '156%',
+    pointerEvents: 'none',
+    overflow: 'visible',
+    zIndex: 3,
+    transform: `rotate(${ringTilt})`,
+    transformOrigin: '50% 50%',
+    perspective: '900px',
+    transformStyle: 'preserve-3d',
+    '&::before, &::after': {
+      content: '""',
+      position: 'absolute',
+      left: '50%',
+      top: '50%',
+      width: '82%',
+      height: '24%',
+      borderRadius: '50%',
+      borderStyle: 'solid',
+      borderColor: 'rgba(254,243,199,0.36)',
+      boxShadow:
+        '0 0 14px rgba(251,191,36,0.16), inset 0 0 10px rgba(254,243,199,0.08)',
+      opacity: isSaturn ? 1 : 0,
+      pointerEvents: 'none',
+      transform: 'translate3d(-50%, -50%, 0)',
+    },
+    '&::before': {
+      borderWidth: '1px 0 0',
+      transform: 'translate3d(-50%, -78%, 0) scaleX(0.92)',
+    },
+    '&::after': {
+      borderWidth: '0 0 1px',
+      transform: 'translate3d(-50%, -20%, 0) scaleX(1.08)',
+      borderColor: 'rgba(251,191,36,0.3)',
+      opacity: isSaturn ? 0.82 : 0,
+    },
+    '& .bubble-orbit-arc': {
+      position: 'absolute',
+      left: '50%',
+      top: '50%',
+      borderRadius: '50%',
+      borderStyle: 'solid',
+      borderColor: 'rgba(254,243,199,0.24)',
+      boxShadow: '0 0 12px rgba(251,191,36,0.12)',
+      opacity: isSaturn ? 1 : 0,
+      pointerEvents: 'none',
+    },
+    '& .bubble-orbit-arc-a': {
+      width: '96%',
+      height: '28%',
+      borderWidth: '1px 0 0',
+      transform: 'translate3d(-50%, -96%, 0) scaleX(0.98)',
+    },
+    '& .bubble-orbit-arc-b': {
+      width: '104%',
+      height: '30%',
+      borderWidth: '0 0 1px',
+      borderColor: 'rgba(251,191,36,0.24)',
+      opacity: isSaturn ? 0.72 : 0,
+      transform: 'translate3d(-50%, 0%, 0) scaleX(1.02)',
+    },
+    '& .bubble-orbit-arc-c': {
+      width: '72%',
+      height: '18%',
+      borderWidth: '1px 0 0',
+      borderColor: 'rgba(255,237,213,0.2)',
+      opacity: isSaturn ? 0.56 : 0,
+      transform: 'translate3d(-50%, -122%, 0) scaleX(0.9)',
+    },
+    '& .bubble-orbit-arc-d': {
+      width: '74%',
+      height: '18%',
+      borderWidth: '0 0 1px',
+      borderColor: 'rgba(146,64,14,0.22)',
+      opacity: isSaturn ? 0.5 : 0,
+      transform: 'translate3d(-50%, 34%, 0) scaleX(1.14)',
+    },
+    '& .bubble-mars-comet': {
+      position: 'absolute',
+      left: '50%',
+      top: '50%',
+      width: 14,
+      height: 14,
+      borderRadius: '50%',
+      background:
+        'radial-gradient(circle at 32% 28%, rgba(255,255,255,0.98) 0%, rgba(254,215,170,0.92) 34%, rgba(249,115,22,0.68) 68%, rgba(127,29,29,0.08) 100%)',
+      boxShadow:
+        '0 0 20px rgba(249,115,22,0.38), 0 0 34px rgba(254,215,170,0.22)',
+      opacity: isMars ? 1 : 0,
+      pointerEvents: 'none',
+      transform:
+        'translate3d(-50%, -50%, 0) translate3d(clamp(-136px, -10vw, -92px), clamp(58px, 6vw, 92px), 0) rotate(-24deg) scale(0.72)',
+      transformOrigin: '50% 50%',
+      animation: isMars ? 'marsCometFlight 10.8s linear infinite' : 'none',
+      '&::before': {
+        content: '""',
+        position: 'absolute',
+        right: '48%',
+        top: '50%',
+        width: 'clamp(54px, 6vw, 92px)',
+        height: 7,
+        borderRadius: 999,
+        background:
+          'linear-gradient(90deg, transparent 0%, rgba(249,115,22,0.08) 24%, rgba(254,215,170,0.34) 62%, rgba(255,255,255,0.72) 100%)',
+        filter: 'blur(1.4px)',
+        opacity: 0.92,
+        transform: 'translateY(-50%) rotate(4deg)',
+        transformOrigin: '100% 50%',
+      },
+      '&::after': {
+        content: '""',
+        position: 'absolute',
+        right: '70%',
+        top: '50%',
+        width: 'clamp(76px, 8vw, 128px)',
+        height: 16,
+        borderRadius: '50%',
+        background:
+          'radial-gradient(ellipse at 100% 50%, rgba(255,255,255,0.26) 0%, rgba(254,215,170,0.16) 32%, rgba(249,115,22,0.08) 58%, transparent 76%)',
+        filter: 'blur(5px)',
+        opacity: 0.72,
+        transform: 'translateY(-50%) rotate(4deg)',
+        transformOrigin: '100% 50%',
+      },
+    },
+    '@keyframes marsCometFlight': {
+      '0%, 14%': {
+        opacity: 0,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(-136px, -10vw, -92px), clamp(58px, 6vw, 92px), 0) rotate(-24deg) scale(0.72)',
+      },
+      '22%': {
+        opacity: 0.72,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(-94px, -7.2vw, -62px), clamp(36px, 4vw, 62px), 0) rotate(-24deg) scale(0.92)',
+      },
+      '38%': {
+        opacity: 1,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(-34px, -2.8vw, -18px), clamp(8px, 1vw, 18px), 0) rotate(-24deg) scale(1.08)',
+      },
+      '54%': {
+        opacity: 0.94,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(18px, 2.8vw, 34px), clamp(-18px, -1.6vw, -8px), 0) rotate(-24deg) scale(1)',
+      },
+      '68%': {
+        opacity: 0.46,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(86px, 6.8vw, 118px), clamp(-44px, -4.4vw, -28px), 0) rotate(-24deg) scale(0.86)',
+      },
+      '78%, 100%': {
+        opacity: 0,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(128px, 9.6vw, 172px), clamp(-66px, -6.6vw, -44px), 0) rotate(-24deg) scale(0.7)',
+      },
+    },
+    '& .bubble-earth-moon': {
+      position: 'absolute',
+      left: '50%',
+      top: '50%',
+      width: 18,
+      height: 18,
+      borderRadius: '50%',
+      background:
+        'radial-gradient(circle at 32% 28%, rgba(255,255,255,0.96) 0%, rgba(226,232,240,0.82) 42%, rgba(100,116,139,0.74) 100%)',
+      boxShadow:
+        '0 0 18px rgba(224,242,254,0.26), inset -4px -4px 7px rgba(15,23,42,0.28)',
+      opacity: isEarth ? 0.92 : 0,
+      pointerEvents: 'none',
+      transform:
+        'translate3d(-50%, -50%, 0) translate3d(clamp(-154px, -10.6vw, -104px), clamp(-22px, -2vw, -10px), 0) scale(0.74)',
+      animation: isEarth ? 'earthMoonFlight 16.5s linear infinite' : 'none',
+    },
+    '@keyframes earthMoonFlight': {
+      '0%': {
+        opacity: 0,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(-154px, -10.6vw, -104px), clamp(-22px, -2vw, -10px), 0) scale(0.74)',
+      },
+      '7%': {
+        opacity: 0.42,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(-132px, -9.2vw, -90px), clamp(4px, 0.6vw, 12px), 0) scale(0.8)',
+      },
+      '15%': {
+        opacity: 0.82,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(-102px, -7.2vw, -70px), clamp(26px, 3vw, 42px), 0) scale(0.9)',
+      },
+      '25%': {
+        opacity: 0.96,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(-56px, -4vw, -34px), clamp(40px, 4.6vw, 60px), 0) scale(1)',
+      },
+      '36%': {
+        opacity: 1,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(-10px, -0.8vw, -4px), clamp(42px, 4.8vw, 64px), 0) scale(1.08)',
+      },
+      '46%': {
+        opacity: 0.96,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(56px, 4.6vw, 80px), clamp(32px, 3.6vw, 52px), 0) scale(1)',
+      },
+      '54%': {
+        opacity: 0.64,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(104px, 7.6vw, 136px), clamp(16px, 2vw, 30px), 0) scale(0.9)',
+      },
+      '60%': {
+        opacity: 0.24,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(122px, 8.8vw, 156px), clamp(-4px, -0.4vw, -2px), 0) scale(0.84)',
+      },
+      '64%, 78%': {
+        opacity: 0,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(88px, 6.6vw, 118px), clamp(-30px, -3.2vw, -16px), 0) scale(0.74)',
+      },
+      '79%': {
+        opacity: 0,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(-140px, -9.8vw, -96px), clamp(-24px, -2.2vw, -12px), 0) scale(0.72)',
+      },
+      '88%': {
+        opacity: 0,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(-136px, -9.6vw, -94px), clamp(-20px, -1.8vw, -10px), 0) scale(0.74)',
+      },
+      '100%': {
+        opacity: 0,
+        transform:
+          'translate3d(-50%, -50%, 0) translate3d(clamp(-154px, -10.6vw, -104px), clamp(-22px, -2vw, -10px), 0) scale(0.74)',
+      },
+    },
+    '@media (prefers-reduced-motion: reduce)': {
+      '& .bubble-mars-comet': {
+        animation: 'none',
+      },
+      '& .bubble-earth-moon': {
+        animation: 'none',
+        opacity: isEarth ? 0.92 : 0,
+        transform: 'translate3d(-50%, -50%, 0)',
+      },
+    },
+    [theme.breakpoints.down('sm')]: {
+      inset: '-22%',
+      width: '144%',
+      height: '144%',
+      '&::before, &::after': {
+        width: '86%',
+        height: '22%',
+      },
+      '& .bubble-orbit-arc-a': {
+        transform: 'translate3d(-50%, -92%, 0) scaleX(0.98)',
+      },
+      '& .bubble-orbit-arc-b': {
+        transform: 'translate3d(-50%, 0%, 0) scaleX(1.02)',
+      },
+      '& .bubble-orbit-arc-c': {
+        transform: 'translate3d(-50%, -116%, 0) scaleX(0.9)',
+      },
+      '& .bubble-orbit-arc-d': {
+        transform: 'translate3d(-50%, 28%, 0) scaleX(1.14)',
+      },
+      '& .bubble-mars-comet, & .bubble-earth-moon': {
+        width: 14,
+        height: 14,
+      },
+    },
+  };
+});
 
 export const BubbleOrbitTextRun = styled(Box)(({ theme }) => ({
   position: 'absolute',
@@ -628,22 +1101,22 @@ export const ProjectModal = styled(Box, {
 function getLaunchPalette(tone: number) {
   const palettes = [
     {
-      core: 'rgba(159,214,255,0.9)',
-      edge: 'rgba(37,99,235,0.84)',
-      glow: 'rgba(125,211,252,0.46)',
-      beam: 'rgba(191,219,254,0.92)',
+      core: 'rgba(242,179,109,0.9)',
+      edge: 'rgba(184,90,50,0.84)',
+      glow: 'rgba(248,113,113,0.42)',
+      beam: 'rgba(254,215,170,0.92)',
     },
     {
-      core: 'rgba(183,242,229,0.9)',
-      edge: 'rgba(8,145,178,0.82)',
-      glow: 'rgba(94,234,212,0.42)',
-      beam: 'rgba(204,251,241,0.94)',
+      core: 'rgba(253,230,138,0.9)',
+      edge: 'rgba(201,151,75,0.82)',
+      glow: 'rgba(251,191,36,0.4)',
+      beam: 'rgba(254,243,199,0.94)',
     },
     {
-      core: 'rgba(199,184,255,0.92)',
-      edge: 'rgba(124,58,237,0.8)',
-      glow: 'rgba(196,181,253,0.44)',
-      beam: 'rgba(233,213,255,0.92)',
+      core: 'rgba(147,197,253,0.92)',
+      edge: 'rgba(15,118,110,0.8)',
+      glow: 'rgba(34,197,94,0.4)',
+      beam: 'rgba(224,242,254,0.92)',
     },
   ];
 
