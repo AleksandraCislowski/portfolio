@@ -172,6 +172,29 @@ export const PlanetStage = styled(Box)(({ theme }) => ({
   },
 }));
 
+export const PlanetEasterHint = styled(Typography)(({ theme }) => ({
+  position: 'absolute',
+  left: theme.spacing(2.5),
+  bottom: theme.spacing(1.5),
+  zIndex: 4,
+  maxWidth: 240,
+  color: alpha(theme.palette.common.white, 0.56),
+  fontSize: '0.68rem',
+  letterSpacing: '0.08em',
+  lineHeight: 1.45,
+  pointerEvents: 'none',
+  textAlign: 'left',
+  textTransform: 'uppercase',
+  textShadow: '0 0 14px rgba(125,211,252,0.28)',
+  transition: 'opacity 220ms ease, transform 260ms ease',
+  [theme.breakpoints.down('sm')]: {
+    left: theme.spacing(1.5),
+    bottom: theme.spacing(1),
+    maxWidth: 190,
+    fontSize: '0.62rem',
+  },
+}));
+
 export const PlanetSlot = styled(Box, {
   shouldForwardProp: (prop) => prop !== '$recovering',
 })<{ $recovering: boolean }>(({ $recovering }) => ({
@@ -187,45 +210,71 @@ export const PlanetCourierUfo = styled(Box, {
   position: 'absolute',
   left: '46%',
   top: '60%',
-  width: 54,
-  height: 18,
+  width: 62,
+  height: 20,
   borderRadius: '50%',
   background:
-    'linear-gradient(180deg, rgba(226,232,240,0.98) 0%, rgba(148,163,184,0.86) 46%, rgba(51,65,85,0.78) 100%)',
+    'radial-gradient(ellipse at 50% 18%, rgba(255,255,255,0.95) 0%, rgba(226,232,240,0.62) 22%, transparent 44%), linear-gradient(180deg, rgba(203,213,225,0.98) 0%, rgba(100,116,139,0.92) 48%, rgba(30,41,59,0.86) 100%)',
   boxShadow:
-    '0 6px 16px rgba(15,23,42,0.34), 0 0 18px rgba(186,230,253,0.28), inset 0 1px 3px rgba(255,255,255,0.72)',
+    '0 7px 18px rgba(15,23,42,0.38), 0 0 22px rgba(125,211,252,0.26), inset 0 2px 4px rgba(255,255,255,0.62), inset 0 -4px 8px rgba(15,23,42,0.3)',
   opacity: $reduceMotion ? 0.72 : 0,
   pointerEvents: 'none',
   transform: 'translate3d(-50%, -50%, 0) rotate(-6deg) scale(0.86)',
   transformOrigin: '50% 50%',
   zIndex: 5,
-  animation: $reduceMotion ? 'none' : 'planetCourierFlight 24s ease-in-out infinite',
+  animation: $reduceMotion ? 'none' : 'planetCourierFlight 17s ease-in-out infinite',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    left: '12%',
+    right: '12%',
+    bottom: '12%',
+    height: '24%',
+    borderRadius: '999px',
+    background:
+      'radial-gradient(circle at 18% 50%, rgba(56,189,248,0.95) 0 2px, transparent 2.8px), radial-gradient(circle at 50% 50%, rgba(254,240,138,0.9) 0 2px, transparent 2.8px), radial-gradient(circle at 82% 50%, rgba(56,189,248,0.95) 0 2px, transparent 2.8px), linear-gradient(90deg, transparent 0%, rgba(15,23,42,0.24) 18%, rgba(255,255,255,0.16) 50%, rgba(15,23,42,0.24) 82%, transparent 100%)',
+    filter: 'drop-shadow(0 0 4px rgba(125,211,252,0.55))',
+  },
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    left: '50%',
+    bottom: '-10%',
+    width: '58%',
+    height: '28%',
+    borderRadius: '50%',
+    background:
+      'radial-gradient(ellipse at 50% 50%, rgba(15,23,42,0.46) 0%, rgba(15,23,42,0.2) 46%, transparent 72%)',
+    transform: 'translateX(-50%)',
+  },
   '& .planet-courier-dome': {
     position: 'absolute',
     left: '50%',
-    top: '-48%',
-    width: '44%',
-    height: '88%',
+    top: '-62%',
+    width: '46%',
+    height: '106%',
     borderRadius: '50% 50% 42% 42%',
     background:
-      'radial-gradient(ellipse at 42% 30%, rgba(255,255,255,0.94) 0%, rgba(186,230,253,0.62) 34%, rgba(59,130,246,0.18) 76%, transparent 100%)',
-    boxShadow: 'inset 0 1px 4px rgba(255,255,255,0.72)',
+      'radial-gradient(ellipse at 35% 24%, rgba(255,255,255,0.98) 0%, rgba(224,242,254,0.72) 30%, rgba(56,189,248,0.32) 64%, rgba(30,41,59,0.18) 100%)',
+    boxShadow:
+      'inset 0 2px 4px rgba(255,255,255,0.78), inset -4px -5px 8px rgba(14,165,233,0.14), 0 0 10px rgba(125,211,252,0.22)',
     transform: 'translateX(-50%)',
+    zIndex: 1,
   },
   '& .planet-courier-beam': {
     position: 'absolute',
     left: '50%',
     top: '66%',
-    width: '38%',
+    width: '44%',
     height: 54,
     background:
-      'linear-gradient(180deg, rgba(186,230,253,0.26) 0%, rgba(254,215,170,0.13) 48%, transparent 100%)',
-    clipPath: 'polygon(38% 0%, 62% 0%, 100% 100%, 0% 100%)',
-    filter: 'blur(2px)',
+      'linear-gradient(180deg, rgba(224,242,254,0.3) 0%, rgba(125,211,252,0.2) 38%, rgba(254,215,170,0.1) 66%, transparent 100%)',
+    clipPath: 'polygon(42% 0%, 58% 0%, 100% 100%, 0% 100%)',
+    filter: 'blur(2.6px)',
     opacity: 0,
     transform: 'translateX(-50%)',
     transformOrigin: '50% 0%',
-    animation: $reduceMotion ? 'none' : 'planetCourierBeam 24s ease-in-out infinite',
+    animation: $reduceMotion ? 'none' : 'planetCourierBeam 17s ease-in-out infinite',
   },
   '& .planet-courier-cargo': {
     position: 'absolute',
@@ -238,7 +287,7 @@ export const PlanetCourierUfo = styled(Box, {
   '& .planet-courier-cow': {
     width: 24,
     height: 16,
-    animation: $reduceMotion ? 'none' : 'planetCourierCow 24s ease-in-out infinite',
+    animation: $reduceMotion ? 'none' : 'planetCourierCow 17s ease-in-out infinite',
     '& .planet-cow-body': {
       position: 'absolute',
       left: 2,
@@ -295,21 +344,15 @@ export const PlanetCourierUfo = styled(Box, {
       left: '20%',
       top: '18%',
       opacity: 1,
-      transform: 'translate3d(-50%, -50%, 0) rotate(18deg) scale(0.92)',
+      transform: 'translate3d(-50%, -50%, 0) rotate(-8deg) scale(0.92)',
     },
-    '56%': {
-      left: '48%',
-      top: '58%',
-      opacity: 1,
-      transform: 'translate3d(-50%, -50%, 0) rotate(28deg) scale(0.94)',
+    '38%': {
+      left: '20%',
+      top: '18%',
+      opacity: 0,
+      transform: 'translate3d(-50%, -50%, 0) translateY(-8px) rotate(-8deg) scale(0.82)',
     },
-    '78%': {
-      left: '46%',
-      top: '56%',
-      opacity: 1,
-      transform: 'translate3d(-50%, -50%, 0) rotate(-7deg) scale(0.92)',
-    },
-    '88%, 100%': {
+    '45%, 100%': {
       left: '46%',
       top: '60%',
       opacity: 0,
@@ -317,8 +360,8 @@ export const PlanetCourierUfo = styled(Box, {
     },
   },
   '@keyframes planetCourierBeam': {
-    '0%, 5%, 18%, 34%, 50%, 82%, 100%': { opacity: 0 },
-    '9%, 28%, 75%': { opacity: 0.76 },
+    '0%, 5%, 18%, 34%, 100%': { opacity: 0 },
+    '9%, 28%': { opacity: 0.76 },
   },
   '@keyframes planetCourierCow': {
     '0%, 6%, 32%, 100%': { opacity: 0 },
@@ -356,21 +399,15 @@ export const PlanetCourierUfo = styled(Box, {
         left: '48%',
         top: '14%',
         opacity: 1,
-        transform: 'translate3d(-50%, -50%, 0) rotate(18deg) scale(0.92)',
+        transform: 'translate3d(-50%, -50%, 0) rotate(-8deg) scale(0.92)',
       },
-      '56%': {
-        left: '56%',
-        top: '68%',
-        opacity: 1,
-        transform: 'translate3d(-50%, -50%, 0) rotate(28deg) scale(0.94)',
+      '38%': {
+        left: '48%',
+        top: '14%',
+        opacity: 0,
+        transform: 'translate3d(-50%, -50%, 0) translateY(-8px) rotate(-8deg) scale(0.82)',
       },
-      '78%': {
-        left: '54%',
-        top: '66%',
-        opacity: 1,
-        transform: 'translate3d(-50%, -50%, 0) rotate(-7deg) scale(0.92)',
-      },
-      '88%, 100%': {
+      '45%, 100%': {
         left: '54%',
         top: '70%',
         opacity: 0,

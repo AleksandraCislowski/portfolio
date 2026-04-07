@@ -18,6 +18,7 @@ import {
   PlanetBackgroundVideo,
   PlanetButton,
   PlanetDriftShell,
+  PlanetEasterHint,
   PlanetField,
   PlanetHeader,
   PlanetHint,
@@ -472,6 +473,18 @@ export default function Projects() {
               <Box className='planet-cow-body' />
             </Box>
           </PlanetCourierUfo>
+
+          <PlanetEasterHint
+            variant='caption'
+            sx={{
+              opacity: modalVisible ? 0 : undefined,
+              transform: modalVisible
+                ? 'translate3d(0, 8px, 0)'
+                : undefined,
+            }}
+          >
+            {t.projects.easterHint}
+          </PlanetEasterHint>
 
           <ProjectsModal
             activeProject={activeProject}
