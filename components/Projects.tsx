@@ -2,7 +2,9 @@
 
 import * as React from 'react';
 import { startTransition } from 'react';
-import { Box, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Typography, useMediaQuery, useTheme } from '@mui/material';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import { alpha } from '@mui/material/styles';
 import { useReducedMotion } from 'framer-motion';
 import { PROJECTS } from '../config/projects';
 import { SITE_CONFIG } from '../config/site';
@@ -16,6 +18,7 @@ import {
   PlanetBackgroundImage,
   PlanetBackgroundVideo,
   PlanetEasterHint,
+  PlanetEasterLink,
   PlanetField,
   PlanetHeader,
   PlanetHint,
@@ -33,6 +36,7 @@ import { useProjectsModal } from './projects/useProjectsModal';
 import { useSectionAnimationReplay } from './sectionAnimationReplay';
 
 const ORBIT_DURATION_MS = 30000;
+const EASTER_EGG_UFO_DELAY_MS = 24000;
 
 export default function Projects() {
   const t = useTranslation();
@@ -47,6 +51,8 @@ export default function Projects() {
   const [planetRecovering, setPlanetRecovering] = React.useState(false);
   const [orbitProgress, setOrbitProgress] = React.useState(0);
   const [hasHydrated, setHasHydrated] = React.useState(false);
+  const [easterEggOpen, setEasterEggOpen] = React.useState(false);
+  const [showCourierUfo, setShowCourierUfo] = React.useState(false);
   const replayKey = useSectionAnimationReplay(SITE_CONFIG.sectionIds.projects);
   const effectiveIsMdDown = hasHydrated ? isMdDown : false;
   const effectiveIsSmDown = hasHydrated ? isSmDown : false;
@@ -159,12 +165,32 @@ export default function Projects() {
     };
   }, [shouldReduceMotion]);
 
+  React.useEffect(() => {
+    setShowCourierUfo(false);
+
+    if (!entered) {
+      return;
+    }
+
+    const ufoTimeoutId = window.setTimeout(() => {
+      setShowCourierUfo(true);
+    }, EASTER_EGG_UFO_DELAY_MS);
+
+    return () => {
+      window.clearTimeout(ufoTimeoutId);
+    };
+  }, [entered, replayKey]);
+
+  const handleEasterEggVote = React.useCallback(() => {
+    setEasterEggOpen(false);
+  }, []);
+
   const activeProject = getActiveProject(activeProjectIndex, t.projects);
   const modalVisible = modalPhase !== 'closed';
 
   return (
     <Section id={SITE_CONFIG.sectionIds.projects} textAlign='center'>
-      <SectionTitle variant='h3'>
+      <SectionTitle as='h2' variant='h3'>
         {t.projects.title}
       </SectionTitle>
       <SectionIntro variant='body2'>
@@ -231,13 +257,15 @@ export default function Projects() {
             />
           ))}
 
-          <PlanetCourierUfo aria-hidden='true' $reduceMotion={shouldReduceMotion}>
-            <Box className='planet-courier-dome' />
-            <Box className='planet-courier-beam' />
-            <Box className='planet-courier-cargo planet-courier-cow'>
-              <Box className='planet-cow-body' />
-            </Box>
-          </PlanetCourierUfo>
+          {showCourierUfo ? (
+            <PlanetCourierUfo aria-hidden='true' $reduceMotion={shouldReduceMotion}>
+              <Box className='planet-courier-dome' />
+              <Box className='planet-courier-beam' />
+              <Box className='planet-courier-cargo planet-courier-cow'>
+                <Box className='planet-cow-body' />
+              </Box>
+            </PlanetCourierUfo>
+          ) : null}
 
           <PlanetEasterHint
             variant='caption'
@@ -248,7 +276,14 @@ export default function Projects() {
                 : undefined,
             }}
           >
-            {t.projects.easterHint}
+            {t.projects.easterHint}{' '}
+            <PlanetEasterLink
+              type='button'
+              onClick={() => setEasterEggOpen(true)}
+              aria-label={t.projects.easterEggLink}
+            >
+              {t.projects.easterEggLink}
+            </PlanetEasterLink>
           </PlanetEasterHint>
 
           <ProjectsModal
@@ -266,6 +301,95 @@ export default function Projects() {
             onClose={closeProjectModal}
             shouldReduceMotion={shouldReduceMotion}
           />
+
+          <Dialog
+            open={easterEggOpen}
+            onClose={() => setEasterEggOpen(false)}
+            fullWidth
+            maxWidth='xs'
+            aria-labelledby='projects-easter-egg-title'
+            aria-describedby='projects-easter-egg-description'
+            slotProps={{
+              paper: {
+                sx: {
+                  borderRadius: 3,
+                  background:
+                    'linear-gradient(180deg, rgba(8,18,36,0.98) 0%, rgba(14,29,54,0.96) 100%)',
+                  border: `1px solid ${alpha('#BAE6FD', 0.16)}`,
+                  color: '#F8FAFC',
+                  boxShadow: '0 28px 64px rgba(2, 6, 23, 0.42)',
+                },
+              },
+              backdrop: {
+                sx: {
+                  backdropFilter: 'blur(6px)',
+                  backgroundColor: alpha('#020617', 0.62),
+                },
+              },
+            }}
+          >
+            <DialogTitle id='projects-easter-egg-title' sx={{ pr: 6, fontWeight: 800 }}>
+              {t.projects.easterEggModalTitle}
+              <IconButton
+                aria-label={t.projects.easterEggClose}
+                onClick={() => setEasterEggOpen(false)}
+                sx={{
+                  position: 'absolute',
+                  right: 12,
+                  top: 12,
+                  color: alpha('#E2E8F0', 0.82),
+                }}
+              >
+                <CloseRoundedIcon />
+              </IconButton>
+            </DialogTitle>
+            <DialogContent>
+              <Typography
+                id='projects-easter-egg-description'
+                variant='body1'
+                sx={{ color: alpha('#E2E8F0', 0.9), lineHeight: 1.8 }}
+              >
+                {t.projects.easterEggModalBody}
+              </Typography>
+            </DialogContent>
+            <DialogActions sx={{ px: 3, pb: 3, pt: 0, gap: 1, justifyContent: 'flex-start', flexWrap: 'wrap' }}>
+              <Button
+                onClick={handleEasterEggVote}
+                variant='contained'
+                sx={{
+                  borderRadius: 999,
+                  px: 2.1,
+                  fontWeight: 700,
+                  textTransform: 'none',
+                  background: 'linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%)',
+                  color: '#082032',
+                  boxShadow: 'none',
+                  '&:hover': {
+                    boxShadow: 'none',
+                    background: 'linear-gradient(135deg, #BAE6FD 0%, #38BDF8 100%)',
+                  },
+                }}
+              >
+                {t.projects.easterEggPrimaryAction}
+              </Button>
+              <Button
+                onClick={handleEasterEggVote}
+                variant='text'
+                sx={{
+                  borderRadius: 999,
+                  px: 1.9,
+                  fontWeight: 700,
+                  textTransform: 'none',
+                  color: alpha('#E2E8F0', 0.92),
+                  '&:hover': {
+                    backgroundColor: alpha('#E2E8F0', 0.08),
+                  },
+                }}
+              >
+                {t.projects.easterEggSecondaryAction}
+              </Button>
+            </DialogActions>
+          </Dialog>
         </PlanetStage>
       </PlanetField>
     </Section>

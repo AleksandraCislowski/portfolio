@@ -364,7 +364,7 @@ export default function Downloads() {
               </DownloadCardBadge>
               <DownloadCardMeta variant='caption'>{meta.size}</DownloadCardMeta>
             </DownloadCardTop>
-            <CardTitle variant='h6'>{item.title}</CardTitle>
+            <CardTitle as='h3' variant='h6'>{item.title}</CardTitle>
             <CardDescription variant='body2'>{item.description}</CardDescription>
             <DownloadCardActions>
               <Button
@@ -408,7 +408,7 @@ export default function Downloads() {
         viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.24 }}
       >
         <MotionBox variants={shouldReduceMotion ? undefined : headerVariants}>
-          <SectionTitle variant='h3'>{t.downloads.title}</SectionTitle>
+          <SectionTitle as='h2' variant='h3'>{t.downloads.title}</SectionTitle>
           <SectionDescription variant='body2'>
             {t.downloads.description}
           </SectionDescription>

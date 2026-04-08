@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Box, Typography, Button, Stack, Link } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
@@ -135,7 +136,7 @@ const ContactVisual = styled(Box)(({ theme }) => ({
 
 const MotionContactVisual = motion.create(ContactVisual);
 
-const ContactVisualImage = styled('img')(() => ({
+const ContactVisualImage = styled(Image)(() => ({
   position: 'absolute',
   inset: 0,
   width: '100%',
@@ -180,7 +181,7 @@ export default function Contact() {
             <ContactEyebrow variant='caption'>
               {t.contact.kicker}
             </ContactEyebrow>
-            <ContactTitle variant='h3'>
+            <ContactTitle as='h2' variant='h3'>
               {t.contact.title}
             </ContactTitle>
             <ContactDescription variant='body1'>
@@ -208,7 +209,9 @@ export default function Contact() {
         <MotionContactVisual variants={shouldReduceMotion ? undefined : visualVariants}>
           <ContactVisualImage
             src='/images/profile/contact.png'
-            alt='Contact illustration'
+            alt=''
+            fill
+            sizes='(max-width: 900px) 100vw, 36vw'
           />
           <ContactVisualOverlay />
         </MotionContactVisual>

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { SITE_CONFIG } from '../../config/site';
+import { useTranslation } from '../../i18n/useTranslation';
 
 import { Brand, BrandLink, BrandLockup } from './Navbar.styles';
 
@@ -8,14 +9,16 @@ type NavbarBrandProps = {
 };
 
 export function NavbarBrand({ onNavigateHome }: NavbarBrandProps) {
+  const t = useTranslation();
+
   return (
     <BrandLink
       href={SITE_CONFIG.sections.home}
-      aria-label='Go to top of page'
+      aria-label={t.accessibility.goToTop.replace('{{name}}', SITE_CONFIG.brandName)}
       onClick={onNavigateHome}
     >
       <BrandLockup>
-        <Brand variant='h5'>{SITE_CONFIG.brandName}</Brand>
+        <Brand as='span' variant='h5'>{SITE_CONFIG.brandName}</Brand>
       </BrandLockup>
     </BrandLink>
   );

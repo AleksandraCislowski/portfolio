@@ -227,7 +227,7 @@ export default function Impact() {
       >
         <MotionBox variants={shouldReduceMotion ? undefined : headingVariants}>
           <HeadingRow>
-            <Typography variant='h3'>
+            <Typography variant='h3' component='h2'>
               {t.impact.title}
             </Typography>
           </HeadingRow>
@@ -241,8 +241,8 @@ export default function Impact() {
               >
                 <ImpactCard>
                   <ImpactCardContent>
-                    <MetricValue variant='h4'>{item.value}</MetricValue>
-                    <ImpactLabel variant='h6'>
+                    <MetricValue as='p' variant='h4'>{item.value}</MetricValue>
+                    <ImpactLabel as='p' variant='h6'>
                       {item.label}
                     </ImpactLabel>
                     <ImpactDescription variant='body2'>

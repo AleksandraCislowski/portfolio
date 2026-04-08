@@ -260,7 +260,7 @@ export default function Navbar() {
             <MobileMenuButton
               edge='end'
               color='inherit'
-              aria-label='Open navigation menu'
+              aria-label={t.accessibility.openNavigationMenu}
               onClick={handleOpenMobileNav}
             >
               <MenuIcon />

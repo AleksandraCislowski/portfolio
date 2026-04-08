@@ -255,7 +255,7 @@ export default function About() {
                   <AboutAvatarFrame>
                     <AboutAvatar
                       src={SITE_CONFIG.avatarImage}
-                      alt='Profile photo'
+                      alt={t.accessibility.profilePhoto}
                     />
                   </AboutAvatarFrame>
                 </AboutMedia>
@@ -265,7 +265,7 @@ export default function About() {
                 variants={shouldReduceMotion ? undefined : contentVariants}
               >
                 <AboutContent>
-                  <AboutTitle variant='h3'>
+                  <AboutTitle as='h2' variant='h3'>
                     {t.about.title}
                   </AboutTitle>
                   <AboutDescription variant='body2'>
@@ -281,7 +281,7 @@ export default function About() {
                   <SocialLinks>
                     <SocialButton
                       href={`mailto:${SITE_CONFIG.contactEmail}`}
-                      aria-label='Send email'
+                      aria-label={t.accessibility.sendEmail}
                     >
                       <EmailIcon />
                     </SocialButton>
@@ -289,7 +289,7 @@ export default function About() {
                       href={SITE_CONFIG.socialLinks.linkedIn}
                       target='_blank'
                       rel='noopener noreferrer'
-                      aria-label='Open LinkedIn profile'
+                      aria-label={t.accessibility.openLinkedIn}
                     >
                       <LinkedInIcon />
                     </SocialButton>
@@ -297,7 +297,7 @@ export default function About() {
                       href={SITE_CONFIG.socialLinks.github}
                       target='_blank'
                       rel='noopener noreferrer'
-                      aria-label='Open GitHub profile'
+                      aria-label={t.accessibility.openGitHub}
                     >
                       <GitHubIcon />
                     </SocialButton>
@@ -305,7 +305,7 @@ export default function About() {
                       href={SITE_CONFIG.socialLinks.lovorda}
                       target='_blank'
                       rel='noopener noreferrer'
-                      aria-label='Open Lovorda profile'
+                      aria-label={t.accessibility.openLovorda}
                     >
                       <TravelExploreRoundedIcon />
                     </SocialButton>
