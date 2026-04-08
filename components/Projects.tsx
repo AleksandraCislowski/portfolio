@@ -44,14 +44,7 @@ import { useSectionAnimationReplay } from './sectionAnimationReplay';
 const ORBIT_DURATION_MS = 30000;
 
 function buildOrbitLabel(title: string) {
-  const chunk = `${title.toUpperCase()} • `;
-  let output = '';
-
-  while (output.length < 44) {
-    output += chunk;
-  }
-
-  return Array.from(output.slice(0, 44));
+  return Array.from(`• ${title.toUpperCase()} • `.repeat(4));
 }
 
 function getOrbitCharStyle(
@@ -494,11 +487,10 @@ export default function Projects() {
             launchTone={activeProjectIndex ?? 0}
             closeLabel={t.projects.closeProject}
             detailsLabel={t.projects.modalDetails}
+            factsLabel={t.projects.modalFacts}
             previewLabel={t.projects.modalPreview}
-            previewCopy={t.projects.modalPreviewCopy}
-            placeholderEyebrow={t.projects.placeholderEyebrow}
-            placeholderParagraphs={t.projects.placeholderParagraphs}
-            placeholderBulletPoints={t.projects.placeholderBulletPoints}
+            sliderLabel={t.projects.modalSlider}
+            visitSiteLabel={t.projects.visitSite}
             onClose={closeProjectModal}
             shouldReduceMotion={shouldReduceMotion}
           />

@@ -72,7 +72,6 @@ export function getActiveProject(
 
   return {
     slug: PROJECTS[activeProjectIndex].slug,
-    title: translations.items[activeProjectIndex].title,
-    description: translations.items[activeProjectIndex].description,
+    ...translations.items[activeProjectIndex],
   };
 }

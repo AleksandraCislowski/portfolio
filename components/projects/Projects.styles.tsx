@@ -1676,7 +1676,7 @@ export const ProjectModalInner = styled(Box)(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: 'minmax(0, 1.4fr) minmax(280px, 0.9fr)',
   gap: theme.spacing(2.5),
-  padding: theme.spacing(3),
+  padding: theme.spacing(8, 3, 3),
   overscrollBehavior: 'contain',
   scrollbarWidth: 'thin',
   scrollbarColor: 'rgba(186,230,253,0.22) transparent',
@@ -1725,7 +1725,7 @@ export const ProjectModalInner = styled(Box)(({ theme }) => ({
   },
   [theme.breakpoints.down('sm')]: {
     gap: theme.spacing(2),
-    padding: theme.spacing(2),
+    padding: theme.spacing(7, 2, 2),
   },
 }));
 
@@ -1756,7 +1756,6 @@ export const ProjectCard = styled(Box)(({ theme }) => ({
 
 export const ProjectCloseButton = styled('button')(({ theme }) => ({
   appearance: 'none',
-  alignSelf: 'flex-end',
   border: `1px solid ${alpha(theme.palette.divider, 0.42)}`,
   background: alpha('#0F213E', 0.78),
   color: theme.palette.text.primary,

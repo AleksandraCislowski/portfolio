@@ -1,6 +1,6 @@
 export const PROJECTS = [
   {
-    slug: 'saas-delivery-leadership',
+    slug: 'funkologi',
     desktop: { top: '12%', left: '10%', size: 234 },
     tablet: { top: '14%', left: '8%', size: 210 },
     mobile: { top: '8%', left: '41%', size: 188 },
