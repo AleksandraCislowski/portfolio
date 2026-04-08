@@ -82,6 +82,12 @@
     "openProject": "Otwórz projekt",
     "planetHint": "Każda planeta delikatnie unosi się i pulsuje. Kliknięcie otwiera duży podgląd projektu bez wychodzenia z tej sekcji.",
     "easterHint": "Jeśli popatrzysz wystarczająco długo, znajdziesz easter egga.",
+    "easterEggLink": "Powiedz mi jaki",
+    "easterEggModalTitle": "Aaaaa... easter egg odkryty!",
+    "easterEggModalBody": "To oczywiście UFO porywające krowę. Nie zwykłe UFO, tylko takie, które najwyraźniej uznało, że międzyplanetarny chaos potrzebuje jeszcze jednego dramatycznego wątku. Krowa nie miała tego w backlogu, ale kosmos rządzi się własnymi sprintami.",
+    "easterEggPrimaryAction": "A nie mówiłam",
+    "easterEggSecondaryAction": "Nie ma mowy",
+    "easterEggClose": "Zamknij easter egg",
     "closeProject": "Zamknij projekt",
     "modalDetails": "Case Study Snapshot",
     "modalFacts": "Rola i zakres",
@@ -285,5 +291,15 @@
   },
   "footer": {
     "copyright": "© {{year}} Aleksandra Cislowski. Strona zbudowana z dbałością o jakość."
+  },
+  "accessibility": {
+    "skipToMainContent": "Przejdź do głównej treści",
+    "goToTop": "{{name}} - przejdź na górę strony",
+    "openNavigationMenu": "Otwórz menu nawigacji",
+    "sendEmail": "Wyślij e-mail",
+    "openLinkedIn": "Otwórz profil LinkedIn",
+    "openGitHub": "Otwórz profil GitHub",
+    "openLovorda": "Otwórz profil Lovorda",
+    "profilePhoto": "Zdjęcie profilowe Aleksandry Cislowski"
   }
 }

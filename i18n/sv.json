@@ -82,6 +82,12 @@
     "openProject": "Öppna projekt",
     "planetHint": "Varje planet svävar lätt och pulserar. Klicka för att öppna en stor projektvy utan att lämna sektionen.",
     "easterHint": "Titta på den här sektionen tillräckligt länge så kanske du hittar ett easter egg.",
+    "easterEggLink": "Säg vad det är",
+    "easterEggModalTitle": "Aaaaa... easter egg upptäckt!",
+    "easterEggModalBody": "Det är förstås ett UFO som kidnappar en ko. Inte vilket UFO som helst heller, utan ett som uppenbarligen tyckte att den här portfolion behövde ytterligare ett dramatiskt sidospår. Kon hade inte detta i sprintplanen, men kosmos väntar sällan på godkännande.",
+    "easterEggPrimaryAction": "Jag visste det",
+    "easterEggSecondaryAction": "Ingen chans",
+    "easterEggClose": "Stäng easter egg",
     "closeProject": "Stäng projekt",
     "modalDetails": "Case Study Snapshot",
     "modalFacts": "Roll och omfattning",
@@ -285,5 +291,15 @@
   },
   "footer": {
     "copyright": "© {{year}} Aleksandra Cislowski. Byggd med kvalitet och tydligt fokus."
+  },
+  "accessibility": {
+    "skipToMainContent": "Hoppa till huvudinnehållet",
+    "goToTop": "{{name}} - gå till början av sidan",
+    "openNavigationMenu": "Öppna navigationsmenyn",
+    "sendEmail": "Skicka e-post",
+    "openLinkedIn": "Öppna LinkedIn-profil",
+    "openGitHub": "Öppna GitHub-profil",
+    "openLovorda": "Öppna Lovorda-profil",
+    "profilePhoto": "Profilbild på Aleksandra Cislowski"
   }
 }

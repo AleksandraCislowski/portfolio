@@ -82,6 +82,12 @@
     "openProject": "Open Project",
     "planetHint": "Each planet drifts slightly in place. Click one to open a large project preview without leaving this section.",
     "easterHint": "Look at this section long enough and you might find an easter egg.",
+    "easterEggLink": "Tell me what it is",
+    "easterEggModalTitle": "Aaaaa... easter egg discovered!",
+    "easterEggModalBody": "It is, of course, a UFO abducting a cow. Not just any UFO either, but one that clearly decided this portfolio needed one more dramatic subplot. The cow did not approve this roadmap item, but the cosmos rarely waits for stakeholder sign-off.",
+    "easterEggPrimaryAction": "I knew it",
+    "easterEggSecondaryAction": "No way",
+    "easterEggClose": "Close easter egg",
     "closeProject": "Close project",
     "modalDetails": "Case Study Snapshot",
     "modalFacts": "Role and scope",
@@ -285,5 +291,15 @@
   },
   "footer": {
     "copyright": "© {{year}} Aleksandra Cislowski. Built with care and high standards."
+  },
+  "accessibility": {
+    "skipToMainContent": "Skip to main content",
+    "goToTop": "{{name}} - go to top of page",
+    "openNavigationMenu": "Open navigation menu",
+    "sendEmail": "Send email",
+    "openLinkedIn": "Open LinkedIn profile",
+    "openGitHub": "Open GitHub profile",
+    "openLovorda": "Open Lovorda profile",
+    "profilePhoto": "Profile photo of Aleksandra Cislowski"
   }
 }
