@@ -1825,8 +1825,4 @@ export const ProjectPreviewSurface = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(2),
   minHeight: 118,
   borderRadius: 20,
-  border: `1px solid ${alpha(theme.palette.common.white, 0.14)}`,
-  background:
-    'radial-gradient(circle at 30% 28%, rgba(255,255,255,0.12), transparent 24%), linear-gradient(145deg, rgba(255,255,255,0.04), rgba(125,211,252,0.08))',
-  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.2)',
 }));

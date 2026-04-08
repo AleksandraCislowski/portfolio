@@ -1,8 +1,11 @@
 'use client';
 
 import * as React from 'react';
+import Image from 'next/image';
 import { Box, Typography } from '@mui/material';
 import type { SxProps, Theme } from '@mui/material/styles';
+import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
+import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded';
 import {
   ProjectLaunchBeam,
@@ -45,6 +48,8 @@ type ProjectsModalProps = {
   factsLabel: string;
   previewLabel: string;
   sliderLabel: string;
+  previousSlideLabel: string;
+  nextSlideLabel: string;
   visitSiteLabel: string;
   onClose: () => void;
   shouldReduceMotion: boolean;
@@ -59,12 +64,7 @@ const metaGridSx = {
   gap: 1.25,
 } as const;
 const previewGridSx = {
-  display: 'grid',
-  gap: 1,
-  gridTemplateColumns: {
-    xs: 'repeat(2, minmax(0, 1fr))',
-    sm: 'repeat(3, minmax(0, 1fr))',
-  },
+  position: 'relative',
 } as const;
 const floatingCloseButtonSx = {
   position: 'absolute',
@@ -240,52 +240,214 @@ function ProjectFactsCard({
 
 // Placeholder gallery keeps the modal structure ready for real screenshots without changing layout later.
 function ProjectPreviewSlides({
+  projectSlug,
   previewLabel,
   sliderLabel,
+  previousSlideLabel,
+  nextSlideLabel,
   slides,
 }: {
+  projectSlug: ActiveProject['slug'];
   previewLabel: string;
   sliderLabel: string;
+  previousSlideLabel: string;
+  nextSlideLabel: string;
   slides: ActiveProject['slides'];
 }) {
+  const [activeSlideIndex, setActiveSlideIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    setActiveSlideIndex(0);
+  }, [projectSlug]);
+
+  const totalSlides = slides.length;
+  const activeSlide = slides[activeSlideIndex];
+
+  const goToPreviousSlide = React.useCallback(() => {
+    setActiveSlideIndex((currentIndex) =>
+      currentIndex === 0 ? totalSlides - 1 : currentIndex - 1,
+    );
+  }, [totalSlides]);
+
+  const goToNextSlide = React.useCallback(() => {
+    setActiveSlideIndex((currentIndex) =>
+      currentIndex === totalSlides - 1 ? 0 : currentIndex + 1,
+    );
+  }, [totalSlides]);
+
+  if (!activeSlide) {
+    return null;
+  }
+
   return (
     <ProjectPreviewCard sx={modalCardPaddingSx}>
-      <Box>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 1.5,
+        }}
+      >
         <Typography variant='overline' sx={overlineAccentSx}>
           {previewLabel}
+        </Typography>
+        <Typography
+          variant='caption'
+          sx={{ color: 'text.secondary', letterSpacing: '0.08em', textTransform: 'uppercase' }}
+        >
+          {String(activeSlideIndex + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}
         </Typography>
       </Box>
 
       <ProjectPreviewSurface role='region' aria-label={sliderLabel} sx={previewGridSx}>
-        {slides.map((slide, index) => (
+        <Box
+          sx={{
+            display: 'grid',
+            gap: 1.25,
+            p: { xs: 0, sm: 0.25 },
+          }}
+        >
           <Box
-            key={`${slide.title}-${index}`}
             sx={{
-              minHeight: 142,
-              p: 1.5,
-              borderRadius: 2.5,
-              border: '1px solid rgba(255,255,255,0.1)',
+              position: 'relative',
+              overflow: 'hidden',
+              aspectRatio: activeSlide.imageAspectRatio ?? '4 / 3',
+              borderRadius: 2.75,
+              border: '1px solid rgba(255,255,255,0.12)',
               background: `
-                linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(125,211,252,0.08) 100%),
-                radial-gradient(circle at 20% 18%, rgba(255,255,255,0.14), transparent 26%)
+                radial-gradient(circle at 20% 18%, rgba(186,230,253,0.2), transparent 26%),
+                linear-gradient(180deg, rgba(7,20,38,0.98) 0%, rgba(10,31,56,0.94) 100%)
               `,
-              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.16)',
+              boxShadow: '0 18px 34px rgba(2, 6, 23, 0.22)',
             }}
           >
+            {activeSlide.imageSrc ? (
+              <Image
+                fill
+                src={activeSlide.imageSrc}
+                alt={activeSlide.imageAlt ?? activeSlide.title}
+                sizes='(max-width: 900px) 100vw, 720px'
+                style={{ objectFit: 'contain' }}
+              />
+            ) : null}
+
+            {totalSlides > 1 ? (
+              <>
+                <Box
+                  component='button'
+                  type='button'
+                  aria-label={previousSlideLabel}
+                  onClick={goToPreviousSlide}
+                  sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: { xs: 10, sm: 14 },
+                    transform: 'translateY(-50%)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 42,
+                    height: 42,
+                    borderRadius: '50%',
+                    border: '1px solid rgba(255,255,255,0.16)',
+                    background: 'rgba(7,20,38,0.78)',
+                    color: 'text.primary',
+                    cursor: 'pointer',
+                    backdropFilter: 'blur(16px)',
+                    boxShadow: '0 12px 24px rgba(2, 6, 23, 0.26)',
+                    transition: 'transform 180ms ease, background-color 180ms ease',
+                    '&:hover, &:focus-visible': {
+                      transform: 'translateY(-50%) scale(1.04)',
+                      background: 'rgba(10,31,56,0.92)',
+                    },
+                  }}
+                >
+                  <ArrowBackRoundedIcon />
+                </Box>
+                <Box
+                  component='button'
+                  type='button'
+                  aria-label={nextSlideLabel}
+                  onClick={goToNextSlide}
+                  sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    right: { xs: 10, sm: 14 },
+                    transform: 'translateY(-50%)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 42,
+                    height: 42,
+                    borderRadius: '50%',
+                    border: '1px solid rgba(255,255,255,0.16)',
+                    background: 'rgba(7,20,38,0.78)',
+                    color: 'text.primary',
+                    cursor: 'pointer',
+                    backdropFilter: 'blur(16px)',
+                    boxShadow: '0 12px 24px rgba(2, 6, 23, 0.26)',
+                    transition: 'transform 180ms ease, background-color 180ms ease',
+                    '&:hover, &:focus-visible': {
+                      transform: 'translateY(-50%) scale(1.04)',
+                      background: 'rgba(10,31,56,0.92)',
+                    },
+                  }}
+                >
+                  <ArrowForwardRoundedIcon />
+                </Box>
+              </>
+            ) : null}
+          </Box>
+
+          <Box sx={{ px: 0.25 }}>
             <Typography variant='overline' sx={overlineAccentSx}>
-              {String(index + 1).padStart(2, '0')}
+              {String(activeSlideIndex + 1).padStart(2, '0')}
             </Typography>
-            <Typography variant='subtitle2' sx={{ mt: 0.75, fontWeight: 700 }}>
-              {slide.title}
+            <Typography variant='subtitle2' sx={{ mt: 0.5, fontWeight: 700 }}>
+              {activeSlide.title}
             </Typography>
             <Typography
               variant='body2'
               sx={{ mt: 0.75, color: 'text.secondary', lineHeight: 1.65 }}
             >
-              {slide.caption}
+              {activeSlide.caption}
             </Typography>
           </Box>
-        ))}
+
+          {totalSlides > 1 ? (
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                gap: 0.9,
+                pt: 0.5,
+              }}
+            >
+              {slides.map((slide, index) => (
+                <Box
+                  key={`${slide.title}-${index}`}
+                  component='button'
+                  type='button'
+                  aria-label={`${sliderLabel} ${index + 1}`}
+                  onClick={() => setActiveSlideIndex(index)}
+                  sx={{
+                    width: index === activeSlideIndex ? 28 : 10,
+                    height: 10,
+                    borderRadius: 999,
+                    border: 'none',
+                    background:
+                      index === activeSlideIndex
+                        ? 'linear-gradient(90deg, rgba(125,211,252,0.94) 0%, rgba(45,212,191,0.92) 100%)'
+                        : 'rgba(186,230,253,0.24)',
+                    cursor: 'pointer',
+                    transition: 'all 180ms ease',
+                  }}
+                />
+              ))}
+            </Box>
+          ) : null}
+        </Box>
       </ProjectPreviewSurface>
     </ProjectPreviewCard>
   );
@@ -327,15 +489,18 @@ export function ProjectsModal({
   factsLabel,
   previewLabel,
   sliderLabel,
+  previousSlideLabel,
+  nextSlideLabel,
   visitSiteLabel,
   onClose,
   shouldReduceMotion,
 }: ProjectsModalProps) {
   const modalRef = React.useRef<HTMLDivElement | null>(null);
   const closeButtonRef = React.useRef<HTMLButtonElement | null>(null);
+  const activeProjectSlug = activeProject?.slug ?? null;
 
   React.useEffect(() => {
-    if (!visible || !activeProject) {
+    if (!visible || !activeProjectSlug) {
       return;
     }
 
@@ -346,7 +511,7 @@ export function ProjectsModal({
     return () => {
       window.cancelAnimationFrame(frameId);
     };
-  }, [activeProject, visible]);
+  }, [activeProjectSlug, visible]);
 
   const handleModalKeyDown = React.useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key !== 'Tab' || !modalRef.current) {
@@ -483,6 +648,14 @@ export function ProjectsModal({
 
             <ProjectMain>
               <ProjectModalHeader project={activeProject} />
+              <ProjectPreviewSlides
+                projectSlug={activeProject.slug}
+                previewLabel={previewLabel}
+                sliderLabel={sliderLabel}
+                previousSlideLabel={previousSlideLabel}
+                nextSlideLabel={nextSlideLabel}
+                slides={activeProject.slides}
+              />
             </ProjectMain>
 
             <ProjectAside>
@@ -495,11 +668,6 @@ export function ProjectsModal({
                 meta={activeProject.meta}
                 liveUrl={activeProject.liveUrl}
                 visitSiteLabel={visitSiteLabel}
-              />
-              <ProjectPreviewSlides
-                previewLabel={previewLabel}
-                sliderLabel={sliderLabel}
-                slides={activeProject.slides}
               />
               <ProjectModalCloseButton
                 closeLabel={closeLabel}

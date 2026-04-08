@@ -297,6 +297,8 @@ export default function Projects() {
             factsLabel={t.projects.modalFacts}
             previewLabel={t.projects.modalPreview}
             sliderLabel={t.projects.modalSlider}
+            previousSlideLabel={t.projects.modalSliderPrevious}
+            nextSlideLabel={t.projects.modalSliderNext}
             visitSiteLabel={t.projects.visitSite}
             onClose={closeProjectModal}
             shouldReduceMotion={shouldReduceMotion}
@@ -328,7 +330,10 @@ export default function Projects() {
               },
             }}
           >
-            <DialogTitle id='projects-easter-egg-title' sx={{ pr: 6, fontWeight: 800 }}>
+            <DialogTitle
+              id='projects-easter-egg-title'
+              sx={{ pr: 6, pl: 6, fontWeight: 800, textAlign: 'center' }}
+            >
               {t.projects.easterEggModalTitle}
               <IconButton
                 aria-label={t.projects.easterEggClose}
@@ -343,16 +348,26 @@ export default function Projects() {
                 <CloseRoundedIcon />
               </IconButton>
             </DialogTitle>
-            <DialogContent>
+            <DialogContent sx={{ px: 3.5, textAlign: 'center' }}>
               <Typography
                 id='projects-easter-egg-description'
                 variant='body1'
-                sx={{ color: alpha('#E2E8F0', 0.9), lineHeight: 1.8 }}
+                sx={{ color: alpha('#E2E8F0', 0.9), lineHeight: 1.8, textAlign: 'center' }}
               >
                 {t.projects.easterEggModalBody}
               </Typography>
             </DialogContent>
-            <DialogActions sx={{ px: 3, pb: 3, pt: 0, gap: 1, justifyContent: 'flex-start', flexWrap: 'wrap' }}>
+            <DialogActions
+              sx={{
+                px: 3,
+                pb: 3,
+                pt: 0,
+                gap: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+              }}
+            >
               <Button
                 onClick={handleEasterEggVote}
                 variant='contained'
@@ -374,14 +389,17 @@ export default function Projects() {
               </Button>
               <Button
                 onClick={handleEasterEggVote}
-                variant='text'
+                variant='outlined'
                 sx={{
                   borderRadius: 999,
                   px: 1.9,
                   fontWeight: 700,
                   textTransform: 'none',
                   color: alpha('#E2E8F0', 0.92),
+                  borderColor: alpha('#BAE6FD', 0.34),
+                  backgroundColor: alpha('#0F213E', 0.2),
                   '&:hover': {
+                    borderColor: alpha('#BAE6FD', 0.54),
                     backgroundColor: alpha('#E2E8F0', 0.08),
                   },
                 }}
