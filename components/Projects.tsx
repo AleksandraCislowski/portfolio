@@ -8,16 +8,13 @@ import { PROJECTS } from '../config/projects';
 import { SITE_CONFIG } from '../config/site';
 import { useTranslation } from '../i18n/useTranslation';
 import Section from './Section';
+import { ProjectPlanet } from './projects/ProjectPlanet';
 import {
   ProjectsModal,
-  type ProjectLaunchSnapshot,
-  type ProjectsModalPhase,
 } from './projects/ProjectsModal';
 import {
   PlanetBackgroundImage,
   PlanetBackgroundVideo,
-  PlanetButton,
-  PlanetDriftShell,
   PlanetEasterHint,
   PlanetField,
   PlanetHeader,
@@ -25,64 +22,17 @@ import {
   PlanetHintBody,
   PlanetHintLabel,
   PlanetCourierUfo,
-  PlanetOrbitBack,
-  PlanetOrbitChar,
-  PlanetOrbitTextRun,
-  PlanetSlot,
   PlanetStage,
   SectionIntro,
   SectionTitle,
 } from './projects/Projects.styles';
 import {
   getActiveProject,
-  getPlanetTransforms,
-  getPlanetVisualState,
-  getProjectLayout,
 } from './projects/projects.utils';
+import { useProjectsModal } from './projects/useProjectsModal';
 import { useSectionAnimationReplay } from './sectionAnimationReplay';
 
 const ORBIT_DURATION_MS = 30000;
-
-function buildOrbitLabel(title: string) {
-  return Array.from(`• ${title.toUpperCase()} • `.repeat(4));
-}
-
-function getOrbitCharStyle(
-  charIndex: number,
-  totalChars: number,
-  orbitProgress: number,
-  planetSize: number,
-) {
-  const progress = ((totalChars - charIndex) / totalChars + orbitProgress) % 1;
-  const angle = progress * Math.PI * 2 - Math.PI / 2;
-  const ringRadiusX = planetSize * 0.74;
-  const ringRadiusY = planetSize * 0.16;
-  const x = Math.cos(angle) * ringRadiusX;
-  const verticalOffset = planetSize * -0.092;
-  const y = Math.sin(angle) * ringRadiusY + verticalOffset;
-  const normalizedX = x / ringRadiusX;
-  const rotateY = normalizedX * 78;
-  const normalizedY = (y - verticalOffset) / ringRadiusY;
-  const frontThreshold = -0.02;
-  const frontFactor = normalizedY < frontThreshold
-    ? 0
-    : Math.max(0, Math.min(1, (normalizedY - frontThreshold) / (1 - frontThreshold)));
-  const sideFade = Math.max(0, 1 - Math.max(0, Math.abs(normalizedX) - 0.72) / 0.28);
-  const opacity = frontFactor * sideFade;
-  const scale = 0.92 + frontFactor * 0.16;
-  const fontSize = Math.max(14, Math.min(24, planetSize * 0.086));
-  const xPx = `${x.toFixed(2)}px`;
-  const yPx = `${y.toFixed(2)}px`;
-  const opacityValue = opacity.toFixed(6);
-  const rotateYValue = `${rotateY.toFixed(2)}deg`;
-  const scaleValue = scale.toFixed(3);
-
-  return {
-    fontSize: `${fontSize.toFixed(2)}px`,
-    opacity: opacityValue,
-    transform: `translate(-50%, -50%) translate3d(${xPx}, ${yPx}, 0px) rotateY(${rotateYValue}) scale(${scaleValue})`,
-  };
-}
 
 export default function Projects() {
   const t = useTranslation();
@@ -92,26 +42,15 @@ export default function Projects() {
   const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
   const fieldRef = React.useRef<HTMLDivElement | null>(null);
   const planetButtonRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
-  const modalPhaseTimeoutRef = React.useRef<number | null>(null);
   const [entered, setEntered] = React.useState(false);
-  const [activeProjectIndex, setActiveProjectIndex] = React.useState<number | null>(null);
   const [planetMotionPaused, setPlanetMotionPaused] = React.useState(false);
   const [planetRecovering, setPlanetRecovering] = React.useState(false);
-  const [modalPhase, setModalPhase] = React.useState<ProjectsModalPhase>('closed');
-  const [launchSnapshot, setLaunchSnapshot] = React.useState<ProjectLaunchSnapshot | null>(null);
   const [orbitProgress, setOrbitProgress] = React.useState(0);
   const [hasHydrated, setHasHydrated] = React.useState(false);
   const replayKey = useSectionAnimationReplay(SITE_CONFIG.sectionIds.projects);
   const effectiveIsMdDown = hasHydrated ? isMdDown : false;
   const effectiveIsSmDown = hasHydrated ? isSmDown : false;
   const effectiveOrbitProgress = hasHydrated ? orbitProgress : 0;
-
-  const clearModalPhaseTimeout = React.useCallback(() => {
-    if (modalPhaseTimeoutRef.current !== null) {
-      window.clearTimeout(modalPhaseTimeoutRef.current);
-      modalPhaseTimeoutRef.current = null;
-    }
-  }, []);
 
   const getPlanetSnapshot = React.useCallback((index: number | null) => {
     if (index === null || typeof window === 'undefined') {
@@ -134,39 +73,17 @@ export default function Projects() {
       expandScale: Number(((maxViewportEdge / Math.max(rect.width, rect.height)) * 1.92).toFixed(3)),
     };
   }, []);
-
-  const openProjectModal = React.useCallback((index: number) => {
-    clearModalPhaseTimeout();
-    setLaunchSnapshot(getPlanetSnapshot(index));
-    setActiveProjectIndex(index);
-    setModalPhase(shouldReduceMotion ? 'open' : 'opening');
-  }, [clearModalPhaseTimeout, getPlanetSnapshot, shouldReduceMotion]);
-
-  const closeProjectModal = React.useCallback(() => {
-    clearModalPhaseTimeout();
-
-    if (typeof document !== 'undefined') {
-      const activeElement = document.activeElement;
-
-      if (activeElement instanceof HTMLElement) {
-        activeElement.blur();
-      }
-    }
-
-    if (activeProjectIndex !== null) {
-      setLaunchSnapshot(getPlanetSnapshot(activeProjectIndex));
-      planetButtonRefs.current[activeProjectIndex]?.blur();
-    }
-
-    if (shouldReduceMotion) {
-      setModalPhase('closed');
-      setActiveProjectIndex(null);
-      setLaunchSnapshot(null);
-      return;
-    }
-
-    setModalPhase('closing');
-  }, [activeProjectIndex, clearModalPhaseTimeout, getPlanetSnapshot, shouldReduceMotion]);
+  const {
+    activeProjectIndex,
+    closeProjectModal,
+    launchSnapshot,
+    modalPhase,
+    openProjectModal,
+  } = useProjectsModal({
+    getPlanetSnapshot,
+    planetButtonRefs,
+    shouldReduceMotion,
+  });
 
   React.useEffect(() => {
     if (shouldReduceMotion) {
@@ -206,28 +123,6 @@ export default function Projects() {
   }, [replayKey, shouldReduceMotion]);
 
   React.useEffect(() => {
-    clearModalPhaseTimeout();
-
-    if (modalPhase === 'opening') {
-      modalPhaseTimeoutRef.current = window.setTimeout(() => {
-        setModalPhase('open');
-      }, 1320);
-    }
-
-    if (modalPhase === 'closing') {
-      modalPhaseTimeoutRef.current = window.setTimeout(() => {
-        setModalPhase('closed');
-        setActiveProjectIndex(null);
-        setLaunchSnapshot(null);
-      }, 1320);
-    }
-
-    return () => {
-      clearModalPhaseTimeout();
-    };
-  }, [clearModalPhaseTimeout, modalPhase]);
-
-  React.useEffect(() => {
     if (shouldReduceMotion) {
       setPlanetMotionPaused(true);
       setPlanetRecovering(false);
@@ -237,42 +132,6 @@ export default function Projects() {
     setPlanetMotionPaused(false);
     setPlanetRecovering(false);
   }, [modalPhase, shouldReduceMotion]);
-
-  React.useEffect(() => {
-    if (modalPhase === 'closed') {
-      return;
-    }
-
-    const previousOverflow = document.body.style.overflow;
-    const previousPaddingRight = document.body.style.paddingRight;
-    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-
-    if (scrollbarWidth > 0) {
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-    }
-
-    document.body.style.overflow = 'hidden';
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        closeProjectModal();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      document.body.style.paddingRight = previousPaddingRight;
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [closeProjectModal, modalPhase]);
-
-  React.useEffect(() => {
-    return () => {
-      clearModalPhaseTimeout();
-    };
-  }, [clearModalPhaseTimeout]);
 
   React.useEffect(() => {
     setHasHydrated(true);
@@ -350,114 +209,27 @@ export default function Projects() {
         </PlanetHeader>
 
         <PlanetStage>
-          {PROJECTS.map((project, index) => {
-            const item = t.projects.items[index];
-            const layout = getProjectLayout(index, effectiveIsSmDown, effectiveIsMdDown);
-            const isActive = activeProjectIndex === index && modalVisible;
-            const hasActiveProject = modalVisible;
-            const delay = `${index * 0.9}s`;
-            const orbitChars = buildOrbitLabel(item.title);
-            const visualState = getPlanetVisualState(
-              isActive,
-              hasActiveProject,
-              entered,
-              shouldReduceMotion,
-            );
-
-            return (
-              <PlanetSlot
-                key={project.slug}
-                $recovering={planetRecovering}
-                style={{
-                  top: layout.top,
-                  left: layout.left,
-                  width: `${layout.size}px`,
-                  height: `${layout.size}px`,
-                  opacity: visualState.opacity,
-                  filter: visualState.filter,
-                  transform: getPlanetTransforms(
-                    index,
-                    effectiveIsSmDown,
-                    isActive,
-                    hasActiveProject,
-                    entered,
-                    shouldReduceMotion,
-                  ),
-                  transitionDelay: entered || shouldReduceMotion
-                    ? `${240 + index * 170}ms`
-                    : '0ms',
-                  zIndex: isActive ? 4 : 2,
-                }}
-              >
-                <PlanetDriftShell
-                  $tone={index}
-                  $delay={delay}
-                  $reduceMotion={shouldReduceMotion}
-                  $modalOpen={hasActiveProject}
-                  $motionPaused={planetMotionPaused}
-                  $recovering={planetRecovering}
-                >
-                  <PlanetOrbitBack $tone={index} aria-hidden='true'>
-                    {index === 0 && <Box className='planet-mars-comet' />}
-                    {index === 1 && (
-                      <>
-                        <Box className='planet-orbit-arc planet-orbit-arc-a' />
-                        <Box className='planet-orbit-arc planet-orbit-arc-b' />
-                        <Box className='planet-orbit-arc planet-orbit-arc-c' />
-                        <Box className='planet-orbit-arc planet-orbit-arc-d' />
-                      </>
-                    )}
-                    {index === 2 && <Box className='planet-earth-moon' />}
-                    <PlanetOrbitTextRun>
-                      {orbitChars.map((char, charIndex) => (
-                        <PlanetOrbitChar
-                          key={`${project.slug}-${charIndex}-${char}`}
-                          style={getOrbitCharStyle(
-                            charIndex,
-                            orbitChars.length,
-                            (effectiveOrbitProgress + index * 0.09) % 1,
-                            layout.size,
-                          )}
-                        >
-                          {char}
-                        </PlanetOrbitChar>
-                      ))}
-                    </PlanetOrbitTextRun>
-                  </PlanetOrbitBack>
-                  <PlanetButton
-                    type='button'
-                    ref={(node) => {
-                      planetButtonRefs.current[index] = node;
-                    }}
-                    $tone={index}
-                    $delay={delay}
-                    $reduceMotion={shouldReduceMotion}
-                    $modalOpen={hasActiveProject}
-                    $active={isActive}
-                    $recovering={planetRecovering}
-                    onClick={() => openProjectModal(index)}
-                    aria-haspopup='dialog'
-                    aria-expanded={isActive}
-                    aria-controls='projects-modal'
-                    aria-label={`${t.projects.openProject}: ${item.title}`}
-                  >
-                    <Box className='planet-hover-sweep' />
-                    <Box className='planet-atmosphere' />
-                    <Box className='planet-surface-detail planet-surface-detail-a' />
-                    <Box className='planet-surface-detail planet-surface-detail-b' />
-                    {index === 0 && (
-                      <>
-                        <Box className='planet-mars-storm' />
-                      </>
-                    )}
-                    {index === 2 && <Box className='planet-earth-clouds' />}
-                    <Box className='planet-rim-light' />
-                    <Box className='planet-shadow' />
-                  </PlanetButton>
-                </PlanetDriftShell>
-              </PlanetSlot>
-            );
-          })}
+          {PROJECTS.map((project, index) => (
+            <ProjectPlanet
+              key={project.slug}
+              index={index}
+              item={t.projects.items[index]}
+              isSmDown={effectiveIsSmDown}
+              isMdDown={effectiveIsMdDown}
+              entered={entered}
+              shouldReduceMotion={shouldReduceMotion}
+              orbitProgress={effectiveOrbitProgress}
+              modalVisible={modalVisible}
+              activeProjectIndex={activeProjectIndex}
+              planetRecovering={planetRecovering}
+              planetMotionPaused={planetMotionPaused}
+              openLabel={t.projects.openProject}
+              onOpen={openProjectModal}
+              planetButtonRef={(node) => {
+                planetButtonRefs.current[index] = node;
+              }}
+            />
+          ))}
 
           <PlanetCourierUfo aria-hidden='true' $reduceMotion={shouldReduceMotion}>
             <Box className='planet-courier-dome' />

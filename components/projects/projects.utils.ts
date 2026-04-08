@@ -1,5 +1,49 @@
 import { PROJECTS } from '../../config/projects';
 import type { TranslationDict } from '../../i18n/useTranslation';
+import type { ProjectItem } from './projects.types';
+
+// The orbit text is intentionally repeated so the ring still looks continuous during rotation.
+export function buildOrbitLabel(title: string) {
+  return Array.from(`• ${title.toUpperCase()} • `.repeat(4));
+}
+
+// Positions each glyph on an ellipse and fades the back half so the ring reads like a 3D orbit.
+export function getOrbitCharStyle(
+  charIndex: number,
+  totalChars: number,
+  orbitProgress: number,
+  planetSize: number,
+) {
+  const progress = ((totalChars - charIndex) / totalChars + orbitProgress) % 1;
+  const angle = progress * Math.PI * 2 - Math.PI / 2;
+  const ringRadiusX = planetSize * 0.74;
+  const ringRadiusY = planetSize * 0.16;
+  const x = Math.cos(angle) * ringRadiusX;
+  const verticalOffset = planetSize * -0.092;
+  const y = Math.sin(angle) * ringRadiusY + verticalOffset;
+  const normalizedX = x / ringRadiusX;
+  const rotateY = normalizedX * 78;
+  const normalizedY = (y - verticalOffset) / ringRadiusY;
+  const frontThreshold = -0.02;
+  const frontFactor = normalizedY < frontThreshold
+    ? 0
+    : Math.max(0, Math.min(1, (normalizedY - frontThreshold) / (1 - frontThreshold)));
+  const sideFade = Math.max(0, 1 - Math.max(0, Math.abs(normalizedX) - 0.72) / 0.28);
+  const opacity = frontFactor * sideFade;
+  const scale = 0.92 + frontFactor * 0.16;
+  const fontSize = Math.max(14, Math.min(24, planetSize * 0.086));
+  const xPx = `${x.toFixed(2)}px`;
+  const yPx = `${y.toFixed(2)}px`;
+  const opacityValue = opacity.toFixed(6);
+  const rotateYValue = `${rotateY.toFixed(2)}deg`;
+  const scaleValue = scale.toFixed(3);
+
+  return {
+    fontSize: `${fontSize.toFixed(2)}px`,
+    opacity: opacityValue,
+    transform: `translate(-50%, -50%) translate3d(${xPx}, ${yPx}, 0px) rotateY(${rotateYValue}) scale(${scaleValue})`,
+  };
+}
 
 export function getProjectLayout(
   index: number,
@@ -11,6 +55,7 @@ export function getProjectLayout(
   return isSmDown ? project.mobile : isMdDown ? project.tablet : project.desktop;
 }
 
+// Planets enter with slightly different offsets to avoid the section feeling mechanically symmetrical.
 export function getPlanetTransforms(
   index: number,
   isSmDown: boolean,
@@ -38,6 +83,7 @@ export function getPlanetTransforms(
   return introTransform;
 }
 
+// Non-active planets stay visible behind the dialog so the modal still feels anchored to the scene.
 export function getPlanetVisualState(
   isActive: boolean,
   hasActiveProject: boolean,
@@ -70,8 +116,10 @@ export function getActiveProject(
     return null;
   }
 
+  const item: ProjectItem = translations.items[activeProjectIndex];
+
   return {
     slug: PROJECTS[activeProjectIndex].slug,
-    ...translations.items[activeProjectIndex],
+    ...item,
   };
 }

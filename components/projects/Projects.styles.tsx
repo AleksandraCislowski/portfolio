@@ -38,6 +38,7 @@ export const PlanetBackgroundImage = styled('img')({
   filter: 'saturate(1.14) contrast(1.06)',
 });
 
+// Outer "space scene" shell for the whole section. It owns the backdrop, stars and entry fade.
 export const PlanetField = styled(Box)(({ theme }) => ({
   position: 'relative',
   width: '100%',
@@ -126,6 +127,7 @@ export const PlanetHint = styled(Box)(({ theme }) => ({
   },
 }));
 
+// The main stage holds planets plus scene-level decorative glows and ring-like framing.
 export const PlanetStage = styled(Box)(({ theme }) => ({
   position: 'relative',
   zIndex: 3,
@@ -204,6 +206,7 @@ export const PlanetSlot = styled(Box, {
   zIndex: 2,
 }));
 
+// Easter egg UFO/cow lives entirely in styles so the JSX stays simple and the gag remains optional.
 export const PlanetCourierUfo = styled(Box, {
   shouldForwardProp: (prop) => prop !== '$reduceMotion',
 })<{ $reduceMotion: boolean }>(({ theme, $reduceMotion }) => ({
@@ -509,6 +512,7 @@ export const PlanetDriftShell = styled(Box, {
   },
 }));
 
+// Drift shell handles ambient motion independently from the clickable planet button.
 export const PlanetButton = styled('button', {
   shouldForwardProp: (prop) =>
     ![
@@ -1202,6 +1206,8 @@ export const PlanetHintBody = styled(Typography)(() => ({
   zIndex: 1,
 }));
 
+// Modal layers are separated into overlay, dialog shell and transition visuals so timing can be tuned
+// without coupling every effect to the content markup.
 export const ProjectOverlay = styled(Box, {
   shouldForwardProp: (prop) => prop !== '$phase',
 })<{ $phase: 'closed' | 'opening' | 'open' | 'closing' }>(
@@ -1359,6 +1365,7 @@ function getLaunchPalette(tone: number) {
   return palettes[tone % palettes.length];
 }
 
+// These launch primitives recreate the feeling that the modal grows out of the clicked planet.
 export const ProjectLaunchLayer = styled(Box)(() => ({
   position: 'fixed',
   inset: 0,
@@ -1668,6 +1675,7 @@ export const ProjectModalGlow = styled(Box)(() => ({
   opacity: 0.58,
 }));
 
+// Scrollable modal grid: main narrative on the left, supporting facts/preview on the right.
 export const ProjectModalInner = styled(Box)(({ theme }) => ({
   position: 'relative',
   zIndex: 1,
@@ -1745,6 +1753,7 @@ export const ProjectAside = styled(Box)(({ theme }) => ({
   gap: theme.spacing(1.5),
 }));
 
+// Shared card primitive keeps all modal panels visually cohesive.
 export const ProjectCard = styled(Box)(({ theme }) => ({
   position: 'relative',
   borderRadius: 24,
@@ -1787,6 +1796,8 @@ export const ProjectPreviewCard = styled(ProjectCard)(({ theme }) => ({
     `,
 }));
 
+// Intentionally neutral preview surface so real screenshots can replace placeholders without
+// requiring a layout or visual rewrite later.
 export const ProjectPreviewSurface = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(2),
   minHeight: 118,
