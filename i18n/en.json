@@ -85,14 +85,16 @@
     "easterEggLink": "Tell me what it is",
     "easterEggModalTitle": "Aaaaa... easter egg discovered!",
     "easterEggModalBody": "It is, of course, a UFO abducting a cow. Not just any UFO either, but one that clearly decided this portfolio needed one more dramatic subplot. The cow did not approve this roadmap item, but the cosmos rarely waits for stakeholder sign-off.",
-    "easterEggPrimaryAction": "I knew it",
-    "easterEggSecondaryAction": "No way",
+    "easterEggPrimaryAction": "I knew it!",
+    "easterEggSecondaryAction": "No way :)",
     "easterEggClose": "Close easter egg",
     "closeProject": "Close project",
     "modalDetails": "Case Study Snapshot",
     "modalFacts": "Role and scope",
     "modalPreview": "Slider / screenshot area",
-    "modalSlider": "Project placeholder slider",
+    "modalSlider": "Project screenshot slider",
+    "modalSliderPrevious": "Previous screenshot",
+    "modalSliderNext": "Next screenshot",
     "visitSite": "Visit live site",
     "items": [
       {
@@ -133,15 +135,38 @@
         "slides": [
           {
             "title": "Hero / first impression",
-            "caption": "Add the opening screen here to show branding, tone, and the core value proposition."
+            "caption": "The opening section sets the tone with a warm, trustworthy visual style and a clearer service promise.",
+            "imageSrc": "/images/projects/funkologi/funkologi1.png",
+            "imageAlt": "Funcology homepage hero section",
+            "imageAspectRatio": "999 / 760"
           },
           {
             "title": "Specialization section",
-            "caption": "Placeholder for a screen that highlights expertise and a more structured narrative."
+            "caption": "This screen shows how the content was grouped to make the offer easier to scan and understand.",
+            "imageSrc": "/images/projects/funkologi/funkologi2.png",
+            "imageAlt": "Funcology specialization section",
+            "imageAspectRatio": "1032 / 994"
           },
           {
             "title": "Materials library",
-            "caption": "Use this slot for the content area that visitors can browse and return to."
+            "caption": "A compact card-based view makes the supporting material library feel lighter and easier to revisit.",
+            "imageSrc": "/images/projects/funkologi/funkologi3.png",
+            "imageAlt": "Funcology materials overview",
+            "imageAspectRatio": "494 / 491"
+          },
+          {
+            "title": "Content deep dive",
+            "caption": "A taller screen gives more room for long-form educational content without breaking the visual rhythm.",
+            "imageSrc": "/images/projects/funkologi/Screenshot 2026-04-08 at 20.53.59.png",
+            "imageAlt": "Funcology article or content detail view",
+            "imageAspectRatio": "933 / 1053"
+          },
+          {
+            "title": "Mobile-friendly detail",
+            "caption": "This view shows how the interface still feels polished when the composition shifts toward a narrower frame.",
+            "imageSrc": "/images/projects/funkologi/funkologi5.png",
+            "imageAlt": "Funcology detailed section in a narrow layout",
+            "imageAspectRatio": "615 / 760"
           }
         ],
         "liveUrl": "https://funcology.vercel.app/"

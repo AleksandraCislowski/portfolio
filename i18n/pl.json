@@ -85,14 +85,16 @@
     "easterEggLink": "Powiedz mi jaki",
     "easterEggModalTitle": "Aaaaa... easter egg odkryty!",
     "easterEggModalBody": "To oczywiście UFO porywające krowę. Nie zwykłe UFO, tylko takie, które najwyraźniej uznało, że międzyplanetarny chaos potrzebuje jeszcze jednego dramatycznego wątku. Krowa nie miała tego w backlogu, ale kosmos rządzi się własnymi sprintami.",
-    "easterEggPrimaryAction": "A nie mówiłam",
-    "easterEggSecondaryAction": "Nie ma mowy",
+    "easterEggPrimaryAction": "Wow, to niesamowite!",
+    "easterEggSecondaryAction": "Ale numer :D",
     "easterEggClose": "Zamknij easter egg",
     "closeProject": "Zamknij projekt",
     "modalDetails": "Case Study Snapshot",
     "modalFacts": "Rola i zakres",
     "modalPreview": "Slider / miejsce na screeny",
-    "modalSlider": "Placeholderowy slider projektu",
+    "modalSlider": "Slider screenów projektu",
+    "modalSliderPrevious": "Poprzedni screen",
+    "modalSliderNext": "Następny screen",
     "visitSite": "Zobacz live",
     "items": [
       {
@@ -133,15 +135,38 @@
         "slides": [
           {
             "title": "Hero / first impression",
-            "caption": "Tutaj wrzucimy screen otwarcia strony z brandingiem i główną obietnicą wartości."
+            "caption": "Sekcja otwarcia od razu buduje klimat marki i czytelniej komunikuje główną obietnicę wartości.",
+            "imageSrc": "/images/projects/funkologi/funkologi1.png",
+            "imageAlt": "Ekran otwarcia strony Funcology",
+            "imageAspectRatio": "999 / 760"
           },
           {
             "title": "Sekcja o specjalizacji",
-            "caption": "Miejsce na widok pokazujący eksperckość klientki i bardziej uporządkowaną narrację."
+            "caption": "Ten widok pokazuje, jak uporządkowana została oferta i jak mocniej wybrzmiewa eksperckość klientki.",
+            "imageSrc": "/images/projects/funkologi/funkologi2.png",
+            "imageAlt": "Sekcja specjalizacji na stronie Funcology",
+            "imageAspectRatio": "1032 / 994"
           },
           {
             "title": "Biblioteka materiałów",
-            "caption": "Placeholder pod screen sekcji, w której użytkownik może przeglądać i wracać do materiałów."
+            "caption": "Kafelkowy układ materiałów ułatwia powrót do treści i sprawia, że sekcja jest lżejsza wizualnie.",
+            "imageSrc": "/images/projects/funkologi/funkologi3.png",
+            "imageAlt": "Przegląd materiałów na stronie Funcology",
+            "imageAspectRatio": "494 / 491"
+          },
+          {
+            "title": "Widok treści",
+            "caption": "Wyższy screen dobrze pokazuje, że dłuższe treści edukacyjne nadal mieszczą się w spójnym layoucie.",
+            "imageSrc": "/images/projects/funkologi/Screenshot 2026-04-08 at 20.53.59.png",
+            "imageAlt": "Widok artykułu lub rozbudowanej treści na stronie Funcology",
+            "imageAspectRatio": "933 / 1053"
+          },
+          {
+            "title": "Węższy kadr",
+            "caption": "Ten screen domyka case study i pokazuje, że interfejs dobrze wygląda także przy bardziej pionowej kompozycji.",
+            "imageSrc": "/images/projects/funkologi/funkologi5.png",
+            "imageAlt": "Węższy widok sekcji na stronie Funcology",
+            "imageAspectRatio": "615 / 760"
           }
         ],
         "liveUrl": "https://funcology.vercel.app/"

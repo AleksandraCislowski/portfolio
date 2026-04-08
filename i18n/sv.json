@@ -85,14 +85,16 @@
     "easterEggLink": "Säg vad det är",
     "easterEggModalTitle": "Aaaaa... easter egg upptäckt!",
     "easterEggModalBody": "Det är förstås ett UFO som kidnappar en ko. Inte vilket UFO som helst heller, utan ett som uppenbarligen tyckte att den här portfolion behövde ytterligare ett dramatiskt sidospår. Kon hade inte detta i sprintplanen, men kosmos väntar sällan på godkännande.",
-    "easterEggPrimaryAction": "Jag visste det",
-    "easterEggSecondaryAction": "Ingen chans",
+    "easterEggPrimaryAction": "Jag visste det!",
+    "easterEggSecondaryAction": "Ingen chans :D",
     "easterEggClose": "Stäng easter egg",
     "closeProject": "Stäng projekt",
     "modalDetails": "Case Study Snapshot",
     "modalFacts": "Roll och omfattning",
     "modalPreview": "Slider / plats för skärmbilder",
-    "modalSlider": "Projektets placeholder-slider",
+    "modalSlider": "Projektets skärmbildsslider",
+    "modalSliderPrevious": "Föregående skärmbild",
+    "modalSliderNext": "Nästa skärmbild",
     "visitSite": "Se live-sidan",
     "items": [
       {
@@ -133,15 +135,38 @@
         "slides": [
           {
             "title": "Hero / first impression",
-            "caption": "Här kan du lägga första skärmen som visar branding, tonalitet och kärnbudskap."
+            "caption": "Öppningssektionen sätter tonen direkt med en varm identitet och ett tydligare värdeerbjudande.",
+            "imageSrc": "/images/projects/funkologi/funkologi1.png",
+            "imageAlt": "Startsida för Funcology",
+            "imageAspectRatio": "999 / 760"
           },
           {
             "title": "Specialiseringssektion",
-            "caption": "Plats för en vy som lyfter expertis och en tydligare innehållsstruktur."
+            "caption": "Den här vyn visar hur erbjudandet strukturerades för att bli lättare att förstå och skanna.",
+            "imageSrc": "/images/projects/funkologi/funkologi2.png",
+            "imageAlt": "Sektion om specialisering på Funcology",
+            "imageAspectRatio": "1032 / 994"
           },
           {
             "title": "Materialbibliotek",
-            "caption": "Använd denna plats för sektionen där besökare kan utforska och återvända till material."
+            "caption": "Kortlayouten gör materialbiblioteket lättare att bläddra i och enklare att återvända till.",
+            "imageSrc": "/images/projects/funkologi/funkologi3.png",
+            "imageAlt": "Översikt av material på Funcology",
+            "imageAspectRatio": "494 / 491"
+          },
+          {
+            "title": "Innehållsvy",
+            "caption": "Den högre skärmen visar att längre utbildande innehåll fortfarande känns lugnt och sammanhållet.",
+            "imageSrc": "/images/projects/funkologi/Screenshot 2026-04-08 at 20.53.59.png",
+            "imageAlt": "Artikel- eller innehållsvy på Funcology",
+            "imageAspectRatio": "933 / 1053"
+          },
+          {
+            "title": "Smalare vy",
+            "caption": "Den här skärmen rundar av case studyt och visar att gränssnittet håller ihop även i ett smalare format.",
+            "imageSrc": "/images/projects/funkologi/funkologi5.png",
+            "imageAlt": "Smalare detaljvy på Funcology",
+            "imageAspectRatio": "615 / 760"
           }
         ],
         "liveUrl": "https://funcology.vercel.app/"
