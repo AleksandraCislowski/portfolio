@@ -83,32 +83,158 @@
     "planetHint": "Each planet drifts slightly in place. Click one to open a large project preview without leaving this section.",
     "easterHint": "Look at this section long enough and you might find an easter egg.",
     "closeProject": "Close project",
-    "modalDetails": "Project Focus",
-    "modalPreview": "Preview",
-    "modalPreviewCopy": "This area can later hold screenshots, a mini gallery, stack notes, results, or a tighter case study. For now it works as a visual placeholder for the larger story.",
-    "placeholderEyebrow": "Project Placeholder",
-    "placeholderParagraphs": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere, nibh et fermentum vulputate, eros turpis pretium risus, vitae facilisis libero lorem non massa.",
-      "Suspendisse potenti. Praesent ultricies, turpis a varius viverra, sapien augue tempus elit, quis suscipit sapien arcu non odio. Curabitur ac sem vitae nisl consequat tincidunt.",
-      "Vivamus feugiat, erat sed luctus pulvinar, neque purus fermentum justo, vel placerat lectus neque nec mi. Donec luctus urna et arcu volutpat, in interdum lacus maximus."
-    ],
-    "placeholderBulletPoints": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "Praesent efficitur sapien sed arcu facilisis, id suscipit neque feugiat.",
-      "Mauris blandit massa at justo malesuada, quis ultrices lorem eleifend."
-    ],
+    "modalDetails": "Case Study Snapshot",
+    "modalFacts": "Role and scope",
+    "modalPreview": "Slider / screenshot area",
+    "modalSlider": "Project placeholder slider",
+    "visitSite": "Visit live site",
     "items": [
       {
-        "title": "SaaS Delivery Leadership",
-        "description": "Combined Scrum leadership and frontend collaboration to keep delivery stable, predictable, and aligned with business priorities."
+        "title": "FUNKOLOGI",
+        "description": "A full redesign and implementation for a psychologist's website, focused on trust, clearer positioning, and a setup that supports easier self-managed content updates.",
+        "eyebrow": "Case study / redesign + delivery",
+        "paragraphs": [
+          "The starting point was straightforward: the client had previously built her own WordPress site, but the result did not communicate professionalism or trust. On top of that, she needed a setup that would let her add materials herself instead of relying on a developer for every update.",
+          "I approached the work as a mix of redesign, information architecture cleanup, and technical groundwork for future content growth. Beyond the visual layer, a key part of the delivery was creating a practical content management flow: an admin panel, logic for adding new materials, and a database-backed setup so resources could be managed without touching code.",
+          "The final result was a modern Next.js website with stronger branding, clearer messaging, a better first impression, and the backend foundation needed to grow a structured materials library. The key business outcome was simple: the client now has a site that looks credible and supports self-managed content through an admin workflow."
+        ],
+        "bulletPoints": [
+          "Moved the brand away from a cluttered self-built WordPress site into a polished custom frontend experience.",
+          "Designed a calm and trustworthy visual identity for families seeking specialist psychological support.",
+          "Simplified the content structure so visitors can quickly understand the offer, specialization, and next steps.",
+          "Created a materials section the client can keep expanding through an admin panel.",
+          "Connected the data layer and prepared the project for storing and serving resources from a database-backed setup.",
+          "Built the project with future growth, SEO, and additional case study artifacts in mind."
+        ],
+        "meta": [
+          {
+            "label": "Role",
+            "value": "UX/UI, frontend, delivery"
+          },
+          {
+            "label": "Project type",
+            "value": "Service website + content hub"
+          },
+          {
+            "label": "Stack",
+            "value": "Next.js, React, MUI, database layer"
+          },
+          {
+            "label": "Primary goal",
+            "value": "Trust + admin panel + easier content management"
+          }
+        ],
+        "slides": [
+          {
+            "title": "Hero / first impression",
+            "caption": "Add the opening screen here to show branding, tone, and the core value proposition."
+          },
+          {
+            "title": "Specialization section",
+            "caption": "Placeholder for a screen that highlights expertise and a more structured narrative."
+          },
+          {
+            "title": "Materials library",
+            "caption": "Use this slot for the content area that visitors can browse and return to."
+          }
+        ],
+        "liveUrl": "https://funcology.vercel.app/"
       },
       {
-        "title": "Workflow & Velocity Optimization",
-        "description": "Introduced process improvements and impediment removal routines that lifted team efficiency and planning confidence."
+        "title": "Personal Blog",
+        "description": "Case study and screenshots will be added next.",
+        "eyebrow": "Coming soon",
+        "paragraphs": [
+          "A full case study for Personal Blog will be added here.",
+          "I will add the final story around the problem, approach, stack, and outcome later.",
+          "For now, this planet stays as a placeholder for the next featured project."
+        ],
+        "bulletPoints": [
+          "Full project write-up in progress.",
+          "Screenshots coming next.",
+          "Implementation details will be added later.",
+          "Section temporarily marked as coming soon."
+        ],
+        "meta": [
+          {
+            "label": "Status",
+            "value": "Coming soon"
+          },
+          {
+            "label": "Project",
+            "value": "Personal Blog"
+          },
+          {
+            "label": "Content",
+            "value": "In progress"
+          },
+          {
+            "label": "Screenshots",
+            "value": "To be added"
+          }
+        ],
+        "slides": [
+          {
+            "title": "Coming soon",
+            "caption": "Add the first project screen here."
+          },
+          {
+            "title": "Coming soon",
+            "caption": "Add the second project screen here."
+          },
+          {
+            "title": "Coming soon",
+            "caption": "Add the third project screen here."
+          }
+        ]
       },
       {
-        "title": "Stakeholder Feedback Engine",
-        "description": "Established regular demos and tighter feedback loops to speed up decision-making and reduce delivery risk."
+        "title": "Dashboard",
+        "description": "Case study and screenshots will be added next.",
+        "eyebrow": "Coming soon",
+        "paragraphs": [
+          "A full case study for Dashboard will be added here.",
+          "I will add the final story around scope, product decisions, and the final outcome later.",
+          "For now, this planet stays as a placeholder for the next featured project."
+        ],
+        "bulletPoints": [
+          "Full project write-up in progress.",
+          "Screenshots coming next.",
+          "Implementation details will be added later.",
+          "Section temporarily marked as coming soon."
+        ],
+        "meta": [
+          {
+            "label": "Status",
+            "value": "Coming soon"
+          },
+          {
+            "label": "Project",
+            "value": "Dashboard"
+          },
+          {
+            "label": "Content",
+            "value": "In progress"
+          },
+          {
+            "label": "Screenshots",
+            "value": "To be added"
+          }
+        ],
+        "slides": [
+          {
+            "title": "Coming soon",
+            "caption": "Add the first project screen here."
+          },
+          {
+            "title": "Coming soon",
+            "caption": "Add the second project screen here."
+          },
+          {
+            "title": "Coming soon",
+            "caption": "Add the third project screen here."
+          }
+        ]
       }
     ]
   },

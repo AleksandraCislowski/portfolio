@@ -83,32 +83,158 @@
     "planetHint": "Każda planeta delikatnie unosi się i pulsuje. Kliknięcie otwiera duży podgląd projektu bez wychodzenia z tej sekcji.",
     "easterHint": "Jeśli popatrzysz wystarczająco długo, znajdziesz easter egga.",
     "closeProject": "Zamknij projekt",
-    "modalDetails": "Project Focus",
-    "modalPreview": "Preview",
-    "modalPreviewCopy": "Tutaj możemy później wrzucić screeny, mini galerię, stack, wyniki albo krótkie case study. Na razie to placeholder pod większą historię projektu.",
-    "placeholderEyebrow": "Placeholder projektu",
-    "placeholderParagraphs": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere, nibh et fermentum vulputate, eros turpis pretium risus, vitae facilisis libero lorem non massa.",
-      "Suspendisse potenti. Praesent ultricies, turpis a varius viverra, sapien augue tempus elit, quis suscipit sapien arcu non odio. Curabitur ac sem vitae nisl consequat tincidunt.",
-      "Vivamus feugiat, erat sed luctus pulvinar, neque purus fermentum justo, vel placerat lectus neque nec mi. Donec luctus urna et arcu volutpat, in interdum lacus maximus."
-    ],
-    "placeholderBulletPoints": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "Praesent efficitur sapien sed arcu facilisis, id suscipit neque feugiat.",
-      "Mauris blandit massa at justo malesuada, quis ultrices lorem eleifend."
-    ],
+    "modalDetails": "Case Study Snapshot",
+    "modalFacts": "Rola i zakres",
+    "modalPreview": "Slider / miejsce na screeny",
+    "modalSlider": "Placeholderowy slider projektu",
+    "visitSite": "Zobacz live",
     "items": [
       {
-        "title": "SaaS Delivery Leadership",
-        "description": "Połączenie leadershipu Scrum i współpracy frontendowej, aby delivery było stabilne, przewidywalne i zgodne z celami biznesowymi."
+        "title": "FUNKOLOGI",
+        "description": "Redesign i wdrożenie strony dla psycholożki specjalizującej się w neuropsychologii, z naciskiem na wiarygodność, spójny branding i prosty system samodzielnego dodawania materiałów przez klientkę.",
+        "eyebrow": "Case study / redesign + delivery",
+        "paragraphs": [
+          "Punkt wyjścia był prosty: klientka miała wcześniej stronę postawioną samodzielnie na WordPressie, ale efekt wizualny nie budował zaufania i nie wspierał profesjonalnego wizerunku marki. Dodatkowo publikowanie materiałów miało być możliwe bez angażowania developera przy każdej aktualizacji.",
+          "Projekt potraktowałam jako połączenie redesignu, uporządkowania architektury informacji i przygotowania technicznego zaplecza pod rozwój contentu. Oprócz warstwy wizualnej ważne było też stworzenie sensownego flow zarządzania treścią: panelu administratora, logiki dodawania materiałów i połączenia z bazą danych, żeby nowe zasoby mogły być publikowane bez ręcznego grzebania w kodzie.",
+          "Finalnie powstała nowoczesna strona w Next.js z czytelną narracją, mocniejszym brandingiem, lepszym first impression i przygotowanym backendowym zapleczem pod rozwijanie biblioteki materiałów. Najważniejszy biznesowo efekt: klientka dostała stronę, która wygląda profesjonalnie i jest gotowa do samodzielnego zarządzania treścią przez panel admina."
+        ],
+        "bulletPoints": [
+          "Przeniesienie marki z chaotycznego, samodzielnie składanego WordPressa do dopracowanego custom frontendu.",
+          "Zaprojektowanie spokojnej, wiarygodnej estetyki pod odbiorców szukających wsparcia psychologicznego dla dzieci i rodzin.",
+          "Uproszczenie struktury treści tak, by użytkownik szybko rozumiał ofertę, specjalizację i kolejne kroki kontaktu.",
+          "Przygotowanie sekcji materiałów tak, by klientka mogła samodzielnie rozwijać bibliotekę contentu z poziomu panelu administratora.",
+          "Podpięcie warstwy danych i przygotowanie rozwiązania pod przechowywanie oraz wyświetlanie materiałów z bazy danych.",
+          "Budowa rozwiązania z myślą o dalszej rozbudowie, SEO i wygodnym podpinaniu kolejnych screenshotów / case artifacts."
+        ],
+        "meta": [
+          {
+            "label": "Rola",
+            "value": "UX/UI, frontend i delivery"
+          },
+          {
+            "label": "Typ projektu",
+            "value": "Strona usługowa + content hub"
+          },
+          {
+            "label": "Stack",
+            "value": "Next.js, React, MUI, baza danych"
+          },
+          {
+            "label": "Główny cel",
+            "value": "Wiarygodność + admin panel + łatwiejsze zarządzanie treścią"
+          }
+        ],
+        "slides": [
+          {
+            "title": "Hero / first impression",
+            "caption": "Tutaj wrzucimy screen otwarcia strony z brandingiem i główną obietnicą wartości."
+          },
+          {
+            "title": "Sekcja o specjalizacji",
+            "caption": "Miejsce na widok pokazujący eksperckość klientki i bardziej uporządkowaną narrację."
+          },
+          {
+            "title": "Biblioteka materiałów",
+            "caption": "Placeholder pod screen sekcji, w której użytkownik może przeglądać i wracać do materiałów."
+          }
+        ],
+        "liveUrl": "https://funcology.vercel.app/"
       },
       {
-        "title": "Workflow & Velocity Optimization",
-        "description": "Usprawnienia procesu i usuwanie blockerów, które zwiększyły efektywność zespołu i pewność planowania."
+        "title": "Personal Blog",
+        "description": "Case study i screeny będą dodane w kolejnym kroku.",
+        "eyebrow": "Coming soon",
+        "paragraphs": [
+          "Tutaj wpadnie pełny case study projektu Personal Blog.",
+          "Dodam później finalny opis problemu, podejścia, stacku i efektu końcowego.",
+          "Na ten moment zostawiamy tę planetę jako placeholder pod kolejną realizację."
+        ],
+        "bulletPoints": [
+          "Pełny opis projektu w przygotowaniu.",
+          "Screeny w przygotowaniu.",
+          "Detale wdrożenia dodamy później.",
+          "Sekcja tymczasowo oznaczona jako coming soon."
+        ],
+        "meta": [
+          {
+            "label": "Status",
+            "value": "Coming soon"
+          },
+          {
+            "label": "Projekt",
+            "value": "Personal Blog"
+          },
+          {
+            "label": "Treść",
+            "value": "W przygotowaniu"
+          },
+          {
+            "label": "Screeny",
+            "value": "Do dodania"
+          }
+        ],
+        "slides": [
+          {
+            "title": "Coming soon",
+            "caption": "Tu dodamy pierwszy screen projektu."
+          },
+          {
+            "title": "Coming soon",
+            "caption": "Tu dodamy drugi screen projektu."
+          },
+          {
+            "title": "Coming soon",
+            "caption": "Tu dodamy trzeci screen projektu."
+          }
+        ]
       },
       {
-        "title": "Stakeholder Feedback Engine",
-        "description": "Regularne demo i krótsze pętle feedbackowe, które przyspieszyły decyzje i obniżyły ryzyko delivery."
+        "title": "Dashboard",
+        "description": "Case study i screeny będą dodane w kolejnym kroku.",
+        "eyebrow": "Coming soon",
+        "paragraphs": [
+          "Tutaj wpadnie pełny case study projektu Dashboard.",
+          "Dodam później finalny opis zakresu, decyzji projektowych i efektu końcowego.",
+          "Na ten moment zostawiamy tę planetę jako placeholder pod kolejną realizację."
+        ],
+        "bulletPoints": [
+          "Pełny opis projektu w przygotowaniu.",
+          "Screeny w przygotowaniu.",
+          "Detale wdrożenia dodamy później.",
+          "Sekcja tymczasowo oznaczona jako coming soon."
+        ],
+        "meta": [
+          {
+            "label": "Status",
+            "value": "Coming soon"
+          },
+          {
+            "label": "Projekt",
+            "value": "Dashboard"
+          },
+          {
+            "label": "Treść",
+            "value": "W przygotowaniu"
+          },
+          {
+            "label": "Screeny",
+            "value": "Do dodania"
+          }
+        ],
+        "slides": [
+          {
+            "title": "Coming soon",
+            "caption": "Tu dodamy pierwszy screen projektu."
+          },
+          {
+            "title": "Coming soon",
+            "caption": "Tu dodamy drugi screen projektu."
+          },
+          {
+            "title": "Coming soon",
+            "caption": "Tu dodamy trzeci screen projektu."
+          }
+        ]
       }
     ]
   },

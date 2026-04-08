@@ -83,32 +83,158 @@
     "planetHint": "Varje planet svävar lätt och pulserar. Klicka för att öppna en stor projektvy utan att lämna sektionen.",
     "easterHint": "Titta på den här sektionen tillräckligt länge så kanske du hittar ett easter egg.",
     "closeProject": "Stäng projekt",
-    "modalDetails": "Project Focus",
-    "modalPreview": "Preview",
-    "modalPreviewCopy": "Här kan vi senare lägga in skärmbilder, ett minigalleri, stack, resultat eller en tätare case study. Just nu fungerar det som en visuell placeholder för den större berättelsen.",
-    "placeholderEyebrow": "Projektplaceholder",
-    "placeholderParagraphs": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere, nibh et fermentum vulputate, eros turpis pretium risus, vitae facilisis libero lorem non massa.",
-      "Suspendisse potenti. Praesent ultricies, turpis a varius viverra, sapien augue tempus elit, quis suscipit sapien arcu non odio. Curabitur ac sem vitae nisl consequat tincidunt.",
-      "Vivamus feugiat, erat sed luctus pulvinar, neque purus fermentum justo, vel placerat lectus neque nec mi. Donec luctus urna et arcu volutpat, in interdum lacus maximus."
-    ],
-    "placeholderBulletPoints": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "Praesent efficitur sapien sed arcu facilisis, id suscipit neque feugiat.",
-      "Mauris blandit massa at justo malesuada, quis ultrices lorem eleifend."
-    ],
+    "modalDetails": "Case Study Snapshot",
+    "modalFacts": "Roll och omfattning",
+    "modalPreview": "Slider / plats för skärmbilder",
+    "modalSlider": "Projektets placeholder-slider",
+    "visitSite": "Se live-sidan",
     "items": [
       {
-        "title": "SaaS Delivery Leadership",
-        "description": "Kombinerade Scrum-ledarskap och frontend-samarbete för stabil, förutsägbar och affärsanpassad leverans."
+        "title": "FUNKOLOGI",
+        "description": "En redesign och implementation av en psykologs webbplats med fokus på förtroende, tydligare positionering och en struktur som gör innehållshantering enklare för kunden själv.",
+        "eyebrow": "Case study / redesign + leverans",
+        "paragraphs": [
+          "Utgångsläget var tydligt: kunden hade tidigare byggt sin WordPress-sida själv, men resultatet förmedlade inte rätt nivå av professionalism eller trygghet. Samtidigt behövde hon kunna lägga till material själv utan att vara beroende av en utvecklare för varje uppdatering.",
+          "Jag behandlade projektet som en kombination av redesign, förbättrad informationsarkitektur och tekniskt grundarbete för framtida innehållstillväxt. Utöver den visuella delen var det viktigt att skapa ett praktiskt flöde för innehållshantering: en adminpanel, logik för att lägga till material och en databasstödd lösning så att resurser kunde hanteras utan att röra kod.",
+          "Slutresultatet blev en modern Next.js-sajt med starkare branding, tydligare budskap, bättre first impression och den backendgrund som behövs för att bygga upp ett strukturerat materialbibliotek. Den viktigaste affärseffekten var att kunden nu har en webbplats som känns trovärdig och stöder eget innehållsansvar via ett adminflöde."
+        ],
+        "bulletPoints": [
+          "Flyttade varumärket från en rörig egenbyggd WordPress-sida till en mer genomarbetad frontendupplevelse.",
+          "Skapade ett lugnt och förtroendeingivande visuellt språk för familjer som söker specialiststöd.",
+          "Förenklade innehållsstrukturen så att besökare snabbt förstår erbjudandet, specialiseringen och nästa steg.",
+          "Byggde en materialsektion som kunden kan fortsätta utveckla via en adminpanel.",
+          "Kopplade datalagret och förberedde projektet för att lagra och visa material från en databasstödd lösning.",
+          "Utformade lösningen med framtida tillväxt, SEO och fler case study-artefakter i åtanke."
+        ],
+        "meta": [
+          {
+            "label": "Roll",
+            "value": "UX/UI, frontend, leverans"
+          },
+          {
+            "label": "Projekttyp",
+            "value": "Tjänstewebb + content hub"
+          },
+          {
+            "label": "Stack",
+            "value": "Next.js, React, MUI, databaslager"
+          },
+          {
+            "label": "Huvudmål",
+            "value": "Förtroende + adminpanel + enklare innehållshantering"
+          }
+        ],
+        "slides": [
+          {
+            "title": "Hero / first impression",
+            "caption": "Här kan du lägga första skärmen som visar branding, tonalitet och kärnbudskap."
+          },
+          {
+            "title": "Specialiseringssektion",
+            "caption": "Plats för en vy som lyfter expertis och en tydligare innehållsstruktur."
+          },
+          {
+            "title": "Materialbibliotek",
+            "caption": "Använd denna plats för sektionen där besökare kan utforska och återvända till material."
+          }
+        ],
+        "liveUrl": "https://funcology.vercel.app/"
       },
       {
-        "title": "Workflow & Velocity Optimization",
-        "description": "Införde processförbättringar och hinderhantering som ökade effektivitet och planeringssäkerhet."
+        "title": "Personal Blog",
+        "description": "Case study och skärmbilder läggs till i nästa steg.",
+        "eyebrow": "Coming soon",
+        "paragraphs": [
+          "Här kommer en fullständig case study för Personal Blog.",
+          "Jag lägger till den slutliga berättelsen om problem, arbetssätt, stack och resultat senare.",
+          "Just nu lämnar vi den här planeten som en placeholder för nästa utvalda projekt."
+        ],
+        "bulletPoints": [
+          "Full projektbeskrivning på väg.",
+          "Skärmbilder kommer senare.",
+          "Implementationsdetaljer läggs till senare.",
+          "Sektionen är tillfälligt markerad som coming soon."
+        ],
+        "meta": [
+          {
+            "label": "Status",
+            "value": "Coming soon"
+          },
+          {
+            "label": "Projekt",
+            "value": "Personal Blog"
+          },
+          {
+            "label": "Innehall",
+            "value": "Pågår"
+          },
+          {
+            "label": "Skärmbilder",
+            "value": "Läggs till senare"
+          }
+        ],
+        "slides": [
+          {
+            "title": "Coming soon",
+            "caption": "Lägg till projektets första skärmbild här."
+          },
+          {
+            "title": "Coming soon",
+            "caption": "Lägg till projektets andra skärmbild här."
+          },
+          {
+            "title": "Coming soon",
+            "caption": "Lägg till projektets tredje skärmbild här."
+          }
+        ]
       },
       {
-        "title": "Stakeholder Feedback Engine",
-        "description": "Skapade regelbundna demos och snabbare feedbackloopar för snabbare beslut och lägre leveransrisk."
+        "title": "Dashboard",
+        "description": "Case study och skärmbilder läggs till i nästa steg.",
+        "eyebrow": "Coming soon",
+        "paragraphs": [
+          "Här kommer en fullständig case study för Dashboard.",
+          "Jag lägger till den slutliga berättelsen om omfattning, produktbeslut och resultat senare.",
+          "Just nu lämnar vi den här planeten som en placeholder för nästa utvalda projekt."
+        ],
+        "bulletPoints": [
+          "Full projektbeskrivning på väg.",
+          "Skärmbilder kommer senare.",
+          "Implementationsdetaljer läggs till senare.",
+          "Sektionen är tillfälligt markerad som coming soon."
+        ],
+        "meta": [
+          {
+            "label": "Status",
+            "value": "Coming soon"
+          },
+          {
+            "label": "Projekt",
+            "value": "Dashboard"
+          },
+          {
+            "label": "Innehall",
+            "value": "Pågår"
+          },
+          {
+            "label": "Skärmbilder",
+            "value": "Läggs till senare"
+          }
+        ],
+        "slides": [
+          {
+            "title": "Coming soon",
+            "caption": "Lägg till projektets första skärmbild här."
+          },
+          {
+            "title": "Coming soon",
+            "caption": "Lägg till projektets andra skärmbild här."
+          },
+          {
+            "title": "Coming soon",
+            "caption": "Lägg till projektets tredje skärmbild här."
+          }
+        ]
       }
     ]
   },
