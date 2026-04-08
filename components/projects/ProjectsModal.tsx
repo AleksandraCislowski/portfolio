@@ -99,7 +99,11 @@ function ProjectModalHeader({ project }: { project: ActiveProject }) {
       >
         {project.title}
       </Typography>
-      <Typography variant='body1' sx={{ color: 'text.secondary', mb: 2.5, maxWidth: 680 }}>
+      <Typography
+        id={`project-modal-description-${project.slug}`}
+        variant='body1'
+        sx={{ color: 'text.secondary', mb: 2.5, maxWidth: 680 }}
+      >
         {project.description}
       </Typography>
 
@@ -292,13 +296,21 @@ function ProjectModalCloseButton({
   closeLabel,
   onClose,
   sx,
+  buttonRef,
 }: {
   closeLabel: string;
   onClose: () => void;
   sx?: SxProps<Theme>;
+  buttonRef?: React.Ref<HTMLButtonElement>;
 }) {
   return (
-    <ProjectCloseButton type='button' onClick={onClose} aria-label={closeLabel} sx={sx}>
+    <ProjectCloseButton
+      ref={buttonRef}
+      type='button'
+      onClick={onClose}
+      aria-label={closeLabel}
+      sx={sx}
+    >
       {closeLabel}
     </ProjectCloseButton>
   );
@@ -319,6 +331,51 @@ export function ProjectsModal({
   onClose,
   shouldReduceMotion,
 }: ProjectsModalProps) {
+  const modalRef = React.useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = React.useRef<HTMLButtonElement | null>(null);
+
+  React.useEffect(() => {
+    if (!visible || !activeProject) {
+      return;
+    }
+
+    const frameId = window.requestAnimationFrame(() => {
+      closeButtonRef.current?.focus();
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+    };
+  }, [activeProject, visible]);
+
+  const handleModalKeyDown = React.useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== 'Tab' || !modalRef.current) {
+      return;
+    }
+
+    const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    );
+
+    if (focusableElements.length === 0) {
+      return;
+    }
+
+    const first = focusableElements[0];
+    const last = focusableElements[focusableElements.length - 1];
+    const activeElement = document.activeElement;
+
+    if (event.shiftKey && activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    }
+
+    if (!event.shiftKey && activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }, []);
+
   return (
     <>
       <ProjectOverlay $phase={phase} onClick={onClose} />
@@ -401,19 +458,24 @@ export function ProjectsModal({
       ) : null}
       <ProjectModal
         id='projects-modal'
+        ref={modalRef}
         role='dialog'
         aria-modal='true'
         aria-hidden={!visible}
         aria-labelledby={activeProject ? `project-modal-title-${activeProject.slug}` : undefined}
+        aria-describedby={activeProject ? `project-modal-description-${activeProject.slug}` : undefined}
+        tabIndex={-1}
         $phase={phase}
         $tone={launchTone}
         $reduceMotion={shouldReduceMotion}
         onClick={(event) => event.stopPropagation()}
+        onKeyDown={handleModalKeyDown}
       >
         <ProjectModalGlow />
         {activeProject ? (
           <ProjectModalInner>
             <ProjectModalCloseButton
+              buttonRef={closeButtonRef}
               closeLabel={closeLabel}
               onClose={onClose}
               sx={floatingCloseButtonSx}

@@ -184,7 +184,6 @@ export const PlanetEasterHint = styled(Typography)(({ theme }) => ({
   fontSize: '0.68rem',
   letterSpacing: '0.08em',
   lineHeight: 1.45,
-  pointerEvents: 'none',
   textAlign: 'left',
   textTransform: 'uppercase',
   textShadow: '0 0 14px rgba(125,211,252,0.28)',
@@ -194,6 +193,30 @@ export const PlanetEasterHint = styled(Typography)(({ theme }) => ({
     bottom: theme.spacing(1),
     maxWidth: 190,
     fontSize: '0.62rem',
+  },
+}));
+
+export const PlanetEasterLink = styled('button')(({ theme }) => ({
+  appearance: 'none',
+  padding: 0,
+  border: 'none',
+  background: 'none',
+  color: alpha(theme.palette.common.white, 0.92),
+  font: 'inherit',
+  letterSpacing: 'inherit',
+  textTransform: 'inherit',
+  textDecoration: 'underline',
+  textUnderlineOffset: '0.22em',
+  cursor: 'pointer',
+  textShadow: '0 0 16px rgba(125,211,252,0.34)',
+  transition: 'color 180ms ease, opacity 180ms ease',
+  '&:hover, &:focus-visible': {
+    color: '#BAE6FD',
+  },
+  '&:focus-visible': {
+    outline: `2px solid ${alpha(theme.palette.common.white, 0.72)}`,
+    outlineOffset: 3,
+    borderRadius: 4,
   },
 }));
 

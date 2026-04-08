@@ -18,6 +18,7 @@ export function useProjectsModal({
   shouldReduceMotion,
 }: UseProjectsModalParams) {
   const modalPhaseTimeoutRef = React.useRef<number | null>(null);
+  const returnFocusIndexRef = React.useRef<number | null>(null);
   const [activeProjectIndex, setActiveProjectIndex] = React.useState<number | null>(null);
   const [modalPhase, setModalPhase] = React.useState<ProjectsModalPhase>('closed');
   const [launchSnapshot, setLaunchSnapshot] = React.useState<ProjectLaunchSnapshot | null>(null);
@@ -31,6 +32,7 @@ export function useProjectsModal({
 
   const openProjectModal = React.useCallback((index: number) => {
     clearModalPhaseTimeout();
+    returnFocusIndexRef.current = index;
     // Capture the clicked planet geometry so the launch animation starts from the real UI position.
     setLaunchSnapshot(getPlanetSnapshot(index));
     setActiveProjectIndex(index);
@@ -99,6 +101,21 @@ export function useProjectsModal({
       clearModalPhaseTimeout();
     }
   ), [clearModalPhaseTimeout]);
+
+  React.useEffect(() => {
+    if (modalPhase !== 'closed') {
+      return;
+    }
+
+    const returnIndex = returnFocusIndexRef.current;
+
+    if (returnIndex === null) {
+      return;
+    }
+
+    planetButtonRefs.current[returnIndex]?.focus();
+    returnFocusIndexRef.current = null;
+  }, [modalPhase, planetButtonRefs]);
 
   React.useEffect(() => {
     if (modalPhase === 'closed') {

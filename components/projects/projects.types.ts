@@ -1,4 +1,4 @@
-import type { TranslationDict } from '../../i18n/useTranslation';
+import type { TranslationDict } from '../../i18n/translations';
 
 export type ProjectItem = TranslationDict['projects']['items'][number];
 export type ActiveProject = ProjectItem & { slug: ProjectSlug };

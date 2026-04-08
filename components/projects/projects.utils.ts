@@ -1,5 +1,5 @@
 import { PROJECTS } from '../../config/projects';
-import type { TranslationDict } from '../../i18n/useTranslation';
+import type { TranslationDict } from '../../i18n/translations';
 import type { ProjectItem } from './projects.types';
 
 // The orbit text is intentionally repeated so the ring still looks continuous during rotation.
