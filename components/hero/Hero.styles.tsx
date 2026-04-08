@@ -142,42 +142,17 @@ export const HeroActions = styled(Stack)(({ theme }) => ({
 export const PrimaryHeroButton = styled(Button)(({ theme }) => ({
   maxWidth: '100%',
   position: 'relative',
-  overflow: 'hidden',
-  isolation: 'isolate',
   borderRadius: 18,
   paddingInline: theme.spacing(2.6),
   paddingBlock: theme.spacing(1.35),
   transition:
     'transform 200ms ease, box-shadow 220ms ease, border-color 220ms ease, background-color 220ms ease, color 220ms ease',
   background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.light} 100%)`,
-  boxShadow: `0 18px 36px ${alpha(theme.palette.primary.main, 0.34)}`,
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    inset: '-12% -32%',
-    background: `linear-gradient(118deg, transparent 12%, ${alpha('#FFFFFF', 0.22)} 34%, ${alpha('#FFFFFF', 0.56)} 50%, ${alpha('#FFFFFF', 0.18)} 66%, transparent 82%)`,
-    opacity: 0,
-    transform: 'translateX(-34%) skewX(-18deg)',
-  },
-  '&::after': {
-    content: '""',
-    position: 'absolute',
-    inset: 1,
-    borderRadius: 16,
-    background: `linear-gradient(180deg, ${alpha('#FFFFFF', 0.24)} 0%, transparent 42%, ${alpha('#0F172A', 0.12)} 100%)`,
-    opacity: 0.5,
-  },
+  boxShadow: 'none',
   '&:hover': {
     transform: 'translateY(-3px) scale(1.01)',
-    boxShadow: `0 24px 46px ${alpha(theme.palette.primary.main, 0.38)}, 0 0 0 1px ${alpha(theme.palette.primary.light, 0.26)}`,
+    boxShadow: `0 18px 34px ${alpha(theme.palette.primary.main, 0.24)}`,
     background: `linear-gradient(135deg, ${theme.palette.primary.light} 0%, ${theme.palette.primary.main} 100%)`,
-  },
-  '&:hover::before': {
-    opacity: 1,
-    transform: 'translateX(30%) skewX(-18deg)',
-  },
-  '&:hover::after': {
-    opacity: 0.72,
   },
   '&:active': {
     transform: 'translateY(-1px) scale(0.99)',

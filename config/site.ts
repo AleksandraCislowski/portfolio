@@ -17,6 +17,8 @@ const SECTION_ANCHORS = {
 
 export const SITE_CONFIG = {
   brandName: 'Aleksandra Cislowski',
+  siteUrl: 'https://aleksandracislowski.com/',
+  professionalTitle: 'Frontend Developer & Scrum Master',
   contactEmail: 'cislowski.aleksandra@gmail.com',
   contactPhone: '+46 73 333 89 01',
   location: 'Stockholm, Sweden',
@@ -35,5 +37,16 @@ export const SITE_CONFIG = {
       '/documents/Alva Labs Logic Test Report - Aleksandra Cislowski.pdf',
     coverLetter:
       '/documents/Alva Labs Personality Test Report - Aleksandra Cislowski.pdf',
+  },
+  seo: {
+    title: 'Aleksandra Cislowski | Frontend Developer & Scrum Master',
+    description:
+      'Portfolio of Aleksandra Cislowski — frontend developer and Scrum Master building polished React, Next.js, and TypeScript experiences with strong delivery thinking.',
+    siteName: 'Aleksandra Cislowski Portfolio',
+    ogEyebrow: 'Frontend Developer • Scrum Master • Product Delivery',
+    ogHeadline: 'Building polished frontend experiences with strong delivery thinking.',
+    ogSubheadline:
+      'React, Next.js, TypeScript, accessibility, performance, and product-minded execution.',
+    ogHighlights: ['React & Next.js', 'TypeScript', 'Accessibility', 'Delivery Leadership'],
   },
 } as const;
