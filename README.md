@@ -35,44 +35,6 @@ The site includes:
 - `Emotion`
 - `Framer Motion`
 
-## Local Development
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Start the development server:
-
-```bash
-npm run dev
-```
-
-Build for production:
-
-```bash
-npm run build
-```
-
-Run linting:
-
-```bash
-npm run lint
-```
-
-## Project Structure
-
-```text
-app/                  App Router entrypoints and metadata
-components/           Main UI sections and shared presentation logic
-components/projects/  Project planets, modal system, and project-specific UI
-config/               Site config and project layout config
-i18n/                 Translation dictionaries and language logic
-public/               Static assets such as images, videos, and PDFs
-theme/                Theme tokens and app theme setup
-```
-
 ## Case Study
 
 ### FUNKOLOGI
