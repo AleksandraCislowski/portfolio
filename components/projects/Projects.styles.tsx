@@ -25,17 +25,18 @@ export const PlanetBackgroundVideo = styled('video')({
   opacity: 0.16,
 });
 
-export const PlanetBackgroundImage = styled('img')({
+export const PlanetBackgroundImage = styled(Box)({
   position: 'absolute',
   inset: 0,
-  width: '100%',
-  height: '100%',
-  objectFit: 'cover',
-  objectPosition: 'center',
   pointerEvents: 'none',
   opacity: 0.62,
   transform: 'scale(1.02)',
   filter: 'saturate(1.14) contrast(1.06)',
+  overflow: 'hidden',
+  '& img': {
+    objectFit: 'cover',
+    objectPosition: 'center',
+  },
 });
 
 // Outer "space scene" shell for the whole section. It owns the backdrop, stars and entry fade.
