@@ -123,12 +123,8 @@ export function useProjectsModal({
     }
 
     // Lock body scroll while the dialog is active and provide a keyboard escape hatch on every viewport.
-    const scrollY = window.scrollY;
     const previousHtmlOverflow = document.documentElement.style.overflow;
     const previousOverflow = document.body.style.overflow;
-    const previousPosition = document.body.style.position;
-    const previousTop = document.body.style.top;
-    const previousWidth = document.body.style.width;
     const previousPaddingRight = document.body.style.paddingRight;
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     const shouldCompensateScrollbar =
@@ -141,9 +137,6 @@ export function useProjectsModal({
     }
 
     document.body.style.overflow = 'hidden';
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = '100%';
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -156,11 +149,7 @@ export function useProjectsModal({
     return () => {
       document.documentElement.style.overflow = previousHtmlOverflow;
       document.body.style.overflow = previousOverflow;
-      document.body.style.position = previousPosition;
-      document.body.style.top = previousTop;
-      document.body.style.width = previousWidth;
       document.body.style.paddingRight = previousPaddingRight;
-      window.scrollTo(0, scrollY);
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [closeProjectModal, modalPhase]);

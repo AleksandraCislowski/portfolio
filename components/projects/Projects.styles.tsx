@@ -1249,6 +1249,7 @@ export const ProjectOverlay = styled(Box, {
         : 'blur(12px) saturate(1.06)',
     [theme.breakpoints.down('sm')]: {
       top: 'calc(env(safe-area-inset-top, 0px) + 72px)',
+      zIndex: theme.zIndex.appBar - 2,
     },
   }),
 );
@@ -1359,6 +1360,7 @@ export const ProjectModal = styled(Box, {
     pointerEvents: 'none',
   },
   [theme.breakpoints.down('sm')]: {
+    zIndex: theme.zIndex.appBar - 1,
     top: 'calc(env(safe-area-inset-top, 0px) + 72px + 8px)',
     left: '50%',
     width: 'calc(100vw - 10px)',
@@ -1433,6 +1435,7 @@ export const ProjectLaunchLayer = styled(Box)(({ theme }) => ({
   overflow: 'hidden',
   [theme.breakpoints.down('sm')]: {
     top: 'calc(env(safe-area-inset-top, 0px) + 72px)',
+    zIndex: theme.zIndex.appBar - 1,
   },
 }));
 
