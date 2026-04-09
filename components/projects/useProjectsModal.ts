@@ -4,6 +4,7 @@ import * as React from 'react';
 import type { ProjectLaunchSnapshot, ProjectsModalPhase } from './ProjectsModal';
 
 const MODAL_TRANSITION_MS = 1320;
+const PROJECTS_MODAL_VISIBILITY_EVENT = 'projects-modal-visibility-change';
 
 type UseProjectsModalParams = {
   getPlanetSnapshot: (index: number | null) => ProjectLaunchSnapshot | null;
@@ -153,6 +154,20 @@ export function useProjectsModal({
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [closeProjectModal, modalPhase]);
+
+  React.useEffect(() => {
+    const isOpen = modalPhase !== 'closed';
+
+    window.dispatchEvent(new CustomEvent(PROJECTS_MODAL_VISIBILITY_EVENT, {
+      detail: { isOpen },
+    }));
+
+    return () => {
+      window.dispatchEvent(new CustomEvent(PROJECTS_MODAL_VISIBILITY_EVENT, {
+        detail: { isOpen: false },
+      }));
+    };
+  }, [modalPhase]);
 
   return {
     activeProjectIndex,

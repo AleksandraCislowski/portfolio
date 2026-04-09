@@ -1234,7 +1234,7 @@ export const PlanetHintBody = styled(Typography)(() => ({
 export const ProjectOverlay = styled(Box, {
   shouldForwardProp: (prop) => prop !== '$phase',
 })<{ $phase: 'closed' | 'opening' | 'open' | 'closing' }>(
-  ({ $phase, theme }) => ({
+  ({ $phase }) => ({
     position: 'fixed',
     inset: 0,
     zIndex: 1200,
@@ -1247,10 +1247,6 @@ export const ProjectOverlay = styled(Box, {
       $phase === 'closed' || $phase === 'closing'
         ? 'blur(0px) saturate(1)'
         : 'blur(12px) saturate(1.06)',
-    [theme.breakpoints.down('sm')]: {
-      top: 'calc(env(safe-area-inset-top, 0px) + 72px)',
-      zIndex: theme.zIndex.appBar - 2,
-    },
   }),
 );
 
@@ -1284,7 +1280,6 @@ export const ProjectModal = styled(Box, {
   transition: $reduceMotion
     ? 'opacity 220ms ease'
     : 'transform 900ms cubic-bezier(0.16, 0.84, 0.2, 1), opacity 680ms ease',
-  backdropFilter: 'blur(20px) saturate(1.12)',
   animation: $reduceMotion
     ? 'none'
     : $phase === 'opening'
@@ -1359,13 +1354,14 @@ export const ProjectModal = styled(Box, {
     filter: 'blur(2px)',
     pointerEvents: 'none',
   },
-  [theme.breakpoints.down('sm')]: {
-    zIndex: theme.zIndex.appBar - 1,
-    top: 'calc(env(safe-area-inset-top, 0px) + 72px + 8px)',
+  '@media (max-width:1024px)': {
+    zIndex: 1201,
+    top: '8px',
     left: '50%',
-    width: 'calc(100vw - 10px)',
-    height: 'calc(100dvh - env(safe-area-inset-top, 0px) - 72px - 18px)',
-    maxHeight: 'calc(100dvh - env(safe-area-inset-top, 0px) - 72px - 18px)',
+    width: '100vw',
+    maxWidth: '100vw',
+    height: 'calc(100dvh - 16px)',
+    maxHeight: 'calc(100dvh - 16px)',
     borderRadius: 28,
     transform:
       $phase === 'open'
@@ -1427,16 +1423,12 @@ function getLaunchPalette(tone: number) {
 }
 
 // These launch primitives recreate the feeling that the modal grows out of the clicked planet.
-export const ProjectLaunchLayer = styled(Box)(({ theme }) => ({
+export const ProjectLaunchLayer = styled(Box)(() => ({
   position: 'fixed',
   inset: 0,
   zIndex: 1201,
   pointerEvents: 'none',
   overflow: 'hidden',
-  [theme.breakpoints.down('sm')]: {
-    top: 'calc(env(safe-area-inset-top, 0px) + 72px)',
-    zIndex: theme.zIndex.appBar - 1,
-  },
 }));
 
 type ProjectLaunchVisualProps = {

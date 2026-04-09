@@ -1,6 +1,7 @@
 'use client';
 import * as React from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useMediaQuery } from '@mui/material';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '../i18n/LanguageContext';
 import type { Language } from '../i18n/config';
@@ -20,16 +21,21 @@ import {
 import type { NavbarItem } from './navbar/navbar.constants';
 import { replaySectionAnimation } from './sectionAnimationReplay';
 
+const PROJECTS_MODAL_VISIBILITY_EVENT = 'projects-modal-visibility-change';
+
 export default function Navbar() {
   const pathname = usePathname();
+  const isTabletOrBelow = useMediaQuery('(max-width:1024px)');
   const { lang, setLang } = useLanguage();
   const t = useTranslation();
   const [mobileNavOpen, setMobileNavOpen] = React.useState(false);
   const [activeHref, setActiveHref] = React.useState<string | null>(null);
   const [hasResolvedActiveHref, setHasResolvedActiveHref] = React.useState(false);
+  const [isProjectsModalOpen, setIsProjectsModalOpen] = React.useState(false);
   const navLockUntilRef = React.useRef(0);
   const isHomePage = pathname === '/';
   const rootPrefix = isHomePage ? '' : '/';
+  const shouldHideNavbar = isTabletOrBelow && isProjectsModalOpen;
 
   const navItems = React.useMemo<readonly NavbarItem[]>(
     () => [
@@ -139,6 +145,33 @@ export default function Navbar() {
     };
   }, [isHomePage, resolveActiveHref]);
 
+  React.useEffect(() => {
+    const handleProjectsModalVisibility = (event: Event) => {
+      const customEvent = event as CustomEvent<{ isOpen?: boolean }>;
+      setIsProjectsModalOpen(Boolean(customEvent.detail?.isOpen));
+    };
+
+    window.addEventListener(
+      PROJECTS_MODAL_VISIBILITY_EVENT,
+      handleProjectsModalVisibility as EventListener,
+    );
+
+    return () => {
+      window.removeEventListener(
+        PROJECTS_MODAL_VISIBILITY_EVENT,
+        handleProjectsModalVisibility as EventListener,
+      );
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (!shouldHideNavbar) {
+      return;
+    }
+
+    setMobileNavOpen(false);
+  }, [shouldHideNavbar]);
+
   const handleLanguageChange = (nextLanguage: Language) => {
     setLang(nextLanguage);
   };
@@ -219,7 +252,14 @@ export default function Navbar() {
   }, [handleSamePageNavigation, isHomePage]);
 
   return (
-    <StyledAppBar position='sticky' color='default' elevation={0}>
+    <StyledAppBar
+      position='sticky'
+      color='default'
+      elevation={0}
+      sx={{
+        display: shouldHideNavbar ? 'none' : undefined,
+      }}
+    >
       <StyledToolbar disableGutters>
         <NavbarBrand />
 
