@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Drawer, List, ListItemButton, ListItemText } from '@mui/material';
-import type { SelectChangeEvent, SelectProps } from '@mui/material/Select';
 
 import type { Language } from '../../i18n/config';
 
@@ -12,8 +11,7 @@ type NavbarDrawerProps = {
   items: readonly NavbarItem[];
   languageLabel: string;
   languageValue: Language;
-  onLanguageChange: (event: SelectChangeEvent<Language>) => void;
-  menuProps: SelectProps<Language>['MenuProps'];
+  onLanguageChange: (language: Language) => void;
   mobileNavOpen: boolean;
   onClose: () => void;
   activeHref: string | null;
@@ -29,7 +27,6 @@ export function NavbarDrawer({
   languageLabel,
   languageValue,
   onLanguageChange,
-  menuProps,
   mobileNavOpen,
   onClose,
   activeHref,
@@ -40,15 +37,19 @@ export function NavbarDrawer({
       anchor='right'
       open={mobileNavOpen}
       onClose={onClose}
+      ModalProps={{
+        disableScrollLock: true,
+      }}
       PaperProps={{ sx: drawerPaperSx }}
     >
       <DrawerContent>
         <NavbarLanguageSelect
-          idPrefix='drawer-lang-select'
           label={languageLabel}
           value={languageValue}
-          onChange={onLanguageChange}
-          menuProps={menuProps}
+          onChange={(language) => {
+            onLanguageChange(language);
+            onClose();
+          }}
           variant='drawer'
         />
         <List>

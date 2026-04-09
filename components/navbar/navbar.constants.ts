@@ -8,6 +8,5 @@ export type NavbarItem = {
 
 export const LANGUAGE_LABELS: Record<Language, string> = {
   en: 'English',
-  pl: 'Polski',
   sv: 'Svenska',
 };

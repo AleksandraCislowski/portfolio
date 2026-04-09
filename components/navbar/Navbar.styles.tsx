@@ -4,12 +4,13 @@ import { alpha, styled } from '@mui/material/styles';
 import { DESIGN_TOKENS } from '../../theme/tokens';
 
 export const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  position: 'sticky',
   top: 0,
   left: 0,
   right: 0,
   width: '100%',
   maxWidth: '100%',
-  zIndex: 1202,
+  zIndex: theme.zIndex.appBar,
   backgroundColor: '#101A33',
   color: '#E2E8F0',
   borderBottom: `1px solid ${alpha('#E2E8F0', 0.2)}`,
@@ -17,6 +18,7 @@ export const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backdropFilter: 'blur(10px)',
   [theme.breakpoints.down('sm')]: {
     position: 'fixed',
+    zIndex: 1202,
   },
   '&::after': {
     content: '""',
@@ -258,8 +260,50 @@ export const DrawerLanguageFormControl = styled(FormControl)(({ theme }) => ({
   },
 }));
 
-export const DrawerContent = styled(Box)(() => ({
-  paddingTop: 16,
+export const LanguageSwitch = styled(Box)(({ theme }) => ({
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: theme.spacing(0.5),
+  padding: theme.spacing(0.5),
+  borderRadius: 999,
+  border: `1px solid ${alpha('#E2E8F0', 0.22)}`,
+  backgroundColor: alpha('#0A1222', 0.35),
+  boxShadow: '0 10px 24px rgba(2, 6, 23, 0.2)',
+}));
+
+export const LanguageSwitchButton = styled('button', {
+  shouldForwardProp: (prop) => prop !== '$active',
+})<{ $active: boolean }>(({ theme, $active }) => ({
+  appearance: 'none',
+  border: 'none',
+  minWidth: 56,
+  padding: theme.spacing(0.85, 1.2),
+  borderRadius: 999,
+  font: 'inherit',
+  fontSize: '0.82rem',
+  fontWeight: 700,
+  letterSpacing: '0.04em',
+  cursor: 'pointer',
+  color: $active ? '#081224' : '#E2E8F0',
+  background: $active
+    ? 'linear-gradient(135deg, #BAE6FD 0%, #60A5FA 100%)'
+    : 'transparent',
+  transition: 'background-color 180ms ease, color 180ms ease, transform 180ms ease',
+  '&:hover': {
+    transform: 'translateY(-1px)',
+    background: $active
+      ? 'linear-gradient(135deg, #BAE6FD 0%, #60A5FA 100%)'
+      : alpha('#E2E8F0', 0.08),
+  },
+  '&:focus-visible': {
+    outline: `2px solid ${alpha(theme.palette.primary.light, 0.9)}`,
+    outlineOffset: 2,
+  },
+}));
+
+export const DrawerContent = styled(Box)(({ theme }) => ({
+  paddingTop: theme.spacing(11),
+  paddingBottom: theme.spacing(2),
 }));
 
 export const DrawerNavItem = styled(Box, {

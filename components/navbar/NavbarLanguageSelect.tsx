@@ -1,50 +1,51 @@
-import { InputLabel, MenuItem, Select } from '@mui/material';
-import type { SelectChangeEvent, SelectProps } from '@mui/material/Select';
-
 import { LANGUAGES, type Language } from '../../i18n/config';
-
 import { LANGUAGE_LABELS } from './navbar.constants';
-import { DrawerLanguageFormControl, LanguageFormControl } from './Navbar.styles';
+import { LanguageSwitch, LanguageSwitchButton } from './Navbar.styles';
 
 type NavbarLanguageSelectProps = {
-  idPrefix: string;
   label: string;
   value: Language;
-  onChange: (event: SelectChangeEvent<Language>) => void;
-  menuProps: SelectProps<Language>['MenuProps'];
+  onChange: (language: Language) => void;
   variant: 'desktop' | 'drawer';
 };
 
 export function NavbarLanguageSelect({
-  idPrefix,
   label,
   value,
   onChange,
-  menuProps,
   variant,
 }: NavbarLanguageSelectProps) {
-  const FormControlComponent =
-    variant === 'desktop' ? LanguageFormControl : DrawerLanguageFormControl;
-  const labelId = `${idPrefix}-label`;
-  const selectId = idPrefix;
-
   return (
-    <FormControlComponent size='small'>
-      <InputLabel id={labelId}>{label}</InputLabel>
-      <Select<Language>
-        labelId={labelId}
-        id={selectId}
-        value={value}
-        label={label}
-        onChange={onChange}
-        MenuProps={menuProps}
-      >
-        {LANGUAGES.map((language) => (
-          <MenuItem key={language} value={language}>
-            {LANGUAGE_LABELS[language]}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControlComponent>
+    <LanguageSwitch
+      role='group'
+      aria-label={label}
+      sx={
+        variant === 'drawer'
+          ? {
+              mx: 2,
+              mb: 2,
+              mt: 1,
+              width: 'fit-content',
+            }
+          : {
+              display: {
+                xs: 'none',
+                lg: 'inline-flex',
+              },
+            }
+      }
+    >
+      {LANGUAGES.map((language) => (
+        <LanguageSwitchButton
+          key={language}
+          type='button'
+          $active={value === language}
+          aria-pressed={value === language}
+          onClick={() => onChange(language)}
+        >
+          {LANGUAGE_LABELS[language]}
+        </LanguageSwitchButton>
+      ))}
+    </LanguageSwitch>
   );
 }
