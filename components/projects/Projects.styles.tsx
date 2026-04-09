@@ -1234,7 +1234,7 @@ export const PlanetHintBody = styled(Typography)(() => ({
 export const ProjectOverlay = styled(Box, {
   shouldForwardProp: (prop) => prop !== '$phase',
 })<{ $phase: 'closed' | 'opening' | 'open' | 'closing' }>(
-  ({ $phase }) => ({
+  ({ $phase, theme }) => ({
     position: 'fixed',
     inset: 0,
     zIndex: 1200,
@@ -1247,6 +1247,9 @@ export const ProjectOverlay = styled(Box, {
       $phase === 'closed' || $phase === 'closing'
         ? 'blur(0px) saturate(1)'
         : 'blur(12px) saturate(1.06)',
+    [theme.breakpoints.down('sm')]: {
+      top: 'calc(env(safe-area-inset-top, 0px) + 72px)',
+    },
   }),
 );
 
@@ -1356,10 +1359,43 @@ export const ProjectModal = styled(Box, {
     pointerEvents: 'none',
   },
   [theme.breakpoints.down('sm')]: {
+    top: 'calc(env(safe-area-inset-top, 0px) + 72px + 8px)',
+    left: '50%',
     width: 'calc(100vw - 10px)',
-    height: 'calc(100vh - 10px)',
-    maxHeight: 'calc(100vh - 10px)',
+    height: 'calc(100dvh - env(safe-area-inset-top, 0px) - 72px - 18px)',
+    maxHeight: 'calc(100dvh - env(safe-area-inset-top, 0px) - 72px - 18px)',
     borderRadius: 28,
+    transform:
+      $phase === 'open'
+        ? 'translate3d(-50%, 0, 0) scale(1)'
+        : 'translate3d(-50%, 12px, 0) scale(0.98)',
+    animation: $reduceMotion
+      ? 'none'
+      : $phase === 'opening'
+        ? 'projectModalRevealMobile 720ms cubic-bezier(0.24, 0.08, 0.18, 1) forwards'
+        : $phase === 'closing'
+          ? 'projectModalDismissMobile 520ms cubic-bezier(0.3, 0.08, 0.18, 1) forwards'
+          : 'none',
+    '@keyframes projectModalRevealMobile': {
+      '0%': {
+        opacity: 0,
+        transform: 'translate3d(-50%, 12px, 0) scale(0.98)',
+      },
+      '100%': {
+        opacity: 1,
+        transform: 'translate3d(-50%, 0, 0) scale(1)',
+      },
+    },
+    '@keyframes projectModalDismissMobile': {
+      '0%': {
+        opacity: 1,
+        transform: 'translate3d(-50%, 0, 0) scale(1)',
+      },
+      '100%': {
+        opacity: 0,
+        transform: 'translate3d(-50%, 12px, 0) scale(0.98)',
+      },
+    },
   },
 }));
 
@@ -1389,12 +1425,15 @@ function getLaunchPalette(tone: number) {
 }
 
 // These launch primitives recreate the feeling that the modal grows out of the clicked planet.
-export const ProjectLaunchLayer = styled(Box)(() => ({
+export const ProjectLaunchLayer = styled(Box)(({ theme }) => ({
   position: 'fixed',
   inset: 0,
   zIndex: 1201,
   pointerEvents: 'none',
   overflow: 'hidden',
+  [theme.breakpoints.down('sm')]: {
+    top: 'calc(env(safe-area-inset-top, 0px) + 72px)',
+  },
 }));
 
 type ProjectLaunchVisualProps = {
@@ -1756,7 +1795,7 @@ export const ProjectModalInner = styled(Box)(({ theme }) => ({
   },
   [theme.breakpoints.down('sm')]: {
     gap: theme.spacing(2),
-    padding: theme.spacing(7, 2, 2),
+    padding: theme.spacing(8.5, 2, 2),
   },
 }));
 

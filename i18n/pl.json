@@ -99,20 +99,22 @@
     "items": [
       {
         "title": "FUNKOLOGI",
-        "description": "Redesign i wdrożenie strony dla psycholożki specjalizującej się w neuropsychologii, z naciskiem na wiarygodność, spójny branding i prosty system samodzielnego dodawania materiałów przez klientkę.",
+        "description": "Redesign i wdrożenie strony dla psycholożki specjalizującej się w neuropsychologii, z naciskiem na wiarygodność, spójny branding, dostępność, SEO i prosty system samodzielnego dodawania materiałów przez klientkę.",
         "eyebrow": "Case study / redesign + delivery",
         "paragraphs": [
           "Punkt wyjścia był prosty: klientka miała wcześniej stronę postawioną samodzielnie na WordPressie, ale efekt wizualny nie budował zaufania i nie wspierał profesjonalnego wizerunku marki. Dodatkowo publikowanie materiałów miało być możliwe bez angażowania developera przy każdej aktualizacji.",
-          "Projekt potraktowałam jako połączenie redesignu, uporządkowania architektury informacji i przygotowania technicznego zaplecza pod rozwój contentu. Oprócz warstwy wizualnej ważne było też stworzenie sensownego flow zarządzania treścią: panelu administratora, logiki dodawania materiałów i połączenia z bazą danych, żeby nowe zasoby mogły być publikowane bez ręcznego grzebania w kodzie.",
-          "Finalnie powstała nowoczesna strona w Next.js z czytelną narracją, mocniejszym brandingiem, lepszym first impression i przygotowanym backendowym zapleczem pod rozwijanie biblioteki materiałów. Najważniejszy biznesowo efekt: klientka dostała stronę, która wygląda profesjonalnie i jest gotowa do samodzielnego zarządzania treścią przez panel admina."
+          "Projekt potraktowałam jako połączenie redesignu, uporządkowania architektury informacji i przygotowania technicznego zaplecza pod rozwój contentu. Oprócz warstwy wizualnej ważne było też stworzenie konkretnego flow zarządzania materiałami: publicznej biblioteki z wyszukiwaniem, panelu administratora, logowania oraz formularza dodawania PDF-ów z metadanymi.",
+          "Finalnie powstała nowoczesna strona w Next.js z czytelną narracją, mocniejszym brandingiem, biblioteką materiałów i działającym zapleczem admina opartym o Firebase. Całość była projektowana z myślą o dostępności, SEO i dalszym utrzymaniu. Najważniejszy biznesowo efekt: klientka dostała stronę, która wygląda profesjonalnie i jest gotowa do samodzielnego publikowania oraz porządkowania nowych materiałów."
         ],
         "bulletPoints": [
           "Przeniesienie marki z chaotycznego, samodzielnie składanego WordPressa do dopracowanego custom frontendu.",
           "Zaprojektowanie spokojnej, wiarygodnej estetyki pod odbiorców szukających wsparcia psychologicznego dla dzieci i rodzin.",
           "Uproszczenie struktury treści tak, by użytkownik szybko rozumiał ofertę, specjalizację i kolejne kroki kontaktu.",
-          "Przygotowanie sekcji materiałów tak, by klientka mogła samodzielnie rozwijać bibliotekę contentu z poziomu panelu administratora.",
-          "Podpięcie warstwy danych i przygotowanie rozwiązania pod przechowywanie oraz wyświetlanie materiałów z bazy danych.",
-          "Budowa rozwiązania z myślą o dalszej rozbudowie, SEO i wygodnym podpinaniu kolejnych screenshotów / case artifacts."
+          "Zaprojektowanie biblioteki materiałów z wyszukiwaniem, popularnymi hasłami i czytelnymi kategoriami treści.",
+          "Przygotowanie panelu administratora z logowaniem, listą opublikowanych materiałów i akcjami edycji / usuwania.",
+          "Dodanie formularza publikacji PDF-ów z metadanymi, słowami kluczowymi i automatyczną obsługą plików.",
+          "Podpięcie Firebase Authentication, Storage i Firestore jako zaplecza do zarządzania zasobami.",
+          "Budowa rozwiązania z myślą o dostępności, SEO, dalszej rozbudowie i wygodnym rozwijaniu content hubu bez wsparcia developera."
         ],
         "meta": [
           {
@@ -125,45 +127,45 @@
           },
           {
             "label": "Stack",
-            "value": "Next.js, React, MUI, baza danych"
+            "value": "Next.js, React, MUI, Firebase"
           },
           {
             "label": "Główny cel",
-            "value": "Wiarygodność + admin panel + łatwiejsze zarządzanie treścią"
+            "value": "Wiarygodność + biblioteka materiałów + samodzielna publikacja treści"
           }
         ],
         "slides": [
           {
-            "title": "Hero / first impression",
-            "caption": "Sekcja otwarcia od razu buduje klimat marki i czytelniej komunikuje główną obietnicę wartości.",
+            "title": "Landing page / first impression",
+            "caption": "Ten ekran pokazuje spokojny hero z mocnym nagłówkiem, CTA do materiałów i tagami tematów, które od razu ustawiają charakter marki.",
             "imageSrc": "/images/projects/funkologi/funkologi1.png",
             "imageAlt": "Ekran otwarcia strony Funcology",
             "imageAspectRatio": "999 / 760"
           },
           {
-            "title": "Sekcja o specjalizacji",
-            "caption": "Ten widok pokazuje, jak uporządkowana została oferta i jak mocniej wybrzmiewa eksperckość klientki.",
+            "title": "Biblioteka materiałów i wyszukiwarka",
+            "caption": "Tutaj widać publiczną sekcję materiałów z wyszukiwarką, popularnymi frazami i kartami kategorii, które pomagają szybciej dotrzeć do właściwych treści.",
             "imageSrc": "/images/projects/funkologi/funkologi2.png",
             "imageAlt": "Sekcja specjalizacji na stronie Funcology",
             "imageAspectRatio": "1032 / 994"
           },
           {
-            "title": "Biblioteka materiałów",
-            "caption": "Kafelkowy układ materiałów ułatwia powrót do treści i sprawia, że sekcja jest lżejsza wizualnie.",
+            "title": "Logowanie do panelu admina",
+            "caption": "Ten widok pokazuje prosty ekran logowania do zaplecza administracyjnego, z którego klientka może zarządzać biblioteką materiałów.",
             "imageSrc": "/images/projects/funkologi/funkologi3.png",
             "imageAlt": "Przegląd materiałów na stronie Funcology",
             "imageAspectRatio": "494 / 491"
           },
           {
-            "title": "Widok treści",
-            "caption": "Wyższy screen dobrze pokazuje, że dłuższe treści edukacyjne nadal mieszczą się w spójnym layoucie.",
+            "title": "Panel publikacji materiałów",
+            "caption": "Na tym screenie widać listę opublikowanych PDF-ów, wyszukiwarkę oraz akcje edycji i usuwania, czyli realne narzędzia do codziennej pracy z contentem.",
             "imageSrc": "/images/projects/funkologi/Screenshot 2026-04-08 at 20.53.59.png",
             "imageAlt": "Widok artykułu lub rozbudowanej treści na stronie Funcology",
             "imageAspectRatio": "933 / 1053"
           },
           {
-            "title": "Węższy kadr",
-            "caption": "Ten screen domyka case study i pokazuje, że interfejs dobrze wygląda także przy bardziej pionowej kompozycji.",
+            "title": "Modal dodawania nowego PDF-a",
+            "caption": "Ten formularz pokazuje, jak wygląda proces dodawania nowego materiału: tytuł, opis, kategoria, słowa kluczowe i upload pliku w jednym miejscu.",
             "imageSrc": "/images/projects/funkologi/funkologi5.png",
             "imageAlt": "Węższy widok sekcji na stronie Funcology",
             "imageAspectRatio": "615 / 760"

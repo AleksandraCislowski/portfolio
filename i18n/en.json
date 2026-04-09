@@ -99,20 +99,22 @@
     "items": [
       {
         "title": "FUNKOLOGI",
-        "description": "A full redesign and implementation for a psychologist's website, focused on trust, clearer positioning, and a setup that supports easier self-managed content updates.",
+        "description": "A full redesign and implementation for a psychologist's website, focused on trust, clearer positioning, accessibility, SEO, and a setup that supports easier self-managed content updates.",
         "eyebrow": "Case study / redesign + delivery",
         "paragraphs": [
           "The starting point was straightforward: the client had previously built her own WordPress site, but the result did not communicate professionalism or trust. On top of that, she needed a setup that would let her add materials herself instead of relying on a developer for every update.",
-          "I approached the work as a mix of redesign, information architecture cleanup, and technical groundwork for future content growth. Beyond the visual layer, a key part of the delivery was creating a practical content management flow: an admin panel, logic for adding new materials, and a database-backed setup so resources could be managed without touching code.",
-          "The final result was a modern Next.js website with stronger branding, clearer messaging, a better first impression, and the backend foundation needed to grow a structured materials library. The key business outcome was simple: the client now has a site that looks credible and supports self-managed content through an admin workflow."
+          "I approached the work as a mix of redesign, information architecture cleanup, and technical groundwork for future content growth. Beyond the visual layer, a key part of the delivery was building a concrete content flow: a public materials library with search, an admin area, authentication, and a form for uploading PDFs with metadata.",
+          "The final result was a modern Next.js website with stronger branding, clearer messaging, a structured materials library, and a working Firebase-backed admin flow. It was also built with accessibility, SEO, and long-term maintainability in mind. The key business outcome was simple: the client now has a site that looks credible and supports self-managed publishing and organizing of new resources."
         ],
         "bulletPoints": [
           "Moved the brand away from a cluttered self-built WordPress site into a polished custom frontend experience.",
           "Designed a calm and trustworthy visual identity for families seeking specialist psychological support.",
           "Simplified the content structure so visitors can quickly understand the offer, specialization, and next steps.",
-          "Created a materials section the client can keep expanding through an admin panel.",
-          "Connected the data layer and prepared the project for storing and serving resources from a database-backed setup.",
-          "Built the project with future growth, SEO, and additional case study artifacts in mind."
+          "Designed a materials library with search, popular queries, and clear category cards.",
+          "Built an admin area with login, a published resources list, and edit/delete actions.",
+          "Added a PDF publishing flow with metadata, keywords, and file upload handling.",
+          "Connected Firebase Authentication, Storage, and Firestore as the content management backbone.",
+          "Built the project with accessibility, SEO, future growth, and scalable content operations in mind."
         ],
         "meta": [
           {
@@ -125,45 +127,45 @@
           },
           {
             "label": "Stack",
-            "value": "Next.js, React, MUI, database layer"
+            "value": "Next.js, React, MUI, Firebase"
           },
           {
             "label": "Primary goal",
-            "value": "Trust + admin panel + easier content management"
+            "value": "Trust + materials library + self-managed publishing"
           }
         ],
         "slides": [
           {
-            "title": "Hero / first impression",
-            "caption": "The opening section sets the tone with a warm, trustworthy visual style and a clearer service promise.",
+            "title": "Landing page / first impression",
+            "caption": "This screen shows the calm hero area with a strong headline, clear CTAs, and topic tags that immediately set the tone of the brand.",
             "imageSrc": "/images/projects/funkologi/funkologi1.png",
             "imageAlt": "Funcology homepage hero section",
             "imageAspectRatio": "999 / 760"
           },
           {
-            "title": "Specialization section",
-            "caption": "This screen shows how the content was grouped to make the offer easier to scan and understand.",
+            "title": "Materials library and search",
+            "caption": "Here you can see the public materials section with search, popular query shortcuts, and category cards that help users reach the right content faster.",
             "imageSrc": "/images/projects/funkologi/funkologi2.png",
             "imageAlt": "Funcology specialization section",
             "imageAspectRatio": "1032 / 994"
           },
           {
-            "title": "Materials library",
-            "caption": "A compact card-based view makes the supporting material library feel lighter and easier to revisit.",
+            "title": "Admin login",
+            "caption": "This view shows the lightweight login screen that gives the client access to the admin area for managing materials.",
             "imageSrc": "/images/projects/funkologi/funkologi3.png",
             "imageAlt": "Funcology materials overview",
             "imageAspectRatio": "494 / 491"
           },
           {
-            "title": "Content deep dive",
-            "caption": "A taller screen gives more room for long-form educational content without breaking the visual rhythm.",
+            "title": "Published materials dashboard",
+            "caption": "This screen highlights the actual content operations flow: a list of published PDFs, search, and edit/delete actions for each resource.",
             "imageSrc": "/images/projects/funkologi/Screenshot 2026-04-08 at 20.53.59.png",
             "imageAlt": "Funcology article or content detail view",
             "imageAspectRatio": "933 / 1053"
           },
           {
-            "title": "Mobile-friendly detail",
-            "caption": "This view shows how the interface still feels polished when the composition shifts toward a narrower frame.",
+            "title": "Upload PDF modal",
+            "caption": "The final screenshot shows the publishing form with title, description, category, keywords, and file upload gathered into one clear workflow.",
             "imageSrc": "/images/projects/funkologi/funkologi5.png",
             "imageAlt": "Funcology detailed section in a narrow layout",
             "imageAspectRatio": "615 / 760"

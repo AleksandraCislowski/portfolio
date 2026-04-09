@@ -99,20 +99,22 @@
     "items": [
       {
         "title": "FUNKOLOGI",
-        "description": "En redesign och implementation av en psykologs webbplats med fokus på förtroende, tydligare positionering och en struktur som gör innehållshantering enklare för kunden själv.",
+        "description": "En redesign och implementation av en psykologs webbplats med fokus på förtroende, tydligare positionering, tillgänglighet, SEO och en struktur som gör innehållshantering enklare för kunden själv.",
         "eyebrow": "Case study / redesign + leverans",
         "paragraphs": [
           "Utgångsläget var tydligt: kunden hade tidigare byggt sin WordPress-sida själv, men resultatet förmedlade inte rätt nivå av professionalism eller trygghet. Samtidigt behövde hon kunna lägga till material själv utan att vara beroende av en utvecklare för varje uppdatering.",
-          "Jag behandlade projektet som en kombination av redesign, förbättrad informationsarkitektur och tekniskt grundarbete för framtida innehållstillväxt. Utöver den visuella delen var det viktigt att skapa ett praktiskt flöde för innehållshantering: en adminpanel, logik för att lägga till material och en databasstödd lösning så att resurser kunde hanteras utan att röra kod.",
-          "Slutresultatet blev en modern Next.js-sajt med starkare branding, tydligare budskap, bättre first impression och den backendgrund som behövs för att bygga upp ett strukturerat materialbibliotek. Den viktigaste affärseffekten var att kunden nu har en webbplats som känns trovärdig och stöder eget innehållsansvar via ett adminflöde."
+          "Jag behandlade projektet som en kombination av redesign, förbättrad informationsarkitektur och tekniskt grundarbete för framtida innehållstillväxt. Utöver den visuella delen var det viktigt att skapa ett konkret flöde för innehållshantering: ett publikt materialbibliotek med sök, en adminyta, inloggning och ett formulär för att ladda upp PDF:er med metadata.",
+          "Slutresultatet blev en modern Next.js-sajt med starkare branding, tydligare budskap, ett strukturerat materialbibliotek och ett fungerande adminflöde byggt på Firebase. Lösningen byggdes också med tillgänglighet, SEO och långsiktig förvaltning i åtanke. Den viktigaste affärseffekten var att kunden nu har en webbplats som känns trovärdig och gör det möjligt att själv publicera och organisera nytt material."
         ],
         "bulletPoints": [
           "Flyttade varumärket från en rörig egenbyggd WordPress-sida till en mer genomarbetad frontendupplevelse.",
           "Skapade ett lugnt och förtroendeingivande visuellt språk för familjer som söker specialiststöd.",
           "Förenklade innehållsstrukturen så att besökare snabbt förstår erbjudandet, specialiseringen och nästa steg.",
-          "Byggde en materialsektion som kunden kan fortsätta utveckla via en adminpanel.",
-          "Kopplade datalagret och förberedde projektet för att lagra och visa material från en databasstödd lösning.",
-          "Utformade lösningen med framtida tillväxt, SEO och fler case study-artefakter i åtanke."
+          "Designade ett materialbibliotek med sök, populära sökord och tydliga kategorikort.",
+          "Byggde en adminyta med inloggning, lista över publicerat material och åtgärder för redigering och borttagning.",
+          "La till ett publiceringsflöde för PDF:er med metadata, nyckelord och filuppladdning.",
+          "Kopplade Firebase Authentication, Storage och Firestore som ryggrad för innehållshanteringen.",
+          "Utformade lösningen med tillgänglighet, SEO, framtida tillväxt och skalbar innehållshantering i åtanke."
         ],
         "meta": [
           {
@@ -125,45 +127,45 @@
           },
           {
             "label": "Stack",
-            "value": "Next.js, React, MUI, databaslager"
+            "value": "Next.js, React, MUI, Firebase"
           },
           {
             "label": "Huvudmål",
-            "value": "Förtroende + adminpanel + enklare innehållshantering"
+            "value": "Förtroende + materialbibliotek + egen publicering"
           }
         ],
         "slides": [
           {
-            "title": "Hero / first impression",
-            "caption": "Öppningssektionen sätter tonen direkt med en varm identitet och ett tydligare värdeerbjudande.",
+            "title": "Landningssida / first impression",
+            "caption": "Den här skärmen visar en lugn hero med stark rubrik, tydliga CTA-knappar och ämnestaggar som direkt sätter tonen för varumärket.",
             "imageSrc": "/images/projects/funkologi/funkologi1.png",
             "imageAlt": "Startsida för Funcology",
             "imageAspectRatio": "999 / 760"
           },
           {
-            "title": "Specialiseringssektion",
-            "caption": "Den här vyn visar hur erbjudandet strukturerades för att bli lättare att förstå och skanna.",
+            "title": "Materialbibliotek och sök",
+            "caption": "Här syns den publika materialytan med sökfält, populära sökord och kategorikort som hjälper användaren att hitta rätt innehåll snabbare.",
             "imageSrc": "/images/projects/funkologi/funkologi2.png",
             "imageAlt": "Sektion om specialisering på Funcology",
             "imageAspectRatio": "1032 / 994"
           },
           {
-            "title": "Materialbibliotek",
-            "caption": "Kortlayouten gör materialbiblioteket lättare att bläddra i och enklare att återvända till.",
+            "title": "Admininloggning",
+            "caption": "Den här vyn visar den enkla inloggningsskärmen som ger kunden tillgång till adminytan för att hantera material.",
             "imageSrc": "/images/projects/funkologi/funkologi3.png",
             "imageAlt": "Översikt av material på Funcology",
             "imageAspectRatio": "494 / 491"
           },
           {
-            "title": "Innehållsvy",
-            "caption": "Den högre skärmen visar att längre utbildande innehåll fortfarande känns lugnt och sammanhållet.",
+            "title": "Dashboard för publicerat material",
+            "caption": "Den här skärmen lyfter det faktiska arbetsflödet för innehåll: lista över publicerade PDF:er, sök och åtgärder för att redigera eller ta bort resurser.",
             "imageSrc": "/images/projects/funkologi/Screenshot 2026-04-08 at 20.53.59.png",
             "imageAlt": "Artikel- eller innehållsvy på Funcology",
             "imageAspectRatio": "933 / 1053"
           },
           {
-            "title": "Smalare vy",
-            "caption": "Den här skärmen rundar av case studyt och visar att gränssnittet håller ihop även i ett smalare format.",
+            "title": "Modal för uppladdning av PDF",
+            "caption": "Den sista skärmen visar publiceringsformuläret med titel, beskrivning, kategori, nyckelord och filuppladdning samlade i ett tydligt arbetsflöde.",
             "imageSrc": "/images/projects/funkologi/funkologi5.png",
             "imageAlt": "Smalare detaljvy på Funcology",
             "imageAspectRatio": "615 / 760"

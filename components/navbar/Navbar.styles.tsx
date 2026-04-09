@@ -5,12 +5,19 @@ import { DESIGN_TOKENS } from '../../theme/tokens';
 
 export const StyledAppBar = styled(AppBar)(({ theme }) => ({
   top: 0,
-  zIndex: theme.zIndex.appBar,
+  left: 0,
+  right: 0,
+  width: '100%',
+  maxWidth: '100%',
+  zIndex: 1202,
   backgroundColor: '#101A33',
   color: '#E2E8F0',
   borderBottom: `1px solid ${alpha('#E2E8F0', 0.2)}`,
   boxShadow: '0 10px 28px rgba(2, 6, 23, 0.35)',
   backdropFilter: 'blur(10px)',
+  [theme.breakpoints.down('sm')]: {
+    position: 'fixed',
+  },
   '&::after': {
     content: '""',
     position: 'absolute',
@@ -26,7 +33,7 @@ export const StyledAppBar = styled(AppBar)(({ theme }) => ({
 export const StyledToolbar = styled(Toolbar)(() => ({
   display: 'flex',
   alignItems: 'center',
-  width: 'min(1280px, calc(100vw - 24px))',
+  width: 'min(1280px, calc(100% - 24px))',
   marginInline: 'auto',
   gap: DESIGN_TOKENS.spacing.xs * 8,
   minHeight: 72,
@@ -44,7 +51,7 @@ export const StyledToolbar = styled(Toolbar)(() => ({
     paddingInline: 32,
   },
   '@media (max-width: 600px)': {
-    width: 'calc(100vw - 20px)',
+    width: 'calc(100% - 20px)',
     paddingInline: 16,
   },
 }));

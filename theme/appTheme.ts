@@ -77,6 +77,11 @@ export function getAppTheme() {
     components: {
       MuiCssBaseline: {
         styleOverrides: {
+          'html, body': {
+            width: '100%',
+            maxWidth: '100%',
+            overflowX: 'clip',
+          },
           body: {
             backgroundImage:
               'radial-gradient(circle at 18% 18%, rgba(96,165,250,0.16), transparent 42%), radial-gradient(circle at 82% 0%, rgba(124,58,237,0.14), transparent 36%)',
