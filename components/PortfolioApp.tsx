@@ -23,9 +23,6 @@ const AppMain = styled('main')(({ theme }) => ({
   minHeight: '100dvh',
   overflowX: 'clip',
   transition: 'background-color 0.25s ease, color 0.25s ease',
-  [theme.breakpoints.down('sm')]: {
-    paddingTop: 'calc(env(safe-area-inset-top, 0px) + 72px)',
-  },
 }));
 
 const Footer = styled('footer')(({ theme }) => ({
