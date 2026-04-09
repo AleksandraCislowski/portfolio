@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Box, Typography, Card, CardContent, Chip, Stack } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import { motion, useInView, useReducedMotion, type Variants } from 'framer-motion';
 import Section from './Section';
 import { SITE_CONFIG } from '../config/site';
 import { useTranslation } from '../i18n/useTranslation';
@@ -209,6 +209,9 @@ const SkillChip = styled(Chip)(({ theme }) => ({
 export default function Impact() {
   const t = useTranslation();
   const shouldReduceMotion = useReducedMotion() ?? false;
+  const sectionRef = React.useRef<HTMLDivElement | null>(null);
+  const isInView = useInView(sectionRef, { amount: 0.28, once: true });
+  const [hasAnimatedIn, setHasAnimatedIn] = React.useState(shouldReduceMotion);
   const impactCards = React.useMemo(
     () => [
       ...t.impact.items,
@@ -217,13 +220,21 @@ export default function Impact() {
     [t],
   );
 
+  React.useEffect(() => {
+    if (shouldReduceMotion || isInView) {
+      setHasAnimatedIn(true);
+    }
+  }, [isInView, shouldReduceMotion]);
+
   return (
     <Section id={SITE_CONFIG.sectionIds.impact}>
       <MotionBox
+        ref={sectionRef}
         variants={shouldReduceMotion ? undefined : sectionVariants}
-        initial={shouldReduceMotion ? undefined : 'hidden'}
-        whileInView={shouldReduceMotion ? undefined : 'visible'}
-        viewport={shouldReduceMotion ? undefined : { once: true, amount: 0.28 }}
+        initial={shouldReduceMotion || hasAnimatedIn ? false : 'hidden'}
+        whileInView={shouldReduceMotion || hasAnimatedIn ? undefined : 'visible'}
+        animate={shouldReduceMotion || hasAnimatedIn ? 'visible' : undefined}
+        viewport={shouldReduceMotion || hasAnimatedIn ? undefined : { once: true, amount: 0.28 }}
       >
         <MotionBox variants={shouldReduceMotion ? undefined : headingVariants}>
           <HeadingRow>
@@ -234,7 +245,7 @@ export default function Impact() {
         </MotionBox>
         <ImpactGrid>
           {impactCards.map((item, index) => (
-            <React.Fragment key={item.label}>
+            <React.Fragment key={`${item.value}-${item.label}`}>
               <MotionImpactCardShell
                 $index={index}
                 variants={shouldReduceMotion ? undefined : cardVariants}
