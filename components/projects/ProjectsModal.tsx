@@ -25,7 +25,7 @@ import {
   ProjectPreviewCard,
   ProjectPreviewSurface,
 } from './Projects.styles';
-import type { ActiveProject } from './projects.types';
+import type { ActiveProject, ProjectSlug } from './projects.types';
 
 export type ProjectsModalPhase = 'closed' | 'opening' | 'open' | 'closing';
 
@@ -78,6 +78,7 @@ const mobileCloseButtonSx = {
   justifyContent: 'center',
   mt: 0.5,
 } as const;
+const placeholderProjectSlugs: readonly ProjectSlug[] = ['personal-blog', 'dashboard'] as const;
 
 // Main narrative card: this is the "what was built and why it mattered" part of the case study.
 function ProjectModalHeader({ project }: { project: ActiveProject }) {
@@ -484,6 +485,43 @@ function ProjectModalCloseButton({
   );
 }
 
+function ProjectComingSoon({
+  project,
+}: {
+  project: ActiveProject;
+}) {
+  return (
+    <ProjectCard
+      sx={{
+        px: { xs: 2.5, sm: 4 },
+        py: { xs: 6, sm: 8 },
+        minHeight: '100%',
+        display: 'grid',
+        placeItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      <Box sx={{ maxWidth: 420 }}>
+        <Typography variant='overline' sx={overlineAccentSx}>
+          {project.eyebrow}
+        </Typography>
+        <Typography
+          id={`project-modal-title-${project.slug}`}
+          variant='h3'
+          sx={{
+            mt: 1.5,
+            fontWeight: 800,
+            letterSpacing: '-0.04em',
+            textWrap: 'balance',
+          }}
+        >
+          Coming soon
+        </Typography>
+      </Box>
+    </ProjectCard>
+  );
+}
+
 export function ProjectsModal({
   activeProject,
   visible,
@@ -504,6 +542,8 @@ export function ProjectsModal({
   const modalRef = React.useRef<HTMLDivElement | null>(null);
   const closeButtonRef = React.useRef<HTMLButtonElement | null>(null);
   const activeProjectSlug = activeProject?.slug ?? null;
+  const isPlaceholderProject = activeProjectSlug !== null
+    && placeholderProjectSlugs.includes(activeProjectSlug);
 
   React.useEffect(() => {
     if (!visible || !activeProjectSlug) {
@@ -644,44 +684,58 @@ export function ProjectsModal({
       >
         <ProjectModalGlow />
         {activeProject ? (
-          <ProjectModalInner>
+          <>
             <ProjectModalCloseButton
               buttonRef={closeButtonRef}
               closeLabel={closeLabel}
               onClose={onClose}
               sx={floatingCloseButtonSx}
             />
+            {isPlaceholderProject ? (
+              <Box
+                sx={{
+                  position: 'relative',
+                  zIndex: 1,
+                  height: '100%',
+                  p: { xs: 2, sm: 3 },
+                }}
+              >
+                <ProjectComingSoon project={activeProject} />
+              </Box>
+            ) : (
+              <ProjectModalInner>
+                <ProjectMain>
+                  <ProjectModalHeader project={activeProject} />
+                  <ProjectPreviewSlides
+                    projectSlug={activeProject.slug}
+                    previewLabel={previewLabel}
+                    sliderLabel={sliderLabel}
+                    previousSlideLabel={previousSlideLabel}
+                    nextSlideLabel={nextSlideLabel}
+                    slides={activeProject.slides}
+                  />
+                </ProjectMain>
 
-            <ProjectMain>
-              <ProjectModalHeader project={activeProject} />
-              <ProjectPreviewSlides
-                projectSlug={activeProject.slug}
-                previewLabel={previewLabel}
-                sliderLabel={sliderLabel}
-                previousSlideLabel={previousSlideLabel}
-                nextSlideLabel={nextSlideLabel}
-                slides={activeProject.slides}
-              />
-            </ProjectMain>
-
-            <ProjectAside>
-              <ProjectDetailsCard
-                detailsLabel={detailsLabel}
-                points={activeProject.bulletPoints}
-              />
-              <ProjectFactsCard
-                factsLabel={factsLabel}
-                meta={activeProject.meta}
-                liveUrl={activeProject.liveUrl}
-                visitSiteLabel={visitSiteLabel}
-              />
-              <ProjectModalCloseButton
-                closeLabel={closeLabel}
-                onClose={onClose}
-                sx={mobileCloseButtonSx}
-              />
-            </ProjectAside>
-          </ProjectModalInner>
+                <ProjectAside>
+                  <ProjectDetailsCard
+                    detailsLabel={detailsLabel}
+                    points={activeProject.bulletPoints}
+                  />
+                  <ProjectFactsCard
+                    factsLabel={factsLabel}
+                    meta={activeProject.meta}
+                    liveUrl={activeProject.liveUrl}
+                    visitSiteLabel={visitSiteLabel}
+                  />
+                  <ProjectModalCloseButton
+                    closeLabel={closeLabel}
+                    onClose={onClose}
+                    sx={mobileCloseButtonSx}
+                  />
+                </ProjectAside>
+              </ProjectModalInner>
+            )}
+          </>
         ) : null}
       </ProjectModal>
     </>
