@@ -16,7 +16,6 @@ export default function Hero() {
   const t = useTranslation();
   const theme = useTheme();
   const isCompactHeroLayout = useMediaQuery(theme.breakpoints.down('lg'));
-  const isPhoneViewport = useMediaQuery(theme.breakpoints.down('sm'));
   const replayKey = useSectionAnimationReplay(HOME_SECTION_REPLAY_ID);
 
   return (
@@ -28,7 +27,7 @@ export default function Hero() {
       animate='visible'
       sx={heroSectionSx}
     >
-      <HeroBackground deferVideo={isPhoneViewport} />
+      <HeroBackground />
 
       <HeroShell>
         <HeroCopy

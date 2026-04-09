@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import { startTransition } from 'react';
-import Image from 'next/image';
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Typography, useMediaQuery, useTheme } from '@mui/material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { alpha } from '@mui/material/styles';
@@ -35,7 +34,6 @@ import {
 } from './projects/projects.utils';
 import { useProjectsModal } from './projects/useProjectsModal';
 import { useSectionAnimationReplay } from './sectionAnimationReplay';
-import cosmicBackground from '../public/images/profile/Cosmic-background.png';
 
 const ORBIT_DURATION_MS = 30000;
 const EASTER_EGG_UFO_DELAY_MS = 24000;
@@ -55,7 +53,6 @@ export default function Projects() {
   const [hasHydrated, setHasHydrated] = React.useState(false);
   const [easterEggOpen, setEasterEggOpen] = React.useState(false);
   const [showCourierUfo, setShowCourierUfo] = React.useState(false);
-  const [shouldRenderBackgroundVideo, setShouldRenderBackgroundVideo] = React.useState(false);
   const replayKey = useSectionAnimationReplay(SITE_CONFIG.sectionIds.projects);
   const effectiveIsMdDown = hasHydrated ? isMdDown : false;
   const effectiveIsSmDown = hasHydrated ? isSmDown : false;
@@ -184,29 +181,6 @@ export default function Projects() {
     };
   }, [entered, replayKey]);
 
-  React.useEffect(() => {
-    if (!entered) {
-      setShouldRenderBackgroundVideo(false);
-      return;
-    }
-
-    const revealVideo = () => {
-      setShouldRenderBackgroundVideo(true);
-    };
-
-    if (effectiveIsSmDown) {
-      const timeoutId = window.setTimeout(revealVideo, 900);
-
-      return () => {
-        window.clearTimeout(timeoutId);
-      };
-    }
-
-    revealVideo();
-
-    return undefined;
-  }, [effectiveIsSmDown, entered]);
-
   const handleEasterEggVote = React.useCallback(() => {
     setEasterEggOpen(false);
   }, []);
@@ -224,31 +198,20 @@ export default function Projects() {
       </SectionIntro>
 
       <PlanetField key={`projects-${replayKey}`} ref={fieldRef} data-entered={entered}>
-        <PlanetBackgroundImage aria-hidden='true'>
-          <Image
-            src={cosmicBackground}
-            alt=''
-            fill
-            sizes='100vw'
-            placeholder='blur'
-            style={{
-              objectFit: 'cover',
-              objectPosition: 'center',
-            }}
-          />
-        </PlanetBackgroundImage>
-        {shouldRenderBackgroundVideo ? (
-          <PlanetBackgroundVideo
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload={effectiveIsSmDown ? 'none' : 'metadata'}
-            aria-hidden='true'
-          >
-            <source src='/images/projects/planets-background.mp4' type='video/mp4' />
-          </PlanetBackgroundVideo>
-        ) : null}
+        <PlanetBackgroundImage
+          src='/images/profile/Cosmic-background.png'
+          alt=''
+          aria-hidden='true'
+        />
+        <PlanetBackgroundVideo
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden='true'
+        >
+          <source src='/images/projects/planets-background.mp4' type='video/mp4' />
+        </PlanetBackgroundVideo>
 
         <PlanetHeader
           sx={{

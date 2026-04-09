@@ -262,12 +262,6 @@ function ProjectPreviewSlides({
 
   const totalSlides = slides.length;
   const activeSlide = slides[activeSlideIndex];
-  const activeSlideAspectRatio =
-    'imageAspectRatio' in activeSlide ? activeSlide.imageAspectRatio : undefined;
-  const activeSlideImageSrc =
-    'imageSrc' in activeSlide ? activeSlide.imageSrc : undefined;
-  const activeSlideImageAlt =
-    'imageAlt' in activeSlide ? activeSlide.imageAlt : undefined;
 
   const goToPreviousSlide = React.useCallback(() => {
     setActiveSlideIndex((currentIndex) =>
@@ -318,7 +312,7 @@ function ProjectPreviewSlides({
             sx={{
               position: 'relative',
               overflow: 'hidden',
-              aspectRatio: activeSlideAspectRatio ?? '4 / 3',
+              aspectRatio: activeSlide.imageAspectRatio ?? '4 / 3',
               borderRadius: 2.75,
               border: '1px solid rgba(255,255,255,0.12)',
               background: `
@@ -328,11 +322,11 @@ function ProjectPreviewSlides({
               boxShadow: '0 18px 34px rgba(2, 6, 23, 0.22)',
             }}
           >
-            {activeSlideImageSrc ? (
+            {activeSlide.imageSrc ? (
               <Image
                 fill
-                src={activeSlideImageSrc}
-                alt={activeSlideImageAlt ?? activeSlide.title}
+                src={activeSlide.imageSrc}
+                alt={activeSlide.imageAlt ?? activeSlide.title}
                 sizes='(max-width: 900px) 100vw, 720px'
                 style={{ objectFit: 'contain' }}
               />

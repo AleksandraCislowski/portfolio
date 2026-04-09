@@ -1,12 +1,10 @@
 import * as React from 'react';
-import Image from 'next/image';
 import { Box, Typography, Card, CardContent, Chip, Stack } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 import { motion, useInView, useReducedMotion, type Variants } from 'framer-motion';
 import Section from './Section';
 import { SITE_CONFIG } from '../config/site';
 import { useTranslation } from '../i18n/useTranslation';
-import impactImage from '../public/images/profile/impact.png';
 
 const MotionBox = motion.create(Box);
 
@@ -163,7 +161,7 @@ const ImpactVisual = styled(Box)(({ theme }) => ({
 
 const MotionImpactVisual = motion.create(ImpactVisual);
 
-const ImpactVisualImage = styled(Image)(() => ({
+const ImpactVisualImage = styled('img')(() => ({
   position: 'absolute',
   inset: 0,
   width: '100%',
@@ -270,11 +268,8 @@ export default function Impact() {
                   variants={shouldReduceMotion ? undefined : visualVariants}
                 >
                   <ImpactVisualImage
-                    src={impactImage}
+                    src='/images/profile/impact.png'
                     alt=''
-                    fill
-                    sizes='(max-width: 599px) 100vw, (max-width: 1199px) 92vw, 24vw'
-                    placeholder='blur'
                   />
                   <ImpactVisualOverlay />
                 </MotionImpactVisual>

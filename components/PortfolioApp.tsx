@@ -1,6 +1,5 @@
 'use client';
 import * as React from 'react';
-import dynamic from 'next/dynamic';
 import { Container, Box, Typography, Stack } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 import { usePathname } from 'next/navigation';
@@ -10,15 +9,13 @@ import EmailIcon from '@mui/icons-material/Email';
 import TravelExploreRoundedIcon from '@mui/icons-material/TravelExploreRounded';
 import Navbar from './Navbar';
 import Hero from './Hero';
-import DeferredSection from './DeferredSection';
+import About from './About';
+import Impact from './Impact';
+import Projects from './Projects';
+import Downloads from './Downloads';
+import Contact from './Contact';
 import { useTranslation } from '../i18n/useTranslation';
 import { SITE_CONFIG } from '../config/site';
-
-const About = dynamic(() => import('./About'));
-const Impact = dynamic(() => import('./Impact'));
-const Projects = dynamic(() => import('./Projects'));
-const Downloads = dynamic(() => import('./Downloads'));
-const Contact = dynamic(() => import('./Contact'));
 
 const AppMain = styled('main')(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
@@ -123,21 +120,11 @@ export default function PortfolioApp({
         <Container maxWidth='lg' disableGutters>
           {isHomePage ? (
             <>
-              <DeferredSection minHeight={{ xs: 420, md: 480 }}>
-                <About />
-              </DeferredSection>
-              <DeferredSection minHeight={{ xs: 420, md: 520 }}>
-                <Impact />
-              </DeferredSection>
-              <DeferredSection minHeight={{ xs: 620, md: 760 }} rootMargin='420px 0px'>
-                <Projects />
-              </DeferredSection>
-              <DeferredSection minHeight={{ xs: 420, md: 520 }}>
-                <Downloads />
-              </DeferredSection>
-              <DeferredSection minHeight={{ xs: 360, md: 460 }}>
-                <Contact />
-              </DeferredSection>
+              <About />
+              <Impact />
+              <Projects />
+              <Downloads />
+              <Contact />
             </>
           ) : null}
           {children}
