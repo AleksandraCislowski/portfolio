@@ -1,8 +1,6 @@
 'use client';
 import * as React from 'react';
-import { SelectProps } from '@mui/material/Select';
 import MenuIcon from '@mui/icons-material/Menu';
-import type { SelectChangeEvent } from '@mui/material/Select';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '../i18n/LanguageContext';
 import type { Language } from '../i18n/config';
@@ -18,7 +16,6 @@ import {
   ToolbarRight,
   RightControls,
   MobileMenuButton,
-  languageMenuPaperSx,
 } from './navbar/Navbar.styles';
 import type { NavbarItem } from './navbar/navbar.constants';
 import { replaySectionAnimation } from './sectionAnimationReplay';
@@ -33,11 +30,6 @@ export default function Navbar() {
   const navLockUntilRef = React.useRef(0);
   const isHomePage = pathname === '/';
   const rootPrefix = isHomePage ? '' : '/';
-  const languageMenuProps: SelectProps<Language>['MenuProps'] = {
-    PaperProps: {
-      sx: languageMenuPaperSx,
-    },
-  };
 
   const navItems = React.useMemo<readonly NavbarItem[]>(
     () => [
@@ -147,16 +139,16 @@ export default function Navbar() {
     };
   }, [isHomePage, resolveActiveHref]);
 
-  const handleLanguageChange = (event: SelectChangeEvent<Language>) => {
-    setLang(event.target.value as Language);
-  };
-
-  const handleOpenMobileNav = () => {
-    setMobileNavOpen(true);
+  const handleLanguageChange = (nextLanguage: Language) => {
+    setLang(nextLanguage);
   };
 
   const handleCloseMobileNav = () => {
     setMobileNavOpen(false);
+  };
+
+  const handleToggleMobileNav = () => {
+    setMobileNavOpen((current) => !current);
   };
 
   const handleSamePageNavigation = React.useCallback((href: string) => {
@@ -226,19 +218,10 @@ export default function Navbar() {
     handleSamePageNavigation(href);
   }, [handleSamePageNavigation, isHomePage]);
 
-  const handleNavigateHome = React.useCallback((event: React.MouseEvent<HTMLElement>) => {
-    if (!isHomePage) {
-      return;
-    }
-
-    event.preventDefault();
-    handleSamePageNavigation(SITE_CONFIG.sections.home);
-  }, [handleSamePageNavigation, isHomePage]);
-
   return (
     <StyledAppBar position='sticky' color='default' elevation={0}>
       <StyledToolbar disableGutters>
-        <NavbarBrand onNavigateHome={handleNavigateHome} />
+        <NavbarBrand />
 
         <ToolbarRight>
           <NavbarDesktopNav
@@ -248,11 +231,9 @@ export default function Navbar() {
           />
 
           <NavbarLanguageSelect
-            idPrefix='lang-select'
             label={t.nav.language}
             value={lang}
             onChange={handleLanguageChange}
-            menuProps={languageMenuProps}
             variant='desktop'
           />
 
@@ -260,8 +241,12 @@ export default function Navbar() {
             <MobileMenuButton
               edge='end'
               color='inherit'
-              aria-label={t.accessibility.openNavigationMenu}
-              onClick={handleOpenMobileNav}
+              aria-label={
+                mobileNavOpen
+                  ? t.accessibility.closeNavigationMenu
+                  : t.accessibility.openNavigationMenu
+              }
+              onClick={handleToggleMobileNav}
             >
               <MenuIcon />
             </MobileMenuButton>
@@ -274,7 +259,6 @@ export default function Navbar() {
         languageLabel={t.nav.language}
         languageValue={lang}
         onLanguageChange={handleLanguageChange}
-        menuProps={languageMenuProps}
         mobileNavOpen={mobileNavOpen}
         onClose={handleCloseMobileNav}
         activeHref={hasResolvedActiveHref ? activeHref : null}
