@@ -1,10 +1,25 @@
 import { Box, Button, Chip, Stack, Typography } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
-import { motion } from 'framer-motion';
 
-export const MotionSection = motion.create(Box);
-export const MotionBox = motion.create(Box);
-export const MotionChip = motion.create(Chip);
+export const HeroSection = styled(Box)(() => ({
+  '@keyframes heroFadeRise': {
+    '0%': {
+      opacity: 0,
+      transform: 'translate3d(0, 20px, 0)',
+    },
+    '100%': {
+      opacity: 1,
+      transform: 'translate3d(0, 0, 0)',
+    },
+  },
+}));
+
+export const HeroFadeItem = styled(Box, {
+  shouldForwardProp: (prop) => prop !== '$delay',
+})<{ $delay?: number }>(({ $delay = 0 }) => ({
+  opacity: 0,
+  animation: `heroFadeRise 680ms ease-out ${$delay}ms forwards`,
+}));
 
 export const HeroBackgroundVideo = styled('video')({
   position: 'absolute',
@@ -29,7 +44,7 @@ export const HeroBackdrop = styled(Box)(() => ({
   zIndex: 1,
 }));
 
-export const HeroShell = styled(motion.div)(({ theme }) => ({
+export const HeroShell = styled(Box)(({ theme }) => ({
   boxSizing: 'border-box',
   position: 'relative',
   display: 'grid',
@@ -73,7 +88,7 @@ export const HeroInlineVisualSlot = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const HeroEyebrow = styled(motion.div)(({ theme }) => ({
+export const HeroEyebrow = styled(Box)(({ theme }) => ({
   display: 'inline-flex',
   alignItems: 'center',
   flexWrap: 'wrap',
@@ -259,7 +274,7 @@ export const SignalItem = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const MetaChip = styled(MotionChip)(({ theme }) => ({
+export const MetaChip = styled(Chip)(({ theme }) => ({
   width: '100%',
   minHeight: 40,
   borderRadius: 999,
@@ -332,7 +347,7 @@ export const ImageMediaClip = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const ImageLayer = styled(motion.div)(({ theme }) => ({
+export const ImageLayer = styled(Box)(({ theme }) => ({
   position: 'absolute',
   inset: 0,
   zIndex: 0,

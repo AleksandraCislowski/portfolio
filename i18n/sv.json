@@ -323,6 +323,7 @@
     "skipToMainContent": "Hoppa till huvudinnehållet",
     "goToTop": "{{name}} - gå till början av sidan",
     "openNavigationMenu": "Öppna navigationsmenyn",
+    "closeNavigationMenu": "Stäng navigationsmenyn",
     "sendEmail": "Skicka e-post",
     "openLinkedIn": "Öppna LinkedIn-profil",
     "openGitHub": "Öppna GitHub-profil",

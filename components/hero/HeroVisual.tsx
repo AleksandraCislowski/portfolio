@@ -4,14 +4,13 @@ import { Typography } from '@mui/material';
 
 import heroImage from '../../public/images/profile/Tech-driven confidence in a digital world.png';
 
-import { itemVariants } from './Hero.animations';
 import {
+  HeroFadeItem,
   ImageAccent,
   ImageAccentEyebrow,
   ImageFrame,
   ImageMediaClip,
   ImageLayer,
-  MotionBox,
   VisualColumn,
   VisualStack,
 } from './Hero.styles';
@@ -22,7 +21,7 @@ type HeroVisualProps = {
 
 export function HeroVisual({ t }: HeroVisualProps) {
   return (
-    <MotionBox variants={itemVariants}>
+    <HeroFadeItem $delay={220}>
       <VisualColumn>
         <VisualStack>
           <ImageFrame>
@@ -34,7 +33,8 @@ export function HeroVisual({ t }: HeroVisualProps) {
                   fill
                   priority
                   placeholder='blur'
-                  sizes='(max-width: 900px) 100vw, 44vw'
+                  quality={62}
+                  sizes='(max-width: 600px) 92vw, (max-width: 900px) 88vw, 44vw'
                   style={{
                     objectFit: 'cover',
                     objectPosition: 'center 22%',
@@ -54,6 +54,6 @@ export function HeroVisual({ t }: HeroVisualProps) {
           </ImageFrame>
         </VisualStack>
       </VisualColumn>
-    </MotionBox>
+    </HeroFadeItem>
   );
 }

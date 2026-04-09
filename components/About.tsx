@@ -1,9 +1,9 @@
 import * as React from 'react';
+import Image from 'next/image';
 import {
   Box,
   Typography,
   Stack,
-  Avatar,
   List,
   ListItem,
   ListItemText,
@@ -19,6 +19,7 @@ import { useTranslation } from '../i18n/useTranslation';
 import Section from './Section';
 import { SITE_CONFIG } from '../config/site';
 import { useSectionAnimationReplay } from './sectionAnimationReplay';
+import profileImage from '../public/images/profile/IMG_4246.jpg';
 
 const MotionBox = motion.create(Box);
 
@@ -146,21 +147,24 @@ const AboutAvatarFrame = styled(Box)(({ theme }) => ({
   },
 }));
 
-const AboutAvatar = styled(Avatar)(({ theme }) => ({
+const AboutAvatar = styled(Box)(({ theme }) => ({
+  position: 'relative',
   width: 132,
   height: 132,
   marginBottom: 0,
   borderRadius: 24,
   border: `3px solid ${alpha(theme.palette.common.white, 0.12)}`,
-  '& .MuiAvatar-img': {
-    objectFit: 'cover',
-    objectPosition: 'center top',
-    transform: 'scale(1.02)',
-  },
+  overflow: 'hidden',
   [theme.breakpoints.up('md')]: {
     width: 156,
     height: 156,
   },
+}));
+
+const AboutAvatarImage = styled(Image)(() => ({
+  objectFit: 'cover',
+  objectPosition: 'center top',
+  transform: 'scale(1.02)',
 }));
 
 const AboutDescription = styled(Typography)(({ theme }) => ({
@@ -253,10 +257,15 @@ export default function About() {
               <MotionBox variants={shouldReduceMotion ? undefined : mediaVariants}>
                 <AboutMedia>
                   <AboutAvatarFrame>
-                    <AboutAvatar
-                      src={SITE_CONFIG.avatarImage}
-                      alt={t.accessibility.profilePhoto}
-                    />
+                    <AboutAvatar>
+                      <AboutAvatarImage
+                        src={profileImage}
+                        alt={t.accessibility.profilePhoto}
+                        fill
+                        placeholder='blur'
+                        sizes='(max-width: 900px) 132px, 156px'
+                      />
+                    </AboutAvatar>
                   </AboutAvatarFrame>
                 </AboutMedia>
               </MotionBox>

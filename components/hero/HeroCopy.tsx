@@ -2,17 +2,16 @@ import * as React from 'react';
 
 import { SITE_CONFIG } from '../../config/site';
 
-import { itemVariants } from './Hero.animations';
 import {
   CopyColumn,
   HeroActions,
   HeroEyebrow,
+  HeroFadeItem,
   HeroInlineVisualSlot,
   HeroKicker,
   HeroLocation,
   HeroSubtitle,
   HeroTitle,
-  MotionBox,
   PrimaryHeroButton,
   SecondaryHeroButton,
 } from './Hero.styles';
@@ -27,22 +26,22 @@ export function HeroCopy({
   visualSlot,
 }: HeroCopyProps) {
   return (
-    <MotionBox variants={itemVariants}>
+    <HeroFadeItem $delay={0}>
       <CopyColumn>
         <HeroEyebrow>
           <HeroKicker>{t.hero.kicker}</HeroKicker>
           <HeroLocation variant='body2'>{t.hero.location}</HeroLocation>
         </HeroEyebrow>
 
-        <MotionBox variants={itemVariants}>
+        <HeroFadeItem $delay={80}>
           <HeroTitle variant='h1'>{t.hero.greeting}</HeroTitle>
-        </MotionBox>
+        </HeroFadeItem>
 
-        <MotionBox variants={itemVariants}>
+        <HeroFadeItem $delay={160}>
           <HeroSubtitle>{t.hero.subtitle}</HeroSubtitle>
-        </MotionBox>
+        </HeroFadeItem>
 
-        <MotionBox variants={itemVariants}>
+        <HeroFadeItem $delay={240}>
           <HeroActions>
             <PrimaryHeroButton
               variant='contained'
@@ -61,12 +60,12 @@ export function HeroCopy({
               {t.hero.secondaryCta}
             </SecondaryHeroButton>
           </HeroActions>
-        </MotionBox>
+        </HeroFadeItem>
 
         {visualSlot ? (
           <HeroInlineVisualSlot>{visualSlot}</HeroInlineVisualSlot>
         ) : null}
       </CopyColumn>
-    </MotionBox>
+    </HeroFadeItem>
   );
 }

@@ -211,6 +211,7 @@ export default function Contact() {
             src='/images/profile/contact.png'
             alt=''
             fill
+            quality={60}
             sizes='(max-width: 900px) 100vw, 36vw'
           />
           <ContactVisualOverlay />

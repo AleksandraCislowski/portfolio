@@ -430,6 +430,7 @@ export default function Downloads() {
                   src='/images/profile/download.png'
                   alt=''
                   fill
+                  quality={60}
                   sizes='(max-width: 1200px) 240px, 320px'
                   style={{
                     objectFit: 'cover',
