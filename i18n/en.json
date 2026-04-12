@@ -274,16 +274,60 @@
         ],
         "slides": [
           {
-            "title": "Overview Dashboard",
-            "caption": "The main view acts as an executive and operational summary, combining KPI cards for revenue, orders, average order value, and conversion with trend, retention, refund, channel, customer, category, risk, and loyalty signals."
+            "title": "Storefront overview",
+            "caption": "The opening dashboard frames Northstar as a daily operations workspace, pairing a product hero and today's signal panel with prioritized KPI cards for revenue, orders, average order value, and conversion.",
+            "imageSrc": "/images/projects/dashboard/dashboard1.png",
+            "imageAlt": "Northstar Commerce overview dashboard with hero panel, signal card, and storefront KPI metrics",
+            "imageAspectRatio": "1601 / 1190"
           },
           {
-            "title": "Order Intelligence",
-            "caption": "The analytics workspace turns dashboard signals into record-level follow-up with saved views, explicit filters, quick presets, searchable order records, risk exposure summaries, and a watchlist for current issues."
+            "title": "Revenue and retention trend",
+            "caption": "This trend section compares revenue momentum across Paid Search, Email, and Organic channels, while side cards keep returning customer share, checkout completion, and refund rate visible for fast interpretation.",
+            "imageSrc": "/images/projects/dashboard/dashboard2.png",
+            "imageAlt": "Northstar Commerce revenue trend chart with retention, checkout, and refund summary cards",
+            "imageAspectRatio": "1512 / 863"
           },
           {
-            "title": "Account and Preferences",
-            "caption": "The supporting screens make the project feel like a real product system, covering workspace identity, reporting preferences, visible metrics, alerts, digest emails, shared dashboards, and preview-only workspace actions."
+            "title": "Customer and risk insights",
+            "caption": "The insight widgets use quick-read donut charts to summarize lifecycle mix, acquisition channel share, order risk breakdown, and loyalty tier distribution for an operations manager scanning the storefront.",
+            "imageSrc": "/images/projects/dashboard/dashboard3.png",
+            "imageAlt": "Northstar Commerce insight widgets for customer mix, acquisition channels, order risk, and loyalty tiers",
+            "imageAspectRatio": "1343 / 638"
+          },
+          {
+            "title": "Action signals and category mix",
+            "caption": "This section turns performance monitoring into next-step prioritization with short operational signals, a channel efficiency radar chart, and a category revenue view for merchandising follow-up.",
+            "imageSrc": "/images/projects/dashboard/dashboard4.png",
+            "imageAlt": "Northstar Commerce action signals with channel efficiency radar chart and category revenue chart",
+            "imageAspectRatio": "1343 / 899"
+          },
+          {
+            "title": "Weekly demand signals",
+            "caption": "The demand chart balances gross orders, recovered carts, and churn risk over time, helping the dashboard show whether weekly demand is strengthening or creating follow-up risk.",
+            "imageSrc": "/images/projects/dashboard/dashboard5.png",
+            "imageAlt": "Northstar Commerce weekly demand signals bar chart with gross orders, recovered carts, and churn risk",
+            "imageAspectRatio": "1343 / 702"
+          },
+          {
+            "title": "Order Intelligence workspace",
+            "caption": "The operational workspace brings saved views, active filters, quick presets, search, a scrollable order table, and watchlist notes together for record-level investigation and follow-up.",
+            "imageSrc": "/images/projects/dashboard/dashboard6.png",
+            "imageAlt": "Northstar Commerce Order Intelligence workspace with filters, searchable order table, and operational notes",
+            "imageAspectRatio": "1116 / 976"
+          },
+          {
+            "title": "Workspace preferences",
+            "caption": "The Preferences screen turns settings into a product surface, covering visible metrics, alert channels, digest cadence, shared dashboards, and the workspace status summary.",
+            "imageSrc": "/images/projects/dashboard/dashboard7.png",
+            "imageAlt": "Northstar Commerce preferences screen with visible metrics, notifications, and workspace status",
+            "imageAspectRatio": "1116 / 950"
+          },
+          {
+            "title": "Account and reporting setup",
+            "caption": "The Account screen completes the product story with workspace identity, profile details, saved views, alert coverage, digest preferences, and preview-only account update feedback.",
+            "imageSrc": "/images/projects/dashboard/dashboard8.png",
+            "imageAlt": "Northstar Commerce account screen with workspace identity, profile settings, and reporting notes",
+            "imageAspectRatio": "1226 / 1014"
           }
         ],
         "liveUrl": "https://northstar-commerce.vercel.app/",

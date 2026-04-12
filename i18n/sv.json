@@ -274,16 +274,60 @@
         ],
         "slides": [
           {
-            "title": "Overview Dashboard",
-            "caption": "Huvudvyn fungerar som en executive och operational summary, där KPI-kort för revenue, orders, average order value och conversion kombineras med trend-, retention-, refund-, channel-, customer-, category-, risk- och loyalty-signaler."
+            "title": "Storefront-översikt",
+            "caption": "Den inledande dashboarden ramar in Northstar som en daglig operationsyta, där en produkthero och en signalpanel kombineras med prioriterade KPI-kort för revenue, orders, average order value och conversion.",
+            "imageSrc": "/images/projects/dashboard/dashboard1.png",
+            "imageAlt": "Northstar Commerce översiktsdashboard med hero-panel, signalkort och storefront-KPI:er",
+            "imageAspectRatio": "1601 / 1190"
           },
           {
-            "title": "Order Intelligence",
-            "caption": "Analytics-arbetsytan gör dashboardsignaler till uppföljning på radnivå med sparade vyer, tydliga filter, quick presets, sökbara orderposter, sammanfattningar av risk exposure och en watchlist för aktuella ärenden."
+            "title": "Revenue och retention trend",
+            "caption": "Den här trendsektionen jämför revenue momentum mellan Paid Search, Email och Organic, samtidigt som sidokort håller returning customer share, checkout completion och refund rate synliga för snabb tolkning.",
+            "imageSrc": "/images/projects/dashboard/dashboard2.png",
+            "imageAlt": "Northstar Commerce revenue trend-diagram med sammanfattningskort för retention, checkout och refunds",
+            "imageAspectRatio": "1512 / 863"
           },
           {
-            "title": "Account och Preferences",
-            "caption": "De stödjande vyerna gör projektet mer som ett riktigt produktsystem, med workspace identity, reporting preferences, visible metrics, alerts, digest emails, shared dashboards och preview-only workspace actions."
+            "title": "Customer och risk insights",
+            "caption": "Insight-widgetarna använder snabbavlästa donut charts för att sammanfatta lifecycle mix, acquisition channel share, order risk breakdown och loyalty tier distribution för en operations manager som skannar storefronten.",
+            "imageSrc": "/images/projects/dashboard/dashboard3.png",
+            "imageAlt": "Northstar Commerce insight-widgets för customer mix, acquisition channels, order risk och loyalty tiers",
+            "imageAspectRatio": "1343 / 638"
+          },
+          {
+            "title": "Action signals och category mix",
+            "caption": "Den här sektionen gör performance monitoring till prioritering av nästa steg med korta operativa signaler, ett radar chart för channel efficiency och en category revenue-vy för merchandising-uppföljning.",
+            "imageSrc": "/images/projects/dashboard/dashboard4.png",
+            "imageAlt": "Northstar Commerce action signals med channel efficiency radar chart och category revenue chart",
+            "imageAspectRatio": "1343 / 899"
+          },
+          {
+            "title": "Weekly demand signals",
+            "caption": "Demand charten balanserar gross orders, recovered carts och churn risk över tid, så att dashboarden visar om veckans demand stärks eller skapar uppföljningsrisk.",
+            "imageSrc": "/images/projects/dashboard/dashboard5.png",
+            "imageAlt": "Northstar Commerce weekly demand signals bar chart med gross orders, recovered carts och churn risk",
+            "imageAspectRatio": "1343 / 702"
+          },
+          {
+            "title": "Order Intelligence-arbetsyta",
+            "caption": "Den operativa arbetsytan samlar saved views, aktiva filter, quick presets, search, en scrollningsbar ordertabell och watchlist notes för undersökning och uppföljning på radnivå.",
+            "imageSrc": "/images/projects/dashboard/dashboard6.png",
+            "imageAlt": "Northstar Commerce Order Intelligence-arbetsyta med filter, sökbar ordertabell och operational notes",
+            "imageAspectRatio": "1116 / 976"
+          },
+          {
+            "title": "Workspace preferences",
+            "caption": "Preferences-skärmen gör settings till en riktig produktyta och täcker visible metrics, alert channels, digest cadence, shared dashboards och en workspace status summary.",
+            "imageSrc": "/images/projects/dashboard/dashboard7.png",
+            "imageAlt": "Northstar Commerce preferences-skärm med visible metrics, notifications och workspace status",
+            "imageAspectRatio": "1116 / 950"
+          },
+          {
+            "title": "Account och reporting setup",
+            "caption": "Account-skärmen avslutar produktberättelsen med workspace identity, profile details, saved views, alert coverage, digest preferences och preview-only feedback för kontouppdateringar.",
+            "imageSrc": "/images/projects/dashboard/dashboard8.png",
+            "imageAlt": "Northstar Commerce account-skärm med workspace identity, profile settings och reporting notes",
+            "imageAspectRatio": "1226 / 1014"
           }
         ],
         "liveUrl": "https://northstar-commerce.vercel.app/",
