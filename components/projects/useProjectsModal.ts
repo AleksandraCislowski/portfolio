@@ -41,6 +41,10 @@ export function useProjectsModal({
   }, [clearModalPhaseTimeout, getPlanetSnapshot, shouldReduceMotion]);
 
   const closeProjectModal = React.useCallback(() => {
+    if (modalPhase === 'closed' || modalPhase === 'closing') {
+      return;
+    }
+
     clearModalPhaseTimeout();
 
     if (typeof document !== 'undefined') {
@@ -69,6 +73,7 @@ export function useProjectsModal({
     activeProjectIndex,
     clearModalPhaseTimeout,
     getPlanetSnapshot,
+    modalPhase,
     planetButtonRefs,
     shouldReduceMotion,
   ]);

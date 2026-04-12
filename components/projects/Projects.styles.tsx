@@ -1239,7 +1239,7 @@ export const ProjectOverlay = styled(Box, {
     position: 'fixed',
     inset: 0,
     zIndex: 1200,
-    pointerEvents: $phase === 'closed' ? 'none' : 'auto',
+    pointerEvents: $phase === 'closed' || $phase === 'closing' ? 'none' : 'auto',
     opacity: $phase === 'closed' ? 0 : $phase === 'closing' ? 0 : 1,
     transition: 'opacity 860ms cubic-bezier(0.2, 0.8, 0.18, 1)',
     background:
