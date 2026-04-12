@@ -6,6 +6,7 @@ import type { SxProps, Theme } from '@mui/material/styles';
 
 type DeferredSectionProps = {
   children: React.ReactNode;
+  id?: string;
   minHeight?: number | string | { xs?: number | string; sm?: number | string; md?: number | string; lg?: number | string };
   rootMargin?: string;
   sx?: SxProps<Theme>;
@@ -13,6 +14,7 @@ type DeferredSectionProps = {
 
 export default function DeferredSection({
   children,
+  id,
   minHeight = 320,
   rootMargin = '320px 0px',
   sx,
@@ -58,8 +60,13 @@ export default function DeferredSection({
   return (
     <Box
       ref={anchorRef}
+      id={id}
       aria-hidden='true'
       sx={{
+        scrollMarginTop: {
+          xs: '88px',
+          md: '96px',
+        },
         minHeight,
         width: '100%',
         ...sx,

@@ -123,19 +123,23 @@ export default function PortfolioApp({
         <Container maxWidth='lg' disableGutters>
           {isHomePage ? (
             <>
-              <DeferredSection minHeight={{ xs: 420, md: 480 }}>
+              <DeferredSection id={SITE_CONFIG.sectionIds.about} minHeight={{ xs: 420, md: 480 }}>
                 <About />
               </DeferredSection>
-              <DeferredSection minHeight={{ xs: 420, md: 520 }}>
+              <DeferredSection id={SITE_CONFIG.sectionIds.impact} minHeight={{ xs: 420, md: 520 }}>
                 <Impact />
               </DeferredSection>
-              <DeferredSection minHeight={{ xs: 620, md: 760 }} rootMargin='420px 0px'>
+              <DeferredSection
+                id={SITE_CONFIG.sectionIds.projects}
+                minHeight={{ xs: 620, md: 760 }}
+                rootMargin='420px 0px'
+              >
                 <Projects />
               </DeferredSection>
-              <DeferredSection minHeight={{ xs: 420, md: 520 }}>
+              <DeferredSection id={SITE_CONFIG.sectionIds.downloads} minHeight={{ xs: 420, md: 520 }}>
                 <Downloads />
               </DeferredSection>
-              <DeferredSection minHeight={{ xs: 360, md: 460 }}>
+              <DeferredSection id={SITE_CONFIG.sectionIds.contact} minHeight={{ xs: 360, md: 460 }}>
                 <Contact />
               </DeferredSection>
             </>
