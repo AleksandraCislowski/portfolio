@@ -37,22 +37,6 @@ I am interested in roles connected to:
 - Scrum Master and delivery coordination
 - product-minded frontend work
 
-## Featured Project
-
-### FUNKOLOGI
-
-**Project type:** Service website + content hub  
-**Role:** UX/UI, frontend, delivery  
-**Live site:** [funkologi.com](https://funkologi.com/)
-
-FUNKOLOGI is a Swedish psychology practice focused on neuropsychology, autistic children, and family support.
-
-The client needed a more professional and trustworthy website, as well as a practical way to publish and manage downloadable PDF materials without relying on a developer for every content update.
-
-I delivered a modern website with clearer communication, improved structure, a searchable materials library, and a protected admin workflow for managing resources.
-
-The project shows my ability to connect frontend implementation with real business needs: credibility, clarity, maintainability, and independence for the client.
-
 ## Skills Highlighted In This Portfolio
 
 - React and Next.js frontend development
@@ -84,17 +68,3 @@ The fastest way to review my profile is:
 2. Open the selected work section to view project case studies.
 3. Download the CV and supporting materials from the downloads section.
 4. Use the contact section or LinkedIn link to get in touch.
-
-## Development
-
-```bash
-npm install
-npm run dev
-```
-
-Run checks:
-
-```bash
-npm run lint
-npm run build
-```
