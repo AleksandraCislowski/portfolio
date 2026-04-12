@@ -7,6 +7,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  Tooltip,
 } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
@@ -288,36 +289,44 @@ export default function About() {
                     ))}
                   </HighlightsList>
                   <SocialLinks>
-                    <SocialButton
-                      href={`mailto:${SITE_CONFIG.contactEmail}`}
-                      aria-label={t.accessibility.sendEmail}
-                    >
-                      <EmailIcon />
-                    </SocialButton>
-                    <SocialButton
-                      href={SITE_CONFIG.socialLinks.linkedIn}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      aria-label={t.accessibility.openLinkedIn}
-                    >
-                      <LinkedInIcon />
-                    </SocialButton>
-                    <SocialButton
-                      href={SITE_CONFIG.socialLinks.github}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      aria-label={t.accessibility.openGitHub}
-                    >
-                      <GitHubIcon />
-                    </SocialButton>
-                    <SocialButton
-                      href={SITE_CONFIG.socialLinks.lovorda}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      aria-label={t.accessibility.openLovorda}
-                    >
-                      <TravelExploreRoundedIcon />
-                    </SocialButton>
+                    <Tooltip title={t.accessibility.emailLinkTooltip} arrow>
+                      <SocialButton
+                        href={`mailto:${SITE_CONFIG.contactEmail}`}
+                        aria-label={t.accessibility.sendEmail}
+                      >
+                        <EmailIcon />
+                      </SocialButton>
+                    </Tooltip>
+                    <Tooltip title={t.accessibility.linkedInLinkTooltip} arrow>
+                      <SocialButton
+                        href={SITE_CONFIG.socialLinks.linkedIn}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        aria-label={t.accessibility.openLinkedIn}
+                      >
+                        <LinkedInIcon />
+                      </SocialButton>
+                    </Tooltip>
+                    <Tooltip title={t.accessibility.gitHubLinkTooltip} arrow>
+                      <SocialButton
+                        href={SITE_CONFIG.socialLinks.github}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        aria-label={t.accessibility.openGitHub}
+                      >
+                        <GitHubIcon />
+                      </SocialButton>
+                    </Tooltip>
+                    <Tooltip title={t.accessibility.lovordaLinkTooltip} arrow>
+                      <SocialButton
+                        href={SITE_CONFIG.socialLinks.lovorda}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        aria-label={t.accessibility.openLovorda}
+                      >
+                        <TravelExploreRoundedIcon />
+                      </SocialButton>
+                    </Tooltip>
                   </SocialLinks>
                 </AboutContent>
               </MotionBox>

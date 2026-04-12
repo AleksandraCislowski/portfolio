@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import dynamic from 'next/dynamic';
-import { Container, Box, Typography, Stack } from '@mui/material';
+import { Container, Box, Typography, Stack, Tooltip } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 import { usePathname } from 'next/navigation';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -164,36 +164,44 @@ export default function PortfolioApp({
                 </Typography>
               </Box>
               <FooterSocialLinks>
-                <FooterSocialButton
-                  href={`mailto:${SITE_CONFIG.contactEmail}`}
-                  aria-label={t.accessibility.sendEmail}
-                >
-                  <EmailIcon />
-                </FooterSocialButton>
-                <FooterSocialButton
-                  href={SITE_CONFIG.socialLinks.linkedIn}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  aria-label={t.accessibility.openLinkedIn}
-                >
-                  <LinkedInIcon />
-                </FooterSocialButton>
-                <FooterSocialButton
-                  href={SITE_CONFIG.socialLinks.github}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  aria-label={t.accessibility.openGitHub}
-                >
-                  <GitHubIcon />
-                </FooterSocialButton>
-                <FooterSocialButton
-                  href={SITE_CONFIG.socialLinks.lovorda}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  aria-label={t.accessibility.openLovorda}
-                >
-                  <TravelExploreRoundedIcon />
-                </FooterSocialButton>
+                <Tooltip title={t.accessibility.emailLinkTooltip} arrow>
+                  <FooterSocialButton
+                    href={`mailto:${SITE_CONFIG.contactEmail}`}
+                    aria-label={t.accessibility.sendEmail}
+                  >
+                    <EmailIcon />
+                  </FooterSocialButton>
+                </Tooltip>
+                <Tooltip title={t.accessibility.linkedInLinkTooltip} arrow>
+                  <FooterSocialButton
+                    href={SITE_CONFIG.socialLinks.linkedIn}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    aria-label={t.accessibility.openLinkedIn}
+                  >
+                    <LinkedInIcon />
+                  </FooterSocialButton>
+                </Tooltip>
+                <Tooltip title={t.accessibility.gitHubLinkTooltip} arrow>
+                  <FooterSocialButton
+                    href={SITE_CONFIG.socialLinks.github}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    aria-label={t.accessibility.openGitHub}
+                  >
+                    <GitHubIcon />
+                  </FooterSocialButton>
+                </Tooltip>
+                <Tooltip title={t.accessibility.lovordaLinkTooltip} arrow>
+                  <FooterSocialButton
+                    href={SITE_CONFIG.socialLinks.lovorda}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    aria-label={t.accessibility.openLovorda}
+                  >
+                    <TravelExploreRoundedIcon />
+                  </FooterSocialButton>
+                </Tooltip>
               </FooterSocialLinks>
             </Stack>
           </FooterCard>

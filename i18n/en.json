@@ -399,6 +399,10 @@
     "openLinkedIn": "Open LinkedIn profile",
     "openGitHub": "Open GitHub profile",
     "openLovorda": "Open Lovorda profile",
+    "emailLinkTooltip": "Email: cislowski.aleksandra@gmail.com",
+    "linkedInLinkTooltip": "Open Aleksandra's LinkedIn profile",
+    "gitHubLinkTooltip": "Open Aleksandra's GitHub profile",
+    "lovordaLinkTooltip": "Open Aleksandra's Lovorda profile",
     "profilePhoto": "Profile photo of Aleksandra Cislowski"
   }
 }
