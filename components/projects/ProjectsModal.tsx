@@ -364,7 +364,8 @@ function ProjectPreviewSlides({
                 fill
                 src={activeSlideImageSrc}
                 alt={activeSlideImageAlt ?? activeSlide.title}
-                sizes='(max-width: 900px) 100vw, 720px'
+                sizes='(max-width: 900px) calc(100vw - 48px), (max-width: 1400px) 62vw, 860px'
+                unoptimized
                 style={{ objectFit: 'contain' }}
               />
             ) : null}
