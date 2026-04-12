@@ -325,6 +325,7 @@ const documentMeta = {
   portfolio: { size: '160 KB', label: 'PDF' },
   references: { size: '92 KB', label: 'PDF' },
   coverLetter: { size: '382 KB', label: 'PDF' },
+  funkologiReference: { size: '55 KB', label: 'PDF' },
 } as const;
 
 type RecommendationItem = {

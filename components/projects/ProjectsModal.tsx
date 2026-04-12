@@ -51,6 +51,8 @@ type ProjectsModalProps = {
   previousSlideLabel: string;
   nextSlideLabel: string;
   visitSiteLabel: string;
+  visitCodeLabel: string;
+  visitRecommendationLabel: string;
   onClose: () => void;
   shouldReduceMotion: boolean;
 };
@@ -78,7 +80,7 @@ const mobileCloseButtonSx = {
   justifyContent: 'center',
   mt: 0.5,
 } as const;
-const placeholderProjectSlugs: readonly ProjectSlug[] = ['personal-blog', 'dashboard'] as const;
+const placeholderProjectSlugs: readonly ProjectSlug[] = ['personal-blog'] as const;
 
 // Main narrative card: this is the "what was built and why it mattered" part of the case study.
 function ProjectModalHeader({ project }: { project: ActiveProject }) {
@@ -162,13 +164,27 @@ function ProjectFactsCard({
   factsLabel,
   meta,
   liveUrl,
+  githubUrl,
+  recommendationUrl,
   visitSiteLabel,
+  visitCodeLabel,
+  visitRecommendationLabel,
 }: {
   factsLabel: string;
   meta: ActiveProject['meta'];
   liveUrl?: string;
+  githubUrl?: string;
+  recommendationUrl?: string;
   visitSiteLabel: string;
+  visitCodeLabel: string;
+  visitRecommendationLabel: string;
 }) {
+  const links = [
+    liveUrl ? { href: liveUrl, label: visitSiteLabel } : null,
+    githubUrl ? { href: githubUrl, label: visitCodeLabel } : null,
+    recommendationUrl ? { href: recommendationUrl, label: visitRecommendationLabel } : null,
+  ].filter((link): link is { href: string; label: string } => Boolean(link));
+
   return (
     <ProjectCard sx={modalCardPaddingSx}>
       <Typography variant='overline' sx={overlineAccentSx}>
@@ -204,35 +220,46 @@ function ProjectFactsCard({
         ))}
       </Box>
 
-      {liveUrl ? (
+      {links.length > 0 ? (
         <Box
-          component='a'
-          href={liveUrl}
-          target='_blank'
-          rel='noreferrer'
           sx={{
             mt: 1.5,
-            display: 'inline-flex',
-            alignItems: 'center',
+            display: 'flex',
+            flexWrap: 'wrap',
             gap: 1,
-            px: 1.75,
-            py: 1.15,
-            borderRadius: 999,
-            border: '1px solid rgba(255,255,255,0.12)',
-            color: 'text.primary',
-            textDecoration: 'none',
-            fontWeight: 700,
-            background:
-              'linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(125,211,252,0.08) 100%)',
-            transition: 'transform 180ms ease, border-color 180ms ease',
-            '&:hover, &:focus-visible': {
-              transform: 'translateY(-1px)',
-              borderColor: 'rgba(125,211,252,0.42)',
-            },
           }}
         >
-          {visitSiteLabel}
-          <OpenInNewRoundedIcon sx={{ fontSize: 18 }} />
+          {links.map((link) => (
+            <Box
+              key={link.href}
+              component='a'
+              href={link.href}
+              target='_blank'
+              rel='noreferrer'
+              sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 1,
+                px: 1.75,
+                py: 1.15,
+                borderRadius: 2,
+                border: '1px solid rgba(255,255,255,0.12)',
+                color: 'text.primary',
+                textDecoration: 'none',
+                fontWeight: 700,
+                background:
+                  'linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(125,211,252,0.08) 100%)',
+                transition: 'transform 180ms ease, border-color 180ms ease',
+                '&:hover, &:focus-visible': {
+                  transform: 'translateY(-1px)',
+                  borderColor: 'rgba(125,211,252,0.42)',
+                },
+              }}
+            >
+              {link.label}
+              <OpenInNewRoundedIcon sx={{ fontSize: 18 }} />
+            </Box>
+          ))}
         </Box>
       ) : null}
     </ProjectCard>
@@ -536,6 +563,8 @@ export function ProjectsModal({
   previousSlideLabel,
   nextSlideLabel,
   visitSiteLabel,
+  visitCodeLabel,
+  visitRecommendationLabel,
   onClose,
   shouldReduceMotion,
 }: ProjectsModalProps) {
@@ -725,7 +754,11 @@ export function ProjectsModal({
                     factsLabel={factsLabel}
                     meta={activeProject.meta}
                     liveUrl={activeProject.liveUrl}
+                    githubUrl={activeProject.githubUrl}
+                    recommendationUrl={activeProject.recommendationUrl}
                     visitSiteLabel={visitSiteLabel}
+                    visitCodeLabel={visitCodeLabel}
+                    visitRecommendationLabel={visitRecommendationLabel}
                   />
                   <ProjectModalCloseButton
                     closeLabel={closeLabel}

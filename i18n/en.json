@@ -96,6 +96,8 @@
     "modalSliderPrevious": "Previous screenshot",
     "modalSliderNext": "Next screenshot",
     "visitSite": "Visit live site",
+    "visitCode": "View GitHub",
+    "visitRecommendation": "View recommendation",
     "items": [
       {
         "title": "FUNKOLOGI",
@@ -171,7 +173,8 @@
             "imageAspectRatio": "615 / 760"
           }
         ],
-        "liveUrl": "https://funcology.vercel.app/"
+        "liveUrl": "https://funkologi.com/",
+        "recommendationUrl": "/documents/Referens_funkologi.pdf"
       },
       {
         "title": "Personal Blog",
@@ -222,52 +225,58 @@
         ]
       },
       {
-        "title": "Dashboard",
-        "description": "Case study and screenshots will be added next.",
-        "eyebrow": "Coming soon",
+        "title": "Northstar Commerce",
+        "description": "A product-style e-commerce operations dashboard for monitoring revenue, conversion, order flow, acquisition performance, customer retention, and operational risk in one workspace.",
+        "eyebrow": "Case study / e-commerce operations dashboard",
         "paragraphs": [
-          "A full case study for Dashboard will be added here.",
-          "I will add the final story around scope, product decisions, and the final outcome later.",
-          "For now, this planet stays as a placeholder for the next featured project."
+          "Northstar Commerce was shaped as a focused dashboard for an e-commerce operations manager rather than a generic analytics demo. The goal was to make the product story clearer: who the workspace is for, which daily decisions it supports, and why each view exists.",
+          "The product workflow moves from top-line storefront health into operational follow-up. The overview helps users review revenue, orders, average order value, conversion rate, retention, refund signals, channel performance, category mix, loyalty tiers, and order risk. The Order Intelligence view then turns that monitoring layer into a searchable record-level workspace with saved views, filters, quick presets, summary cards, a data table, and a watchlist for active issues.",
+          "Supporting Account and Preferences screens were treated as real product surfaces instead of placeholders. The final experience uses a restrained data palette, clearer chart hierarchy, product-oriented copy, light and dark theme readability improvements, and responsive summaries that keep dense charts and full grids reserved for larger screens."
         ],
         "bulletPoints": [
-          "Full project write-up in progress.",
-          "Screenshots coming next.",
-          "Implementation details will be added later.",
-          "Section temporarily marked as coming soon."
+          "Designed the project around a specific primary user: an e-commerce operations manager.",
+          "Built an overview dashboard for revenue, orders, average order value, conversion, retention, refunds, channel performance, category mix, and order risk.",
+          "Created an Order Intelligence workspace with saved views, explicit filters, search, quick presets, summary cards, an operational table, and watchlist notes.",
+          "Reframed Account and Preferences as supporting product screens for workspace identity, reporting preferences, alerts, digest emails, visible metrics, and shared dashboards.",
+          "Used product-oriented e-commerce terminology so the dashboard feels like an operations tool rather than a template demo.",
+          "Refined the visual system around navy, teal, sage, amber, and coral with improved chart readability in light and dark themes.",
+          "Kept the implementation portfolio-scoped with demo data and preview-only actions while preserving a clear product narrative.",
+          "Delivered the project with a clean production build and lint pass."
         ],
         "meta": [
           {
-            "label": "Status",
-            "value": "Coming soon"
+            "label": "Role",
+            "value": "UX/UI, frontend, product framing"
           },
           {
-            "label": "Project",
-            "value": "Dashboard"
+            "label": "Project type",
+            "value": "E-commerce operations dashboard"
           },
           {
-            "label": "Content",
-            "value": "In progress"
+            "label": "Stack",
+            "value": "Next.js, React, TypeScript, MUI, Chart.js, Sass modules, NextAuth"
           },
           {
-            "label": "Screenshots",
-            "value": "To be added"
+            "label": "Primary goal",
+            "value": "Storefront health + operational follow-up"
           }
         ],
         "slides": [
           {
-            "title": "Coming soon",
-            "caption": "Add the first project screen here."
+            "title": "Overview Dashboard",
+            "caption": "The main view focuses on daily storefront monitoring through KPI cards, revenue trends, retention and refund signals, acquisition channels, customer mix, category demand, and loyalty indicators."
           },
           {
-            "title": "Coming soon",
-            "caption": "Add the second project screen here."
+            "title": "Order Intelligence",
+            "caption": "The analytics workspace extends the dashboard into record-level investigation with saved views, filter controls, quick presets, searchable orders, risk exposure summaries, and a watchlist for follow-up."
           },
           {
-            "title": "Coming soon",
-            "caption": "Add the third project screen here."
+            "title": "Account and Preferences",
+            "caption": "The supporting screens cover workspace identity, reporting preferences, visible metrics, alert settings, digest emails, and shared dashboards so the product feels complete beyond the analytics views."
           }
-        ]
+        ],
+        "liveUrl": "https://northstar-commerce.vercel.app/",
+        "githubUrl": "https://github.com/AleksandraCislowski/dashboard"
       }
     ]
   },
@@ -280,7 +289,14 @@
       "button": "Recommendations",
       "closeLabel": "Close recommendations",
       "empty": "Materials coming soon.",
-      "items": []
+      "items": [
+        {
+          "title": "Funkologi reference",
+          "description": "Client reference for the Funkologi redesign and delivery.",
+          "documentId": "funkologiReference",
+          "cta": "View PDF"
+        }
+      ]
     },
     "items": [
       {

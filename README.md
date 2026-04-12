@@ -42,7 +42,7 @@ The site includes:
 **Project type:** Service website + content hub  
 **Role:** UX/UI, frontend, delivery  
 **Stack:** `Next.js`, `React`, `MUI`, `Firebase`  
-**Live site:** [funcology.vercel.app](https://funcology.vercel.app/)
+**Live site:** [funkologi.com](https://funkologi.com/)
 
 #### Context
 

@@ -96,6 +96,8 @@
     "modalSliderPrevious": "Föregående skärmbild",
     "modalSliderNext": "Nästa skärmbild",
     "visitSite": "Se live-sidan",
+    "visitCode": "Se GitHub",
+    "visitRecommendation": "Se rekommendation",
     "items": [
       {
         "title": "FUNKOLOGI",
@@ -171,7 +173,8 @@
             "imageAspectRatio": "615 / 760"
           }
         ],
-        "liveUrl": "https://funcology.vercel.app/"
+        "liveUrl": "https://funkologi.com/",
+        "recommendationUrl": "/documents/Referens_funkologi.pdf"
       },
       {
         "title": "Personal Blog",
@@ -222,52 +225,58 @@
         ]
       },
       {
-        "title": "Dashboard",
-        "description": "Case study och skärmbilder läggs till i nästa steg.",
-        "eyebrow": "Coming soon",
+        "title": "Northstar Commerce",
+        "description": "En produktinriktad dashboard för e-handelsdrift där intäkter, konvertering, orderflöde, förvärvskanaler, kundretention och operativ risk samlas i en arbetsyta.",
+        "eyebrow": "Case study / dashboard för e-handelsdrift",
         "paragraphs": [
-          "Här kommer en fullständig case study för Dashboard.",
-          "Jag lägger till den slutliga berättelsen om omfattning, produktbeslut och resultat senare.",
-          "Just nu lämnar vi den här planeten som en placeholder för nästa utvalda projekt."
+          "Northstar Commerce formades som en fokuserad dashboard för en e-commerce operations manager, inte som en generisk analytics-demo. Målet var att göra produktberättelsen tydligare: vem arbetsytan är till för, vilka dagliga beslut den stödjer och varför varje vy finns.",
+          "Produktflödet går från övergripande storefront-hälsa till operativ uppföljning. Översikten hjälper användaren att följa intäkter, orders, average order value, konverteringsgrad, retention, refunds, kanalprestanda, kategorimix, lojalitetsnivåer och orderrisk. Order Intelligence-vyn gör sedan monitoreringen till en sökbar arbetsyta på radnivå med sparade vyer, filter, snabbval, sammanfattningskort, datatabell och watchlist för aktuella ärenden.",
+          "Account och Preferences behandlades som riktiga produktytor i stället för placeholders. Slutresultatet använder en återhållen datapalette, tydligare diagramhierarki, produktorienterad copy, bättre läsbarhet i både ljust och mörkt tema samt responsiva sammanfattningar där täta diagram och fulla datagrids sparas för större skärmar."
         ],
         "bulletPoints": [
-          "Full projektbeskrivning på väg.",
-          "Skärmbilder kommer senare.",
-          "Implementationsdetaljer läggs till senare.",
-          "Sektionen är tillfälligt markerad som coming soon."
+          "Designade projektet runt en tydlig primär användare: en e-commerce operations manager.",
+          "Byggde en översiktsdashboard för intäkter, orders, average order value, konvertering, retention, refunds, kanalprestanda, kategorimix och orderrisk.",
+          "Skapade en Order Intelligence-arbetsyta med sparade vyer, tydliga filter, sök, snabbval, sammanfattningskort, operativ datatabell och watchlist-anteckningar.",
+          "Ramade om Account och Preferences som stödjande produktytor för workspace identity, rapportinställningar, alerts, digest emails, synliga metrics och shared dashboards.",
+          "Använde mer realistisk e-handelsterminologi så att dashboarden känns som ett operativt verktyg snarare än en templatedemo.",
+          "Förfinade det visuella systemet runt navy, teal, sage, amber och coral med bättre läsbarhet i diagram för både ljust och mörkt tema.",
+          "Höll implementationen portfolio-anpassad med demodata och preview-only actions, men med en tydlig produktberättelse.",
+          "Levererade projektet med clean production build och lint pass."
         ],
         "meta": [
           {
-            "label": "Status",
-            "value": "Coming soon"
+            "label": "Roll",
+            "value": "UX/UI, frontend, produktinramning"
           },
           {
-            "label": "Projekt",
-            "value": "Dashboard"
+            "label": "Projekttyp",
+            "value": "Dashboard för e-handelsdrift"
           },
           {
-            "label": "Innehall",
-            "value": "Pågår"
+            "label": "Stack",
+            "value": "Next.js, React, TypeScript, MUI, Chart.js, Sass modules, NextAuth"
           },
           {
-            "label": "Skärmbilder",
-            "value": "Läggs till senare"
+            "label": "Huvudmål",
+            "value": "Storefront-hälsa + operativ uppföljning"
           }
         ],
         "slides": [
           {
-            "title": "Coming soon",
-            "caption": "Lägg till projektets första skärmbild här."
+            "title": "Overview Dashboard",
+            "caption": "Huvudvyn fokuserar på daglig monitorering av storefront genom KPI-kort, revenue trends, retention- och refund-signaler, acquisition channels, customer mix, category demand och loyalty indicators."
           },
           {
-            "title": "Coming soon",
-            "caption": "Lägg till projektets andra skärmbild här."
+            "title": "Order Intelligence",
+            "caption": "Analytics-arbetsytan förlänger dashboarden till undersökning på radnivå med sparade vyer, filterkontroller, snabbval, sökbara orders, sammanfattning av risk exposure och en watchlist för uppföljning."
           },
           {
-            "title": "Coming soon",
-            "caption": "Lägg till projektets tredje skärmbild här."
+            "title": "Account och Preferences",
+            "caption": "De stödjande vyerna täcker workspace identity, reporting preferences, synliga metrics, alert settings, digest emails och shared dashboards så att produkten känns komplett även utanför analytics-vyerna."
           }
-        ]
+        ],
+        "liveUrl": "https://northstar-commerce.vercel.app/",
+        "githubUrl": "https://github.com/AleksandraCislowski/dashboard"
       }
     ]
   },
@@ -280,7 +289,14 @@
       "button": "Rekommendationer",
       "closeLabel": "Stäng rekommendationer",
       "empty": "Material kommer snart.",
-      "items": []
+      "items": [
+        {
+          "title": "Referens Funkologi",
+          "description": "Kundreferens för redesign och leverans av Funkologi.",
+          "documentId": "funkologiReference",
+          "cta": "Visa PDF"
+        }
+      ]
     },
     "items": [
       {

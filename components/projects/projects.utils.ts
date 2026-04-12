@@ -4,7 +4,10 @@ import type { ProjectItem } from './projects.types';
 
 // The orbit text is intentionally repeated so the ring still looks continuous during rotation.
 export function buildOrbitLabel(title: string) {
-  return Array.from(`• ${title.toUpperCase()} • `.repeat(4));
+  const orbitLabel = `• ${title.toUpperCase()} • `;
+  const repeatCount = Math.max(2, Math.min(4, Math.round(56 / orbitLabel.length)));
+
+  return Array.from(orbitLabel.repeat(repeatCount));
 }
 
 // Positions each glyph on an ellipse and fades the back half so the ring reads like a 3D orbit.

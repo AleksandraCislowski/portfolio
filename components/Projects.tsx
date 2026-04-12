@@ -392,6 +392,8 @@ export default function Projects() {
             previousSlideLabel={t.projects.modalSliderPrevious}
             nextSlideLabel={t.projects.modalSliderNext}
             visitSiteLabel={t.projects.visitSite}
+            visitCodeLabel={t.projects.visitCode}
+            visitRecommendationLabel={t.projects.visitRecommendation}
             onClose={closeProjectModal}
             shouldReduceMotion={shouldReduceMotion}
           />
