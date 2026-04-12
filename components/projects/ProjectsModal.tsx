@@ -223,10 +223,11 @@ function ProjectFactsCard({
       {links.length > 0 ? (
         <Box
           sx={{
-            mt: 1.5,
+            mt: 2,
             display: 'flex',
             flexWrap: 'wrap',
-            gap: 1,
+            justifyContent: 'center',
+            gap: 1.25,
           }}
         >
           {links.map((link) => (
@@ -239,7 +240,9 @@ function ProjectFactsCard({
               sx={{
                 display: 'inline-flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: 1,
+                minWidth: { xs: '100%', sm: 168 },
                 px: 1.75,
                 py: 1.15,
                 borderRadius: 2,

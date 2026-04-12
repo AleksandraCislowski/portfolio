@@ -101,39 +101,41 @@
     "items": [
       {
         "title": "FUNKOLOGI",
-        "description": "A full redesign and implementation for a psychologist's website, focused on trust, clearer positioning, accessibility, SEO, and a setup that supports easier self-managed content updates.",
+        "description": "A production-oriented website and resource library for a Swedish psychology practice, combining a polished public experience with a protected Firebase-backed admin workflow for publishing downloadable PDF materials.",
         "eyebrow": "Case study / redesign + delivery",
         "paragraphs": [
-          "The starting point was straightforward: the client had previously built her own WordPress site, but the result did not communicate professionalism or trust. On top of that, she needed a setup that would let her add materials herself instead of relying on a developer for every update.",
-          "I approached the work as a mix of redesign, information architecture cleanup, and technical groundwork for future content growth. Beyond the visual layer, a key part of the delivery was building a concrete content flow: a public materials library with search, an admin area, authentication, and a form for uploading PDFs with metadata.",
-          "The final result was a modern Next.js website with stronger branding, clearer messaging, a structured materials library, and a working Firebase-backed admin flow. It was also built with accessibility, SEO, and long-term maintainability in mind. The key business outcome was simple: the client now has a site that looks credible and supports self-managed publishing and organizing of new resources."
+          "FUNKOLOGI is a Swedish psychology practice focused on neuropsychology, autistic children, and family support. The starting point was straightforward: the client had previously built her own WordPress site, but the result did not communicate the level of professionalism, calm, and trust needed for sensitive specialist work.",
+          "I treated the project as both a redesign and a small content platform. The public site was rebuilt around clearer positioning, SEO, accessibility, contact paths, practitioner credibility, and a searchable resource library organized into practical material categories such as energy and stress, structure and routines, social skills, and feelings and demand sensitivity.",
+          "The most important operational piece was the protected admin workflow. I built an allowlisted admin area with Auth.js Credentials authentication, Firebase Authentication, short-lived sessions, idle logout handling, and server-side validation so the client can upload PDFs, edit metadata, manage categories and keywords, and delete resources without touching code.",
+          "Behind the scenes, Firebase Storage holds the PDF files and generated preview images, while Firestore is the source of truth for titles, descriptions, keywords, file metadata, storage paths, download tokens, page counts, and preview URLs. The upload flow also processes PDFs, extracts page counts, generates first-page PNG previews, and revalidates the public category pages after content changes.",
+          "The final result is a maintainable, mobile-first Next.js application that pairs a polished marketing experience with a production-oriented publishing workflow. The business outcome is simple: the client now has a credible website and a practical self-managed resource library for downloadable materials."
         ],
         "bulletPoints": [
-          "Moved the brand away from a cluttered self-built WordPress site into a polished custom frontend experience.",
-          "Designed a calm and trustworthy visual identity for families seeking specialist psychological support.",
-          "Simplified the content structure so visitors can quickly understand the offer, specialization, and next steps.",
-          "Designed a materials library with search, popular queries, and clear category cards.",
-          "Built an admin area with login, a published resources list, and edit/delete actions.",
-          "Added a PDF publishing flow with metadata, keywords, and file upload handling.",
-          "Connected Firebase Authentication, Storage, and Firestore as the content management backbone.",
-          "Built the project with accessibility, SEO, future growth, and scalable content operations in mind."
+          "Rebuilt a self-made WordPress presence into a custom Next.js App Router experience with stronger trust, clearer positioning, SEO metadata, and structured content delivery.",
+          "Designed a calm, accessible, mobile-first interface for families seeking specialist psychological support around neuropsychology, autism, and everyday family life.",
+          "Created a searchable public resource library with generated category routes, keyword suggestions, PDF cards, preview images, file metadata, open links, and direct download actions.",
+          "Built a protected admin area for allowlisted users with Auth.js Credentials authentication, Firebase Authentication, short-lived JWT sessions, and idle logout handling.",
+          "Implemented server actions for material upload, metadata updates, deletion, validation, and cache revalidation after content changes.",
+          "Added a PDF processing pipeline that extracts page counts and generates first-page PNG previews during upload.",
+          "Connected Firestore, Firebase Storage, Firebase Admin SDK, and download-token metadata so materials can be managed outside the repository.",
+          "Kept static category definitions versioned in TypeScript while merging them with dynamic Firestore documents at request time."
         ],
         "meta": [
           {
             "label": "Role",
-            "value": "UX/UI, frontend, delivery"
+            "value": "UX/UI, frontend, architecture, delivery"
           },
           {
             "label": "Project type",
-            "value": "Service website + content hub"
+            "value": "Service website + protected resource library"
           },
           {
             "label": "Stack",
-            "value": "Next.js, React, MUI, Firebase"
+            "value": "Next.js 16, React 19, TypeScript, MUI 7, Firebase, Auth.js"
           },
           {
             "label": "Primary goal",
-            "value": "Trust + materials library + self-managed publishing"
+            "value": "Trust + searchable PDF library + self-managed publishing"
           }
         ],
         "slides": [
@@ -146,31 +148,38 @@
           },
           {
             "title": "Materials library and search",
-            "caption": "Here you can see the public materials section with search, popular query shortcuts, and category cards that help users reach the right content faster.",
+            "caption": "Here you can see the public materials section with search, keyword suggestions, and category cards for practical themes like energy, routines, social skills, and demand sensitivity.",
             "imageSrc": "/images/projects/funkologi/funkologi2.png",
             "imageAlt": "Funcology specialization section",
             "imageAspectRatio": "1032 / 994"
           },
           {
             "title": "Admin login",
-            "caption": "This view shows the lightweight login screen that gives the client access to the admin area for managing materials.",
+            "caption": "This view shows the protected sign-in flow for the allowlisted admin area, backed by Firebase Authentication and Auth.js Credentials sessions.",
             "imageSrc": "/images/projects/funkologi/funkologi3.png",
             "imageAlt": "Funcology materials overview",
             "imageAspectRatio": "494 / 491"
           },
           {
             "title": "Published materials dashboard",
-            "caption": "This screen highlights the actual content operations flow: a list of published PDFs, search, and edit/delete actions for each resource.",
-            "imageSrc": "/images/projects/funkologi/Screenshot 2026-04-08 at 20.53.59.png",
-            "imageAlt": "Funcology article or content detail view",
+            "caption": "This screen highlights the content operations flow: published PDF resources, searchable metadata, category context, preview assets, and edit/delete actions.",
+            "imageSrc": "/images/projects/funkologi/funkologi4.png",
+            "imageAlt": "Funkologi admin dashboard with published PDF materials",
             "imageAspectRatio": "933 / 1053"
           },
           {
             "title": "Upload PDF modal",
-            "caption": "The final screenshot shows the publishing form with title, description, category, keywords, and file upload gathered into one clear workflow.",
+            "caption": "The final screenshot shows the PDF publishing workflow with title, description, category, keywords, upload validation, preview generation, and Firestore metadata creation.",
             "imageSrc": "/images/projects/funkologi/funkologi5.png",
-            "imageAlt": "Funcology detailed section in a narrow layout",
+            "imageAlt": "Funkologi admin modal for uploading a new PDF material",
             "imageAspectRatio": "615 / 760"
+          },
+          {
+            "title": "PDF category page",
+            "caption": "This public category view shows what visitors see after opening one of the four material categories: a focused PDF list with search, popular keyword shortcuts, preview thumbnails, page counts, file sizes, open links, and download actions.",
+            "imageSrc": "/images/projects/funkologi/funkologi6.png",
+            "imageAlt": "Funkologi public PDF category page with searchable material cards",
+            "imageAspectRatio": "1186 / 892"
           }
         ],
         "liveUrl": "https://funkologi.com/",
@@ -226,22 +235,24 @@
       },
       {
         "title": "Northstar Commerce",
-        "description": "A product-style e-commerce operations dashboard for monitoring revenue, conversion, order flow, acquisition performance, customer retention, and operational risk in one workspace.",
+        "description": "A portfolio case study for an e-commerce operations dashboard that brings revenue, conversion, order flow, acquisition performance, customer insights, and operational risk into one workspace.",
         "eyebrow": "Case study / e-commerce operations dashboard",
         "paragraphs": [
-          "Northstar Commerce was shaped as a focused dashboard for an e-commerce operations manager rather than a generic analytics demo. The goal was to make the product story clearer: who the workspace is for, which daily decisions it supports, and why each view exists.",
-          "The product workflow moves from top-line storefront health into operational follow-up. The overview helps users review revenue, orders, average order value, conversion rate, retention, refund signals, channel performance, category mix, loyalty tiers, and order risk. The Order Intelligence view then turns that monitoring layer into a searchable record-level workspace with saved views, filters, quick presets, summary cards, a data table, and a watchlist for active issues.",
-          "Supporting Account and Preferences screens were treated as real product surfaces instead of placeholders. The final experience uses a restrained data palette, clearer chart hierarchy, product-oriented copy, light and dark theme readability improvements, and responsive summaries that keep dense charts and full grids reserved for larger screens."
+          "Northstar Commerce is a portfolio project for an e-commerce operations dashboard. It was shaped as a product-style workspace rather than a generic analytics demo, with a clear primary user: an e-commerce operations manager who needs to monitor storefront performance and act on operational issues quickly.",
+          "The product story centers on a practical daily workflow: review top-line storefront health, spot movement in acquisition channels, retention, conversion quality, refunds, fulfillment delays, and order risk, then drill into the records that need follow-up. The main promise is one workspace for moving from signal to action without losing context.",
+          "The Overview Dashboard works as an executive and operational summary. It covers KPI cards for net revenue, orders, average order value, and conversion rate, then adds revenue trends, retention and refund signals, customer mix, acquisition channels, category demand, loyalty tiers, channel efficiency, and risk-oriented insight widgets.",
+          "The Order Intelligence view extends the dashboard into a record-level operations workspace. It includes saved views, explicit filters, quick presets, summary cards for tracked orders and risk exposure, a searchable data table, and a watchlist panel for current issues and follow-up notes.",
+          "Account and Preferences were reframed as real product views rather than placeholder pages. The final experience includes workspace identity, reporting preferences, visible metrics, alerts, digest emails, and shared dashboard settings, while keeping the implementation portfolio-scoped with demo data and preview-only feedback."
         ],
         "bulletPoints": [
-          "Designed the project around a specific primary user: an e-commerce operations manager.",
-          "Built an overview dashboard for revenue, orders, average order value, conversion, retention, refunds, channel performance, category mix, and order risk.",
-          "Created an Order Intelligence workspace with saved views, explicit filters, search, quick presets, summary cards, an operational table, and watchlist notes.",
-          "Reframed Account and Preferences as supporting product screens for workspace identity, reporting preferences, alerts, digest emails, visible metrics, and shared dashboards.",
-          "Used product-oriented e-commerce terminology so the dashboard feels like an operations tool rather than a template demo.",
-          "Refined the visual system around navy, teal, sage, amber, and coral with improved chart readability in light and dark themes.",
-          "Kept the implementation portfolio-scoped with demo data and preview-only actions while preserving a clear product narrative.",
-          "Delivered the project with a clean production build and lint pass."
+          "Framed the product around a specific primary user: an e-commerce operations manager responsible for revenue, conversion health, order flow, channel performance, and customer follow-up.",
+          "Designed the workflow to move from high-level storefront signals into operational detail: overview metrics, trend interpretation, record-level investigation, and workspace settings.",
+          "Built an Overview Dashboard with net revenue, orders, average order value, conversion rate, revenue trends, retention, refunds, acquisition channels, customer mix, category demand, and loyalty indicators.",
+          "Created an Order Intelligence workspace with saved views, explicit filter controls, quick presets, risk summaries, searchable operational records, and a watchlist for active follow-up.",
+          "Reframed Account and Preferences as supporting product screens for workspace identity, reporting preferences, visible metrics, alerts, digest emails, and shared dashboards.",
+          "Refined the visual direction with a restrained data palette, stronger dashboard hierarchy, contextual headers, subtle brand watermark treatment, and product-oriented e-commerce copy.",
+          "Improved readability across light and dark themes, with responsive summary views for mobile and denser charts and full data grids reserved for tablet and desktop screens.",
+          "Kept the scope portfolio-appropriate with demo data and preview-only actions while delivering a clean production build and lint pass."
         ],
         "meta": [
           {
@@ -250,7 +261,7 @@
           },
           {
             "label": "Project type",
-            "value": "E-commerce operations dashboard"
+            "value": "Portfolio e-commerce operations dashboard"
           },
           {
             "label": "Stack",
@@ -258,21 +269,21 @@
           },
           {
             "label": "Primary goal",
-            "value": "Storefront health + operational follow-up"
+            "value": "Storefront monitoring + fast operational follow-up"
           }
         ],
         "slides": [
           {
             "title": "Overview Dashboard",
-            "caption": "The main view focuses on daily storefront monitoring through KPI cards, revenue trends, retention and refund signals, acquisition channels, customer mix, category demand, and loyalty indicators."
+            "caption": "The main view acts as an executive and operational summary, combining KPI cards for revenue, orders, average order value, and conversion with trend, retention, refund, channel, customer, category, risk, and loyalty signals."
           },
           {
             "title": "Order Intelligence",
-            "caption": "The analytics workspace extends the dashboard into record-level investigation with saved views, filter controls, quick presets, searchable orders, risk exposure summaries, and a watchlist for follow-up."
+            "caption": "The analytics workspace turns dashboard signals into record-level follow-up with saved views, explicit filters, quick presets, searchable order records, risk exposure summaries, and a watchlist for current issues."
           },
           {
             "title": "Account and Preferences",
-            "caption": "The supporting screens cover workspace identity, reporting preferences, visible metrics, alert settings, digest emails, and shared dashboards so the product feels complete beyond the analytics views."
+            "caption": "The supporting screens make the project feel like a real product system, covering workspace identity, reporting preferences, visible metrics, alerts, digest emails, shared dashboards, and preview-only workspace actions."
           }
         ],
         "liveUrl": "https://northstar-commerce.vercel.app/",

@@ -101,44 +101,46 @@
     "items": [
       {
         "title": "FUNKOLOGI",
-        "description": "En redesign och implementation av en psykologs webbplats med fokus på förtroende, tydligare positionering, tillgänglighet, SEO och en struktur som gör innehållshantering enklare för kunden själv.",
+        "description": "En produktionsinriktad webbplats och resursbibliotek för en svensk psykologmottagning, där en polerad publik upplevelse kombineras med ett skyddat Firebase-baserat adminflöde för publicering av nedladdningsbara PDF-material.",
         "eyebrow": "Case study / redesign + leverans",
         "paragraphs": [
-          "Utgångsläget var tydligt: kunden hade tidigare byggt sin WordPress-sida själv, men resultatet förmedlade inte rätt nivå av professionalism eller trygghet. Samtidigt behövde hon kunna lägga till material själv utan att vara beroende av en utvecklare för varje uppdatering.",
-          "Jag behandlade projektet som en kombination av redesign, förbättrad informationsarkitektur och tekniskt grundarbete för framtida innehållstillväxt. Utöver den visuella delen var det viktigt att skapa ett konkret flöde för innehållshantering: ett publikt materialbibliotek med sök, en adminyta, inloggning och ett formulär för att ladda upp PDF:er med metadata.",
-          "Slutresultatet blev en modern Next.js-sajt med starkare branding, tydligare budskap, ett strukturerat materialbibliotek och ett fungerande adminflöde byggt på Firebase. Lösningen byggdes också med tillgänglighet, SEO och långsiktig förvaltning i åtanke. Den viktigaste affärseffekten var att kunden nu har en webbplats som känns trovärdig och gör det möjligt att själv publicera och organisera nytt material."
+          "FUNKOLOGI är en svensk psykologmottagning med fokus på neuropsykologi, autistiska barn och stöd till familjer. Utgångsläget var tydligt: kunden hade tidigare byggt sin WordPress-sida själv, men resultatet förmedlade inte den nivå av professionalism, lugn och förtroende som behövs för känsligt specialistarbete.",
+          "Jag behandlade projektet både som en redesign och som en liten innehållsplattform. Den publika webbplatsen byggdes om kring tydligare positionering, SEO, tillgänglighet, kontaktvägar, behandlarens trovärdighet och ett sökbart resursbibliotek organiserat i praktiska materialkategorier som energi och stress, struktur och rutiner, sociala färdigheter samt känslor och kravkänslighet.",
+          "Den viktigaste operativa delen var det skyddade adminflödet. Jag byggde en adminyta för allowlistade användare med Auth.js Credentials-inloggning, Firebase Authentication, kortlivade sessioner, idle logout och server-side validation så att kunden kan ladda upp PDF:er, redigera metadata, hantera kategorier och nyckelord samt ta bort resurser utan att röra kod.",
+          "Bakom kulisserna lagras PDF-filer och genererade preview-bilder i Firebase Storage, medan Firestore är källan för titlar, beskrivningar, nyckelord, filmetadata, storage paths, download tokens, sidantal och preview-URL:er. Uppladdningsflödet bearbetar också PDF:er, extraherar sidantal, genererar PNG-previews från första sidan och revaliderar de publika kategorisidorna efter innehållsändringar.",
+          "Slutresultatet är en förvaltningsbar, mobile-first Next.js-applikation som kombinerar en polerad marknadsföringsupplevelse med ett produktionsinriktat publiceringsflöde. Affärseffekten är enkel: kunden har nu en trovärdig webbplats och ett praktiskt självhanterat resursbibliotek för nedladdningsbart material."
         ],
         "bulletPoints": [
-          "Flyttade varumärket från en rörig egenbyggd WordPress-sida till en mer genomarbetad frontendupplevelse.",
-          "Skapade ett lugnt och förtroendeingivande visuellt språk för familjer som söker specialiststöd.",
-          "Förenklade innehållsstrukturen så att besökare snabbt förstår erbjudandet, specialiseringen och nästa steg.",
-          "Designade ett materialbibliotek med sök, populära sökord och tydliga kategorikort.",
-          "Byggde en adminyta med inloggning, lista över publicerat material och åtgärder för redigering och borttagning.",
-          "La till ett publiceringsflöde för PDF:er med metadata, nyckelord och filuppladdning.",
-          "Kopplade Firebase Authentication, Storage och Firestore som ryggrad för innehållshanteringen.",
-          "Utformade lösningen med tillgänglighet, SEO, framtida tillväxt och skalbar innehållshantering i åtanke."
+          "Byggde om en egenbyggd WordPress-närvaro till en anpassad Next.js App Router-upplevelse med starkare förtroende, tydligare positionering, SEO-metadata och strukturerad innehållsleverans.",
+          "Designade ett lugnt, tillgängligt och mobile-first gränssnitt för familjer som söker specialiststöd kring neuropsykologi, autism och vardagsnära familjeliv.",
+          "Skapade ett sökbart publikt resursbibliotek med genererade kategorirutter, nyckelordsförslag, PDF-kort, preview-bilder, filmetadata, öppna länkar och direkta nedladdningsåtgärder.",
+          "Byggde en skyddad adminyta för allowlistade användare med Auth.js Credentials-inloggning, Firebase Authentication, kortlivade JWT-sessioner och idle logout.",
+          "Implementerade server actions för uppladdning av material, metadatauppdateringar, borttagning, validering och cache revalidation efter innehållsändringar.",
+          "La till en PDF-bearbetningspipeline som extraherar sidantal och genererar PNG-previews från första sidan vid uppladdning.",
+          "Kopplade Firestore, Firebase Storage, Firebase Admin SDK och download-token-metadata så att material kan hanteras utanför repositoryt.",
+          "Behöll statiska kategoridefinitioner versionerade i TypeScript och slog ihop dem med dynamiska Firestore-dokument vid request time."
         ],
         "meta": [
           {
             "label": "Roll",
-            "value": "UX/UI, frontend, leverans"
+            "value": "UX/UI, frontend, arkitektur, leverans"
           },
           {
             "label": "Projekttyp",
-            "value": "Tjänstewebb + content hub"
+            "value": "Tjänstewebb + skyddat resursbibliotek"
           },
           {
             "label": "Stack",
-            "value": "Next.js, React, MUI, Firebase"
+            "value": "Next.js 16, React 19, TypeScript, MUI 7, Firebase, Auth.js"
           },
           {
             "label": "Huvudmål",
-            "value": "Förtroende + materialbibliotek + egen publicering"
+            "value": "Förtroende + sökbart PDF-bibliotek + egen publicering"
           }
         ],
         "slides": [
           {
-            "title": "Landningssida / first impression",
+            "title": "Landningssida / första intryck",
             "caption": "Den här skärmen visar en lugn hero med stark rubrik, tydliga CTA-knappar och ämnestaggar som direkt sätter tonen för varumärket.",
             "imageSrc": "/images/projects/funkologi/funkologi1.png",
             "imageAlt": "Startsida för Funcology",
@@ -146,31 +148,38 @@
           },
           {
             "title": "Materialbibliotek och sök",
-            "caption": "Här syns den publika materialytan med sökfält, populära sökord och kategorikort som hjälper användaren att hitta rätt innehåll snabbare.",
+            "caption": "Här syns den publika materialytan med sök, nyckelordsförslag och kategorikort för praktiska teman som energi, rutiner, sociala färdigheter och kravkänslighet.",
             "imageSrc": "/images/projects/funkologi/funkologi2.png",
             "imageAlt": "Sektion om specialisering på Funcology",
             "imageAspectRatio": "1032 / 994"
           },
           {
             "title": "Admininloggning",
-            "caption": "Den här vyn visar den enkla inloggningsskärmen som ger kunden tillgång till adminytan för att hantera material.",
+            "caption": "Den här vyn visar det skyddade inloggningsflödet för den allowlistade adminytan, byggt med Firebase Authentication och Auth.js Credentials-sessioner.",
             "imageSrc": "/images/projects/funkologi/funkologi3.png",
             "imageAlt": "Översikt av material på Funcology",
             "imageAspectRatio": "494 / 491"
           },
           {
             "title": "Dashboard för publicerat material",
-            "caption": "Den här skärmen lyfter det faktiska arbetsflödet för innehåll: lista över publicerade PDF:er, sök och åtgärder för att redigera eller ta bort resurser.",
-            "imageSrc": "/images/projects/funkologi/Screenshot 2026-04-08 at 20.53.59.png",
-            "imageAlt": "Artikel- eller innehållsvy på Funcology",
+            "caption": "Den här skärmen lyfter innehållsflödet: publicerade PDF-resurser, sökbar metadata, kategorikontext, preview-assets och åtgärder för redigering eller borttagning.",
+            "imageSrc": "/images/projects/funkologi/funkologi4.png",
+            "imageAlt": "Funkologi admin-dashboard med publicerade PDF-material",
             "imageAspectRatio": "933 / 1053"
           },
           {
             "title": "Modal för uppladdning av PDF",
-            "caption": "Den sista skärmen visar publiceringsformuläret med titel, beskrivning, kategori, nyckelord och filuppladdning samlade i ett tydligt arbetsflöde.",
+            "caption": "Den sista skärmen visar PDF-publiceringsflödet med titel, beskrivning, kategori, nyckelord, uppladdningsvalidering, preview-generering och skapande av Firestore-metadata.",
             "imageSrc": "/images/projects/funkologi/funkologi5.png",
-            "imageAlt": "Smalare detaljvy på Funcology",
+            "imageAlt": "Funkologi admin-modal för uppladdning av nytt PDF-material",
             "imageAspectRatio": "615 / 760"
+          },
+          {
+            "title": "PDF-kategorisida",
+            "caption": "Den här publika kategorivyn visar vad besökaren ser efter att ha öppnat en av de fyra materialkategorierna: en fokuserad PDF-lista med sök, populära nyckelordsgenvägar, preview-bilder, sidantal, filstorlekar, öppna länkar och nedladdningsåtgärder.",
+            "imageSrc": "/images/projects/funkologi/funkologi6.png",
+            "imageAlt": "Funkologi publik PDF-kategorisida med sökbara materialkort",
+            "imageAspectRatio": "1186 / 892"
           }
         ],
         "liveUrl": "https://funkologi.com/",
@@ -226,22 +235,24 @@
       },
       {
         "title": "Northstar Commerce",
-        "description": "En produktinriktad dashboard för e-handelsdrift där intäkter, konvertering, orderflöde, förvärvskanaler, kundretention och operativ risk samlas i en arbetsyta.",
+        "description": "En portfolio-case study för en dashboard inom e-handelsdrift som samlar intäkter, konvertering, orderflöde, acquisition performance, kundinsikter och operativ risk i en arbetsyta.",
         "eyebrow": "Case study / dashboard för e-handelsdrift",
         "paragraphs": [
-          "Northstar Commerce formades som en fokuserad dashboard för en e-commerce operations manager, inte som en generisk analytics-demo. Målet var att göra produktberättelsen tydligare: vem arbetsytan är till för, vilka dagliga beslut den stödjer och varför varje vy finns.",
-          "Produktflödet går från övergripande storefront-hälsa till operativ uppföljning. Översikten hjälper användaren att följa intäkter, orders, average order value, konverteringsgrad, retention, refunds, kanalprestanda, kategorimix, lojalitetsnivåer och orderrisk. Order Intelligence-vyn gör sedan monitoreringen till en sökbar arbetsyta på radnivå med sparade vyer, filter, snabbval, sammanfattningskort, datatabell och watchlist för aktuella ärenden.",
-          "Account och Preferences behandlades som riktiga produktytor i stället för placeholders. Slutresultatet använder en återhållen datapalette, tydligare diagramhierarki, produktorienterad copy, bättre läsbarhet i både ljust och mörkt tema samt responsiva sammanfattningar där täta diagram och fulla datagrids sparas för större skärmar."
+          "Northstar Commerce är ett portfolio-projekt för en dashboard inom e-handelsdrift. Det formades som en produktinriktad arbetsyta snarare än en generisk analytics-demo, med en tydlig primär användare: en e-commerce operations manager som behöver följa storefront performance och agera snabbt på operativa problem.",
+          "Produktberättelsen utgår från ett praktiskt dagligt arbetsflöde: granska övergripande storefront-hälsa, se rörelser i acquisition channels, retention, conversion quality, refunds, fulfillment delays och orderrisk, och sedan gå ner i de poster som behöver uppföljning. Huvudlöftet är en arbetsyta för att gå från signal till åtgärd utan att tappa kontext.",
+          "Overview Dashboard fungerar som en executive och operational summary. Den innehåller KPI-kort för net revenue, orders, average order value och conversion rate, och bygger vidare med revenue trends, retention- och refund-signaler, customer mix, acquisition channels, category demand, loyalty tiers, channel efficiency och riskorienterade insight widgets.",
+          "Order Intelligence-vyn förlänger dashboarden till en operativ arbetsyta på radnivå. Den innehåller sparade vyer, tydliga filter, quick presets, sammanfattningskort för tracked orders och risk exposure, en sökbar datatabell och en watchlist-panel för aktuella ärenden och uppföljningsanteckningar.",
+          "Account och Preferences ramades om som riktiga produktvyer i stället för placeholders. Slutupplevelsen innehåller workspace identity, reporting preferences, visible metrics, alerts, digest emails och shared dashboard settings, samtidigt som implementationen hålls portfolio-anpassad med demodata och preview-only feedback."
         ],
         "bulletPoints": [
-          "Designade projektet runt en tydlig primär användare: en e-commerce operations manager.",
-          "Byggde en översiktsdashboard för intäkter, orders, average order value, konvertering, retention, refunds, kanalprestanda, kategorimix och orderrisk.",
-          "Skapade en Order Intelligence-arbetsyta med sparade vyer, tydliga filter, sök, snabbval, sammanfattningskort, operativ datatabell och watchlist-anteckningar.",
-          "Ramade om Account och Preferences som stödjande produktytor för workspace identity, rapportinställningar, alerts, digest emails, synliga metrics och shared dashboards.",
-          "Använde mer realistisk e-handelsterminologi så att dashboarden känns som ett operativt verktyg snarare än en templatedemo.",
-          "Förfinade det visuella systemet runt navy, teal, sage, amber och coral med bättre läsbarhet i diagram för både ljust och mörkt tema.",
-          "Höll implementationen portfolio-anpassad med demodata och preview-only actions, men med en tydlig produktberättelse.",
-          "Levererade projektet med clean production build och lint pass."
+          "Ramade in produkten kring en tydlig primär användare: en e-commerce operations manager med ansvar för revenue, conversion health, order flow, channel performance och customer follow-up.",
+          "Designade arbetsflödet för att gå från övergripande storefront-signaler till operativ detalj: overview metrics, trend interpretation, record-level investigation och workspace settings.",
+          "Byggde en Overview Dashboard med net revenue, orders, average order value, conversion rate, revenue trends, retention, refunds, acquisition channels, customer mix, category demand och loyalty indicators.",
+          "Skapade en Order Intelligence-arbetsyta med sparade vyer, tydliga filterkontroller, quick presets, risksammanfattningar, sökbara operativa poster och en watchlist för aktiv uppföljning.",
+          "Ramade om Account och Preferences som stödjande produktytor för workspace identity, reporting preferences, visible metrics, alerts, digest emails och shared dashboards.",
+          "Förfinade den visuella riktningen med en återhållen datapalette, starkare dashboardhierarki, contextual headers, subtil brand watermark-behandling och produktorienterad e-handelscopy.",
+          "Förbättrade läsbarheten i både ljust och mörkt tema, med responsiva sammanfattningsvyer för mobile och tätare diagram samt fulla datagrids reserverade för tablet och desktop.",
+          "Höll scopet portfolio-anpassat med demodata och preview-only actions, samtidigt som projektet levererades med clean production build och lint pass."
         ],
         "meta": [
           {
@@ -250,7 +261,7 @@
           },
           {
             "label": "Projekttyp",
-            "value": "Dashboard för e-handelsdrift"
+            "value": "Portfolio-dashboard för e-handelsdrift"
           },
           {
             "label": "Stack",
@@ -258,21 +269,21 @@
           },
           {
             "label": "Huvudmål",
-            "value": "Storefront-hälsa + operativ uppföljning"
+            "value": "Storefront-monitorering + snabb operativ uppföljning"
           }
         ],
         "slides": [
           {
             "title": "Overview Dashboard",
-            "caption": "Huvudvyn fokuserar på daglig monitorering av storefront genom KPI-kort, revenue trends, retention- och refund-signaler, acquisition channels, customer mix, category demand och loyalty indicators."
+            "caption": "Huvudvyn fungerar som en executive och operational summary, där KPI-kort för revenue, orders, average order value och conversion kombineras med trend-, retention-, refund-, channel-, customer-, category-, risk- och loyalty-signaler."
           },
           {
             "title": "Order Intelligence",
-            "caption": "Analytics-arbetsytan förlänger dashboarden till undersökning på radnivå med sparade vyer, filterkontroller, snabbval, sökbara orders, sammanfattning av risk exposure och en watchlist för uppföljning."
+            "caption": "Analytics-arbetsytan gör dashboardsignaler till uppföljning på radnivå med sparade vyer, tydliga filter, quick presets, sökbara orderposter, sammanfattningar av risk exposure och en watchlist för aktuella ärenden."
           },
           {
             "title": "Account och Preferences",
-            "caption": "De stödjande vyerna täcker workspace identity, reporting preferences, synliga metrics, alert settings, digest emails och shared dashboards så att produkten känns komplett även utanför analytics-vyerna."
+            "caption": "De stödjande vyerna gör projektet mer som ett riktigt produktsystem, med workspace identity, reporting preferences, visible metrics, alerts, digest emails, shared dashboards och preview-only workspace actions."
           }
         ],
         "liveUrl": "https://northstar-commerce.vercel.app/",
