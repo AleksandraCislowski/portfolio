@@ -19,6 +19,10 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
+function toJsonLd(data: unknown) {
+  return JSON.stringify(data).replace(/</g, '\\u003c');
+}
+
 export const metadata: Metadata = {
   title: SITE_CONFIG.seo.title,
   description: SITE_CONFIG.seo.description,
@@ -47,6 +51,8 @@ export const metadata: Metadata = {
     description: SITE_CONFIG.seo.description,
     url: SITE_CONFIG.siteUrl,
     siteName: SITE_CONFIG.seo.siteName,
+    locale: 'en_US',
+    alternateLocale: ['sv_SE'],
     type: 'website',
     images: [
       {
@@ -61,12 +67,18 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: SITE_CONFIG.seo.title,
     description: SITE_CONFIG.seo.description,
-    creator: `@${SITE_CONFIG.brandName.replace(/\s+/g, '')}`,
     images: ['/twitter-image'],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
 };
 
@@ -90,6 +102,7 @@ export default async function RootLayout({
       '@context': 'https://schema.org',
       '@type': 'Person',
       name: SITE_CONFIG.brandName,
+      alternateName: 'AleksandraCislowski',
       url: SITE_CONFIG.siteUrl,
       image: avatarUrl,
       jobTitle: SITE_CONFIG.professionalTitle,
@@ -114,6 +127,21 @@ export default async function RootLayout({
         'Scrum',
         'Product Delivery',
       ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ProfilePage',
+      name: SITE_CONFIG.seo.title,
+      url: SITE_CONFIG.siteUrl,
+      description: SITE_CONFIG.seo.description,
+      inLanguage: LANGUAGES,
+      about: {
+        '@type': 'Person',
+        name: SITE_CONFIG.brandName,
+        url: SITE_CONFIG.siteUrl,
+        image: avatarUrl,
+        jobTitle: SITE_CONFIG.professionalTitle,
+      },
     },
     {
       '@context': 'https://schema.org',
@@ -158,7 +186,7 @@ export default async function RootLayout({
         </a>
         <script
           type='application/ld+json'
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          dangerouslySetInnerHTML={{ __html: toJsonLd(structuredData) }}
         />
         <LanguageProvider initialLanguage={initialLanguage}>
           <ThemeRegistry>

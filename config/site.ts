@@ -42,7 +42,7 @@ export const SITE_CONFIG = {
   seo: {
     title: 'Aleksandra Cislowski | Frontend Developer & Scrum Master',
     description:
-      'Portfolio of Aleksandra Cislowski — frontend developer and Scrum Master building polished React, Next.js, and TypeScript experiences with strong delivery thinking.',
+      'Official portfolio of Aleksandra Cislowski, a Stockholm-based Frontend Developer and Scrum Master building polished React, Next.js, and TypeScript experiences with strong delivery thinking.',
     siteName: 'Aleksandra Cislowski Portfolio',
     ogEyebrow: 'Frontend Developer • Scrum Master • Product Delivery',
     ogHeadline: 'Building polished frontend experiences with strong delivery thinking.',
