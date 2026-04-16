@@ -38,6 +38,7 @@ export const SITE_CONFIG = {
     coverLetter:
       '/documents/Alva Labs Personality Test Report - Aleksandra Cislowski.pdf',
     funkologiReference: '/documents/Referens_funkologi.pdf',
+    peturRecommendation: '/documents/Recommendation-Pétur.pdf',
   },
   seo: {
     title: 'Aleksandra Cislowski | Frontend Developer & Scrum Master',

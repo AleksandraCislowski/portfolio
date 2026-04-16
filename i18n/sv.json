@@ -350,6 +350,12 @@
           "description": "Kundreferens för redesign och leverans av Funkologi.",
           "documentId": "funkologiReference",
           "cta": "Visa PDF"
+        },
+        {
+          "title": "Referens från Pétur Valdimarsson",
+          "description": "Mentor- och kollegereferens från Montrima AB, med fokus på frontendutveckling, scrumansvar och projektkoordinering.",
+          "documentId": "peturRecommendation",
+          "cta": "Visa PDF"
         }
       ]
     },

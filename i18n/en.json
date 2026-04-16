@@ -350,6 +350,12 @@
           "description": "Client reference for the Funkologi redesign and delivery.",
           "documentId": "funkologiReference",
           "cta": "View PDF"
+        },
+        {
+          "title": "Reference from Pétur Valdimarsson",
+          "description": "Mentor and coworker reference from Montrima AB, covering frontend development, scrum responsibilities, and project coordination.",
+          "documentId": "peturRecommendation",
+          "cta": "View PDF"
         }
       ]
     },
