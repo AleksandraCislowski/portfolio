@@ -13,6 +13,7 @@ export type ProjectLayout = {
 
 export type ProjectConfig = {
   slug: ProjectSlug;
+  itemIndex: number;
   desktop: ProjectLayout;
   tablet: ProjectLayout;
   mobile: ProjectLayout;

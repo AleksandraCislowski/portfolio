@@ -327,27 +327,31 @@ export default function Projects() {
         </PlanetHeader>
 
         <PlanetStage>
-          {PROJECTS.map((project, index) => (
-            <ProjectPlanet
-              key={project.slug}
-              index={index}
-              item={t.projects.items[index]}
-              isSmDown={effectiveIsSmDown}
-              isMdDown={effectiveIsMdDown}
-              entered={entered}
-              shouldReduceMotion={shouldReduceMotion}
-              orbitProgress={effectiveOrbitProgress}
-              modalVisible={modalVisible}
-              activeProjectIndex={activeProjectIndex}
-              planetRecovering={planetRecovering}
-              planetMotionPaused={planetMotionPaused}
-              openLabel={t.projects.openProject}
-              onOpen={openProjectModal}
-              planetButtonRef={(node) => {
-                planetButtonRefs.current[index] = node;
-              }}
-            />
-          ))}
+          {PROJECTS.map((project, index) => {
+            const item = t.projects.items[project.itemIndex];
+
+            return (
+              <ProjectPlanet
+                key={project.slug}
+                index={index}
+                item={item}
+                isSmDown={effectiveIsSmDown}
+                isMdDown={effectiveIsMdDown}
+                entered={entered}
+                shouldReduceMotion={shouldReduceMotion}
+                orbitProgress={effectiveOrbitProgress}
+                modalVisible={modalVisible}
+                activeProjectIndex={activeProjectIndex}
+                planetRecovering={planetRecovering}
+                planetMotionPaused={planetMotionPaused}
+                openLabel={t.projects.openProject}
+                onOpen={openProjectModal}
+                planetButtonRef={(node) => {
+                  planetButtonRefs.current[index] = node;
+                }}
+              />
+            );
+          })}
 
           {showCourierUfo ? (
             <PlanetCourierUfo aria-hidden='true' $reduceMotion={shouldReduceMotion}>

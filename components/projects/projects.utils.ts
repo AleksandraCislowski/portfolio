@@ -119,10 +119,11 @@ export function getActiveProject(
     return null;
   }
 
-  const item: ProjectItem = translations.items[activeProjectIndex];
+  const project = PROJECTS[activeProjectIndex];
+  const item: ProjectItem = translations.items[project.itemIndex];
 
   return {
-    slug: PROJECTS[activeProjectIndex].slug,
+    slug: project.slug,
     ...item,
   };
 }
