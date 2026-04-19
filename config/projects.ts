@@ -8,7 +8,7 @@ export const PROJECTS: readonly ProjectConfig[] = [
     mobile: { top: '8%', left: '41%', size: 188 },
   },
   {
-    slug: 'personal-blog',
+    slug: 'elsewhere-log',
     desktop: { top: '10%', left: '66%', size: 194 },
     tablet: { top: '14%', left: '66%', size: 172 },
     mobile: { top: '40%', left: '10%', size: 162 },

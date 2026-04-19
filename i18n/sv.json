@@ -186,52 +186,90 @@
         "recommendationUrl": "/documents/Referens_funkologi.pdf"
       },
       {
-        "title": "Personal Blog",
-        "description": "Case study och skärmbilder läggs till i nästa steg.",
-        "eyebrow": "Coming soon",
+        "title": "Elsewhere Log",
+        "description": "En polerad resejournal byggd med Next.js, markdown-inlägg, sökbart arkiv, interaktiva kartor, SEO och ett litet publiceringsflöde för att lägga till nya texter konsekvent.",
+        "eyebrow": "Case study / resejournal + publiceringsflöde",
         "paragraphs": [
-          "Här kommer en fullständig case study för Personal Blog.",
-          "Jag lägger till den slutliga berättelsen om problem, arbetssätt, stack och resultat senare.",
-          "Just nu lämnar vi den här planeten som en placeholder för nästa utvalda projekt."
+          "Elsewhere Log är en ombyggd resejournal som gör personligt reseskrivande till en strukturerad och sökbar editorial produkt. Målet var att lyfta ett äldre bloggprojekt till något som känns mer genomtänkt, lätt att utforska, tillgängligt, SEO-vänligt och enkelt att underhålla över tid.",
+          "Produktupplevelsen är byggd kring utforskande. Läsare kan söka, filtrera, sortera och bläddra bland anteckningar efter plats, land, typ av resa och taggar, medan startsidan ger en snabb överblick genom statistik, utvalda texter och en interaktiv karta.",
+          "Varje reseanteckning fungerar som en rikare editorial sida snarare än en enkel artikel. Inläggen innehåller platskontext, cover image, field notes, taggar, karta, relaterade texter och next/previous navigation så att läsaren kan röra sig vidare utan att tappa sammanhang.",
+          "Content-modellen använder markdown frontmatter som källa för kort, filter, kartor, SEO-metadata, relaterade inlägg och sitemap entries. Jag lade också till ett litet Node.js-script som skapar ett nytt inlägg och en matchande bildmapp från ett kommando, vilket minskar repetitivt arbete och håller nya inlägg konsekventa.",
+          "I ombyggnaden förenklade jag den gamla arkitekturen, tog bort oanvända backend-beroenden, ersatte kontakt-API:t med ett tydligare kontaktflöde, skapade en starkare visuell identitet och lade till förbättringar för accessibility och SEO."
         ],
         "bulletPoints": [
-          "Full projektbeskrivning på väg.",
-          "Skärmbilder kommer senare.",
-          "Implementationsdetaljer läggs till senare.",
-          "Sektionen är tillfälligt markerad som coming soon."
+          "Byggde om en äldre reseblogg till en polerad editorial upplevelse med tydligare produktstruktur, starkare visuell identitet och responsiva layouter för mobile, desktop och ultrawide.",
+          "Skapade ett sökbart arkiv med kombinerade filter för land, resetyp, taggar, plats, titel och excerpt, samtidigt som flödet undviker dead-end states där det går.",
+          "Lade till Leaflet-baserade kartor på startsidan och inläggssidorna med koordinater från markdown frontmatter.",
+          "Strukturerade varje inlägg kring cover image, field notes, platskontext, relaterade texter, taggar och next/previous navigation.",
+          "Använde markdown frontmatter för att driva arkivkort, filtrering, kartor, dynamisk SEO-metadata, social previews, sitemap entries och relaterat innehåll.",
+          "Förbättrade produktionskänslan med Open Graph-metadata, Twitter cards, canonical URLs, JSON-LD, dynamisk sitemap, robots-fil, skip link, synliga focus states, semantiskt innehåll och reduced-motion-stöd.",
+          "Tog bort oanvänd MongoDB- och Nodemailer-infrastruktur och ersatte det gamla kontakt-API:t med en enklare kontaktsida.",
+          "Byggde ett eget publiceringsscript som skapar ett nytt markdown-inlägg och en matchande bildmapp från ett enda kommando."
         ],
         "meta": [
           {
-            "label": "Status",
-            "value": "Coming soon"
+            "label": "Roll",
+            "value": "UX/UI, frontend, content architecture, SEO"
           },
           {
-            "label": "Projekt",
-            "value": "Personal Blog"
+            "label": "Projekttyp",
+            "value": "Resejournal + sökbart editorial arkiv"
           },
           {
-            "label": "Innehall",
-            "value": "Pågår"
+            "label": "Stack",
+            "value": "Next.js, React, CSS Modules, Markdown, gray-matter, react-markdown, Leaflet"
           },
           {
-            "label": "Skärmbilder",
-            "value": "Läggs till senare"
+            "label": "Huvudmål",
+            "value": "Utforskbar resetext + repeterbar publicering"
           }
         ],
         "slides": [
           {
-            "title": "Coming soon",
-            "caption": "Lägg till projektets första skärmbild här."
+            "title": "Resejournalens öppning",
+            "caption": "Startsidan öppnar med en tydlig editorial identitet, en scenisk hero-bild, enkel navigation och en direkt väg in till reseanteckningarna.",
+            "imageSrc": "/images/projects/elsewhere-log/blog1.png",
+            "imageAlt": "Elsewhere Log startsidehero med scenisk vattenfallsillustration och navigation",
+            "imageAspectRatio": "1152 / 746"
           },
           {
-            "title": "Coming soon",
-            "caption": "Lägg till projektets andra skärmbild här."
+            "title": "Kartbaserat arkiv",
+            "caption": "Startsidan gör post metadata till en interaktiv atlas, där Leaflet-markers kombineras med en lättskannad lista över platser som redan har texter.",
+            "imageSrc": "/images/projects/elsewhere-log/blog2.png",
+            "imageAlt": "Elsewhere Log kartsektion med markörer för reseanteckningar och platslista",
+            "imageAspectRatio": "1152 / 853"
           },
           {
-            "title": "Coming soon",
-            "caption": "Lägg till projektets tredje skärmbild här."
+            "title": "Highlights och arkivstatistik",
+            "caption": "Highlights-sektionen ger en snabb överblick över arkivets storlek och lyfter utvalda reseanteckningar som editorial kort med plats, datum, taggar och excerpts.",
+            "imageSrc": "/images/projects/elsewhere-log/blog3.png",
+            "imageAlt": "Elsewhere Log highlights-sektion med arkivstatistik och kort för reseanteckningar",
+            "imageAspectRatio": "1152 / 985"
+          },
+          {
+            "title": "Sök- och filteryta",
+            "caption": "Arkivvyn stödjer sök, filtrering och sortering över notes, countries, cities, tags och trip types utan att göra bläddringen tung.",
+            "imageSrc": "/images/projects/elsewhere-log/blog4.png",
+            "imageAlt": "Elsewhere Log researkiv med sökfält, filter, sortering och arkivstatistik",
+            "imageAspectRatio": "1152 / 730"
+          },
+          {
+            "title": "Detaljsida för reseanteckning",
+            "caption": "Inläggssidor kombinerar field-note metadata, taggar, en platskarta, cover image och längre text så att varje anteckning känns förankrad i sin plats.",
+            "imageSrc": "/images/projects/elsewhere-log/blog5.png",
+            "imageAlt": "Elsewhere Log reseanteckning om Seville med metadatakort, karta, cover image, taggar och artikeltext",
+            "imageAspectRatio": "1084 / 905"
+          },
+          {
+            "title": "Kontaktflöde",
+            "caption": "Kontaktsidan ersätter onödig backend-forminfrastruktur med en direkt och pålitlig e-postväg samt en sekundär väg tillbaka till researkivet.",
+            "imageSrc": "/images/projects/elsewhere-log/blog6.png",
+            "imageAlt": "Elsewhere Log kontaktsida med scenisk vägillustration, e-post-CTA och reseantecknings-CTA",
+            "imageAspectRatio": "1084 / 905"
           }
-        ]
+        ],
+        "liveUrl": "https://blog.aleksandracislowski.com",
+        "githubUrl": "https://github.com/AleksandraCislowski/next-blog"
       },
       {
         "title": "Northstar Commerce",

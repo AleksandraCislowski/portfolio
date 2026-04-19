@@ -186,52 +186,90 @@
         "recommendationUrl": "/documents/Referens_funkologi.pdf"
       },
       {
-        "title": "Personal Blog",
-        "description": "Case study and screenshots will be added next.",
-        "eyebrow": "Coming soon",
+        "title": "Elsewhere Log",
+        "description": "A polished travel journal built with Next.js, markdown posts, searchable archives, interactive maps, SEO, and a small publishing workflow for adding new notes consistently.",
+        "eyebrow": "Case study / travel journal + publishing workflow",
         "paragraphs": [
-          "A full case study for Personal Blog will be added here.",
-          "I will add the final story around the problem, approach, stack, and outcome later.",
-          "For now, this planet stays as a placeholder for the next featured project."
+          "Elsewhere Log is a rebuilt travel journal that turns personal travel writing into a structured, searchable editorial product. The goal was to move an older blog-style project into something that feels intentional, easy to browse, accessible, SEO-friendly, and maintainable enough for regular publishing.",
+          "The product experience is built around exploration. Readers can search, filter, sort, and browse notes by place, country, trip type, and tags, while the homepage gives a quick overview of the archive through stats, highlighted notes, and an interactive map.",
+          "Each travel note works as a richer editorial page rather than a simple article. Posts include location context, a cover image, field notes, tags, a map, related notes, and next/previous navigation so readers can move through the archive without losing orientation.",
+          "The content model uses markdown frontmatter as the source for cards, filters, maps, SEO metadata, related posts, and sitemap entries. I also added a small Node.js publishing script that creates a new post and matching image folder from one command, reducing repetitive setup and keeping new content consistent.",
+          "During the rebuild, I simplified the old architecture, removed unused backend dependencies, replaced the contact API with a clearer contact flow, introduced a stronger visual identity, and added accessibility and SEO polish across the experience."
         ],
         "bulletPoints": [
-          "Full project write-up in progress.",
-          "Screenshots coming next.",
-          "Implementation details will be added later.",
-          "Section temporarily marked as coming soon."
+          "Rebuilt an older travel blog into a polished editorial experience with a clearer product structure, stronger visual identity, and responsive layouts for mobile, desktop, and ultrawide screens.",
+          "Created a searchable archive with combined filters for country, trip type, tags, location, title, and excerpt, while avoiding dead-end browsing states where possible.",
+          "Added Leaflet-powered maps on the homepage and post pages using coordinates stored in markdown frontmatter.",
+          "Structured each post around cover imagery, field notes, location context, related notes, tags, and next/previous navigation.",
+          "Used markdown frontmatter to drive archive cards, filtering, maps, dynamic SEO metadata, social previews, sitemap entries, and related content.",
+          "Improved production readiness with Open Graph metadata, Twitter cards, canonical URLs, JSON-LD, dynamic sitemap, robots file, skip link, visible focus states, semantic content, and reduced-motion support.",
+          "Removed unused MongoDB and Nodemailer infrastructure and replaced the old contact API with a simpler contact page.",
+          "Built a custom publishing script that creates a new markdown post and matching image folder from a single command."
         ],
         "meta": [
           {
-            "label": "Status",
-            "value": "Coming soon"
+            "label": "Role",
+            "value": "UX/UI, frontend, content architecture, SEO"
           },
           {
-            "label": "Project",
-            "value": "Personal Blog"
+            "label": "Project type",
+            "value": "Travel journal + searchable editorial archive"
           },
           {
-            "label": "Content",
-            "value": "In progress"
+            "label": "Stack",
+            "value": "Next.js, React, CSS Modules, Markdown, gray-matter, react-markdown, Leaflet"
           },
           {
-            "label": "Screenshots",
-            "value": "To be added"
+            "label": "Primary goal",
+            "value": "Browseable travel writing + repeatable publishing"
           }
         ],
         "slides": [
           {
-            "title": "Coming soon",
-            "caption": "Add the first project screen here."
+            "title": "Opening travel journal",
+            "caption": "The homepage opens with a strong editorial identity, a scenic hero image, simple navigation, and a clear path into the travel notes.",
+            "imageSrc": "/images/projects/elsewhere-log/blog1.png",
+            "imageAlt": "Elsewhere Log homepage hero with scenic waterfall illustration and navigation",
+            "imageAspectRatio": "1152 / 746"
           },
           {
-            "title": "Coming soon",
-            "caption": "Add the second project screen here."
+            "title": "Map-based archive",
+            "caption": "The homepage turns post metadata into an interactive atlas, pairing Leaflet map markers with a scannable list of places written so far.",
+            "imageSrc": "/images/projects/elsewhere-log/blog2.png",
+            "imageAlt": "Elsewhere Log map section with travel note markers and place list",
+            "imageAspectRatio": "1152 / 853"
           },
           {
-            "title": "Coming soon",
-            "caption": "Add the third project screen here."
+            "title": "Highlights and archive stats",
+            "caption": "The highlights section gives readers a quick read on the archive size and surfaces selected notes as editorial cards with location, date, tags, and excerpts.",
+            "imageSrc": "/images/projects/elsewhere-log/blog3.png",
+            "imageAlt": "Elsewhere Log highlights section with archive statistics and travel note cards",
+            "imageAspectRatio": "1152 / 985"
+          },
+          {
+            "title": "Search and filter workspace",
+            "caption": "The archive view supports searching, filtering, and sorting across notes, countries, cities, tags, and trip types without making browsing feel heavy.",
+            "imageSrc": "/images/projects/elsewhere-log/blog4.png",
+            "imageAlt": "Elsewhere Log travel archive with search field, filters, sorting, and archive statistics",
+            "imageAspectRatio": "1152 / 730"
+          },
+          {
+            "title": "Travel note detail",
+            "caption": "Post pages combine field-note metadata, tags, a location map, cover imagery, and long-form writing so each note feels grounded in place.",
+            "imageSrc": "/images/projects/elsewhere-log/blog5.png",
+            "imageAlt": "Elsewhere Log Seville travel note with metadata cards, map, cover image, tags, and article text",
+            "imageAspectRatio": "1084 / 905"
+          },
+          {
+            "title": "Contact flow",
+            "caption": "The contact page replaces unnecessary backend form infrastructure with a direct, reliable email path and a secondary route back into the travel archive.",
+            "imageSrc": "/images/projects/elsewhere-log/blog6.png",
+            "imageAlt": "Elsewhere Log contact page with scenic road illustration, email CTA, and travel notes CTA",
+            "imageAspectRatio": "1084 / 905"
           }
-        ]
+        ],
+        "liveUrl": "https://blog.aleksandracislowski.com",
+        "githubUrl": "https://github.com/AleksandraCislowski/next-blog"
       },
       {
         "title": "Northstar Commerce",

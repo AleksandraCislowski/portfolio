@@ -80,7 +80,7 @@ const mobileCloseButtonSx = {
   justifyContent: 'center',
   mt: 0.5,
 } as const;
-const placeholderProjectSlugs: readonly ProjectSlug[] = ['personal-blog'] as const;
+const placeholderProjectSlugs: readonly ProjectSlug[] = [] as const;
 
 // Main narrative card: this is the "what was built and why it mattered" part of the case study.
 function ProjectModalHeader({ project }: { project: ActiveProject }) {
@@ -97,6 +97,7 @@ function ProjectModalHeader({ project }: { project: ActiveProject }) {
           mb: 1.5,
           fontWeight: 800,
           letterSpacing: '-0.04em',
+          textTransform: 'uppercase',
           textWrap: 'balance',
         }}
       >
