@@ -237,7 +237,7 @@
             "caption": "Startsidan gör post metadata till en interaktiv atlas, där Leaflet-markers kombineras med en lättskannad lista över platser som redan har texter.",
             "imageSrc": "/images/projects/elsewhere-log/blog2.png",
             "imageAlt": "Elsewhere Log kartsektion med markörer för reseanteckningar och platslista",
-            "imageAspectRatio": "1152 / 853"
+            "imageAspectRatio": "1308 / 849"
           },
           {
             "title": "Highlights och arkivstatistik",
@@ -257,8 +257,8 @@
             "title": "Detaljsida för reseanteckning",
             "caption": "Inläggssidor kombinerar field-note metadata, taggar, en platskarta, cover image och längre text så att varje anteckning känns förankrad i sin plats.",
             "imageSrc": "/images/projects/elsewhere-log/blog5.png",
-            "imageAlt": "Elsewhere Log reseanteckning om Seville med metadatakort, karta, cover image, taggar och artikeltext",
-            "imageAspectRatio": "1084 / 905"
+            "imageAlt": "Elsewhere Log reseanteckning om Setti Fatma med metadatakort, karta, cover image, taggar och artikeltext",
+            "imageAspectRatio": "1245 / 801"
           },
           {
             "title": "Kontaktflöde",

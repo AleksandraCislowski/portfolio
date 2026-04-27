@@ -237,7 +237,7 @@
             "caption": "The homepage turns post metadata into an interactive atlas, pairing Leaflet map markers with a scannable list of places written so far.",
             "imageSrc": "/images/projects/elsewhere-log/blog2.png",
             "imageAlt": "Elsewhere Log map section with travel note markers and place list",
-            "imageAspectRatio": "1152 / 853"
+            "imageAspectRatio": "1308 / 849"
           },
           {
             "title": "Highlights and archive stats",
@@ -257,8 +257,8 @@
             "title": "Travel note detail",
             "caption": "Post pages combine field-note metadata, tags, a location map, cover imagery, and long-form writing so each note feels grounded in place.",
             "imageSrc": "/images/projects/elsewhere-log/blog5.png",
-            "imageAlt": "Elsewhere Log Seville travel note with metadata cards, map, cover image, tags, and article text",
-            "imageAspectRatio": "1084 / 905"
+            "imageAlt": "Elsewhere Log Setti Fatma travel note with metadata cards, map, cover image, tags, and article text",
+            "imageAspectRatio": "1245 / 801"
           },
           {
             "title": "Contact flow",
